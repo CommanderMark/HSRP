@@ -261,4 +261,4 @@ __pycache__/
 *.pyc
 
 ### HSRP
-config/token.txt
+*token.txt
