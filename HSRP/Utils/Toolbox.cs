@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace HSRP
@@ -33,5 +34,27 @@ namespace HSRP
         }
 
         public static int RandInt(int max, bool inclusive = false) => RandInt(0, max, inclusive);
+
+        public static void DebugWriteLine(params object[] args)
+        {
+            foreach (object obj in args)
+            {
+                Console.WriteLine(obj.ToString());
+            }
+        }
+
+        public static PropertyInfo GetAbilityProperty(this BaseAbility ability)
+        {
+            Type type = typeof(AbilitySet);
+            foreach (PropertyInfo prop in type.GetProperties())
+            {
+                if (prop.Name == ability.ToString())
+                {
+                    return prop;
+                }
+            }
+
+            return null;
+        }
     }
 }

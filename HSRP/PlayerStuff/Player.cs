@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Xml.Linq;
 
 namespace HSRP
 {
@@ -10,7 +11,19 @@ namespace HSRP
         public ulong ID { get; set; }
         public string Name { get; set; }
 
-        public AbilitySet Abilities { get; set; }
+        private AbilitySet abilities { get; set; }
+        private AbilitySet abilityModifiers { get; set; }
+
+        /// <summary>
+        /// Total ability skill set.
+        /// </summary>
+        public AbilitySet Abilities 
+        {
+            get
+            {
+                return abilities + abilityModifiers;
+            }
+        }
 
         public int Health { get; set; }
         public int Armor { get; set; }
@@ -45,12 +58,22 @@ namespace HSRP
             }
         }
 
+        public bool Errored { get; set; }
+
+        public Player(Discord.IUser user) : this(user.Id.ToString()) { }
         public Player(ulong ID) : this(ID.ToString()) { }
         public Player(string filePath)
         {
             string path = filePath.Contains(Dirs.Players)
                 ? filePath + ".xml"
                 : Path.Combine(Dirs.Players, filePath) + ".xml";
+
+            XDocument doc = XmlToolbox.TryLoadXml(filePath);
+            if (doc == null) { Errored = true; return; }
+            foreach (XElement ele in doc.Root.Elements())
+            {
+
+            }
         }
 
         /// <summary>
@@ -64,12 +87,18 @@ namespace HSRP
 
             Health += Toolbox.DiceRoll(1, 6 + Abilities.Constitution);
 
-            if (Echeladder % 2 == 0)
+            if (Math.Log(Echeladder, 2) % 1 == 0)
             {
                 PendingSkillPointAllocations++;
                 return true;
             }
             return false;
+        }
+
+        // Static utils.
+        public static bool Registered(ulong plyer)
+        {
+            return Directory.Exists(Path.Combine(Dirs.Players, plyer.ToString()));
         }
     }
 }

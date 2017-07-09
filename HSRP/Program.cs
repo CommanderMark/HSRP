@@ -49,14 +49,23 @@ namespace HSRP
 
             // Hook the MessageReceived Event into our Command Handler.
             Client.MessageReceived += OnMessageReceive;
-            //Client.Connected += OnConnect;
+            Client.Connected += OnConnect;
             Client.Ready += OnReady;
+            // Client.UserJoined += OnUserJoin;
+            // Client.UserLeft += OnUserLeave;
 
             // Discover all of the commands in this assembly and load them.
+            commands.AddTypeReader<Player>(new Commands.PlayerTypeReader());
+            commands.AddTypeReader<BaseAbility>(new Commands.AbilityTypeReader());
             await commands.AddModulesAsync(Assembly.GetEntryAssembly());
 
             // Block this task until the program is exited.
             await Task.Delay(-1);
+        }
+
+        public async Task OnConnect()
+        {
+            await Client.SetGameAsync("Beta Test");
         }
 
         public async Task OnReady()
@@ -72,6 +81,18 @@ namespace HSRP
             }
         }
 
+        public async Task OnUserJoin(SocketGuildUser user)
+        {
+            SocketTextChannel chnl = user.Guild.GetTextChannel(Constants.GEN_CHANNEL);
+            await chnl.SendMessageAsync(user.Username + " has joined the server.");
+        }
+
+        public async Task OnUserLeave(SocketGuildUser user)
+        {
+            SocketTextChannel chnl = user.Guild.GetTextChannel(Constants.GEN_CHANNEL);
+            await chnl.SendMessageAsync(user.Username + " has left the server.");
+        }
+
         public async Task OnMessageReceive(SocketMessage messageParam)
         {
             // Don't process the command if it was a System Message.
@@ -84,13 +105,13 @@ namespace HSRP
             // Create a number to track where the prefix ends and the command begins.
             int argPos = 0;
 
-            if (message.HasStringPrefix("==>", ref argPos))
+            if (message.HasStringPrefix(Constants.BotPrefix, ref argPos))
             {
                 IResult result = await commands.ExecuteAsync(context, argPos);
 
                 if (!result.IsSuccess)
                 {
-                    Console.WriteLine("[WHOOPS] " + result.ErrorReason);
+                    Toolbox.DebugWriteLine("[WHOOPS]", result.ErrorReason);
                 }
             }
         }

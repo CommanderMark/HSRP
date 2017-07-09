@@ -2,6 +2,8 @@
 {
     public static class Constants
     {
+        public const string BotPrefix = "==>";
+
         // Bot owner.
         public const ulong OWNER = 103547713932529664;
 
@@ -10,6 +12,7 @@
 
         // Channel IDs
         public const ulong RPOOC_CHANNEL = 325511222000615424;
+        public const ulong GEN_CHANNEL = 325511181634895872;
     }
 
     public static class Dirs
