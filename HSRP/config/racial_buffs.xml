@@ -39,11 +39,8 @@
     <charisma value="-1" />
   </race>
   <race type="Fuchsia" pp="-7" mental="4" physical="4">
-    <strength value="1" />
-    <constitution value="1" />
+    <dexterity value="2" />
+    <constitution value="2" />
     <wisdom value="1" />
-    <intelligence value="1" />
-    <dexterity value="1" />
-    <charisma value="1" />
   </race>
 </racial>
