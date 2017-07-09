@@ -63,12 +63,8 @@ namespace HSRP
         {
             try
             {
-                Console.WriteLine("I RAN");
                 Instance.RpGuild = Client.GetGuild(Constants.RP_GUILD) as IGuild;
-                Console.WriteLine(Instance.RpGuild.OwnerId);
-                ITextChannel dfault = await Instance.RpGuild.GetTextChannelAsync(Constants.RPOOC_CHANNEL);
-                await dfault.SendMessageAsync("Hello!");
-                Console.WriteLine("I RAN");
+                await Console.Out.WriteLineAsync("Hello!");
             }
             catch (Exception e)
             {
@@ -88,7 +84,7 @@ namespace HSRP
             // Create a number to track where the prefix ends and the command begins.
             int argPos = 0;
 
-            if (message.HasStringPrefix("parry ", ref argPos))
+            if (message.HasStringPrefix("==>", ref argPos))
             {
                 IResult result = await commands.ExecuteAsync(context, argPos);
 
