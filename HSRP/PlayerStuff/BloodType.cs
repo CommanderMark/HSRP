@@ -2,6 +2,7 @@
 {
     public enum BloodType
     {
+        None,
         Burgundy,
         Bronze,
         Yellow,
