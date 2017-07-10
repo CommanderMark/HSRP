@@ -14,29 +14,28 @@ namespace HSRP
         public static XDocument TryLoadXml(string filePath)
         {
             XDocument doc;
-            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            try
             {
-                try
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     doc = XDocument.Load(filePath);
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine("[XML] " + "Couldn't load xml document \"" + filePath + "\"!\n" + e);
-                    return null;
-                }
+
+                if (doc.Root == null) return null;
+                return doc;
             }
-
-            if (doc.Root == null) return null;
-
-            return doc;
+            catch (Exception e)
+            {
+                Console.WriteLine("[XML] " + "Couldn't load xml document \"" + filePath + "\"!\n" + e);
+                return null;
+            }
         }
 
         public static void WriteXml(string filePath, XDocument xml, XmlWriterSettings settings = null)
         {
-            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            try
             {
-                try
+                using (FileStream fs = new FileStream(filePath, FileMode.Create))
                 {
                     if (settings == null)
                     {
@@ -50,10 +49,11 @@ namespace HSRP
                         }
                     }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine("[XML] " + "Couldn't save xml document \"" + filePath + "\"!\n" + e);
-                }
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("[XML] " + "Couldn't save xml document \"" + filePath + "\"!\n" + e);
             }
         }
 

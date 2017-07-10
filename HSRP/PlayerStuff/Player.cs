@@ -13,15 +13,10 @@ namespace HSRP
         public ulong ID { get; set; }
         public string Name { get; set; }
         public BloodType BloodColor { get; set; }
+        public bool LikesPineappleOnPizza { get; set; }
 
         private AbilitySet _abilities { get; set; }
-        private AbilitySet _abilityModifiers
-        {
-            get
-            {
-                return _abilities.GetModifiers();
-            }
-        }
+        private AbilitySet _abilityModifiers { get; set; }
 
         /// <summary>
         /// Total ability skill set.
@@ -80,6 +75,8 @@ namespace HSRP
 
         public bool Errored { get; set; }
 
+        private Player() { }
+
         public Player(Discord.IUser user) : this(user.Id.ToString()) { }
         public Player(ulong ID) : this(ID.ToString()) { }
         public Player(string filePath)
@@ -88,12 +85,13 @@ namespace HSRP
                 ? filePath + ".xml"
                 : Path.Combine(Dirs.Players, filePath) + ".xml";
 
-            XDocument doc = XmlToolbox.TryLoadXml(filePath);
+            XDocument doc = XmlToolbox.TryLoadXml(path);
             if (doc == null) { Errored = true; return; }
 
             Name = XmlToolbox.GetAttributeString(doc.Root, "name", string.Empty);
             ID = XmlToolbox.GetAttributeUnsignedLong(doc.Root, "id", 0);
             BloodColor = XmlToolbox.GetAttributeEnum(doc.Root, "blood", BloodType.None);
+            LikesPineappleOnPizza = XmlToolbox.GetAttributeBool(doc.Root, "pineappleOnPizza", false);
 
             Type type = _abilities.GetType();
             foreach (XElement ele in doc.Root.Elements())
@@ -153,7 +151,8 @@ namespace HSRP
             XElement player = new XElement("player",
                 new XAttribute("name", Name),
                 new XAttribute("id", ID),
-                new XAttribute("blood", BloodColor.ToString())
+                new XAttribute("blood", BloodColor.ToString()),
+                new XAttribute("pineappleOnPizza", LikesPineappleOnPizza)
                 );
 
             XElement status = new XElement("status",
@@ -210,7 +209,36 @@ namespace HSRP
 
             player.Add(status, levels, abilities, inventory);
             doc.Add(player);
-            XmlToolbox.WriteXml(Path.Combine(Dirs.Players, ID.ToString()), doc);
+            XmlToolbox.WriteXml(this.ToXmlPath(), doc);
+        }
+
+        public bool Register(string input)
+        {
+            try
+            {
+                if (Errored)
+                {
+                    Errored = false;
+                    File.Create(this.ToXmlPath());
+                    Program.Instance.Registers.Add(ID, 1);
+                    return true;
+                }
+                
+                int phase = Program.Instance.Registers[ID];
+                switch (phase)
+                {
+                    case 1:
+                        Name = input;
+                        break;
+                }
+
+                Program.Instance.Registers[ID] = ++phase;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -232,10 +260,14 @@ namespace HSRP
             return false;
         }
 
+        public string ToXmlPath() => Path.Combine(Dirs.Players, ID.ToString() + ".xml");
+
         // Static utils.
         public static bool Registered(ulong plyer)
         {
-            return Directory.Exists(Path.Combine(Dirs.Players, plyer.ToString()));
+            string filePath = Path.Combine(Dirs.Players, plyer.ToString() + ".xml");
+            return File.Exists(filePath)
+                && !Program.Instance.Registers.ContainsKey(plyer);
         }
     }
 }

@@ -1,4 +1,4 @@
-<player name="Sicarius Anathera" id="184763855803645952" blood="Cerulean">
+<player name="Sicarius Anathera" id="184763855803645952" blood="Cerulean" pineappleOnPizza="true">
   <status hp="100" ac="0" specibus="Bladekindx2" />
   <levels echeladder="1" pendingLevelUps="0" pendingSkillPoints="0" />
   

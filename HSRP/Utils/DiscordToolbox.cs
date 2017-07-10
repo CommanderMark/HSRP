@@ -68,4 +68,16 @@ namespace HSRP
             return clr.R.ToString("X2") + clr.G.ToString("X2") + clr.B.ToString("X2");
         }
     }
+
+    // Syntax stuff for Discord.
+    public static class Syntax
+    {
+        public static string ToItalics(string text) => "_" + text + "_";
+        public static string ToBold(string text) => "**" + text + "**";
+        public static string ToBoldItalics(string text) => ToBold(ToItalics(text));
+        public static string ToStrikethrough(string text) => "~~" + text + "~~";
+
+        public static string ToCodeLine(string text) => "`" + text + "`";
+        public static string ToCodeBlock(string text) => "```" + text + "```";
+    }
 }

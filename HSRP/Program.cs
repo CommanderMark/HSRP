@@ -5,6 +5,7 @@ using Discord.Commands;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.IO;
+using System.Collections.Generic;
 
 namespace HSRP
 {
@@ -17,6 +18,11 @@ namespace HSRP
         private CommandService commands;
 
         public IGuild RpGuild { get; private set; }
+
+        /// <summary>
+        /// Key value pair of users who are in the process of registering.
+        /// </summary>
+        public Dictionary<ulong, int> Registers { get; private set; }
 
         // Convert our sync-main to an async main method.
         private static void Main(string[] args)
@@ -39,11 +45,11 @@ namespace HSRP
             // Add the command service.
             commands = new CommandService(new CommandServiceConfig()
             {
-                DefaultRunMode = RunMode.Async
+                DefaultRunMode = RunMode.Sync
             });
 
-            Console.WriteLine("[API] Connecting to SkaiaBot...");
-            // Run the bot. This token is private, and is the key to connect the bot. Do not share it please.
+            Registers = new Dictionary<ulong, int>();
+
             await Client.LoginAsync(TokenType.Bot, File.ReadAllText(Path.Combine(Dirs.Config, "token.txt")));
             await Client.StartAsync();
 
@@ -51,6 +57,7 @@ namespace HSRP
             Client.MessageReceived += OnMessageReceive;
             Client.Connected += OnConnect;
             Client.Ready += OnReady;
+            Client.JoinedGuild += OnJoinGuild;
             // Client.UserJoined += OnUserJoin;
             // Client.UserLeft += OnUserLeave;
 
@@ -78,6 +85,16 @@ namespace HSRP
             catch (Exception e)
             {
                 Console.WriteLine(e);
+            }
+        }
+
+        public async Task OnJoinGuild(SocketGuild guild)
+        {
+            if (guild.Id != Constants.RP_GUILD)
+            {
+                await guild.DefaultChannel.SendMessageAsync("This bot only works on its original server."
+                    + "\nIf you see this message then either you're doing something wrong or Mark fucked up.");
+                await guild.LeaveAsync();
             }
         }
 
