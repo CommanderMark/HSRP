@@ -12,12 +12,12 @@ namespace HSRP.Commands
     {
         public override async Task<TypeReaderResult> Read(ICommandContext context, string input, IServiceProvider services)
         {
-            Type type = typeof(BaseAbility);
-            foreach (FieldInfo field in type.GetFields())
+            Type type = typeof(AbilitySet);
+            foreach (PropertyInfo prop in type.GetProperties())
             {
-                if (input.StartsWith(field.Name) && Enum.TryParse(field.Name, out BaseAbility result))
+                if (input.StartsWith(prop.Name, StringComparison.OrdinalIgnoreCase))
                 {
-                    return await Task.FromResult(TypeReaderResult.FromSuccess(result));
+                    return await Task.FromResult(TypeReaderResult.FromSuccess(prop));
                 }
             }
             await context.Channel.SendMessageAsync("No such ability found.");

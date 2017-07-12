@@ -42,19 +42,5 @@ namespace HSRP
                 Console.WriteLine(obj.ToString());
             }
         }
-
-        public static PropertyInfo GetAbilityProperty(this BaseAbility ability)
-        {
-            Type type = typeof(AbilitySet);
-            foreach (PropertyInfo prop in type.GetProperties())
-            {
-                if (prop.Name == ability.ToString())
-                {
-                    return prop;
-                }
-            }
-
-            return null;
-        }
     }
 }

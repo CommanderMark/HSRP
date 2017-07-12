@@ -6,22 +6,28 @@ namespace HSRP
 {
     public class AbilitySet
     {
+        // Physical Offense
         public int Strength { get; set; }
-        public int Dexterity { get; set; }
+        // Physical Defense
         public int Constitution { get; set; }
-        public int Intelligence { get; set; }
-        public int Wisdom { get; set; }
-        public int Charisma { get; set; }
+        // Mental Offense
+        public int Psion { get; set; }
+        // Mental Defense
+        public int Fortitude { get; set; }
+        // Speech Offense
+        public int Intimidation { get; set; }
+        // Speech Defense
+        public int Persuation { get; set; }
 
         public static AbilitySet operator +(AbilitySet set1, AbilitySet set2)
         {
             AbilitySet newSet = new AbilitySet();
             newSet.Strength = set1.Strength + set2.Strength;
-            newSet.Dexterity = set1.Dexterity + set2.Dexterity;
             newSet.Constitution = set1.Constitution + set2.Constitution;
-            newSet.Intelligence = set1.Intelligence + set2.Intelligence;
-            newSet.Wisdom = set1.Wisdom + set2.Wisdom;
-            newSet.Charisma = set1.Charisma + set2.Charisma;
+            newSet.Psion = set1.Psion + set2.Psion;
+            newSet.Fortitude = set1.Fortitude + set2.Fortitude;
+            newSet.Intimidation = set1.Intimidation + set2.Intimidation;
+            newSet.Persuation = set1.Persuation + set2.Persuation;
 
             return newSet;
         }
@@ -38,6 +44,26 @@ namespace HSRP
                     property.SetValue(this, value);
                 }
             }
+        }
+
+        public XElement ToXmlElement()
+        {
+            XElement ele = new XElement("abilities");
+            Type type = this.GetType();
+            foreach (PropertyInfo property in type.GetProperties())
+            {
+                if (property.CanRead)
+                {
+                    int value = (int)property.GetValue(this);
+                    ele.Add(
+                        new XElement(property.Name.ToLower(),
+                            new XAttribute("value", value)
+                            )
+                        );
+                }
+            }
+
+            return ele;
         }
 
         public AbilitySet GetModifiers()
@@ -60,9 +86,8 @@ namespace HSRP
             return modifierSet;
         }
 
-        public string Display()
+        public string Display(AbilitySet modifiers)
         {
-            AbilitySet modifiers = GetModifiers();
             string disp = "";
 
             Type type = this.GetType();

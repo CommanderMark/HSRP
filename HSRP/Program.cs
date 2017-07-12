@@ -63,7 +63,7 @@ namespace HSRP
 
             // Discover all of the commands in this assembly and load them.
             commands.AddTypeReader<Player>(new Commands.PlayerTypeReader());
-            commands.AddTypeReader<BaseAbility>(new Commands.AbilityTypeReader());
+            commands.AddTypeReader<PropertyInfo>(new Commands.AbilityTypeReader());
             await commands.AddModulesAsync(Assembly.GetEntryAssembly());
 
             // Block this task until the program is exited.

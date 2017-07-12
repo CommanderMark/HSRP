@@ -15,8 +15,8 @@ namespace HSRP
         public BloodType BloodColor { get; set; }
         public bool LikesPineappleOnPizza { get; set; }
 
+        // TODO: Can weapons be modifiers?
         private AbilitySet _abilities { get; set; }
-        private AbilitySet _abilityModifiers { get; set; }
 
         /// <summary>
         /// Total ability skill set.
@@ -34,7 +34,7 @@ namespace HSRP
                     }
                 }
 
-                return tru + _abilities + _abilityModifiers;
+                return tru + _abilities;
             }
         }
 
@@ -45,31 +45,6 @@ namespace HSRP
         public int Echeladder { get; private set; }
         public int PendingLevelUps { get; set; }
         public int PendingSkillPointAllocations { get; set; }
-
-        // Stats based on previously mentioned variables.
-        public int Will
-        {
-            get
-            {
-                return 10 + Abilities.Wisdom + Abilities.Charisma;
-            }
-        }
-
-        public int Persuation
-        {
-            get
-            {
-                return Abilities.Intelligence + Abilities.Charisma;
-            }
-        }
-
-        public int Intimidation
-        {
-            get
-            {
-                return Abilities.Strength - Abilities.Charisma;
-            }
-        }
 
         private LinkedList<Item> Inventory { get; set; }
 
@@ -111,16 +86,7 @@ namespace HSRP
                         break;
 
                     case "abilities":
-                        foreach (PropertyInfo property in type.GetProperties())
-                        {
-                            if (property.CanWrite)
-                            {
-                                int score = XmlToolbox.GetAttributeInt(ele.Element(property.Name.ToLower()), "score", 0);
-                                int modifier = XmlToolbox.GetAttributeInt(ele.Element(property.Name.ToLower()), "modifier", 0);
-                                property.SetValue(_abilities, score);
-                                property.SetValue(_abilityModifiers, modifier);
-                            }
-                        }
+                        _abilities = new AbilitySet(ele);
                         break;
 
                     case "inventory":
@@ -167,22 +133,7 @@ namespace HSRP
                 new XAttribute("pendingSKillPoints", PendingSkillPointAllocations)
                 );
 
-            XElement abilities = new XElement("abilities");
-
-            foreach (PropertyInfo property in type.GetProperties())
-            {
-                if (property.CanRead)
-                {
-                    int value = (int)property.GetValue(_abilities);
-                    int modifier = (int)property.GetValue(_abilityModifiers);
-                    abilities.Add(
-                        new XElement(property.Name.ToLower(),
-                            new XAttribute("score", value),
-                            new XAttribute("modifier", modifier)
-                            )
-                        );
-                }
-            }
+            XElement abilities = _abilities.ToXmlElement();
 
             XElement inventory = new XElement("inventory");
 
@@ -216,6 +167,7 @@ namespace HSRP
         {
             try
             {
+                // Registering.
                 if (Errored)
                 {
                     Errored = false;
@@ -227,8 +179,23 @@ namespace HSRP
                 int phase = Program.Instance.Registers[ID];
                 switch (phase)
                 {
+                    // Name.
                     case 1:
                         Name = input;
+                        break;
+                    
+                    // Blood color.
+                    case 2:
+                        if (Enum.TryParse(input, out BloodType result))
+                        {
+                            BloodColor = result;
+                            break;
+                        }
+                        return false;
+
+                    // Specibus
+                    case 3:
+                        Specibus = input;
                         break;
                 }
 

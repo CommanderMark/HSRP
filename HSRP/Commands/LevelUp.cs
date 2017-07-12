@@ -36,7 +36,7 @@ namespace HSRP.Commands
         }
 
         [Command("spendskill")]
-        public async Task SpendSkill(BaseAbility ability)
+        public async Task SpendSkill(PropertyInfo ability)
         {
             Player plyr = new Player(Context.User);
             if (plyr.PendingSkillPointAllocations < 1)
@@ -45,9 +45,9 @@ namespace HSRP.Commands
                 return;
             }
 
-            PropertyInfo prop = ability.GetAbilityProperty();
-            int value = (int)prop.GetValue(plyr.Abilities);
-            prop.SetValue(plyr.Abilities, value + 1);
+            // FIXME: plyr.Abilities has no accessor.
+            int value = (int)ability.GetValue(plyr.Abilities);
+            ability.SetValue(plyr.Abilities, value + 1);
 
             plyr.PendingSkillPointAllocations--;
 

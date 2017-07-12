@@ -12,7 +12,8 @@ namespace HSRP.Commands
         {
             if (Player.Registered(Context.User.Id))
             {
-                await ReplyAsync(failure[0]);
+                await ReplyAsync("You are already registered.");
+                return;
             }
             
             Player plyr = new Player(Context.User);
@@ -21,39 +22,55 @@ namespace HSRP.Commands
                  plyr.ID = Context.User.Id;
             }
 
-            if (plyr.Register(input))
+            bool result = plyr.Register(input);
+            string msg = "";
+
+            switch (Program.Instance.Registers[Context.User.Id])
             {
-                await ReplyAsync(success[Program.Instance.Registers[Context.User.Id]]);
-                plyr.Save();
+                // Registering/Name
+                case 1:
+                    msg = "You are now in the process of registering."
+                        + "\nThis is a multi-step process, you will only be registered once this process is complete."
+                        + $"\n\nStart by typing `{Constants.BotPrefix}register [your character's name]`.";
+                    break;
+                
+                // Blood Color
+                case 2:
+                    if (result)
+                    {
+                        msg = $"Your character's name is {plyr.Name}."
+                            + "\n\nWhat is your character's blood color?"
+                            + $"\nType `{Constants.BotPrefix}register [blood color]`."
+                            + $"\nRefer to `{Constants.BotPrefix}help blood` for colors.";
+                    }
+                    else
+                    {
+                        msg = "Invalid blood color."
+                            + $"\nRefer to `{Constants.BotPrefix}help blood` for colors.";
+                    }
+                    break;
+
+                // Specibus.
+                case 3:
+                    if (result)
+                    {
+                        msg = $"Your character's blood color is {plyr.Name}."
+                            + "\n\nWhat is your character's blood color?";
+                    }
+                    break;
             }
-            else
-            {
-                await ReplyAsync(failure[Program.Instance.Registers[Context.User.Id]]);
-            }
+
+            await DiscordToolbox.DMUser(Context.User, msg);
         }
 
         private static List<string> success = new List<string>
         {
-            "If you see this message then something is wrong with the bot. Report it! Error code: 0s",
-
-            "You are now in the process of registering."
-            + "\nThis is a multi-step process, you will only be registered once this process is complete."
-            + $"\n\nStart by typing `{Constants.BotPrefix}register [your character's name]`.",
 
             "What is your character's blood color?"
             + $"\nType `{Constants.BotPrefix}register [blood color]`."
             + $"\nRefer to `{Constants.BotPrefix}help blood` for colors.",
 
 
-        };
-
-        private static List<string> failure = new List<string>
-        {
-            "You are already registered.",
-
-            "If you see this message then something is wrong with the bot. Report it! Error code: 1f",
-
-            "If you see this message then something is wrong with the bot. Report it! Error code: 2f",
         };
     }
 }
