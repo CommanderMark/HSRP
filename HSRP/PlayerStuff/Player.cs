@@ -13,6 +13,7 @@ namespace HSRP
         public ulong ID { get; set; }
         public string Name { get; set; }
         public BloodType BloodColor { get; set; }
+        public string LususDescription { get; set; }
         public bool LikesPineappleOnPizza { get; set; }
 
         // TODO: Can weapons be modifiers?
@@ -89,6 +90,10 @@ namespace HSRP
                         _abilities = new AbilitySet(ele);
                         break;
 
+                    case "lusus":
+                        LususDescription = ele.ElementInnerText();
+                        break;
+
                     case "inventory":
                         foreach (XElement item in ele.Elements())
                         {
@@ -135,6 +140,9 @@ namespace HSRP
 
             XElement abilities = _abilities.ToXmlElement();
 
+            XElement lusus = new XElement("lusus",
+                new XText(LususDescription));
+
             XElement inventory = new XElement("inventory");
 
             foreach (Item item in Inventory)
@@ -158,7 +166,7 @@ namespace HSRP
                 }
             }
 
-            player.Add(status, levels, abilities, inventory);
+            player.Add(status, levels, abilities, lusus, inventory);
             doc.Add(player);
             XmlToolbox.WriteXml(this.ToXmlPath(), doc);
         }
@@ -193,10 +201,19 @@ namespace HSRP
                         }
                         return false;
 
-                    // Specibus
+                    // Specibus.
                     case 3:
                         Specibus = input;
                         break;
+
+                    // Lusus description.
+                    case 4:
+                        if (input.Length > 1 && input.Length <= 60)
+                        {
+                            LususDescription = input;
+                            break;
+                        }
+                        return false;
                 }
 
                 Program.Instance.Registers[ID] = ++phase;

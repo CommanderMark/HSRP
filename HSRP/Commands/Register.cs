@@ -27,14 +27,17 @@ namespace HSRP.Commands
 
             switch (Program.Instance.Registers[Context.User.Id])
             {
-                // Registering/Name
+                // If a phase is succesful, then the number
+                // is incremented by the time we get here.
+                // Otherwise, the number remains the same.
+                // Registering/Name.
                 case 1:
                     msg = "You are now in the process of registering."
                         + "\nThis is a multi-step process, you will only be registered once this process is complete."
                         + $"\n\nStart by typing `{Constants.BotPrefix}register [your character's name]`.";
                     break;
                 
-                // Blood Color
+                // Blood color.
                 case 2:
                     if (result)
                     {
@@ -46,7 +49,7 @@ namespace HSRP.Commands
                     else
                     {
                         msg = "Invalid blood color."
-                            + $"\nRefer to `{Constants.BotPrefix}help blood` for colors.";
+                            + $"\nRefer to `{Constants.BotPrefix}help blood` for valid colors.";
                     }
                     break;
 
@@ -55,7 +58,24 @@ namespace HSRP.Commands
                     if (result)
                     {
                         msg = $"Your character's blood color is {plyr.Name}."
-                            + "\n\nWhat is your character's blood color?";
+                            + "\n\nNext, enter your strife specibus' name."
+                            + $"\nType `{Constants.BotPrefix}register [specibus]`.";
+                    }
+                    break;
+
+                // Lusus description.
+                case 4:
+                    if (result)
+                    {
+                        msg = $"Your character's strife specibus is {plyr.Specibus}."
+                            + "\n\nNext, enter a brief description of your lusus."
+                            + "\nTheir name, physical appearance, ect. Describe it in"
+                            + "60 characters or less.";
+                    }
+                    else
+                    {
+                        msg = $"Your description was {input.Length} characters long."
+                            + "The limit is 60 characters.";
                     }
                     break;
             }
