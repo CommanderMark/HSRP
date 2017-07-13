@@ -137,13 +137,14 @@ namespace HSRP
             }
         }
 
+        // TODO: Not sure about using this.
         public async Task LogChannel(ICommandContext context, string msg)
         {
             ITextChannel chnl = await RpGuild.GetTextChannelAsync(Constants.LOG_CHANNEL);
             string result = "[" + context.User.Username + "]\n";
             result += msg;
 
-            await chnl.SendMessageAsync(result);
+            // await chnl.SendMessageAsync(result);
         }
     }
 }

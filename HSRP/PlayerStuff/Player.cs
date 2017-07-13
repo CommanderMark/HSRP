@@ -260,7 +260,9 @@ namespace HSRP
             string result = "";
             for (int i = 0; i < Inventory.Count; i++)
             {
-                result = result.AddLine($"{i} - {Inventory.ElementAt(i).name}");
+                result = Inventory.ElementAt(i).equipped
+                    ? result.AddLine($"{i} - {Inventory.ElementAt(i).name} (Equipped)")
+                    : result.AddLine($"{i} - {Inventory.ElementAt(i).name}");
             }
 
             return result;

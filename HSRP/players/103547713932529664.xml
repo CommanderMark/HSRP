@@ -11,5 +11,7 @@
     <persuation value="5" />
   </abilities>
   <lusus>uh</lusus>
-  <inventory />
+  <inventory>
+    <item value="memes" />
+  </inventory>
 </player>
