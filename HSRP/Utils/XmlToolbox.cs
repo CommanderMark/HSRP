@@ -16,7 +16,7 @@ namespace HSRP
             XDocument doc;
             try
             {
-                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
                     doc = XDocument.Load(filePath);
                 }
@@ -35,7 +35,7 @@ namespace HSRP
         {
             try
             {
-                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 {
                     if (settings == null)
                     {

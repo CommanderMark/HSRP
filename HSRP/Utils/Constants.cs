@@ -3,6 +3,7 @@
     public static class Constants
     {
         public const string BotPrefix = "==>";
+        public const int StartingSkillPoints = 24;
 
         // Bot owner.
         public const ulong OWNER = 103547713932529664;

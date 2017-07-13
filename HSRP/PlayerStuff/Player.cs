@@ -15,14 +15,13 @@ namespace HSRP
         public BloodType BloodColor { get; set; }
         public string LususDescription { get; set; }
         public bool LikesPineappleOnPizza { get; set; }
-
-        // TODO: Can weapons be modifiers?
-        private AbilitySet _abilities { get; set; }
+        
+        public AbilitySet Abilities { get; set; }
 
         /// <summary>
         /// Total ability skill set.
         /// </summary>
-        public AbilitySet Abilities
+        public AbilitySet TotalAbilities
         {
             get
             {
@@ -35,7 +34,7 @@ namespace HSRP
                     }
                 }
 
-                return tru + _abilities;
+                return tru + Abilities;
             }
         }
 
@@ -50,11 +49,19 @@ namespace HSRP
 
         public bool Errored { get; set; }
 
-        private Player() { }
+        public Player()
+        {
+            Abilities = new AbilitySet();
+            Inventory = new LinkedList<Item>();
+
+            Name = "";
+            LususDescription = "";
+            Specibus = "";
+        }
 
         public Player(Discord.IUser user) : this(user.Id.ToString()) { }
         public Player(ulong ID) : this(ID.ToString()) { }
-        public Player(string filePath)
+        public Player(string filePath) : this()
         {
             string path = filePath.Contains(Dirs.Players)
                 ? filePath + ".xml"
@@ -68,7 +75,7 @@ namespace HSRP
             BloodColor = XmlToolbox.GetAttributeEnum(doc.Root, "blood", BloodType.None);
             LikesPineappleOnPizza = XmlToolbox.GetAttributeBool(doc.Root, "pineappleOnPizza", false);
 
-            Type type = _abilities.GetType();
+            Type type = Abilities.GetType();
             foreach (XElement ele in doc.Root.Elements())
             {
                 switch (ele.Name.LocalName)
@@ -81,12 +88,11 @@ namespace HSRP
 
                     case "levels":
                         Echeladder = XmlToolbox.GetAttributeInt(ele, "echeladder", 0);
-                        PendingLevelUps = XmlToolbox.GetAttributeInt(ele, "pendingLevelUps", 0);
                         PendingSkillPointAllocations = XmlToolbox.GetAttributeInt(ele, "pendingSkillPoints", 0);
                         break;
 
                     case "abilities":
-                        _abilities = new AbilitySet(ele);
+                        Abilities = new AbilitySet(ele);
                         break;
 
                     case "lusus":
@@ -116,14 +122,13 @@ namespace HSRP
 
         public void Save()
         {
-            Type type = _abilities.GetType();
+            Type type = Abilities.GetType();
             XDocument doc = new XDocument();
-            XElement player = new XElement("player",
-                new XAttribute("name", Name),
-                new XAttribute("id", ID),
-                new XAttribute("blood", BloodColor.ToString()),
-                new XAttribute("pineappleOnPizza", LikesPineappleOnPizza)
-                );
+            XElement player = new XElement("player");
+            player.Add(new XAttribute("name", Name));
+            player.Add(new XAttribute("id", ID));
+            player.Add(new XAttribute("blood", BloodColor.ToString()));
+            player.Add(new XAttribute("pineappleOnPizza", LikesPineappleOnPizza));
 
             XElement status = new XElement("status",
                 new XAttribute("hp", Health),
@@ -133,11 +138,10 @@ namespace HSRP
 
             XElement levels = new XElement("levels",
                 new XAttribute("echeladder", Echeladder),
-                new XAttribute("pendingLevelUps", PendingLevelUps),
-                new XAttribute("pendingSKillPoints", PendingSkillPointAllocations)
+                new XAttribute("pendingSkillPoints", PendingSkillPointAllocations)
                 );
 
-            XElement abilities = _abilities.ToXmlElement();
+            XElement abilities = Abilities.ToXmlElement();
 
             XElement lusus = new XElement("lusus",
                 new XText(LususDescription));
@@ -175,10 +179,9 @@ namespace HSRP
             try
             {
                 // Registering.
-                if (Errored)
+                if (!Program.Instance.Registers.ContainsKey(ID))
                 {
-                    Errored = false;
-                    File.Create(this.ToXmlPath());
+                    File.Create(this.ToXmlPath()).Dispose();
                     Program.Instance.Registers.Add(ID, 1);
                     return true;
                 }
@@ -188,12 +191,16 @@ namespace HSRP
                 {
                     // Name.
                     case 1:
+                        if (string.IsNullOrWhiteSpace(input))
+                        {
+                            return false;
+                        }
                         Name = input;
                         break;
                     
                     // Blood color.
                     case 2:
-                        if (Enum.TryParse(input, out BloodType result))
+                        if (Enum.TryParse(input, true, out BloodType result))
                         {
                             BloodColor = result;
                             break;
@@ -202,6 +209,10 @@ namespace HSRP
 
                     // Specibus.
                     case 3:
+                        if (string.IsNullOrWhiteSpace(input))
+                        {
+                            return false;
+                        }
                         Specibus = input;
                         break;
 
@@ -217,17 +228,13 @@ namespace HSRP
                     // Pineapple.
                     case 5:
                         if (input == "yes"
-                            || input == "y"
-                            || (bool.TryParse(input, out bool bl)
-                                && bl)
-                            )
+                            || input == "y")
                         {
                             LikesPineappleOnPizza = true;
                             break;
                         }
                         else if (input == "no"
-                            || input == "n"
-                            || !bl)
+                            || input == "n")
                         {
                             LikesPineappleOnPizza = false;
                             break;
@@ -244,23 +251,15 @@ namespace HSRP
             }
         }
 
+        // TODO: This.
         /// <summary>
         /// Levels up your character.
         /// </summary>
-        /// <returns>Whether or not you're due for a skill point increase.</returns>
-        public bool LevelUp()
+        public void LevelUp()
         {
             Echeladder++;
-            PendingLevelUps--;
 
             Health += Toolbox.DiceRoll(1, 6 + Abilities.Constitution);
-
-            if (Math.Log(Echeladder, 2) % 1 == 0)
-            {
-                PendingSkillPointAllocations++;
-                return true;
-            }
-            return false;
         }
 
         public string ToXmlPath() => Path.Combine(Dirs.Players, ID.ToString() + ".xml");
