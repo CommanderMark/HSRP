@@ -44,7 +44,6 @@ namespace HSRP
         public string Specibus { get; set; }
 
         public int Echeladder { get; private set; }
-        public int PendingLevelUps { get; set; }
         public int PendingSkillPointAllocations { get; set; }
 
         private LinkedList<Item> Inventory { get; set; }
@@ -211,6 +210,26 @@ namespace HSRP
                         if (input.Length > 1 && input.Length <= 60)
                         {
                             LususDescription = input;
+                            break;
+                        }
+                        return false;
+
+                    // Pineapple.
+                    case 5:
+                        if (input == "yes"
+                            || input == "y"
+                            || (bool.TryParse(input, out bool bl)
+                                && bl)
+                            )
+                        {
+                            LikesPineappleOnPizza = true;
+                            break;
+                        }
+                        else if (input == "no"
+                            || input == "n"
+                            || !bl)
+                        {
+                            LikesPineappleOnPizza = false;
                             break;
                         }
                         return false;

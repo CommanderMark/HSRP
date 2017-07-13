@@ -70,7 +70,8 @@ namespace HSRP.Commands
                         msg = $"Your character's strife specibus is {plyr.Specibus}."
                             + "\n\nNext, enter a brief description of your lusus."
                             + "\nTheir name, physical appearance, ect. Describe it in"
-                            + "60 characters or less.";
+                            + "60 characters or less."
+                            + $"\nType `{Constants.BotPrefix}register [lusus description]`.";
                     }
                     else
                     {
@@ -78,19 +79,45 @@ namespace HSRP.Commands
                             + "The limit is 60 characters.";
                     }
                     break;
+                
+                // Pineapple.
+                case 5:
+                    if (result)
+                    {
+                        msg = "\n\nFinal question. You do you like pineapple on pizza?"
+                            + $"\nType `{Constants.BotPrefix}register [yes/no]`.";
+                    }
+                    else
+                    {
+                        msg = "Invalid answer.";
+                    }
+                    break;
+
+                // Done.
+                case 6:
+                    if (result)
+                    {
+                        msg = "Alright, you are now registered!";
+                    }
+                    break;
             }
-
             await DiscordToolbox.DMUser(Context.User, msg);
+
+            if (Program.Instance.Registers[Context.User.Id] <= 6)
+            {
+                Program.Instance.Registers.Remove(Context.User.Id);
+                plyr.PendingSkillPointAllocations = 24;
+                await Info();
+            }
+            plyr.Save();
         }
-
-        private static List<string> success = new List<string>
+        
+        private async Task Info()
         {
-
-            "What is your character's blood color?"
-            + $"\nType `{Constants.BotPrefix}register [blood color]`."
-            + $"\nRefer to `{Constants.BotPrefix}help blood` for colors.",
-
-
-        };
+            string message = "Some other stuff that's important to know follows."
+                + "\n\nYour base stats are divided into 3 categories. Physical, Mental and Speech. "
+                + " Each category has 2 stats, one for offensive capability, the other for defensive."
+                + $"\n\n`{Constants.BotPrefix}"
+        }
     }
 }
