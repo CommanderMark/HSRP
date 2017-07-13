@@ -25,7 +25,7 @@ namespace HSRP
         public int Echeladder { get; private set; }
         public int PendingSkillPointAllocations { get; set; }
 
-        private LinkedList<Item> Inventory { get; set; }
+        public LinkedList<Item> Inventory { get; set; }
 
         public bool Errored { get; set; }
 
@@ -248,6 +248,17 @@ namespace HSRP
             {
                 int value = (int)prop.GetValue(Abilities);
                 result = result.AddLine(prop.Name + ": " + value);
+            }
+
+            return result;
+        }
+
+        public string DisplayInventory()
+        {
+            string result = "";
+            for (int i = 0; i < Inventory.Count; i++)
+            {
+                result = result.AddLine($"{i} - {Inventory.ElementAt(i).name}");
             }
 
             return result;

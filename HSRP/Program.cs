@@ -36,7 +36,8 @@ namespace HSRP
             // Create the client.
             Client = new DiscordSocketClient(new DiscordSocketConfig
             {
-                LogLevel = LogSeverity.Verbose
+                LogLevel = LogSeverity.Verbose,
+                
             });
 
             // Add the log handler.
@@ -131,6 +132,15 @@ namespace HSRP
                     Toolbox.DebugWriteLine("[WHOOPS]", result.ErrorReason);
                 }
             }
+        }
+
+        public async Task LogChannel(ICommandContext context, string msg)
+        {
+            ITextChannel chnl = await RpGuild.GetTextChannelAsync(Constants.LOG_CHANNEL);
+            string result = "[" + context.User.Username + "]\n";
+            result += msg;
+
+            await chnl.SendMessageAsync(msg);
         }
     }
 }
