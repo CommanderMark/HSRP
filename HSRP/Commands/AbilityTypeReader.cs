@@ -15,7 +15,7 @@ namespace HSRP.Commands
             Type type = typeof(AbilitySet);
             foreach (PropertyInfo prop in type.GetProperties())
             {
-                if (input.StartsWith(prop.Name, StringComparison.OrdinalIgnoreCase))
+                if (prop.Name.StartsWith(input, StringComparison.OrdinalIgnoreCase))
                 {
                     return await Task.FromResult(TypeReaderResult.FromSuccess(prop));
                 }

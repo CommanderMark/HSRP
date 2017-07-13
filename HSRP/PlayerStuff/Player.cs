@@ -18,26 +18,6 @@ namespace HSRP
         
         public AbilitySet Abilities { get; set; }
 
-        /// <summary>
-        /// Total ability skill set.
-        /// </summary>
-        public AbilitySet TotalAbilities
-        {
-            get
-            {
-                AbilitySet tru = new AbilitySet();
-                foreach (Item i in Inventory)
-                {
-                    if (i.equipped)
-                    {
-                        tru += i.abilities;
-                    }
-                }
-
-                return tru + Abilities;
-            }
-        }
-
         public int Health { get; set; }
         public int Armor { get; set; }
         public string Specibus { get; set; }
@@ -74,8 +54,7 @@ namespace HSRP
             ID = XmlToolbox.GetAttributeUnsignedLong(doc.Root, "id", 0);
             BloodColor = XmlToolbox.GetAttributeEnum(doc.Root, "blood", BloodType.None);
             LikesPineappleOnPizza = XmlToolbox.GetAttributeBool(doc.Root, "pineappleOnPizza", false);
-
-            Type type = Abilities.GetType();
+            
             foreach (XElement ele in doc.Root.Elements())
             {
                 switch (ele.Name.LocalName)
@@ -105,15 +84,6 @@ namespace HSRP
                             Item i = new Item();
                             i.name = XmlToolbox.GetAttributeString(item, "value", string.Empty);
                             i.equipped = XmlToolbox.GetAttributeBool(item, "equipped", false);
-
-                            foreach (PropertyInfo property in type.GetProperties())
-                            {
-                                if (property.CanWrite)
-                                {
-                                    int value = XmlToolbox.GetAttributeInt(item.Element(property.Name.ToLower()), "score", 0);
-                                    property.SetValue(i.abilities, value);
-                                }
-                            }
                         }
                         break;
                 }
@@ -122,7 +92,6 @@ namespace HSRP
 
         public void Save()
         {
-            Type type = Abilities.GetType();
             XDocument doc = new XDocument();
             XElement player = new XElement("player");
             player.Add(new XAttribute("name", Name));
@@ -154,18 +123,6 @@ namespace HSRP
                 if (item.equipped)
                 {
                     ele.Add(new XAttribute("equipped", item.equipped));
-                }
-                
-                foreach (PropertyInfo property in type.GetProperties())
-                {
-                    if (property.CanRead)
-                    {
-                        int value = (int)property.GetValue(item.abilities);
-                        if (value != 0)
-                        {
-                            ele.Add(new XElement(property.Name.ToLower(), value));
-                        }
-                    }
                 }
             }
 
@@ -200,7 +157,8 @@ namespace HSRP
                     
                     // Blood color.
                     case 2:
-                        if (Enum.TryParse(input, true, out BloodType result))
+                        if (Enum.TryParse(input, true, out BloodType result)
+                            && result != BloodType.None)
                         {
                             BloodColor = result;
                             break;
@@ -251,7 +209,6 @@ namespace HSRP
             }
         }
 
-        // TODO: This.
         /// <summary>
         /// Levels up your character.
         /// </summary>
@@ -260,6 +217,40 @@ namespace HSRP
             Echeladder++;
 
             Health += Toolbox.DiceRoll(1, 6 + Abilities.Constitution);
+            PendingSkillPointAllocations += 12;
+            if (Echeladder % 5 == 0)
+            {
+                PendingSkillPointAllocations += 12;
+            }
+        }
+
+        public string Display(Discord.IUser user)
+        {
+            string result = "";
+
+            result = result.AddLine("Name: " + Name);
+            result = result.AddLine("Owned by: " + user.Username);
+            result = result.AddLine("Blood Color: " + BloodColor);
+            result = result.AddLine("Lusus Desc: " + LususDescription);
+            result = result.AddLine("");
+
+            result = result.AddLine("Health Vial: " + Health);
+            result = result.AddLine("Armor: " + Armor);
+            result = result.AddLine("Strife Specibus " + Specibus);
+            result = result.AddLine("");
+
+            result = result.AddLine("Echeladder Rung: " + Echeladder);
+            result = result.AddLine("Pending Skill Points: " + PendingSkillPointAllocations);
+            result = result.AddLine("");
+
+            result = result.AddLine("Base Statistics");
+            foreach (PropertyInfo prop in Abilities.GetType().GetProperties())
+            {
+                int value = (int)prop.GetValue(Abilities);
+                result = result.AddLine(prop.Name + ": " + value);
+            }
+
+            return result;
         }
 
         public string ToXmlPath() => Path.Combine(Dirs.Players, ID.ToString() + ".xml");

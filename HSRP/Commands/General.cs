@@ -1,13 +1,25 @@
 ﻿using Discord.Commands;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HSRP.Commands
 {
     public class General : ModuleBase
     {
+        [Command("profile"), Alias("stats", "prof"), RequireRegistration]
+        public async Task Profile()
+        {
+            try
+            {
+                Player plyr = new Player(Context.User);
+                await ReplyAsync(Syntax.ToCodeBlock(plyr.Display(Context.User)));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
         [Command("roll")]
         public async Task RollDice(string input)
         {

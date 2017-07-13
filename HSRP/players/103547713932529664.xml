@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<player name="test" id="103547713932529664" blood="Teal" pineappleOnPizza="true">
+  <status hp="100" ac="0" specibus="uh" />
+  <levels echeladder="0" pendingSkillPoints="15" />
+  <abilities>
+    <strength value="0" />
+    <constitution value="0" />
+    <psion value="0" />
+    <fortitude value="0" />
+    <intimidation value="4" />
+    <persuation value="5" />
+  </abilities>
+  <lusus>uh</lusus>
+  <inventory />
+</player>

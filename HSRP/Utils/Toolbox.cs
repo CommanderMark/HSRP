@@ -42,5 +42,11 @@ namespace HSRP
                 Console.WriteLine(obj.ToString());
             }
         }
+
+        // Extensions.
+        public static string AddLine(this string str, string appended)
+        {
+            return str += appended + "\n";
+        }
     }
 }
