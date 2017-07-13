@@ -1,6 +1,6 @@
 ﻿namespace HSRP
 {
-    public struct Item
+    public class Item
     {
         public string name;
         public bool equipped;

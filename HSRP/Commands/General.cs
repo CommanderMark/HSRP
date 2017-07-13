@@ -12,14 +12,7 @@ namespace HSRP.Commands
         [Command("profile"), Alias("stats", "prof")]
         public async Task Profile(Player plyr)
         {
-            try
-            {
-                await ReplyAsync(Syntax.ToCodeBlock(plyr.Display(Context.User)));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            await ReplyAsync(Syntax.ToCodeBlock(plyr.Display(Context.User)));
         }
 
         [Command("roll")]

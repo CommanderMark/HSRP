@@ -84,6 +84,7 @@ namespace HSRP
                             Item i = new Item();
                             i.name = XmlToolbox.GetAttributeString(item, "value", string.Empty);
                             i.equipped = XmlToolbox.GetAttributeBool(item, "equipped", false);
+                            Inventory.AddLast(i);
                         }
                         break;
                 }
@@ -124,6 +125,7 @@ namespace HSRP
                 {
                     ele.Add(new XAttribute("equipped", item.equipped));
                 }
+                inventory.Add(ele);
             }
 
             player.Add(status, levels, abilities, lusus, inventory);

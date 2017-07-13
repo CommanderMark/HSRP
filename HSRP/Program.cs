@@ -36,7 +36,7 @@ namespace HSRP
             // Create the client.
             Client = new DiscordSocketClient(new DiscordSocketConfig
             {
-                LogLevel = LogSeverity.Verbose,
+                LogLevel = LogSeverity.Verbose
                 
             });
 
@@ -46,8 +46,11 @@ namespace HSRP
             // Add the command service.
             commands = new CommandService(new CommandServiceConfig()
             {
-                DefaultRunMode = RunMode.Sync
+                DefaultRunMode = RunMode.Sync,
+                LogLevel = LogSeverity.Error
             });
+            // FUCK YES
+            commands.Log += async (message) => await Console.Out.WriteLineAsync($"[{message.Severity}] {message.Source} -> {message.Message}\n\n" + message.Exception);
 
             Registers = new Dictionary<ulong, int>();
 
@@ -140,7 +143,7 @@ namespace HSRP
             string result = "[" + context.User.Username + "]\n";
             result += msg;
 
-            await chnl.SendMessageAsync(msg);
+            await chnl.SendMessageAsync(result);
         }
     }
 }

@@ -46,12 +46,13 @@ namespace HSRP.Commands
                     }
                 }
 
+
                 // By Username
                 // If there's more then one user with that username respond with a warning.
                 var matchedUsers = guildUsers.Where(x => string.Equals(input, x.Username, StringComparison.OrdinalIgnoreCase));
                 if (matchedUsers.Count() == 1)
                 {
-                    IGuildUser user = guildUsers.FirstOrDefault();
+                    IGuildUser user = matchedUsers.FirstOrDefault();
                     if (user != null)
                     {
                         id = user.Id;
@@ -76,7 +77,7 @@ namespace HSRP.Commands
                 matchedUsers = guildUsers.Where(x => string.Equals(input, x.Nickname, StringComparison.OrdinalIgnoreCase));
                 if (matchedUsers.Count() == 1)
                 {
-                    IGuildUser user = guildUsers.FirstOrDefault();
+                    IGuildUser user = matchedUsers.FirstOrDefault();
                     if (user != null)
                     {
                         id = user.Id;
