@@ -16,5 +16,7 @@
     <item value="SOCKS" />
     <item value="MOODY BLUE CAPE" equipped="true" />
     <item value="MOODY BLUE RUSTY HATCHET" equipped="true" />
+    <item value="Stolen Dagger" />
+    <item value="$700 Stolen Cash" />
   </inventory>
 </player>

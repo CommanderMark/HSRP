@@ -71,7 +71,7 @@ namespace HSRP.Commands
         }
 
         [Command("remove"), Priority(0), RequireGM]
-        public async Task Remove(Player plyr, string name)
+        public async Task Remove(Player plyr, [Remainder] string name)
         {
             Item item = plyr.Inventory.FirstOrDefault(x => x.name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
             if (item == null)

@@ -11,5 +11,7 @@
     <persuation value="0" />
   </abilities>
   <lusus>Bat</lusus>
-  <inventory />
+  <inventory>
+    <item value="Shovel" />
+  </inventory>
 </player>

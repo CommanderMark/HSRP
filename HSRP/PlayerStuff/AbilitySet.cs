@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Xml.Linq;
 
@@ -6,7 +7,7 @@ namespace HSRP
 {
     public class AbilitySet
     {
-        // Physical Offense
+        [Description("A person")]
         public int Strength { get; set; }
         // Physical Defense
         public int Constitution { get; set; }

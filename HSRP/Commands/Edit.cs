@@ -23,7 +23,7 @@ namespace HSRP.Commands
             plyr.Name = name;
             plyr.Save();
 
-            await ReplyAsync(Syntax.ToCodeLine(prev) + " was renamed to " + Syntax.ToCodeLine(plyr.Name));
+            await ReplyAsync(Syntax.ToCodeLine(prev) + " was renamed to " + Syntax.ToCodeLine(plyr.Name) + ".");
         }
 
         [Command("specibus"), RequireRegistration, Priority(1)]
