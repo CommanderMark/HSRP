@@ -13,7 +13,7 @@ namespace HSRP.Commands
         [Command, RequireRegistration]
         public async Task Inv() => await Inv(new Player(Context.User));
 
-        [Command]
+        [Command, RequireGM]
         public async Task Inv(Player plyr)
         {
             string output = "Inventory for " + plyr.Name + ":\n";

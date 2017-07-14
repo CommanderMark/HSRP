@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<player name="Sicarius Anathera" id="184763855803645952" blood="Cerulean" pineappleOnPizza="false">
+  <status hp="0" ac="0" specibus="Bladekindx2" />
+  <levels echeladder="0" pendingSkillPoints="0" />
+  <abilities>
+    <strength value="0" />
+    <constitution value="0" />
+    <psion value="0" />
+    <fortitude value="0" />
+    <intimidation value="0" />
+    <persuation value="0" />
+  </abilities>
+  <lusus></lusus>
+  <inventory />
+</player>

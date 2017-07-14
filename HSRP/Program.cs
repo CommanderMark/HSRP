@@ -132,7 +132,7 @@ namespace HSRP
 
                 if (!result.IsSuccess)
                 {
-                    Toolbox.DebugWriteLine("[WHOOPS]", result.ErrorReason);
+                    Toolbox.DebugWriteLine("[WHOOPS] " + message.Author.Username, message.Content, result.ErrorReason);
                 }
             }
         }
