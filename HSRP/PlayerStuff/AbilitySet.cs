@@ -2,16 +2,37 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Xml.Linq;
+using HSRP.Commands;
 
 namespace HSRP
 {
     public class AbilitySet
     {
-        [Description("A person")]
+        [Ability("Physical Offense",
+            "Encompasses your character's brawn."
+            + "\n\nHaving a high value in this stat grants")]
         public int Strength { get; set; }
-        // Physical Defense
+        
+        [Ability("Physical Defense",
+            "Muscle strength helps with getting out in the world, but without enough muscle endurance "
+            + "to back that up you won't be getting far. This stat determines your resilience to physical activities. "
+            + "Whether it involves overcoming treacherous environments or picking off hostiles from a distance, "
+            + "your body is capable of responding to the task at hand with utmost precision."
+            + "\n\nHaving a high value in this stat grants you more resistance to environmental hazards. "
+            + "Your ability to use projectile-based weapons is significantly improved. "
+            + "It also grants the user better dexterity, making them better equipped at handling "
+            + "hazardous terrain and stealth, depending on your playstyle.")]
         public int Constitution { get; set; }
-        // Mental Offense
+        
+        [Ability("Mental Offense",
+            "Muscle strength helps with getting out in the world, but without enough muscle endurance "
+            + "to back that up you won't be getting far. This stat determines your resilience to physical activities. "
+            + "Whether it involves overcoming treacherous environments or picking off hostiles from a distance, "
+            + "your body is capable of responding to the task at hand with utmost precision."
+            + "\n\nHaving a high value in this stat grants you more resistance to environmental hazards. "
+            + "Your ability to use projectile-based weapons is significantly improved. "
+            + "It also grants the user better dexterity, making them better equipped at handling "
+            + "hazardous terrain and stealth, depending on your playstyle.")]
         public int Psion { get; set; }
         // Mental Defense
         public int Fortitude { get; set; }

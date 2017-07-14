@@ -53,7 +53,7 @@ namespace HSRP.Commands
             await Program.Instance.LogChannel(Context, log);
         }
 
-        [Command("remove"), Priority(1), RequireGM]
+        [Command("remove"), Priority(1), RequireGM, Summary("Removes an item.")]
         public async Task Remove(Player plyr, int index)
         {
             Item item = plyr.Inventory.ElementAtOrDefault(index);
