@@ -13,7 +13,7 @@
   <lusus>Amaryllis. A goat-like creature...yeah that about covers it.</lusus>
   <inventory>
     <item value="Map" />
-    <item value="SOCKS" />
+    <item value="SOCKS" equipped="true" />
     <item value="MOODY BLUE CAPE" equipped="true" />
     <item value="MOODY BLUE RUSTY HATCHET" equipped="true" />
     <item value="Stolen Dagger" />
