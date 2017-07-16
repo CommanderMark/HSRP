@@ -15,7 +15,7 @@ namespace HSRP.Commands
         }
 
         [Command("blood")]
-        public async Task Help1()
+        public async Task HelpBlood()
         {
             string msg = "List of valid blood types:";
 
@@ -27,6 +27,34 @@ namespace HSRP.Commands
             }
 
             await ReplyAsync(msg);
+        }
+
+        [Command("skills")]
+        public async Task HelpSkills()
+        {
+            string msg = "List of Base Abilities:";
+            foreach (PropertyInfo prop in typeof(AbilitySet).GetProperties())
+            {
+                AbilityAttribute attrib = (AbilityAttribute)prop.GetCustomAttribute(typeof(AbilityAttribute), false)
+                    ?? new AbilityAttribute("Error", "Errored");
+                msg += "\n" + Syntax.ToCodeLine($"{prop.Name} ({attrib.Alias})");
+            }
+
+            msg += $"\n\nType `{Constants.BotPrefix}help skills [ability name]` for information on each skill.";
+            msg += $"\nType `{Constants.BotPrefix}spend [ability name] [amount]` to invest pending skill points "
+            + "you may have into a specific stat. Remember that spent skill points can not be refunded.";
+
+            await ReplyAsync(msg);
+        }
+
+        [Command("skills")]
+        public async Task HelpSkills(PropertyInfo prop)
+        {
+            AbilityAttribute attrib = (AbilityAttribute)prop.GetCustomAttribute(typeof(AbilityAttribute), false)
+                ?? new AbilityAttribute("Error", "Errored");
+            string ab = Syntax.ToCodeLine($"{prop.Name} ({attrib.Alias})") + "\n";
+            ab = ab.AddLine(attrib.Desc);
+            await DiscordToolbox.DMUser(Context.User, ab);
         }
     }
 }

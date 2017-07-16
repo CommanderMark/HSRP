@@ -50,7 +50,6 @@ namespace HSRP.Commands
             plyr.Save();
             string log = Syntax.ToCodeLine(item) + " was added to the inventory of " + Syntax.ToCodeLine(plyr.Name) + ".";
             await ReplyAsync(log);
-            await Program.Instance.LogChannel(Context, log);
         }
 
         [Command("remove"), Priority(1), RequireGM, Summary("Removes an item.")]
@@ -67,7 +66,6 @@ namespace HSRP.Commands
             plyr.Save();
             string log = Syntax.ToCodeLine(item.name) + " was removed from the inventory of " + Syntax.ToCodeLine(plyr.Name) + ".";
             await ReplyAsync(log);
-            await Program.Instance.LogChannel(Context, log);
         }
 
         [Command("remove"), Priority(0), RequireGM]
@@ -84,7 +82,6 @@ namespace HSRP.Commands
             plyr.Save();
             string log = Syntax.ToCodeLine(item.name) + " was removed from the inventory of " + Syntax.ToCodeLine(plyr.Name) + ".";
             await ReplyAsync(log);
-            await Program.Instance.LogChannel(Context, log);
         }
 
         [Command("equip"), Priority(1), RequireGM]
@@ -110,11 +107,10 @@ namespace HSRP.Commands
             plyr.Save();
             string log = Syntax.ToCodeLine(newItem.name) + " was equipped to " + Syntax.ToCodeLine(plyr.Name) + ".";
             await ReplyAsync(log);
-            await Program.Instance.LogChannel(Context, log);
         }
 
         [Command("equip"), Priority(0), RequireGM]
-        public async Task Equip(Player plyr, string name)
+        public async Task Equip(Player plyr, [Remainder] string name)
         {
             Item prevItem = plyr.Inventory.FirstOrDefault(x => x.name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
             if (prevItem == null)
@@ -136,7 +132,6 @@ namespace HSRP.Commands
             plyr.Save();
             string log = Syntax.ToCodeLine(newItem.name) + " was equipped to " + Syntax.ToCodeLine(plyr.Name) + ".";
             await ReplyAsync(log);
-            await Program.Instance.LogChannel(Context, log);
         }
 
         [Command("unequip"), Priority(1), RequireGM]
@@ -162,11 +157,10 @@ namespace HSRP.Commands
             plyr.Save();
             string log = Syntax.ToCodeLine(newItem.name) + " was un-equipped from " + Syntax.ToCodeLine(plyr.Name) + ".";
             await ReplyAsync(log);
-            await Program.Instance.LogChannel(Context, log);
         }
 
         [Command("unequip"), Priority(0), RequireGM]
-        public async Task UnEquip(Player plyr, string name)
+        public async Task UnEquip(Player plyr, [Remainder] string name)
         {
             Item prevItem = plyr.Inventory.FirstOrDefault(x => x.name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
             if (prevItem == null)
@@ -188,7 +182,6 @@ namespace HSRP.Commands
             plyr.Save();
             string log = Syntax.ToCodeLine(newItem.name) + " was un-equipped from " + Syntax.ToCodeLine(plyr.Name) + ".";
             await ReplyAsync(log);
-            await Program.Instance.LogChannel(Context, log);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace HSRP
             // Create the client.
             Client = new DiscordSocketClient(new DiscordSocketConfig
             {
-                LogLevel = LogSeverity.Verbose
+                LogLevel = LogSeverity.Info
                 
             });
 
@@ -134,17 +134,11 @@ namespace HSRP
                 {
                     Toolbox.DebugWriteLine("[WHOOPS] " + message.Author.Username, message.Content, result.ErrorReason);
                 }
+                else
+                {
+                    await Console.Out.WriteLineAsync($"[{message.Author}] [{message.Channel.Name}] -> {message.Content}");
+                }
             }
-        }
-
-        // TODO: Not sure about using this.
-        public async Task LogChannel(ICommandContext context, string msg)
-        {
-            ITextChannel chnl = await RpGuild.GetTextChannelAsync(Constants.LOG_CHANNEL);
-            string result = "[" + context.User.Username + "]\n";
-            result += msg;
-
-            // await chnl.SendMessageAsync(result);
         }
     }
 }

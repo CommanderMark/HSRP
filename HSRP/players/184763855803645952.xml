@@ -11,5 +11,9 @@
     <persuation value="0" />
   </abilities>
   <lusus></lusus>
-  <inventory />
+  <inventory>
+    <item value="DUAL CORVOS" equipped="true" />
+    <item value="Un-Stolen Computer" />
+    <item value="Computer Guy Phone" />
+  </inventory>
 </player>
