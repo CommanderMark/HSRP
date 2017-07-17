@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using Discord;
 
 namespace HSRP.Commands
 {
@@ -64,7 +65,9 @@ namespace HSRP.Commands
                 string msg = $"{Syntax.ToCodeLine(plyr.Name)} has gained {count}!";
 
                 await ReplyAsync(msg);
-                await DiscordToolbox.DMUser(Context.User, msg + $"\nYou now have {plyr.PendingSkillPointAllocations} skill points to spend!"
+
+                IGuildUser user = await plyr.GuildUser;
+                await DiscordToolbox.DMUser(user, msg + $"\nYou now have {plyr.PendingSkillPointAllocations} skill points to spend!"
                     + $"\nYour maximum health has been increased to {plyr.MaxHealth}.");
             }
 
