@@ -43,5 +43,31 @@ namespace HSRP.Commands
             plyr.Save();
             await ReplyAsync(msg);
         }
+
+        [Command("givexp"), Alias("xp"), RequireGM]
+        public async Task GrantXP(Player plyr, int amount)
+        {
+            if (amount <= 0)
+            {
+                await ReplyAsync("Invalid XP amount.");
+                return;
+            }
+
+            int levels = plyr.GiveXP(amount);
+            await ReplyAsync($"{Syntax.ToCodeLine(plyr.Name)} has been awarded {amount} XP.");
+            if (levels > 0)
+            {
+                string count = levels > 1
+                    ? levels + " levels"
+                    : "a level";
+                
+                string msg = "{Syntax.ToCodeLine(plyr.Name)} has gained {count}!";
+
+                await ReplyAsync(msg);
+                await DiscordToolbox.DMUser(Context.User, msg + $"\nYou now have {plyr.PendingSkillPointAllocations} skill points to spend!");
+            }
+
+            plyr.Save();
+        }
     }
 }

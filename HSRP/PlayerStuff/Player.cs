@@ -12,6 +12,7 @@ namespace HSRP
     {
         public ulong ID { get; set; }
         public string Name { get; set; }
+
         public BloodType BloodColor { get; set; }
         public string LususDescription { get; set; }
         public bool LikesPineappleOnPizza { get; set; }
@@ -22,8 +23,10 @@ namespace HSRP
         public int Armor { get; set; }
         public string Specibus { get; set; }
 
-        public int Echeladder { get; private set; }
-        public int PendingSkillPointAllocations { get; set; }
+        public int Echeladder{ get; set; }
+        public int PendingSkillPointAllocations { get; private set; }
+        public int XP { get; set; }
+        public int NextLevelXP { get; set; }
 
         public LinkedList<Item> Inventory { get; set; }
 
@@ -68,6 +71,8 @@ namespace HSRP
                     case "levels":
                         Echeladder = XmlToolbox.GetAttributeInt(ele, "echeladder", 0);
                         PendingSkillPointAllocations = XmlToolbox.GetAttributeInt(ele, "pendingSkillPoints", 0);
+                        XP = XmlToolbox.GetAttributeInt(ele, "xp", 0);
+                        NextLevelXP = XmlToolbox.GetAttributeInt(ele, "nextLevel", 0);
                         break;
 
                     case "abilities":
@@ -108,7 +113,9 @@ namespace HSRP
 
             XElement levels = new XElement("levels",
                 new XAttribute("echeladder", Echeladder),
-                new XAttribute("pendingSkillPoints", PendingSkillPointAllocations)
+                new XAttribute("pendingSkillPoints", PendingSkillPointAllocations),
+                new XAttribute("xp", XP),
+                new XAttribute("nextLevel", NextLevelXP)
                 );
 
             XElement abilities = Abilities.ToXmlElement();
@@ -212,6 +219,25 @@ namespace HSRP
         }
 
         /// <summary>
+        /// Gives a character XP. Levels up the character if they reach a milestone.
+        /// </summary>
+        /// <returns>The amount of levels they gained from this XP boost.</returns>
+        public int GiveXP(int xp)
+        {
+            NextLevelXP -= xp;
+            int i = 0;
+
+            while (NextLevelXP <= 0 && Echeladder < 30)
+            {
+                this.LevelUp();
+                NextLevelXP += Constants.XPMilestones[Echeladder];
+                ++i;
+            }
+
+            return i;
+        }
+
+        /// <summary>
         /// Levels up your character.
         /// </summary>
         public void LevelUp()
@@ -242,6 +268,8 @@ namespace HSRP
             result = result.AddLine("");
 
             result = result.AddLine("Echeladder Rung: " + Echeladder);
+            result = result.AddLine("Total XP: " + XP);
+            result = result.AddLine("Next Level In: " + NextLevelXP);
             result = result.AddLine("Pending Skill Points: " + PendingSkillPointAllocations);
             result = result.AddLine("");
 

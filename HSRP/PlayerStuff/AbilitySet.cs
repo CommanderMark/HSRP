@@ -72,17 +72,17 @@ namespace HSRP
             + "\n\nHaving a high value in this stat makes you resilient to high Intidimation stats. You appear less suspicious "
             + "and can use speech to bypass hazards in unusual fashions. Your charm makes it more likely "
             + "for people to perceive you as non-threatening, regardless of your actual motive.")]
-        public int Persuation { get; set; }
+        public int Persuasion { get; set; }
 
         public static AbilitySet operator +(AbilitySet set1, AbilitySet set2)
         {
             AbilitySet newSet = new AbilitySet();
-            newSet.Strength = set1.Strength + set2.Strength;
-            newSet.Constitution = set1.Constitution + set2.Constitution;
-            newSet.Psion = set1.Psion + set2.Psion;
-            newSet.Fortitude = set1.Fortitude + set2.Fortitude;
-            newSet.Intimidation = set1.Intimidation + set2.Intimidation;
-            newSet.Persuation = set1.Persuation + set2.Persuation;
+            foreach (PropertyInfo prop in newSet.GetType().GetProperties())
+            {
+                int val1 = (int)prop.GetValue(set1);
+                int val2 = (int)prop.GetValue(set2);
+                prop.SetValue(newSet, val1 + val2);
+            }
 
             return newSet;
         }
