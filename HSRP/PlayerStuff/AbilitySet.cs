@@ -25,9 +25,10 @@ namespace HSRP
             + "your body is capable of responding to the task at hand with utmost precision."
 
             + "\n\nHaving a high value in this stat grants you more resistance to environmental hazards. "
+            + "The maximum value your max HP can increase by every level up is increased."
             + "Your ability to use projectile-based weapons is significantly improved. "
             + "It also grants the user better dexterity, making them better equipped at handling "
-            + "hazardous terrain and stealth, depending on your playstyle.")]
+            + "hazardous terrain and stealth, depending on your playstyle. ")]
         public int Constitution { get; set; }
         
         [Ability("Mental Offense",

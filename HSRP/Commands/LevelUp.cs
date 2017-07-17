@@ -44,7 +44,7 @@ namespace HSRP.Commands
             await ReplyAsync(msg);
         }
 
-        [Command("givexp"), Alias("xp"), RequireGM]
+        [Command("givexp"), Alias("xp", "award"), RequireGM]
         public async Task GrantXP(Player plyr, int amount)
         {
             if (amount <= 0)
@@ -61,10 +61,11 @@ namespace HSRP.Commands
                     ? levels + " levels"
                     : "a level";
                 
-                string msg = "{Syntax.ToCodeLine(plyr.Name)} has gained {count}!";
+                string msg = $"{Syntax.ToCodeLine(plyr.Name)} has gained {count}!";
 
                 await ReplyAsync(msg);
-                await DiscordToolbox.DMUser(Context.User, msg + $"\nYou now have {plyr.PendingSkillPointAllocations} skill points to spend!");
+                await DiscordToolbox.DMUser(Context.User, msg + $"\nYou now have {plyr.PendingSkillPointAllocations} skill points to spend!"
+                    + $"\nYour maximum health has been increased to {plyr.MaxHealth}.");
             }
 
             plyr.Save();

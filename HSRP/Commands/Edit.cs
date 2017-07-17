@@ -56,6 +56,11 @@ namespace HSRP.Commands
                 await ReplyAsync("Invalid description.");
                 return;
             }
+            if (desc.Length > 1 && desc.Length <= Constants.LususDescCharLimit)
+            {
+                await ReplyAsync($"Your description was {desc.Length} characters long. "
+                    + $"The limit is {Constants.LususDescCharLimit} characters.");
+            }
 
             plyr.LususDescription = desc;
             plyr.Save();

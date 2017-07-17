@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<player name="Sicarius Anathera" id="184763855803645952" blood="Cerulean" pineappleOnPizza="false">
-  <status hp="0" ac="0" specibus="Bladekindx2" />
-  <levels echeladder="0" pendingSkillPoints="0" />
+<player name="Sicarius Anathera" id="184763855803645952" blood="Cerulean" pineappleOnPizza="true">
+  <status hp="100" ac="0" specibus="Bladekindx2" />
+  <levels echeladder="0" pendingSkillPoints="0" xp="0" nextLevel="0" />
   <abilities>
-    <strength value="0" />
-    <constitution value="0" />
+    <strength value="4" />
+    <constitution value="4" />
     <psion value="0" />
-    <fortitude value="0" />
-    <intimidation value="0" />
-    <persuation value="0" />
+    <fortitude value="2" />
+    <intimidation value="7" />
+    <persuasion value="7" />
   </abilities>
-  <lusus></lusus>
+  <lusus>Veneficus is a giant Scorpion with spikes on his back.</lusus>
   <inventory>
     <item value="DUAL CORVOS" equipped="true" />
     <item value="Un-Stolen Computer" />

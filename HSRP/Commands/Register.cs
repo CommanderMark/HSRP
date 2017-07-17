@@ -86,13 +86,13 @@ namespace HSRP.Commands
                         msg = $"Your character's strife specibus is {plyr.Specibus}."
                             + "\n\nNext, enter a brief description of your lusus."
                             + "\nTheir name, physical appearance, ect. Describe it in"
-                            + " 60 characters or less."
+                            + $" {Constants.LususDescCharLimit} characters or less."
                             + $"\nType `{Constants.BotPrefix}register [lusus description]`.";
                     }
                     else
                     {
-                        msg = $"Your description was {input.Length} characters long."
-                            + " The limit is 60 characters.";
+                        msg = $"Your description was {input.Length} characters long. "
+                            + $"The limit is {Constants.LususDescCharLimit} characters.";
                     }
                     break;
 

@@ -20,11 +20,12 @@ namespace HSRP
         public AbilitySet Abilities { get; set; }
 
         public int Health { get; set; }
+        public int MaxHealth { get; set; }
         public int Armor { get; set; }
         public string Specibus { get; set; }
 
-        public int Echeladder{ get; set; }
-        public int PendingSkillPointAllocations { get; private set; }
+        public int Echeladder{ get; private set; }
+        public int PendingSkillPointAllocations { get; set; }
         public int XP { get; set; }
         public int NextLevelXP { get; set; }
 
@@ -64,6 +65,7 @@ namespace HSRP
                 {
                     case "status":
                         Health = XmlToolbox.GetAttributeInt(ele, "hp", -1);
+                        MaxHealth = XmlToolbox.GetAttributeInt(ele, "maxhp", Health);
                         Armor = XmlToolbox.GetAttributeInt(ele, "ac", 0);
                         Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
                         break;
@@ -107,6 +109,7 @@ namespace HSRP
 
             XElement status = new XElement("status",
                 new XAttribute("hp", Health),
+                new XAttribute("maxhp", MaxHealth),
                 new XAttribute("ac", Armor),
                 new XAttribute("specibus", Specibus)
                 );
@@ -185,7 +188,7 @@ namespace HSRP
 
                     // Lusus description.
                     case 4:
-                        if (input.Length > 1 && input.Length <= 60)
+                        if (input.Length > 1 && input.Length <= Constants.LususDescCharLimit)
                         {
                             LususDescription = input;
                             break;
@@ -224,6 +227,7 @@ namespace HSRP
         /// <returns>The amount of levels they gained from this XP boost.</returns>
         public int GiveXP(int xp)
         {
+            XP += xp;
             NextLevelXP -= xp;
             int i = 0;
 
@@ -243,12 +247,14 @@ namespace HSRP
         public void LevelUp()
         {
             Echeladder++;
+            int hp = Toolbox.DiceRoll(1, 6 + Abilities.Constitution);
+            MaxHealth += hp;
+            Health += hp;
 
-            Health += Toolbox.DiceRoll(1, 6 + Abilities.Constitution);
-            PendingSkillPointAllocations += 12;
+            PendingSkillPointAllocations += Constants.SkillPointsPerLevel;
             if (Echeladder % 5 == 0)
             {
-                PendingSkillPointAllocations += 12;
+                PendingSkillPointAllocations += Constants.SkillPointsPerLevel;
             }
         }
 
@@ -262,7 +268,7 @@ namespace HSRP
             result = result.AddLine("Lusus Desc: " + LususDescription);
             result = result.AddLine("");
 
-            result = result.AddLine("Health Vial: " + Health);
+            result = result.AddLine("Health Vial: " + Health + "/" + MaxHealth);
             result = result.AddLine("Armor: " + Armor);
             result = result.AddLine("Strife Specibus " + Specibus);
             result = result.AddLine("");
