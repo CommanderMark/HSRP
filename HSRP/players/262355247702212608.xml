@@ -1,17 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player name="The Loverspy" id="262355247702212608" blood="Olive" pineappleOnPizza="false">
-  <status hp="100" ac="0" specibus="Ropekind" />
-  <levels echeladder="0" pendingSkillPoints="24" />
+  <status hp="100" maxhp="100" ac="0" specibus="Ropekind" />
+  <levels echeladder="0" pendingSkillPoints="0" xp="0" nextLevel="0" />
   <abilities>
     <strength value="0" />
     <constitution value="0" />
     <psion value="0" />
-    <fortitude value="0" />
-    <intimidation value="0" />
-    <persuation value="0" />
+    <fortitude value="6" />
+    <intimidation value="3" />
+    <persuasion value="15" />
   </abilities>
   <lusus>Bat</lusus>
   <inventory>
-    <item value="Shovel" />
+    <item value="Shovel" quantity="1" />
+    <item value="Highblood's Phone" quantity="1" />
+    <item value="1000$" quantity="1" />
+    <item value="Highblood's Club" quantity="1" />
+    <item value="Fucking Computer" quantity="0" />
   </inventory>
 </player>

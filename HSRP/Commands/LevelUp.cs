@@ -8,7 +8,6 @@ using Discord;
 
 namespace HSRP.Commands
 {
-    // TODO: XP System
     [RequireRegistration]
     public class LevelUp : ModuleBase
     {

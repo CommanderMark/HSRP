@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player name="Sidewind Langston" id="103547713932529664" blood="Violet" pineappleOnPizza="false">
-  <status hp="106" maxhp="106" ac="0" specibus="Hatchetkind" />
+  <status hp="71" maxhp="106" ac="0" specibus="Hatchetkind" />
   <levels echeladder="1" pendingSkillPoints="0" xp="5" nextLevel="15" />
   <abilities>
     <strength value="2" />
@@ -12,11 +12,13 @@
   </abilities>
   <lusus>Amaryllis. A goat-like creature...yeah that about covers it.</lusus>
   <inventory>
-    <item value="Map" />
-    <item value="SOCKS" equipped="true" />
-    <item value="MOODY BLUE CAPE" equipped="true" />
-    <item value="MOODY BLUE RUSTY HATCHET" equipped="true" />
-    <item value="Stolen Dagger" />
-    <item value="$700 Stolen Cash" />
+    <item value="Map" quantity="1" />
+    <item value="SOCKS" quantity="1" equipped="true" />
+    <item value="MOODY BLUE CAPE" quantity="1" equipped="true" />
+    <item value="MOODY BLUE RUSTY HATCHET" quantity="1" equipped="true" />
+    <item value="Stolen Dagger" quantity="1" />
+    <item value="Cash" quantity="1550" />
+    <item value="Phones" quantity="3" />
+    <item value="Book of the Signless" quantity="1" />
   </inventory>
 </player>
