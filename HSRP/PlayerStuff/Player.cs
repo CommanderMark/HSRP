@@ -98,6 +98,7 @@ namespace HSRP
                         {
                             Item i = new Item();
                             i.name = XmlToolbox.GetAttributeString(item, "value", string.Empty);
+                            i.quantity = XmlToolbox.GetAttributeUnsignedInt(item, "quantity", 1);
                             i.equipped = XmlToolbox.GetAttributeBool(item, "equipped", false);
                             Inventory.AddLast(i);
                         }
@@ -138,7 +139,8 @@ namespace HSRP
 
             foreach (Item item in Inventory)
             {
-                XElement ele = new XElement("item", new XAttribute("value", item.name));
+                XElement ele = new XElement("item", new XAttribute("value", item.name),
+                    new XAttribute("quantity", item.quantity));
                 if (item.equipped)
                 {
                     ele.Add(new XAttribute("equipped", item.equipped));
@@ -264,6 +266,12 @@ namespace HSRP
             {
                 PendingSkillPointAllocations += Constants.SkillPointsPerLevel;
             }
+        }
+
+        public bool InflictDamage(int amount)
+        {
+            Health -= amount;
+            return Health <= 0;
         }
 
         public string Display(Discord.IUser user)

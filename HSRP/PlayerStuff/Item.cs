@@ -4,5 +4,6 @@
     {
         public string name;
         public bool equipped;
+        public uint quantity;
     }
 }

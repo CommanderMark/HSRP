@@ -1,6 +1,7 @@
 ﻿using Discord.Commands;
 using System;
 using System.Threading.Tasks;
+using Discord;
 
 namespace HSRP.Commands
 {
@@ -12,7 +13,8 @@ namespace HSRP.Commands
         [Command("profile"), Alias("stats", "prof")]
         public async Task Profile(Player plyr)
         {
-            await ReplyAsync(Syntax.ToCodeBlock(plyr.Display(Context.User)));
+            IGuildUser user = await plyr.GuildUser;
+            await ReplyAsync(Syntax.ToCodeBlock(plyr.Display(user)));
         }
 
         [Command("roll")]

@@ -77,11 +77,9 @@ namespace HSRP.Commands
                 await ReplyAsync("Invalid item name.");
                 return;
             }
-            plyr.Inventory.Remove(item);
-
-            plyr.Save();
-            string log = Syntax.ToCodeLine(item.name) + " was removed from the inventory of " + Syntax.ToCodeLine(plyr.Name) + ".";
-            await ReplyAsync(log);
+            
+            int index = plyr.Inventory.IndexOf(item);
+            await Remove(plyr, index);
         }
 
         [Command("equip"), Priority(1), RequireGM]
@@ -119,19 +117,8 @@ namespace HSRP.Commands
                 return;
             }
 
-            if (prevItem.equipped)
-            {
-                await ReplyAsync("This item is already equipped.");
-                return;
-            }
-
-            Item newItem = prevItem;
-            newItem.equipped = true;
-            plyr.Inventory.Find(prevItem).Value = newItem;
-
-            plyr.Save();
-            string log = Syntax.ToCodeLine(newItem.name) + " was equipped to " + Syntax.ToCodeLine(plyr.Name) + ".";
-            await ReplyAsync(log);
+            int index = plyr.Inventory.IndexOf(prevItem);
+            await Equip(plyr, index);
         }
 
         [Command("unequip"), Priority(1), RequireGM]
@@ -169,19 +156,90 @@ namespace HSRP.Commands
                 return;
             }
 
-            if (!prevItem.equipped)
+            int index = plyr.Inventory.IndexOf(prevItem);
+            await UnEquip(plyr, index);
+        }
+
+        [Group("quantity"), Alias("amount"), RequireGM]
+        public class QuantityCommands : ModuleBase
+        {
+            [Command("add"), Priority(1)]
+            public async Task QuantityAdd(Player plyr, int index, int amount)
             {
-                await ReplyAsync("This item is not equipped.");
-                return;
+                Item prevItem = plyr.Inventory.ElementAtOrDefault(index);
+                if (prevItem == null)
+                {
+                    await ReplyAsync("Invalid item index.");
+                    return;
+                }
+
+                if (amount <= 0)
+                {
+                    await ReplyAsync("Invalid amount.");
+                    return;
+                }
+
+                Item newItem = prevItem;
+                newItem.quantity += (uint)amount;
+                plyr.Inventory.Find(prevItem).Value = newItem;
+
+                plyr.Save();
+                string log = $"{amount} {Syntax.ToCodeLine(newItem.name)} added to the inventory of {Syntax.ToCodeLine(plyr.Name)}.";
+                await ReplyAsync(log);
             }
 
-            Item newItem = prevItem;
-            newItem.equipped = false;
-            plyr.Inventory.Find(prevItem).Value = newItem;
+            [Command("add"), Priority(0)]
+            public async Task QuantityAdd(Player plyr, string name, int amount)
+            {
+                Item prevItem = plyr.Inventory.FirstOrDefault(x => x.name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
+                if (prevItem == null)
+                {
+                    await ReplyAsync("Invalid item name.");
+                    return;
+                }
 
-            plyr.Save();
-            string log = Syntax.ToCodeLine(newItem.name) + " was un-equipped from " + Syntax.ToCodeLine(plyr.Name) + ".";
-            await ReplyAsync(log);
+                int index = plyr.Inventory.IndexOf(prevItem);
+                await QuantityAdd(plyr, index, amount);
+            }
+
+            [Command("remove"), Priority(1)]
+            public async Task QuantityRemove(Player plyr, int index, int amount)
+            {
+                Item prevItem = plyr.Inventory.ElementAtOrDefault(index);
+                if (prevItem == null)
+                {
+                    await ReplyAsync("Invalid item index.");
+                    return;
+                }
+
+                if (amount <= 0 || amount > prevItem.quantity)
+                {
+                    await ReplyAsync("Invalid amount.");
+                    return;
+                }
+
+                Item newItem = prevItem;
+                newItem.quantity -= (uint)amount;
+                plyr.Inventory.Find(prevItem).Value = newItem;
+
+                plyr.Save();
+                string log = $"{amount} {Syntax.ToCodeLine(newItem.name)} removed from the inventory of {Syntax.ToCodeLine(plyr.Name)}.";
+                await ReplyAsync(log);
+            }
+
+            [Command("remove"), Priority(0)]
+            public async Task QuantityRemove(Player plyr, string name, int amount)
+            {
+                Item prevItem = plyr.Inventory.FirstOrDefault(x => x.name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
+                if (prevItem == null)
+                {
+                    await ReplyAsync("Invalid item name.");
+                    return;
+                }
+
+                int index = plyr.Inventory.IndexOf(prevItem);
+                await QuantityRemove(plyr, index, amount);
+            }
         }
     }
 }
