@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<player name="Sicarius Anathera" id="184763855803645952" blood="Cerulean" pineappleOnPizza="true">
-  <status hp="110" maxhp="110" ac="0" specibus="Bladekindx2" />
+<player>
+  <info name="Sicarius Anathera" id="184763855803645952" blood="Cerulean" pineappleOnPizza="true" />
+  <lusus>Veneficus is a giant Scorpion with spikes on his back.</lusus>
+  <status hp="110" maxhp="110" specibus="Bladekindx2" />
   <levels echeladder="1" pendingSkillPoints="0" xp="10" nextLevel="10" />
   <abilities>
     <strength value="6" />
@@ -10,7 +12,6 @@
     <intimidation value="7" />
     <persuasion value="7" />
   </abilities>
-  <lusus>Veneficus is a giant Scorpion with spikes on his back.</lusus>
   <inventory>
     <item value="DUAL CORVOS" quantity="1" equipped="true" />
     <item value="Un-Stolen Computer" quantity="1" />

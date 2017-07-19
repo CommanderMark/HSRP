@@ -49,26 +49,32 @@ namespace HSRP
             Specibus = "";
         }
 
-        public Player(Discord.IUser user) : this(user.Id.ToString()) { }
-        public Player(ulong ID) : this(ID.ToString()) { }
+        public Player(Discord.IUser user) : this(user.Id.ToString() + ".xml") { }
+        public Player(ulong ID) : this(ID.ToString() + ".xml") { }
         public Player(string filePath) : this()
         {
             string path = filePath.Contains(Dirs.Players)
-                ? filePath + ".xml"
-                : Path.Combine(Dirs.Players, filePath) + ".xml";
+                ? filePath
+                : Path.Combine(Dirs.Players, filePath);
 
             XDocument doc = XmlToolbox.TryLoadXml(path);
             if (doc == null) { Errored = true; return; }
-
-            Name = XmlToolbox.GetAttributeString(doc.Root, "name", string.Empty);
-            ID = XmlToolbox.GetAttributeUnsignedLong(doc.Root, "id", 0);
-            BloodColor = XmlToolbox.GetAttributeEnum(doc.Root, "blood", BloodType.None);
-            LikesPineappleOnPizza = XmlToolbox.GetAttributeBool(doc.Root, "pineappleOnPizza", false);
             
             foreach (XElement ele in doc.Root.Elements())
             {
                 switch (ele.Name.LocalName)
                 {
+                    case "info":
+                        Name = XmlToolbox.GetAttributeString(ele, "name", string.Empty);
+                        ID = XmlToolbox.GetAttributeUnsignedLong(ele, "id", 0);
+                        BloodColor = XmlToolbox.GetAttributeEnum(ele, "blood", BloodType.None);
+                        LikesPineappleOnPizza = XmlToolbox.GetAttributeBool(ele, "pineappleOnPizza", false);
+                        break;
+
+                    case "lusus":
+                        LususDescription = ele.ElementInnerText();
+                        break;
+
                     case "status":
                         Health = XmlToolbox.GetAttributeInt(ele, "hp", -1);
                         MaxHealth = XmlToolbox.GetAttributeInt(ele, "maxhp", Health);
@@ -84,10 +90,6 @@ namespace HSRP
 
                     case "abilities":
                         Abilities = new AbilitySet(ele);
-                        break;
-
-                    case "lusus":
-                        LususDescription = ele.ElementInnerText();
                         break;
 
                     case "inventory":
@@ -108,10 +110,16 @@ namespace HSRP
         {
             XDocument doc = new XDocument();
             XElement player = new XElement("player");
-            player.Add(new XAttribute("name", Name));
-            player.Add(new XAttribute("id", ID));
-            player.Add(new XAttribute("blood", BloodColor.ToString()));
-            player.Add(new XAttribute("pineappleOnPizza", LikesPineappleOnPizza));
+            
+            XElement info = new XElement("info",
+                new XAttribute("name", Name),
+                new XAttribute("id", ID),
+                new XAttribute("blood", BloodColor.ToString()),
+                new XAttribute("pineappleOnPizza", LikesPineappleOnPizza)
+                );
+
+            XElement lusus = new XElement("lusus",
+                new XText(LususDescription));
 
             XElement status = new XElement("status",
                 new XAttribute("hp", Health),
@@ -128,9 +136,6 @@ namespace HSRP
 
             XElement abilities = Abilities.ToXmlElement();
 
-            XElement lusus = new XElement("lusus",
-                new XText(LususDescription));
-
             XElement inventory = new XElement("inventory");
 
             foreach (Item item in Inventory)
@@ -144,7 +149,7 @@ namespace HSRP
                 inventory.Add(ele);
             }
 
-            player.Add(status, levels, abilities, lusus, inventory);
+            player.Add(info, lusus, status, levels, abilities, inventory);
             doc.Add(player);
             XmlToolbox.WriteXml(this.ToXmlPath(), doc);
         }
@@ -234,13 +239,12 @@ namespace HSRP
         public int GiveXP(int xp)
         {
             XP += xp;
-            NextLevelXP -= xp;
             int i = 0;
 
-            while (NextLevelXP <= 0 && Echeladder < 30)
+            while (NextLevelXP < XP && Echeladder < 30)
             {
                 this.LevelUp();
-                NextLevelXP += Constants.XPMilestones[Echeladder];
+                NextLevelXP = Constants.XPMilestones[Echeladder];
                 ++i;
             }
 
@@ -280,7 +284,7 @@ namespace HSRP
 
             result = result.AddLine("Echeladder Rung: " + Echeladder);
             result = result.AddLine("Total XP: " + XP);
-            result = result.AddLine("Next Level In: " + NextLevelXP);
+            result = result.AddLine("Next Level In: " + (NextLevelXP - XP));
             result = result.AddLine("Pending Skill Points: " + PendingSkillPointAllocations);
             result = result.AddLine("");
 

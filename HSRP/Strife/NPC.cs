@@ -1,4 +1,6 @@
-﻿namespace HSRP
+﻿using System.Xml.Linq;
+
+namespace HSRP
 {
     public class NPC : IEntity
     {
@@ -28,7 +30,24 @@
 
         public NPC(string filePath) : this()
         {
+            XDocument doc = XmlToolbox.TryLoadXml(filePath);
+            foreach (XElement ele in doc.Root.Elements())
+            {
+                switch (ele.Name.LocalName)
+                {
+                    case "info":
+                        Name = XmlToolbox.GetAttributeString(ele, "name", string.Empty);
+                        LikesPineappleOnPizza = XmlToolbox.GetAttributeBool(ele, "pineappleOnPizza", false);
+                        Description = XmlToolbox.ElementInnerText(ele);
+                        break;
 
+                    case "status":
+                        Health = XmlToolbox.GetAttributeInt(ele, "hp", -1);
+                        MaxHealth = XmlToolbox.GetAttributeInt(ele, "maxhp", Health);
+                        Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
+                        break;
+                }
+            }
         }
     }
 }

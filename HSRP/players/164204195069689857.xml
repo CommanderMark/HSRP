@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<player name="Rezkas Kabsen" id="164204195069689857" blood="Teal" pineappleOnPizza="false">
-  <status hp="100" ac="0" specibus="Bladekind" />
-  <levels echeladder="0" pendingSkillPoints="24" />
+<player>
+  <info name="Rezkas Kabsen" id="164204195069689857" blood="Teal" pineappleOnPizza="false" />
+  <lusus>large snake</lusus>
+  <status hp="100" maxhp="100" specibus="Bladekind" />
+  <levels echeladder="0" pendingSkillPoints="24" xp="0" nextLevel="0" />
   <abilities>
     <strength value="0" />
     <constitution value="0" />
     <psion value="0" />
     <fortitude value="0" />
     <intimidation value="0" />
-    <persuation value="0" />
+    <persuasion value="0" />
   </abilities>
-  <lusus>large snake</lusus>
   <inventory />
 </player>

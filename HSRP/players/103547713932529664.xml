@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<player name="Sidewind Langston" id="103547713932529664" blood="Violet" pineappleOnPizza="false">
-  <status hp="71" maxhp="106" ac="0" specibus="Hatchetkind" />
+<player>
+  <info name="Sidewind Langston" id="103547713932529664" blood="Violet" pineappleOnPizza="false" />
+  <lusus>Amaryllis. A goat-like creature...yeah that about covers it.</lusus>
+  <status hp="71" maxhp="106" specibus="Hatchetkind" />
   <levels echeladder="1" pendingSkillPoints="0" xp="5" nextLevel="15" />
   <abilities>
     <strength value="2" />
@@ -10,7 +12,6 @@
     <intimidation value="10" />
     <persuasion value="10" />
   </abilities>
-  <lusus>Amaryllis. A goat-like creature...yeah that about covers it.</lusus>
   <inventory>
     <item value="Map" quantity="1" />
     <item value="SOCKS" quantity="1" equipped="true" />

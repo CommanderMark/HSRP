@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<player name="The Loverspy" id="262355247702212608" blood="Olive" pineappleOnPizza="false">
-  <status hp="100" maxhp="100" ac="0" specibus="Ropekind" />
+<player>
+  <info name="The Loverspy" id="262355247702212608" blood="Olive" pineappleOnPizza="false" />
+  <lusus>Bat</lusus>
+  <status hp="100" maxhp="100" specibus="Ropekind" />
   <levels echeladder="0" pendingSkillPoints="0" xp="0" nextLevel="0" />
   <abilities>
     <strength value="0" />
@@ -10,7 +12,6 @@
     <intimidation value="3" />
     <persuasion value="15" />
   </abilities>
-  <lusus>Bat</lusus>
   <inventory>
     <item value="Shovel" quantity="1" />
     <item value="Highblood's Phone" quantity="1" />

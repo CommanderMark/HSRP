@@ -219,10 +219,9 @@ namespace HSRP
                     val[i] = int.Parse(content[i], CultureInfo.InvariantCulture);
                 }
             }
-            catch
+            catch (Exception e)
             {
-                // Don't bother throwing an error here because it'll spam the console.
-                //Console.WriteLine("[XML] " + "Error in " + attribute + "! \n" + e);
+                Console.WriteLine("[XML] " + "Error in " + attribute + "! \n" + e);
                 val = defaultValue;
             }
 

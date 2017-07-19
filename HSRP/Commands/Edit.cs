@@ -4,7 +4,7 @@ using Discord.Commands;
 namespace HSRP.Commands
 {
     // Stuff for modifying pre-existing player data.
-    [Group("edit"), RequireRegistration]
+    [Group("edit")]
     public class EditCommands : JModuleBase
     {
         [Command("name"), RequireRegistration, Priority(1)]

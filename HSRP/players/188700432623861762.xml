@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<player name="I am Wood" id="188700432623861762" blood="Teal" pineappleOnPizza="true">
-  <status hp="100" ac="0" specibus="stupid" />
-  <levels echeladder="0" pendingSkillPoints="0" />
+<player>
+  <info name="I am Wood" id="188700432623861762" blood="Teal" pineappleOnPizza="true" />
+  <lusus>Teleporting manifestation of stupidity. Known as "duwang"</lusus>
+  <status hp="100" maxhp="100" specibus="stupid" />
+  <levels echeladder="0" pendingSkillPoints="0" xp="0" nextLevel="0" />
   <abilities>
     <strength value="3" />
     <constitution value="4" />
     <psion value="7" />
     <fortitude value="4" />
     <intimidation value="3" />
-    <persuation value="3" />
+    <persuasion value="0" />
   </abilities>
-  <lusus>Teleporting manifestation of stupidity. Known as "duwang"</lusus>
   <inventory />
 </player>
