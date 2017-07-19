@@ -81,14 +81,17 @@ namespace HSRP
 
         public async Task OnReady()
         {
-            try
+            await Task.Run(() =>
             {
-                Instance.RpGuild = Client.GetGuild(Constants.RP_GUILD) as IGuild;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+                try
+                {
+                    Instance.RpGuild = Client.GetGuild(Constants.RP_GUILD) as IGuild;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            });
         }
 
         public async Task OnJoinGuild(SocketGuild guild)
