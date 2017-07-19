@@ -4,7 +4,7 @@ using Discord.Commands;
 namespace HSRP.Commands
 {
     [RequireGM]
-    public class StatsCommands : ModuleBase
+    public class StatsCommands : JModuleBase
     {
         [Command("damage"), Alias("inflict")]
         public async Task InflictDamage(Player plyr, int amount)

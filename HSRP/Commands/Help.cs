@@ -5,7 +5,7 @@ using Discord.Commands;
 namespace HSRP.Commands
 {
     [Group("help")]
-    public class HelpCommands : ModuleBase
+    public class HelpCommands : JModuleBase
     {
         [Command]
         public async Task Help()

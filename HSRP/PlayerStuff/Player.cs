@@ -279,7 +279,7 @@ namespace HSRP
             string result = "";
 
             result = result.AddLine("Name: " + Name);
-            result = result.AddLine("Owned by: " + user.Username);
+            result = result.AddLine($"Owned by: {user.Username} ({user.Id})");
             result = result.AddLine("Blood Color: " + BloodColor);
             result = result.AddLine("Lusus Desc: " + LususDescription);
             result = result.AddLine("");

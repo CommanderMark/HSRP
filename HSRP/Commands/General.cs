@@ -5,7 +5,7 @@ using Discord;
 
 namespace HSRP.Commands
 {
-    public class General : ModuleBase
+    public class General : JModuleBase
     {
         [Command("profile"), Alias("stats", "prof"), RequireRegistration]
         public async Task Profile() => await Profile(new Player(Context.User));

@@ -8,7 +8,7 @@ using System;
 namespace HSRP.Commands
 {
     [Group("inventory"), Alias("inv")]
-    public class InventoryCommands : ModuleBase
+    public class InventoryCommands : JModuleBase
     {
         [Command, RequireRegistration]
         public async Task Inv() => await Inv(new Player(Context.User));
@@ -161,7 +161,7 @@ namespace HSRP.Commands
         }
 
         [Group("quantity"), Alias("amount"), RequireGM]
-        public class QuantityCommands : ModuleBase
+        public class QuantityCommands : JModuleBase
         {
             [Command("add"), Priority(1)]
             public async Task QuantityAdd(Player plyr, int index, int amount)

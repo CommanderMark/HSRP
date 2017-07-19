@@ -5,7 +5,7 @@ namespace HSRP.Commands
 {
     // Stuff for modifying pre-existing player data.
     [Group("edit"), RequireRegistration]
-    public class EditCommands : ModuleBase
+    public class EditCommands : JModuleBase
     {
         [Command("name"), RequireRegistration, Priority(1)]
         public async Task Name([Remainder] string name) => await Name(new Player(Context.User), name);

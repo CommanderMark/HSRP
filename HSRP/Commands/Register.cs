@@ -5,7 +5,7 @@ using Discord.Commands;
 namespace HSRP.Commands
 {
     [Group("register")]
-    public class Register : ModuleBase
+    public class Register : JModuleBase
     {
         [Command]
         public async Task Registering([Remainder] string input = "")

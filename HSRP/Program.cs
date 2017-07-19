@@ -84,7 +84,6 @@ namespace HSRP
             try
             {
                 Instance.RpGuild = Client.GetGuild(Constants.RP_GUILD) as IGuild;
-                await Console.Out.WriteLineAsync("Hello!");
             }
             catch (Exception e)
             {

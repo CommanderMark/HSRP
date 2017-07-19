@@ -9,7 +9,7 @@ using Discord;
 namespace HSRP.Commands
 {
     [RequireRegistration]
-    public class LevelUp : ModuleBase
+    public class LevelUp : JModuleBase
     {
         [Command("allocate"), Alias("spend")]
         public async Task SpendSkill(PropertyInfo ability, int amount)
