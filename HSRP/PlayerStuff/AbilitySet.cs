@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 using System.Reflection;
 using System.Xml.Linq;
 using HSRP.Commands;
@@ -122,40 +121,14 @@ namespace HSRP
             return ele;
         }
 
-        public AbilitySet GetModifiers()
-        {
-            AbilitySet modifierSet = new AbilitySet();
-
-            Type type = this.GetType();
-            foreach (PropertyInfo property in type.GetProperties())
-            {
-                if (property.CanWrite && property.CanRead)
-                {
-                    int value = (int)property.GetValue(this);
-                    // y = 0.5x - 5, rounded down.
-                    float modiVal = (float)Math.Floor((0.5 * value) - 5);
-
-                    property.SetValue(modifierSet, (int)modiVal);
-                }
-            }
-
-            return modifierSet;
-        }
-
-        public string Display(AbilitySet modifiers)
+        public string Display()
         {
             string disp = "";
-
-            Type type = this.GetType();
-            foreach (PropertyInfo property in type.GetProperties())
+            
+            foreach (PropertyInfo prop in GetType().GetProperties())
             {
-                if (property.CanRead)
-                {
-                    int value = (int)property.GetValue(this);
-                    int modiVal = (int)property.GetValue(modifiers);
-
-                    disp += $"{property.Name}: {value} ({modiVal})\n";
-                }
+                int value = (int)prop.GetValue(this);
+                disp = disp.AddLine(prop.Name + ": " + value);
             }
 
             return disp;

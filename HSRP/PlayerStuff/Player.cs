@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace HSRP
 {
-    public class Player
+    public class Player : IEntity
     {
         public ulong ID { get; set; }
         public Task<Discord.IGuildUser> GuildUser
@@ -29,7 +28,6 @@ namespace HSRP
 
         public int Health { get; set; }
         public int MaxHealth { get; set; }
-        public int Armor { get; set; }
         public string Specibus { get; set; }
 
         public int Echeladder{ get; private set; }
@@ -74,7 +72,6 @@ namespace HSRP
                     case "status":
                         Health = XmlToolbox.GetAttributeInt(ele, "hp", -1);
                         MaxHealth = XmlToolbox.GetAttributeInt(ele, "maxhp", Health);
-                        Armor = XmlToolbox.GetAttributeInt(ele, "ac", 0);
                         Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
                         break;
 
@@ -119,7 +116,6 @@ namespace HSRP
             XElement status = new XElement("status",
                 new XAttribute("hp", Health),
                 new XAttribute("maxhp", MaxHealth),
-                new XAttribute("ac", Armor),
                 new XAttribute("specibus", Specibus)
                 );
 
@@ -268,12 +264,6 @@ namespace HSRP
             }
         }
 
-        public bool InflictDamage(int amount)
-        {
-            Health -= amount;
-            return Health <= 0;
-        }
-
         public string Display(Discord.IUser user)
         {
             string result = "";
@@ -285,7 +275,6 @@ namespace HSRP
             result = result.AddLine("");
 
             result = result.AddLine("Health Vial: " + Health + "/" + MaxHealth);
-            result = result.AddLine("Armor: " + Armor);
             result = result.AddLine("Strife Specibus " + Specibus);
             result = result.AddLine("");
 
@@ -296,11 +285,7 @@ namespace HSRP
             result = result.AddLine("");
 
             result = result.AddLine("Base Statistics");
-            foreach (PropertyInfo prop in Abilities.GetType().GetProperties())
-            {
-                int value = (int)prop.GetValue(Abilities);
-                result = result.AddLine(prop.Name + ": " + value);
-            }
+            result = result.AddLine(Abilities.Display());
 
             return result;
         }
