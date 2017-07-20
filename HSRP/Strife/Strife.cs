@@ -10,6 +10,16 @@ namespace HSRP
     {
         public static LinkedList<Strife> Strifes { get; set; }
 
-        public int ID { get; set; }
+        /// <summary>
+        /// Whether the Attackers team is taking their turn or not.
+        /// </summary>
+        public bool AttackTurn { get; set; }
+        /// <summary>
+        /// Who in the current team's (Attackers or Targets) turn it is. Starts at 0.
+        /// </summary>
+        public int Turn { get; set; }
+
+        public LinkedList<Player> Attackers { get; set; }
+        public LinkedList<NPC> Targets { get; set; }
     }
 }
