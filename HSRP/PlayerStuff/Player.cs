@@ -29,6 +29,7 @@ namespace HSRP
         public int Health { get; set; }
         public int MaxHealth { get; set; }
         public string Specibus { get; set; }
+        public int StrifeID { get; set; }
 
         public int Echeladder{ get; private set; }
         public int PendingSkillPointAllocations { get; set; }
@@ -79,6 +80,7 @@ namespace HSRP
                         Health = XmlToolbox.GetAttributeInt(ele, "hp", -1);
                         MaxHealth = XmlToolbox.GetAttributeInt(ele, "maxhp", Health);
                         Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
+                        StrifeID = XmlToolbox.GetAttributeInt(ele, "strife", 0);
                         break;
 
                     case "levels":
@@ -118,13 +120,13 @@ namespace HSRP
                 new XAttribute("pineappleOnPizza", LikesPineappleOnPizza)
                 );
 
-            XElement lusus = new XElement("lusus",
-                new XText(LususDescription));
+            XElement lusus = new XElement("lusus", new XText(LususDescription));
 
             XElement status = new XElement("status",
                 new XAttribute("hp", Health),
                 new XAttribute("maxhp", MaxHealth),
-                new XAttribute("specibus", Specibus)
+                new XAttribute("specibus", Specibus),
+                new XAttribute("strife", StrifeID)
                 );
 
             XElement levels = new XElement("levels",

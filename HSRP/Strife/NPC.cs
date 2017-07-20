@@ -28,10 +28,9 @@ namespace HSRP
             Specibus = "";
         }
 
-        public NPC(string filePath) : this()
+        public NPC(XElement element) : this()
         {
-            XDocument doc = XmlToolbox.TryLoadXml(filePath);
-            foreach (XElement ele in doc.Root.Elements())
+            foreach (XElement ele in element.Elements())
             {
                 switch (ele.Name.LocalName)
                 {
@@ -45,9 +44,37 @@ namespace HSRP
                         Health = XmlToolbox.GetAttributeInt(ele, "hp", -1);
                         MaxHealth = XmlToolbox.GetAttributeInt(ele, "maxhp", Health);
                         Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
+                        DiceRolls = XmlToolbox.GetAttributeInt(ele, "diceRolls", 1);
+                        break;
+                    
+                    case "abilities":
+                        Abilities = new AbilitySet(ele);
                         break;
                 }
             }
+        }
+
+        public XElement Save()
+        {
+            XElement npc = new XElement("npc");
+
+            XElement info = new XElement("info",
+                new XAttribute("name", Name),
+                new XAttribute("pineappleOnPizza", LikesPineappleOnPizza),
+                new XText(Description)
+                );
+            
+            XElement status = new XElement("status",
+                new XAttribute("hp", Health),
+                new XAttribute("maxhp", MaxHealth),
+                new XAttribute("specibus", Specibus),
+                new XAttribute("diceRolls", DiceRolls)
+                );
+
+            XElement abilities = Abilities.ToXmlElement();
+
+            npc.Add(info, status, abilities);
+            return npc;
         }
     }
 }
