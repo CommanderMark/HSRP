@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using System.Linq;
 using Discord;
+using Discord.Commands;
 
 namespace HSRP
 {
@@ -62,10 +63,22 @@ namespace HSRP
             await (await user.GetOrCreateDMChannelAsync()).SendMessageAsync(message, embed: embed);
         }
 
-        // Extension method for getting hex from Discord.Color.
+        // Extension methods.
         public static string GetHexValue(this Color clr)
         {
             return clr.R.ToString("X2") + clr.G.ToString("X2") + clr.B.ToString("X2");
+        }
+
+        public static Player GetPlayerEntity(this ICommandContext context)
+        {
+            Player plyr = new Player(context.User);
+            return plyr.Errored ? null : plyr;
+        }
+
+        public static Strife GetStrife(this ICommandContext context)
+        {
+            Player plyr = context.GetPlayerEntity();
+            return Strife.Strifes.ElementAtOrDefault(plyr.StrifeID);
         }
     }
 

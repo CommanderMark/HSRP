@@ -7,7 +7,8 @@ namespace HSRP.Commands
 {
     public class General : JModuleBase
     {
-        [Command("profile"), Alias("stats", "prof"), RequireRegistration]
+        [RequireRegistration]
+        [Command("profile"), Alias("stats", "prof")]
         public async Task Profile() => await Profile(new Player(Context.User));
 
         [Command("profile"), Alias("stats", "prof")]
@@ -36,7 +37,8 @@ namespace HSRP.Commands
             }
         }
 
-        [Command("stfu"), Alias("kys", "die"), RequireJorge]
+        [RequireJorge]
+        [Command("stfu"), Alias("kys", "die")]
         public async Task Die()
         {
             await ReplyAsync("Going offline.");

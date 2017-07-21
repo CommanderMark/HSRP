@@ -36,8 +36,8 @@ namespace HSRP.Commands
             foreach (PropertyInfo prop in typeof(AbilitySet).GetProperties())
             {
                 AbilityAttribute attrib = (AbilityAttribute)prop.GetCustomAttribute(typeof(AbilityAttribute), false)
-                    ?? new AbilityAttribute("Error", "Errored");
-                msg += "\n" + Syntax.ToCodeLine($"{prop.Name} ({attrib.Alias})");
+                    ?? new AbilityAttribute(AbilityType.None, false, "Errored");
+                msg += "\n" + Syntax.ToCodeLine($"{prop.Name} ({attrib.ToString()})");
             }
 
             msg += $"\n\nType `{Constants.BotPrefix}help skills [ability name]` for information on each skill.";
@@ -51,8 +51,8 @@ namespace HSRP.Commands
         public async Task HelpSkills(PropertyInfo prop)
         {
             AbilityAttribute attrib = (AbilityAttribute)prop.GetCustomAttribute(typeof(AbilityAttribute), false)
-                ?? new AbilityAttribute("Error", "Errored");
-            string ab = Syntax.ToCodeLine($"{prop.Name} ({attrib.Alias})") + "\n";
+                ?? new AbilityAttribute(AbilityType.None, false, "Errored");
+            string ab = Syntax.ToCodeLine($"{prop.Name} ({attrib.ToString()})") + "\n";
             ab = ab.AddLine(attrib.Desc);
             await DiscordToolbox.DMUser(Context.User, ab);
         }

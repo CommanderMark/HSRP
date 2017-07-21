@@ -7,7 +7,7 @@ namespace HSRP
 {
     public class AbilitySet
     {
-        [Ability("Physical Offense",
+        [Ability(AbilityType.Physical, true,
             "Encompasses your brawn. Look at those guns. You use traditional brute forcing to fix and further "
             + "create new problems. You may end up being solo most of the time in your endeavours, but you "
             + "are all you need to dish out pain."
@@ -17,7 +17,7 @@ namespace HSRP
             + "end up skipping combat altogether against weaker physical opponents.")]
         public int Strength { get; set; }
         
-        [Ability("Physical Defense",
+        [Ability(AbilityType.Physical, false,
             "Muscle strength helps with getting out in the world, but without enough muscle endurance "
             + "to back that up you won't be getting far. This stat determines your resilience to physical activities. "
             + "Whether it involves overcoming treacherous environments or picking off hostiles from a distance, "
@@ -30,7 +30,7 @@ namespace HSRP
             + "hazardous terrain and stealth, depending on your playstyle. ")]
         public int Constitution { get; set; }
         
-        [Ability("Mental Offense",
+        [Ability(AbilityType.Mental, true,
             "The best offense is a good defense, by which I mean you don't need defense if you can take down "
             + "everyone with your mind. Straight out of sci-fi, this stat determines your ability to use special "
             + "attacks that bypass any form of physicality the target may have. Granted your attacks are not "
@@ -42,7 +42,7 @@ namespace HSRP
             + "weak minded.")]
         public int Psion { get; set; }
         
-        [Ability("Mental Defense",
+        [Ability(AbilityType.Mental, false,
             "The best defense is a good offense, said no one ever. Regardless, you possess a strong will with this trait, "
             + "not only good for countering mind-based attacks, but allows you to be less susceptible to "
             + "common battleground fatigue. You can remain clear and focus under the least hospitable scenarios."
@@ -52,7 +52,7 @@ namespace HSRP
             + "when under stress.")]
         public int Fortitude { get; set; }
         
-        [Ability("Speech Offense",
+        [Ability(AbilityType.Speech, true,
             "You're fucking nuts, but people still listen to what you say regardless. This stat lets your words "
             + "do the work. You can get out of bad situations using a silver tongue and fish out more information "
             + "from people you talk to with your irresistable charm, or if not that your magical eyepatch. "
@@ -63,7 +63,7 @@ namespace HSRP
             + "in relation to your Intimidation.")]
         public int Intimidation { get; set; }
         
-        [Ability("Speech Defense",
+        [Ability(AbilityType.Speech, false,
             "You're fucking nuts, but people can't convince you otherwise. This stat benefits your speech "
             + "in a different manner as opposed to Intimidation. It instead focuses on using your natural charm "
             + "to well, persuade people to underestimate or assist you. You don't talk your way out of a negative scenario, "

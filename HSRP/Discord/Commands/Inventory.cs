@@ -10,10 +10,12 @@ namespace HSRP.Commands
     [Group("inventory"), Alias("inv")]
     public class InventoryCommands : JModuleBase
     {
-        [Command, RequireRegistration]
+        [RequireRegistration]
+        [Command]
         public async Task Inv() => await Inv(new Player(Context.User));
 
-        [Command, RequireGM]
+        [RequireGM]
+        [Command]
         public async Task Inv(Player plyr)
         {
             string output = "Inventory for " + plyr.Name + ":\n";
@@ -29,7 +31,8 @@ namespace HSRP.Commands
             await ReplyAsync(output);
         }
 
-        [Command("add"), RequireGM]
+        [RequireGM]
+        [Command("add")]
         public async Task Add(Player plyr, [Remainder] string item)
         {
             if (string.IsNullOrWhiteSpace(item))
@@ -45,6 +48,7 @@ namespace HSRP.Commands
 
             Item i = new Item();
             i.name = item;
+            i.quantity = 1;
             plyr.Inventory.AddLast(i);
 
             plyr.Save();
@@ -52,7 +56,8 @@ namespace HSRP.Commands
             await ReplyAsync(log);
         }
 
-        [Command("remove"), Priority(1), RequireGM, Summary("Removes an item.")]
+        [RequireGM]
+        [Command("remove"), Priority(1)]
         public async Task Remove(Player plyr, int index)
         {
             Item item = plyr.Inventory.ElementAtOrDefault(index);
@@ -68,7 +73,8 @@ namespace HSRP.Commands
             await ReplyAsync(log);
         }
 
-        [Command("remove"), Priority(0), RequireGM]
+        [RequireGM]
+        [Command("remove"), Priority(0)]
         public async Task Remove(Player plyr, [Remainder] string name)
         {
             Item item = plyr.Inventory.FirstOrDefault(x => x.name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
@@ -82,7 +88,8 @@ namespace HSRP.Commands
             await Remove(plyr, index);
         }
 
-        [Command("equip"), Priority(1), RequireGM]
+        [RequireGM]
+        [Command("equip"), Priority(1)]
         public async Task Equip(Player plyr, int index)
         {
             Item prevItem = plyr.Inventory.ElementAtOrDefault(index);
@@ -107,7 +114,8 @@ namespace HSRP.Commands
             await ReplyAsync(log);
         }
 
-        [Command("equip"), Priority(0), RequireGM]
+        [RequireGM]
+        [Command("equip"), Priority(0)]
         public async Task Equip(Player plyr, [Remainder] string name)
         {
             Item prevItem = plyr.Inventory.FirstOrDefault(x => x.name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
@@ -121,7 +129,8 @@ namespace HSRP.Commands
             await Equip(plyr, index);
         }
 
-        [Command("unequip"), Priority(1), RequireGM]
+        [RequireGM]
+        [Command("unequip"), Priority(1)]
         public async Task UnEquip(Player plyr, int index)
         {
             Item prevItem = plyr.Inventory.ElementAtOrDefault(index);
@@ -146,7 +155,8 @@ namespace HSRP.Commands
             await ReplyAsync(log);
         }
 
-        [Command("unequip"), Priority(0), RequireGM]
+        [RequireGM]
+        [Command("unequip"), Priority(0)]
         public async Task UnEquip(Player plyr, [Remainder] string name)
         {
             Item prevItem = plyr.Inventory.FirstOrDefault(x => x.name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
@@ -160,7 +170,8 @@ namespace HSRP.Commands
             await UnEquip(plyr, index);
         }
 
-        [Group("quantity"), Alias("amount"), RequireGM]
+        [RequireGM]
+        [Group("quantity"), Alias("amount")]
         public class QuantityCommands : JModuleBase
         {
             [Command("add"), Priority(1)]

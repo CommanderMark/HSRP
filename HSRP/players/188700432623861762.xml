@@ -10,7 +10,7 @@
     <psion value="7" />
     <fortitude value="4" />
     <intimidation value="3" />
-    <persuasion value="0" />
+    <persuasion value="3" />
   </abilities>
   <inventory />
 </player>

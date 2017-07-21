@@ -7,10 +7,12 @@ namespace HSRP.Commands
     [Group("edit")]
     public class EditCommands : JModuleBase
     {
-        [Command("name"), RequireRegistration, Priority(1)]
+        [RequireRegistration]
+        [Command("name"), Priority(1)]
         public async Task Name([Remainder] string name) => await Name(new Player(Context.User), name);
 
-        [Command("name"), RequireGM]
+        [RequireGM]
+        [Command("name")]
         public async Task Name(Player plyr, [Remainder] string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -26,10 +28,12 @@ namespace HSRP.Commands
             await ReplyAsync(Syntax.ToCodeLine(prev) + " was renamed to " + Syntax.ToCodeLine(plyr.Name) + ".");
         }
 
-        [Command("specibus"), RequireRegistration, Priority(1)]
+        [RequireRegistration]
+        [Command("specibus"), Priority(1)]
         public async Task Specibus([Remainder] string name) => await Specibus(new Player(Context.User), name);
 
-        [Command("specibus"), RequireGM]
+        [RequireGM]
+        [Command("specibus")]
         public async Task Specibus(Player plyr, [Remainder] string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -45,10 +49,12 @@ namespace HSRP.Commands
             await ReplyAsync($"{Syntax.ToCodeLine(plyr.Name)} changed their specibus. ({Syntax.ToCodeLine(prev)} -> {Syntax.ToCodeLine(plyr.Specibus)})");
         }
 
-        [Command("lusus"), RequireRegistration, Priority(1)]
+        [RequireRegistration]
+        [Command("lusus"), Priority(1)]
         public async Task Lusus([Remainder] string desc) => await Lusus(new Player(Context.User), desc);
 
-        [Command("lusus"), RequireGM]
+        [RequireGM]
+        [Command("lusus")]
         public async Task Lusus(Player plyr, [Remainder] string desc)
         {
             if (string.IsNullOrWhiteSpace(desc))
@@ -68,7 +74,8 @@ namespace HSRP.Commands
             await ReplyAsync(Syntax.ToCodeLine(plyr.Name) + " lusus description to updated.");
         }
 
-        [Command("pineapple"), Alias("pineappleonpizza"), RequireGM(Group = "selection"), RequireRegistration(Group = "selection")]
+        [RequireGM(Group = "selection"), RequireRegistration(Group = "selection")]
+        [Command("pineapple"), Alias("pineappleonpizza")]
         public async Task Pineapple([Remainder] string any)
         {
             await ReplyAsync("You cannot change what is true.");

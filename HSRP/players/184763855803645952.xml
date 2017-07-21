@@ -2,7 +2,7 @@
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" blood="Cerulean" pineappleOnPizza="true" />
   <lusus>Veneficus is a giant Scorpion with spikes on his back.</lusus>
-  <status hp="110" maxhp="110" specibus="Bladekindx2" />
+  <status hp="110" maxhp="110" specibus="Bladekindx2" strife="0" />
   <levels echeladder="1" pendingSkillPoints="0" xp="10" nextLevel="10" />
   <abilities>
     <strength value="6" />
@@ -17,5 +17,7 @@
     <item value="Un-Stolen Computer" quantity="1" />
     <item value="Computer Guy Phone" quantity="1" />
     <item value="1/2 Boomerangx2" quantity="0" />
+    <item value="Powdered Aluminum" quantity="0" />
+    <item value="Powdered Uranium" quantity="0" />
   </inventory>
 </player>

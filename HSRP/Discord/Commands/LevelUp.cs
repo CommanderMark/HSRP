@@ -44,7 +44,8 @@ namespace HSRP.Commands
             await ReplyAsync(msg);
         }
 
-        [Command("givexp"), Alias("xp", "award"), RequireGM]
+        [RequireGM]
+        [Command("givexp"), Alias("xp", "award")]
         public async Task GrantXP(Player plyr, int amount)
         {
             if (amount <= 0)

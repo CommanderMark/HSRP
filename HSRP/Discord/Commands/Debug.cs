@@ -7,7 +7,8 @@ namespace HSRP.Commands
 {
     public class DebugCommands : JModuleBase
     {
-        [Command("filter"), RequireJorge]
+        [RequireJorge]
+        [Command("filter")]
         public async Task FilterXml(string type)
         {
             if (type == "users")

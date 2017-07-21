@@ -238,9 +238,9 @@ namespace HSRP
         /// Gives a character XP. Levels up the character if they reach a milestone.
         /// </summary>
         /// <returns>The amount of levels they gained from this XP boost.</returns>
-        public int GiveXP(int xp)
+        public int GiveXP(int amount)
         {
-            XP += xp;
+            XP += amount;
             int i = 0;
 
             while (NextLevelXP < XP && Echeladder < 30)
