@@ -49,19 +49,6 @@ namespace HSRP
             return str += appended + "\n";
         }
 
-        public static int IndexOf<T>(this LinkedList<T> list, T item)
-        {
-            int count = 0;
-            for (LinkedListNode<T> node = list.First; node != null; node = node.Next, count++)
-            {
-                if (item.Equals(node.Value))
-                {
-                    return count;
-                }
-            }
-            return -1;
-        }
-
         public static string FirstCharUpper(this string text)
         {
             return text.Substring(0, 1).ToUpper() + text.Substring(1, text.Length - 1).ToLower();

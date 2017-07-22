@@ -36,14 +36,14 @@ namespace HSRP
         public int XP { get; set; }
         public int NextLevelXP { get; set; }
 
-        public LinkedList<Item> Inventory { get; set; }
+        public List<Item> Inventory { get; set; }
 
         public bool Errored { get; set; }
 
         public Player()
         {
             Abilities = new AbilitySet();
-            Inventory = new LinkedList<Item>();
+            Inventory = new List<Item>();
 
             Name = "";
             LususDescription = "";
@@ -101,7 +101,7 @@ namespace HSRP
                             i.name = XmlToolbox.GetAttributeString(item, "value", string.Empty);
                             i.quantity = XmlToolbox.GetAttributeUnsignedInt(item, "quantity", 1);
                             i.equipped = XmlToolbox.GetAttributeBool(item, "equipped", false);
-                            Inventory.AddLast(i);
+                            Inventory.Add(i);
                         }
                         break;
                 }

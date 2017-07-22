@@ -8,7 +8,7 @@ namespace HSRP
     // and other stuff (oh GAWD the other stuff) is done here.
     public class Strife
     {
-        public static LinkedList<Strife> Strifes { get; set; }
+        public static List<Strife> Strifes { get; set; }
 
         /// <summary>
         /// Whether the Attackers team is taking their turn or not.
@@ -19,7 +19,21 @@ namespace HSRP
         /// </summary>
         public int Turn { get; set; }
 
-        public LinkedList<Player> Attackers { get; set; }
-        public LinkedList<NPC> Targets { get; set; }
+        /// <summary>
+        /// Log of events that have occurred in the strife so far.
+        /// </summary>
+        public List<string> Logs { get; set; }
+        /// <summary>
+        /// Log of current event.
+        /// </summary>
+        private string log;
+
+        /// <summary>
+        /// The IDs of every attacker's character.
+        /// </summary>
+        public List<ulong> Attackers { get; set; }
+        public List<NPC> Targets { get; set; }
+
+        private 
     }
 }

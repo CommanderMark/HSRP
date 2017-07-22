@@ -49,7 +49,7 @@ namespace HSRP.Commands
             Item i = new Item();
             i.name = item;
             i.quantity = 1;
-            plyr.Inventory.AddLast(i);
+            plyr.Inventory.Add(i);
 
             plyr.Save();
             string log = Syntax.ToCodeLine(item) + " was added to the inventory of " + Syntax.ToCodeLine(plyr.Name) + ".";
@@ -107,7 +107,7 @@ namespace HSRP.Commands
 
             Item newItem = prevItem;
             newItem.equipped = true;
-            plyr.Inventory.Find(prevItem).Value = newItem;
+            plyr.Inventory[index] = newItem;
 
             plyr.Save();
             string log = Syntax.ToCodeLine(newItem.name) + " was equipped to " + Syntax.ToCodeLine(plyr.Name) + ".";
@@ -148,7 +148,7 @@ namespace HSRP.Commands
 
             Item newItem = prevItem;
             newItem.equipped = false;
-            plyr.Inventory.Find(prevItem).Value = newItem;
+            plyr.Inventory[index] = newItem;
 
             plyr.Save();
             string log = Syntax.ToCodeLine(newItem.name) + " was un-equipped from " + Syntax.ToCodeLine(plyr.Name) + ".";
@@ -192,7 +192,7 @@ namespace HSRP.Commands
 
                 Item newItem = prevItem;
                 newItem.quantity += (uint)amount;
-                plyr.Inventory.Find(prevItem).Value = newItem;
+                plyr.Inventory[index] = newItem;
 
                 plyr.Save();
                 string log = $"{amount} {Syntax.ToCodeLine(newItem.name)} added to the inventory of {Syntax.ToCodeLine(plyr.Name)}.";
@@ -231,7 +231,7 @@ namespace HSRP.Commands
 
                 Item newItem = prevItem;
                 newItem.quantity -= (uint)amount;
-                plyr.Inventory.Find(prevItem).Value = newItem;
+                plyr.Inventory[index] = newItem;
 
                 plyr.Save();
                 string log = $"{amount} {Syntax.ToCodeLine(newItem.name)} removed from the inventory of {Syntax.ToCodeLine(plyr.Name)}.";
