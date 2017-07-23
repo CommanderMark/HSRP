@@ -33,7 +33,7 @@ namespace HSRP
         public int MaxHealth { get; set; }
         public string Specibus { get; set; }
         /// <summary>
-        /// The amount of times the NPC gets to roll a die for their attack turn.
+        /// The amount of times the NPC gets to roll a die for their attack or defense turn.
         /// </summary>
         public int DiceRolls { get; set; }
 

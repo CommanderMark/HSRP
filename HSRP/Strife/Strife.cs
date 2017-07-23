@@ -34,19 +34,20 @@ namespace HSRP
         public List<IEntity> Attackers { get; set; }
         public List<IEntity> Targets { get; set; }
 
-        private Dictionary<ulong, AbilitySet> Modifiers { get; set; }
-
         public Strife()
         {
             Logs = new List<string>();
             Attackers = new List<IEntity>();
             Targets = new List<IEntity>();
-            Modifiers = new Dictionary<ulong, AbilitySet>();
         }
 
-        // Player --> NPC. Other way around is done in a function overload. (same for PvP if that's ever a thing)
-        // Physical: XDSTR --> XDCON. Counter: XDSTR <-- XDPER: Debuff
-        private void PhysicalAttack(ref Player attacker, ref NPC target)
+        // Player targeting NPC. Other way around is done in a function overload. (same for PvP if that's ever a thing)
+
+        // Physical: XDSTR --> XDCON.
+        // If XDSTR rolls higher than difference between both is the damage on the target.
+        // Assuming they're not equal, then the target has a chance to counter attack if they rolls higher.
+        // XDSTR <-- XDPER: Debuff of the difference between both roles is applied to the attacker's strength.
+        private void PhysicalAttack(ref StrifePlayer attacker, ref NPC target)
         {
             log = $"{Syntax.ToCodeLine(attacker.Name)} attacks {Syntax.ToCodeLine(attacker.Name)}.\n\n";
 
@@ -79,7 +80,9 @@ namespace HSRP
                 if (Toolbox.RandInt(2) == 1)
                 {
                     tarY = target.Abilities.Persuasion;
-                    if ((-tarY) >= Modifiers[attacker.ID].Strength)
+                    // If the strength modifier is already debuffed by a number equal to or greater
+                    // than the target's persuasion then don't debuff.
+                    if (attacker.Modifiers.Strength <= (-tarY))
                     {
                         log = log.AddLine($"Maximum amount of counter attacks reached.");
                         return;
@@ -98,9 +101,9 @@ namespace HSRP
                     // Counter suceeded, debuff strength.
                     else
                     {
-                        int nonBuff = Modifiers[attacker.ID].Strength;
+                        int nonBuff = attacker.Modifiers.Strength;
                         int debuff = Math.Max(nonBuff - (tar - atk), -tarY);
-                        Modifiers[attacker.ID].Strength = debuff;
+                        attacker.Modifiers.Strength = debuff;
                         log = log.AddLine($"\nStrenth debuff of {debuff - nonBuff} inflicted on {Syntax.ToCodeLine(attacker.Name)}.");
                     }
                 }
