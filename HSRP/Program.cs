@@ -96,7 +96,7 @@ namespace HSRP
                         if (string.IsNullOrEmpty(key)) { continue; }
 
                         List<string> value = new List<string>();
-                        foreach (XElement msg in ele.Elements(""))
+                        foreach (XElement msg in ele.Elements())
                         {
                             value.Add(XmlToolbox.ElementInnerText(msg));
                         }

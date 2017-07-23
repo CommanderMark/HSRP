@@ -31,16 +31,16 @@ namespace HSRP
         /// <summary>
         /// The IDs of every attacker's character.
         /// </summary>
-        public List<ulong> Attackers { get; set; }
-        public List<NPC> Targets { get; set; }
+        public List<IEntity> Attackers { get; set; }
+        public List<IEntity> Targets { get; set; }
 
         private Dictionary<ulong, AbilitySet> Modifiers { get; set; }
 
         public Strife()
         {
             Logs = new List<string>();
-            Attackers = new List<ulong>();
-            Targets = new List<NPC>();
+            Attackers = new List<IEntity>();
+            Targets = new List<IEntity>();
             Modifiers = new Dictionary<ulong, AbilitySet>();
         }
 
@@ -119,5 +119,6 @@ namespace HSRP
 
         // Mental: XDPSI --> XDFOR
         // Speech: XD(INT+STR) --> XD(PER+FOR)
+        // Guards CON += XDCON
     }
 }

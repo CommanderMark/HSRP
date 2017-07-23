@@ -8,11 +8,11 @@ namespace HSRP.Commands
     public class EditCommands : JModuleBase
     {
         [RequireRegistration]
-        [Command("name"), Priority(1)]
+        [Command("name"), Priority(0)]
         public async Task Name([Remainder] string name) => await Name(new Player(Context.User), name);
 
         [RequireGM]
-        [Command("name")]
+        [Command("name"), Priority(1)]
         public async Task Name(Player plyr, [Remainder] string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -29,11 +29,11 @@ namespace HSRP.Commands
         }
 
         [RequireRegistration]
-        [Command("specibus"), Priority(1)]
+        [Command("specibus"), Priority(0)]
         public async Task Specibus([Remainder] string name) => await Specibus(new Player(Context.User), name);
 
         [RequireGM]
-        [Command("specibus")]
+        [Command("specibus"), Priority(1)]
         public async Task Specibus(Player plyr, [Remainder] string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -50,11 +50,11 @@ namespace HSRP.Commands
         }
 
         [RequireRegistration]
-        [Command("lusus"), Priority(1)]
+        [Command("lusus"), Priority(0)]
         public async Task Lusus([Remainder] string desc) => await Lusus(new Player(Context.User), desc);
 
         [RequireGM]
-        [Command("lusus")]
+        [Command("lusus"), Priority(1)]
         public async Task Lusus(Player plyr, [Remainder] string desc)
         {
             if (string.IsNullOrWhiteSpace(desc))

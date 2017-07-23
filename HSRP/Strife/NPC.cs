@@ -9,11 +9,6 @@ namespace HSRP
         {
             get
             {
-                if (MindControlled)
-                {
-                    return _name + " (Mind-Controlled)";
-                }
-                
                 if (Type == NPCType.Lusus)
                 {
                     return _name + " (Lusus)";
@@ -21,6 +16,7 @@ namespace HSRP
 
                 return _name;
             }
+            
             set
             {
                 _name = value;
@@ -41,7 +37,10 @@ namespace HSRP
         /// </summary>
         public int DiceRolls { get; set; }
 
-        public bool MindControlled { get; set; }
+        /// <summary>
+        /// ID of the character controlling this one, if any.
+        /// </summary>
+        public ulong Controller { get; set; }
 
         public NPC()
         {
@@ -70,7 +69,7 @@ namespace HSRP
                         MaxHealth = XmlToolbox.GetAttributeInt(ele, "maxhp", Health);
                         Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
                         DiceRolls = XmlToolbox.GetAttributeInt(ele, "diceRolls", 1);
-                        MindControlled = XmlToolbox.GetAttributeBool(ele, "mind", false);
+                        Controller = XmlToolbox.GetAttributeUnsignedLong(ele, "controller", 0);
                         break;
                     
                     case "abilities":
@@ -96,7 +95,7 @@ namespace HSRP
                 new XAttribute("maxhp", MaxHealth),
                 new XAttribute("specibus", Specibus),
                 new XAttribute("diceRolls", DiceRolls),
-                new XAttribute("mind", MindControlled)
+                new XAttribute("controller", Controller)
                 );
 
             XElement abilities = Abilities.ToXmlElement();
