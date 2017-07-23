@@ -1,0 +1,7 @@
+<root>
+  <messages trigger="failedNPCCounter">
+    <msg>Nothing happened.</msg>
+    <msg>The enemy appears to have forgotten what they were doing.</msg>
+    <msg>The enemy appears to have forgotten what they were suppose to do.</msg>
+  </messages>
+</root>

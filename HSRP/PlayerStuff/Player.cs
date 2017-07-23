@@ -37,6 +37,26 @@ namespace HSRP
         public int NextLevelXP { get; set; }
 
         public List<Item> Inventory { get; set; }
+        /// <summary>
+        /// Returns the total damage of the character's equipped items.
+        /// </summary>
+        public int TotalDamage
+        {
+            get
+            {
+                int dmg = 0;
+                foreach (Item i in Inventory)
+                {
+                    if (i.Equipped && i.Damage > 0)
+                    {
+                        dmg += i.Damage;
+                    }
+                }
+                if (dmg == 0) { dmg = 1; }
+                
+                return dmg;
+            }
+        }
 
         public bool Errored { get; set; }
 
@@ -98,9 +118,10 @@ namespace HSRP
                         foreach (XElement item in ele.Elements())
                         {
                             Item i = new Item();
-                            i.name = XmlToolbox.GetAttributeString(item, "value", string.Empty);
-                            i.quantity = XmlToolbox.GetAttributeUnsignedInt(item, "quantity", 1);
-                            i.equipped = XmlToolbox.GetAttributeBool(item, "equipped", false);
+                            i.Name = XmlToolbox.GetAttributeString(item, "value", string.Empty);
+                            i.Quantity = XmlToolbox.GetAttributeUnsignedInt(item, "quantity", 1);
+                            i.Damage = XmlToolbox.GetAttributeInt(item, "dmg", 0);
+                            i.Equipped = XmlToolbox.GetAttributeBool(item, "equipped", false);
                             Inventory.Add(i);
                         }
                         break;
@@ -142,11 +163,15 @@ namespace HSRP
 
             foreach (Item item in Inventory)
             {
-                XElement ele = new XElement("item", new XAttribute("value", item.name),
-                    new XAttribute("quantity", item.quantity));
-                if (item.equipped)
+                XElement ele = new XElement("item", new XAttribute("value", item.Name),
+                    new XAttribute("quantity", item.Quantity));
+                if (item.Damage > 0)
                 {
-                    ele.Add(new XAttribute("equipped", item.equipped));
+                    ele.Add(new XAttribute("dmg", item.Damage));
+                }
+                if (item.Equipped)
+                {
+                    ele.Add(new XAttribute("equipped", item.Equipped));
                 }
                 inventory.Add(ele);
             }
@@ -301,11 +326,11 @@ namespace HSRP
             string result = "";
             for (int i = 0; i < Inventory.Count; i++)
             {
-                result += Inventory.ElementAt(i).quantity > 1
-                    ? $"{i} - {Inventory.ElementAt(i).name} ({Inventory.ElementAt(i).quantity})"
-                    : $"{i} - {Inventory.ElementAt(i).name}";
+                result += Inventory.ElementAt(i).Quantity > 1
+                    ? $"{i} - {Inventory.ElementAt(i).Name} ({Inventory.ElementAt(i).Quantity})"
+                    : $"{i} - {Inventory.ElementAt(i).Name}";
                 
-                if (Inventory.ElementAt(i).equipped)
+                if (Inventory.ElementAt(i).Equipped)
                 {
                     result += " (Equipped)";
                 }

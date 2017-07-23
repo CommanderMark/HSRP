@@ -7,8 +7,12 @@ namespace HSRP
 {
     public static class Toolbox
     {
+        public static Dictionary<string, string[]> Messages = new Dictionary<string, string[]>();
+
         public static int DiceRoll(int rolls, int dieType = 6)
         {
+            if (rolls < 1 || dieType < 1) { return 0; }
+
             int total = 0;
             for (int i = 0; i < rolls; i++)
             {
@@ -34,6 +38,16 @@ namespace HSRP
         }
 
         public static int RandInt(int max, bool inclusive = false) => RandInt(0, max, inclusive);
+
+        public static string GetRandomMessage(string key)
+        {
+            if (Messages.TryGetValue(key, out string[] value))
+            {
+                return value[RandInt(value.Length)];
+            }
+
+            return string.Empty;
+        }
 
         public static void DebugWriteLine(params object[] args)
         {

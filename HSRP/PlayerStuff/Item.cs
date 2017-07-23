@@ -2,8 +2,9 @@
 {
     public class Item
     {
-        public string name;
-        public bool equipped;
-        public uint quantity;
+        public string Name;
+        public bool Equipped;
+        public uint Quantity;
+        public int Damage;
     }
 }

@@ -4,8 +4,30 @@ namespace HSRP
 {
     public class NPC : IEntity
     {
-        public string Name { get; set; }
+        private string _name;
+        public string Name
+        {
+            get
+            {
+                if (MindControlled)
+                {
+                    return _name + " (Mind-Controlled)";
+                }
+                
+                if (Type == NPCType.Lusus)
+                {
+                    return _name + " (Lusus)";
+                }
+
+                return _name;
+            }
+            set
+            {
+                _name = value;
+            }
+        }
         public string Description { get; set; }
+        public NPCType Type { get; set; }
 
         public bool LikesPineappleOnPizza { get; set; }
 
@@ -18,6 +40,8 @@ namespace HSRP
         /// The amount of times the NPC gets to roll a die for their attack turn.
         /// </summary>
         public int DiceRolls { get; set; }
+
+        public bool MindControlled { get; set; }
 
         public NPC()
         {
@@ -36,6 +60,7 @@ namespace HSRP
                 {
                     case "info":
                         Name = XmlToolbox.GetAttributeString(ele, "name", string.Empty);
+                        Type = XmlToolbox.GetAttributeEnum(ele, "type", NPCType.Normal);
                         LikesPineappleOnPizza = XmlToolbox.GetAttributeBool(ele, "pineappleOnPizza", false);
                         Description = XmlToolbox.ElementInnerText(ele);
                         break;
@@ -45,6 +70,7 @@ namespace HSRP
                         MaxHealth = XmlToolbox.GetAttributeInt(ele, "maxhp", Health);
                         Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
                         DiceRolls = XmlToolbox.GetAttributeInt(ele, "diceRolls", 1);
+                        MindControlled = XmlToolbox.GetAttributeBool(ele, "mind", false);
                         break;
                     
                     case "abilities":
@@ -60,6 +86,7 @@ namespace HSRP
 
             XElement info = new XElement("info",
                 new XAttribute("name", Name),
+                new XAttribute("type", Type),
                 new XAttribute("pineappleOnPizza", LikesPineappleOnPizza),
                 new XText(Description)
                 );
@@ -68,7 +95,8 @@ namespace HSRP
                 new XAttribute("hp", Health),
                 new XAttribute("maxhp", MaxHealth),
                 new XAttribute("specibus", Specibus),
-                new XAttribute("diceRolls", DiceRolls)
+                new XAttribute("diceRolls", DiceRolls),
+                new XAttribute("mind", MindControlled)
                 );
 
             XElement abilities = Abilities.ToXmlElement();
