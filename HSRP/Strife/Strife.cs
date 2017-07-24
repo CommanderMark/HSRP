@@ -53,7 +53,7 @@ namespace HSRP
 
             // Player XDY roll.
             int atkX = attacker.TotalDamage;
-            int atkY = attacker.Abilities.Strength;
+            int atkY = attacker.TotalAbilityStats.Strength;
 
             // NPC XDY roll.
             int tarX = target.DiceRolls;

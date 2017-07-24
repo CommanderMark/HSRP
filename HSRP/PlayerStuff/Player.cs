@@ -79,7 +79,7 @@ namespace HSRP
                 : Path.Combine(Dirs.Players, filePath);
 
             XDocument doc = XmlToolbox.TryLoadXml(path);
-            if (doc == null) { Errored = true; return; }
+            if (doc == null || doc.Root == null) { Errored = true; return; }
             
             foreach (XElement ele in doc.Root.Elements())
             {
