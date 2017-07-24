@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Xml.Linq;
 
 namespace HSRP
 {
     public static class Toolbox
     {
-        public static Dictionary<string, string[]> Messages = new Dictionary<string, string[]>();
+        public static Dictionary<string, string[]> Messages;
 
         public static int DiceRoll(int rolls, int dieType = 6)
         {
@@ -25,11 +27,11 @@ namespace HSRP
         // Random int generator that can output different
         // numbers in the same tick.
         private static readonly Random rand = new Random();
-        private static readonly object synclock = new object();
+        private static readonly object randLock = new object();
         public static int RandInt(int min, int max, bool inclusive = false)
         {
             // Locking allows different numbers per tick.
-            lock (synclock)
+            lock (randLock)
             {
                 return inclusive
                     ? rand.Next(max - min + 1) + min
@@ -39,11 +41,44 @@ namespace HSRP
 
         public static int RandInt(int max, bool inclusive = false) => RandInt(0, max, inclusive);
 
-        public static string GetRandomMessage(string key)
+        public static void UpdateRandomMessages()
+        {
+            Messages = new Dictionary<string, string[]>();
+
+            XDocument doc = XmlToolbox.TryLoadXml(Path.Combine(Dirs.Config, "messages.xml"));
+            if (doc == null || doc.Root == null) { return; }
+
+            foreach (XElement ele in doc.Root.Elements())
+            {
+                string key = XmlToolbox.GetAttributeString(ele, "trigger", string.Empty);
+                if (string.IsNullOrEmpty(key)) { continue; }
+
+                List<string> value = new List<string>();
+                foreach (XElement msg in ele.Elements())
+                {
+                    value.Add(XmlToolbox.ElementInnerText(msg));
+                }
+
+                Toolbox.Messages.Add(key, value.ToArray());
+            }
+        }
+        /// <summary>
+        /// Generates a random message from a specific category
+        public static string GetRandomMessage(string key, params string[] args)
         {
             if (Messages.TryGetValue(key, out string[] value))
             {
-                return value[RandInt(value.Length)];
+                if (args == null)
+                {
+                    return value[RandInt(value.Length)];
+                }
+                
+                string msg = value[RandInt(value.Length)];
+                for (int i = 0; i < args.Length; i++)
+                {
+                    msg = msg.Replace("{" + i + "}", args[i]);
+                }
+                return msg;
             }
 
             return string.Empty;

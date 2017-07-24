@@ -15,9 +15,9 @@ namespace HSRP
 
         /// <summary>
         /// Buffs or debuffs applied to stats that remain for a specified number of turns.
-        /// The index of the list corresponds to the number of turns left until the modifier is removed.
+        /// The key is the number of turns left until the modifier is removed.
         /// </summary>
-        public List<List<AbilitySet>> TempMods;
+        private Dictionary<int, AbilitySet> TempMods;
 
         /// <summary>
         /// An AbilitySet containing both the character's abilitie stats and their modifiers.
@@ -29,13 +29,26 @@ namespace HSRP
                 AbilitySet aSet = base.Abilities + Modifiers;
                 if (TempMods.Any())
                 {
-                    foreach (List<AbilitySet> abList in TempMods)
+                    foreach (KeyValuePair<int, AbilitySet> set in TempMods)
                     {
-                        abList.ForEach(set => aSet += set);
+                        aSet += set.Value;
                     }
                 }
 
                 return aSet;
+            }
+        }
+
+        public void AddTempMod(AbilitySet mod, int turnsUntilRemoval)
+        {
+            // TODO
+            if (TempMods.ContainsKey(turnsUntilRemoval))
+            {
+                TempMods[turnsUntilRemoval] += mod;
+            }
+            else
+            {
+                TempMods.Add(turnsUntilRemoval, mod);
             }
         }
     }

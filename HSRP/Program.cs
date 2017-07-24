@@ -87,22 +87,7 @@ namespace HSRP
                 try
                 {
                     Instance.RpGuild = Client.GetGuild(Constants.RP_GUILD) as IGuild;
-
-                    // Load messages.
-                    XDocument doc = XmlToolbox.TryLoadXml(Path.Combine(Dirs.Config, "messages.xml"));
-                    foreach (XElement ele in doc.Root.Elements())
-                    {
-                        string key = XmlToolbox.GetAttributeString(ele, "trigger", string.Empty);
-                        if (string.IsNullOrEmpty(key)) { continue; }
-
-                        List<string> value = new List<string>();
-                        foreach (XElement msg in ele.Elements())
-                        {
-                            value.Add(XmlToolbox.ElementInnerText(msg));
-                        }
-
-                        Toolbox.Messages.Add(key, value.ToArray());
-                    }
+                    Toolbox.UpdateRandomMessages();        
                 }
                 catch (Exception e)
                 {

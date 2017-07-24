@@ -3,6 +3,7 @@ namespace HSRP
     public enum NPCType
     {
         Normal,
-        Lusus
+        Lusus,
+        Psionic
     }
 }

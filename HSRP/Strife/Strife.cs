@@ -121,7 +121,37 @@ namespace HSRP
         }
 
         // Mental: XDPSI --> XDFOR
+
         // Speech: XD(INT+STR) --> XD(PER+FOR)
-        // Guards CON += XDCON
+        private void SpeechAttack(ref StrifePlayer attacker, ref NPC target)
+        {
+            log = Toolbox.GetRandomMessage("speechAttackStart", attacker.Name, target.Name) + "\n\n";
+
+            // Player XDY roll.
+            int atkX = attacker.TotalDamage;
+            int atkY = attacker.TotalAbilityStats.Intimidation + attacker.TotalAbilityStats.Strength;
+
+            // NPC XDY roll.
+            int tarX = target.DiceRolls;
+            int tarY = target.Abilities.Persuasion + target.Abilities.Fortitude;
+
+            // Dice rolls.
+            int atk = Toolbox.DiceRoll(atkX, atkY);
+            int tar = Toolbox.DiceRoll(tarX, tarY);
+            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
+            log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
+
+            // TODO: effects.
+        }
+
+        // Guard CON += XDCON
+        private void Guard(ref StrifePlayer plyr)
+        {
+            log = $"{plyr.Name} is guarding.\n";
+
+            AbilitySet mod = new AbilitySet();
+            mod.Constitution = Toolbox.DiceRoll(1, plyr.Abilities.Constitution);
+            plyr.AddTempMod(mod, 0);
+        }
     }
 }
