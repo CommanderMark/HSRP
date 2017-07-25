@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using Discord.Commands;
 
 namespace HSRP.Commands
@@ -41,25 +42,22 @@ namespace HSRP.Commands
             }
         }
 
-        [Command("shit")]
-        public async Task Shit([Remainder]string text)
+        [Command("quirk")]
+        public async Task Quirk([Remainder]string text)
         {
-            string[] words = text.ToLower().Split(' ');
+            text = Regex.Replace(text, @"\b(\w)", m => m.ToString().ToUpper());
+            text = Regex.Replace(text, @"(\w)\b", m => m.ToString().ToUpper());
 
-            for (int i = 0; i < words.Length; i++)
-            {
-                if (words[i].Length == 1 || words[i].Length == 2)
-                {
-                    words[i] = words[i].ToUpper();
-                    continue;
-                }
+            await ReplyAsync(text);
+        }
 
-                words[i] = words[i].Substring(0, 1).ToUpper()
-                    + words[i].Substring(1, words[i].Length - 2).ToLower()
-                    + words[i].Substring(words[i].Length - 1, 1).ToUpper();
-            }
+        [Command("pester")]
+        public async Task Pester([Remainder]string text)
+        {
+            text = Regex.Replace(text, @"\b(\w)", m => m.ToString().ToUpper());
+            text = Regex.Replace(text, @"(\w)\b", m => m.ToString().ToUpper());
 
-            await ReplyAsync(string.Join(" ", words));
+            await ReplyAsync("\\`OMV\\`: " + text);
         }
     }
 }
