@@ -49,7 +49,7 @@ namespace HSRP
         // XDSTR <-- XDPER: Debuff of the difference between both roles is applied to the attacker's strength.
         private void PhysicalAttack(ref StrifePlayer attacker, ref NPC target)
         {
-            log = $"{Syntax.ToCodeLine(attacker.Name)} attacks {Syntax.ToCodeLine(attacker.Name)}.\n\n";
+            log = $"{Syntax.ToCodeLine(attacker.Name)} attacks {Syntax.ToCodeLine(target.Name)}.\n\n";
 
             // Player XDY roll.
             int atkX = attacker.TotalDamage;

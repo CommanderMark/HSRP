@@ -40,5 +40,26 @@ namespace HSRP.Commands
                 }
             }
         }
+
+        [Command("shit")]
+        public async Task Shit([Remainder]string text)
+        {
+            string[] words = text.ToLower().Split(' ');
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i].Length == 1 || words[i].Length == 2)
+                {
+                    words[i] = words[i].ToUpper();
+                    continue;
+                }
+
+                words[i] = words[i].Substring(0, 1).ToUpper()
+                    + words[i].Substring(1, words[i].Length - 2).ToLower()
+                    + words[i].Substring(words[i].Length - 1, 1).ToUpper();
+            }
+
+            await ReplyAsync(string.Join(" ", words));
+        }
     }
 }

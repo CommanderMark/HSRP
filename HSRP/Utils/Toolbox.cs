@@ -64,6 +64,7 @@ namespace HSRP
         }
         /// <summary>
         /// Generates a random message from a specific category
+        /// </summary>
         public static string GetRandomMessage(string key, params string[] args)
         {
             if (Messages.TryGetValue(key, out string[] value))
