@@ -42,22 +42,23 @@ namespace HSRP.Commands
             }
         }
 
-        [Command("quirk")]
-        public async Task Quirk([Remainder]string text)
+        private string ToQuirk(string str)
         {
-            text = Regex.Replace(text, @"\b(\w)", m => m.ToString().ToUpper());
-            text = Regex.Replace(text, @"(\w)\b", m => m.ToString().ToUpper());
+            str = Regex.Replace(str, @"\b(\w)", m => m.ToString().ToUpper());
+            str = Regex.Replace(str, @"(\w)\b", m => m.ToString().ToUpper());
+            return str;
+        }
 
-            await ReplyAsync(text);
+        [Command("quirk")]
+        public async Task Quirk([Remainder] string text)
+        {
+            await ReplyAsync(ToQuirk(text));
         }
 
         [Command("pester")]
-        public async Task Pester([Remainder]string text)
+        public async Task Pester([Remainder] string text)
         {
-            text = Regex.Replace(text, @"\b(\w)", m => m.ToString().ToUpper());
-            text = Regex.Replace(text, @"(\w)\b", m => m.ToString().ToUpper());
-
-            await ReplyAsync("\\`OMV\\`: " + text);
+            await ReplyAsync("\\`OMV\\`: " + ToQuirk(text));
         }
     }
 }

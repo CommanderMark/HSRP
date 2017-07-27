@@ -14,6 +14,6 @@
   
   <inventory>
     <item value="DUAL CORVOS" equipped="true"/>
-	<item value="Notes" />
+	  <item value="Notes" />
   </inventory>
 </player>

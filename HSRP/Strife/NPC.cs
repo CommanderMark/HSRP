@@ -4,22 +4,17 @@ namespace HSRP
 {
     public class NPC : IEntity
     {
-        private string _name;
-        public string Name
+        public string Name { get; set; }
+        public string Title
         {
             get
             {
                 if (Type == NPCType.Lusus)
                 {
-                    return _name + " (Lusus)";
+                    return Name + " (Lusus)";
                 }
 
-                return _name;
-            }
-            
-            set
-            {
-                _name = value;
+                return Name;
             }
         }
         public string Description { get; set; }

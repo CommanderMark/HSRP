@@ -141,7 +141,11 @@ namespace HSRP
             log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
             log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
 
-            // TODO: effects.
+            switch (Toolbox.RandInt(5, true))
+            {
+                case 0:
+                    
+            }
         }
 
         // Guard CON += XDCON

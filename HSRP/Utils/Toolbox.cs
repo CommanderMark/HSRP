@@ -104,7 +104,7 @@ namespace HSRP
             return text.Substring(0, 1).ToUpper() + text.Substring(1, text.Length - 1).ToLower();
         }
 
-        public static bool CaseInsensitiveContains(this string text, string value,
+        public static bool Contains(this string text, string value,
             StringComparison stringComparison = StringComparison.OrdinalIgnoreCase)
         {
             return text.IndexOf(value, stringComparison) >= 0;

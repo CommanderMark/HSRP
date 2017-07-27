@@ -49,7 +49,7 @@ namespace HSRP.Commands
 
                 // By Username
                 // If there's more then one user with that username respond with a warning.
-                var matchedUsers = guildUsers.Where(x => x.Username.StartsWith(input, StringComparison.OrdinalIgnoreCase));
+                var matchedUsers = guildUsers.Where(x => x.Username.Contains(input, StringComparison.OrdinalIgnoreCase));
                 if (matchedUsers.Count() == 1)
                 {
                     IGuildUser user = matchedUsers.FirstOrDefault();
@@ -74,7 +74,7 @@ namespace HSRP.Commands
                 }
 
                 // By Nickname
-                matchedUsers = guildUsers.Where(x => !string.IsNullOrWhiteSpace(x.Nickname) && x.Nickname.StartsWith(input, StringComparison.OrdinalIgnoreCase));
+                matchedUsers = guildUsers.Where(x => !string.IsNullOrWhiteSpace(x.Nickname) && x.Nickname.Contains(input, StringComparison.OrdinalIgnoreCase));
                 if (matchedUsers.Count() == 1)
                 {
                     IGuildUser user = matchedUsers.FirstOrDefault();

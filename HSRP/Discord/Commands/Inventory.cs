@@ -40,7 +40,7 @@ namespace HSRP.Commands
                 await ReplyAsync("Invalid item name.");
                 return;
             }
-            if (item.CaseInsensitiveContains("equipped"))
+            if (item.Contains("equipped"))
             {
                 await ReplyAsync("Nice try. :/");
                 return;
