@@ -20,9 +20,9 @@ namespace HSRP
         private Dictionary<int, AbilitySet> TempMods;
 
         /// <summary>
-        /// An AbilitySet containing both the character's abilitie stats and their modifiers.
+        /// An AbilitySet containing both the character's base ability stats and their modifiers.
         /// </summary>
-        public AbilitySet TotalAbilityStats
+        public override AbilitySet Abilities
         {
             get
             {
@@ -36,6 +36,11 @@ namespace HSRP
                 }
 
                 return aSet;
+            }
+
+            set
+            {
+                base.Abilities = value;
             }
         }
 

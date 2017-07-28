@@ -11,5 +11,7 @@
         int Health { get; set; }
         int MaxHealth { get; set; }
         string Specibus { get; set; }
+
+        int DiceRolls { get; }
     }
 }

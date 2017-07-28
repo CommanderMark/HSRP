@@ -52,8 +52,8 @@ namespace HSRP
             log = $"{Syntax.ToCodeLine(attacker.Name)} attacks {Syntax.ToCodeLine(target.Name)}.\n\n";
 
             // Player XDY roll.
-            int atkX = attacker.TotalDamage;
-            int atkY = attacker.TotalAbilityStats.Strength;
+            int atkX = attacker.DiceRolls;
+            int atkY = attacker.Abilities.Strength;
 
             // NPC XDY roll.
             int tarX = target.DiceRolls;
@@ -128,8 +128,8 @@ namespace HSRP
             log = Toolbox.GetRandomMessage("speechAttackStart", attacker.Name, target.Name) + "\n\n";
 
             // Player XDY roll.
-            int atkX = attacker.TotalDamage;
-            int atkY = attacker.TotalAbilityStats.Intimidation + attacker.TotalAbilityStats.Strength;
+            int atkX = attacker.DiceRolls;
+            int atkY = attacker.Abilities.Intimidation + attacker.Abilities.Strength;
 
             // NPC XDY roll.
             int tarX = target.DiceRolls;
@@ -141,6 +141,7 @@ namespace HSRP
             log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
             log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
 
+            // TODO;
             switch (Toolbox.RandInt(5, true))
             {
                 case 0:

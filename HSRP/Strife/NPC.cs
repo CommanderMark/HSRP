@@ -27,6 +27,7 @@ namespace HSRP
         public int Health { get; set; }
         public int MaxHealth { get; set; }
         public string Specibus { get; set; }
+        
         /// <summary>
         /// The amount of times the NPC gets to roll a die for their attack or defense turn.
         /// </summary>

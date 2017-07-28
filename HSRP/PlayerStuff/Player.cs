@@ -24,23 +24,17 @@ namespace HSRP
         public string LususDescription { get; set; }
         public bool LikesPineappleOnPizza { get; set; }
         
-        public AbilitySet Abilities { get; set; }
+        public virtual AbilitySet Abilities { get; set; }
 
         public int Health { get; set; }
         public int MaxHealth { get; set; }
         public string Specibus { get; set; }
         public int StrifeID { get; set; }
 
-        public int Echeladder{ get; private set; }
-        public int PendingSkillPointAllocations { get; set; }
-        public int XP { get; set; }
-        public int NextLevelXP { get; set; }
-
-        public List<Item> Inventory { get; set; }
         /// <summary>
         /// Returns the total damage of the character's equipped items.
         /// </summary>
-        public int TotalDamage
+        public int DiceRolls
         {
             get
             {
@@ -57,6 +51,13 @@ namespace HSRP
                 return dmg;
             }
         }
+
+        public int Echeladder{ get; private set; }
+        public int PendingSkillPointAllocations { get; set; }
+        public int XP { get; set; }
+        public int NextLevelXP { get; set; }
+
+        public List<Item> Inventory { get; set; }
 
         public bool Errored { get; set; }
 
