@@ -1,23 +1,25 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace HSRP
 {
+    // TODO: Read and write from an xml element functions.
     /// <summary>
     /// Character entity with more variables specific to individual strifes.
     /// </summary>
-    public class StrifePlayer : Player
+    public class StrifePlayer : Player, IStrifeEntity
     {
         /// <summary>
         /// Buffs or debuffs applied to stats that remain until the end of the strife.
         /// </summary>
-        public AbilitySet Modifiers;
+        public AbilitySet Modifiers { get; set; }
 
         /// <summary>
         /// Buffs or debuffs applied to stats that remain for a specified number of turns.
         /// The key is the number of turns left until the modifier is removed.
         /// </summary>
-        private Dictionary<int, AbilitySet> TempMods;
+        public Dictionary<int, AbilitySet> TempMods { get; set; }
 
         /// <summary>
         /// An AbilitySet containing both the character's base ability stats and their modifiers.
@@ -41,19 +43,6 @@ namespace HSRP
             set
             {
                 base.Abilities = value;
-            }
-        }
-
-        public void AddTempMod(AbilitySet mod, int turnsUntilRemoval)
-        {
-            // TODO
-            if (TempMods.ContainsKey(turnsUntilRemoval))
-            {
-                TempMods[turnsUntilRemoval] += mod;
-            }
-            else
-            {
-                TempMods.Add(turnsUntilRemoval, mod);
             }
         }
     }

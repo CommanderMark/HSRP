@@ -1,8 +1,11 @@
-﻿using System.Xml.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace HSRP
 {
-    public class NPC : IEntity
+    public class NPC : IEntity, IStrifeEntity
     {
         public string Name { get; set; }
         public string Title
@@ -22,7 +25,44 @@ namespace HSRP
 
         public bool LikesPineappleOnPizza { get; set; }
 
-        public AbilitySet Abilities { get; set; }
+        private AbilitySet _abilities;
+
+        // TODO: XML these.
+        /// <summary>
+        /// Buffs or debuffs applied to stats that remain until the end of the strife.
+        /// </summary>
+        public AbilitySet Modifiers { get; set; }
+
+        /// <summary>
+        /// Buffs or debuffs applied to stats that remain for a specified number of turns.
+        /// The key is the number of turns left until the modifier is removed.
+        /// </summary>
+        public Dictionary<int, AbilitySet> TempMods { get; set; }
+
+        /// <summary>
+        /// An AbilitySet containing both the character's base ability stats and their modifiers.
+        /// </summary>
+        public AbilitySet Abilities
+        {
+            get
+            {
+                AbilitySet aSet = _abilities + Modifiers;
+                if (TempMods.Any())
+                {
+                    foreach (KeyValuePair<int, AbilitySet> set in TempMods)
+                    {
+                        aSet += set.Value;
+                    }
+                }
+
+                return aSet;
+            }
+
+            set
+            {
+                _abilities = value;
+            }
+        }
 
         public int Health { get; set; }
         public int MaxHealth { get; set; }
@@ -41,6 +81,7 @@ namespace HSRP
         public NPC()
         {
             Abilities = new AbilitySet();
+            TempMods = new Dictionary<int, AbilitySet>();
 
             Name = "";
             Description = "";

@@ -99,11 +99,14 @@ namespace HSRP
                         log = log.AddLine("\nCounter attack blocked.");
                     }
                     // Counter suceeded, debuff strength.
-                    else
+                    else if (!attacker.TempMods.ContainsKey(1) || attacker.TempMods[1].Strength > -tarY)
                     {
-                        int nonBuff = attacker.Modifiers.Strength;
+                        int nonBuff = attacker.TempMods.ContainsKey(1)
+                            ? attacker.TempMods[1].Strength
+                            : 0;
                         int debuff = Math.Max(nonBuff - (tar - atk), -tarY);
-                        attacker.Modifiers.Strength = debuff;
+                        attacker.TempMods.Remove(1);
+                        attacker.AddTempMod("strength", debuff, 1);
                         log = log.AddLine($"\nStrenth debuff of {debuff - nonBuff} inflicted on {Syntax.ToCodeLine(attacker.Name)}.");
                     }
                 }
@@ -123,6 +126,11 @@ namespace HSRP
         // Mental: XDPSI --> XDFOR
 
         // Speech: XD(INT+STR) --> XD(PER+FOR)
+        // Random chance to do 3 things on success:
+        // Roll 1DINT to debuff STR for 3 turns.
+        // Roll 1DPER to debuff FOR for 1 turn.
+        // Roll 1DINT to debuff INT for 1 turn.
+        // If STR or FOR reach 0 they leave the strife.
         private void SpeechAttack(ref StrifePlayer attacker, ref NPC target)
         {
             log = Toolbox.GetRandomMessage("speechAttackStart", attacker.Name, target.Name) + "\n\n";
@@ -142,10 +150,28 @@ namespace HSRP
             log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
 
             // TODO;
-            switch (Toolbox.RandInt(5, true))
+            // Log messages.
+            // Attack rolls higher, random chance begins.
+            if (atk > tar)
             {
-                case 0:
-                    
+                switch (Toolbox.RandInt(2))
+                {
+                    // Roll 1DINT to debuff STR for 3 turns.
+                    case 0:
+                        {
+                            int y = attacker.Abilities.Intimidation;
+                            int debuff = -Toolbox.DiceRoll(1, y);
+                            target.AddTempMod("strength", debuff, 2);
+                        } break;
+
+                    // Roll 1DPER to debuff FOR for 1 turn.
+                    case 1:
+                        {
+                            int y = attacker.Abilities.Persuasion;
+                            int debuff = -Toolbox.DiceRoll(1, y);
+                            target.AddTempMod("strength", debuff, 0);
+                        } break;
+                }
             }
         }
 
