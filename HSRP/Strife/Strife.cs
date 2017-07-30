@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace HSRP
@@ -106,7 +107,7 @@ namespace HSRP
                             : 0;
                         int debuff = Math.Max(nonBuff - (tar - atk), -tarY);
                         attacker.TempMods.Remove(1);
-                        attacker.AddTempMod("strength", debuff, 1);
+                        ApplyTempMod(ref attacker, "strength", debuff, 1);
                         log = log.AddLine($"\nStrenth debuff of {debuff - nonBuff} inflicted on {Syntax.ToCodeLine(attacker.Name)}.");
                     }
                 }
@@ -161,7 +162,7 @@ namespace HSRP
                         {
                             int y = attacker.Abilities.Intimidation;
                             int debuff = -Toolbox.DiceRoll(1, y);
-                            target.AddTempMod("strength", debuff, 2);
+                            ApplyTempMod(ref target, "strength", debuff, 2);
                         } break;
 
                     // Roll 1DPER to debuff FOR for 1 turn.
@@ -169,7 +170,7 @@ namespace HSRP
                         {
                             int y = attacker.Abilities.Persuasion;
                             int debuff = -Toolbox.DiceRoll(1, y);
-                            target.AddTempMod("strength", debuff, 0);
+                            ApplyTempMod(ref target, "strength", debuff, 0);
                         } break;
                 }
             }
@@ -181,8 +182,47 @@ namespace HSRP
             log = $"{plyr.Name} is guarding.\n";
 
             AbilitySet mod = new AbilitySet();
-            mod.Constitution = Toolbox.DiceRoll(1, plyr.Abilities.Constitution);
-            plyr.AddTempMod(mod, 0);
+            ApplyTempMod(ref plyr, "constitution", Toolbox.DiceRoll(1, plyr.Abilities.Constitution), 0);
+        }
+
+        private void ApplyTempMod(ref StrifePlayer ent, string stat, int value, int turns)
+        {
+            AbilitySet set = new AbilitySet();
+            foreach (PropertyInfo prop in set.GetType().GetProperties())
+            {
+                if (prop.Name.Contains(stat, StringComparison.OrdinalIgnoreCase))
+                {
+                    prop.SetValue(set, value);
+                    ent.AddTempMod(set, turns);
+
+                    string plural = turns == 1
+                        ? "1 turn"
+                        : (turns + 1).ToString() + " turns";
+                    log = log.AddLine($"{ent.Name} was inflicted with {value} {prop.Name} for {plural}.");
+
+                    return;
+                }
+            }
+        }
+
+        private void ApplyTempMod(ref NPC ent, string stat, int value, int turns)
+        {
+            AbilitySet set = new AbilitySet();
+            foreach (PropertyInfo prop in set.GetType().GetProperties())
+            {
+                if (prop.Name.Contains(stat, StringComparison.OrdinalIgnoreCase))
+                {
+                    prop.SetValue(set, value);
+                    ent.AddTempMod(set, turns);
+
+                    string plural = turns == 1
+                        ? "1 turn"
+                        : (turns + 1).ToString() + " turns";
+                    log = log.AddLine($"{ent.Name} was inflicted with {value} {prop.Name} for {plural}.");
+
+                    return;
+                }
+            }
         }
     }
 }
