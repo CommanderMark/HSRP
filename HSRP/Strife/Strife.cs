@@ -52,11 +52,11 @@ namespace HSRP
         {
             log = $"{Syntax.ToCodeLine(attacker.Name)} attacks {Syntax.ToCodeLine(target.Name)}.\n\n";
 
-            // Player XDY roll.
+            // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
             int atkY = attacker.Abilities.Strength;
 
-            // NPC XDY roll.
+            // Target XDY roll.
             int tarX = target.DiceRolls;
             int tarY = target.Abilities.Constitution;
 
@@ -124,10 +124,83 @@ namespace HSRP
             }
         }
 
-        // Mental: XDPSI --> XDFOR
+        // Mental: XDPSI --> XDFOR 3 times in a row.
         private void MindControl(ref IEntity attacker, ref IEntity target)
         {
+            log = $"{Syntax.ToCodeLine(attacker.Name)} attempts to mind control {Syntax.ToCodeLine(target.Name)}.\n\n";
 
+            // Attacker XDY roll.
+            int atkX = attacker.DiceRolls;
+            int atkY = attacker.Abilities.Psion;
+
+            // Target XDY roll.
+            int tarX = target.DiceRolls;
+            int tarY = target.Abilities.Fortitude;
+
+            // Dice rolls.
+            int[] atk = new int[3];
+            int[] tar = new int[3];
+
+            for (int i = 0; i < 3; i++)
+            {
+                atk[i] = Toolbox.DiceRoll(atkX, atkY);
+                tar[i] = Toolbox.DiceRoll(tarX, tarY);
+            }
+
+            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
+            log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar[0]}, {tar[1]}, {tar[2]}!");
+
+            int atkTotal = atk[0] + atk[1] + atk[2];
+            int tarTotal = tar[0] + tar[1] + tar[2];
+            // Mind control wooo.
+            if (atkTotal > tarTotal)
+            {
+                target.Controller = attacker.ID;
+                log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} has successfully mind controlled {Syntax.ToCodeLine(target.Name)}.");
+            }
+            else
+            {
+                log = log.AddLine("Mind control failed.");
+            }
+        }
+        private void OpticBlast(ref IEntity attacker, ref IEntity target)
+        {
+            log = $"{Syntax.ToCodeLine(attacker.Name)} is preparing an Optic Blast.\n\n";
+
+            // Attacker XDY roll.
+            int atkX = attacker.DiceRolls;
+            int atkY = attacker.Abilities.Psion;
+
+            // Target XDY roll.
+            int tarX = target.DiceRolls;
+            int tarY = target.Abilities.Fortitude;
+
+            // Dice rolls.
+            int[] atk = new int[3];
+            int[] tar = new int[3];
+
+            for (int i = 0; i < 3; i++)
+            {
+                atk[i] = Toolbox.DiceRoll(atkX, atkY);
+                tar[i] = Toolbox.DiceRoll(tarX, tarY);
+            }
+
+            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
+            log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar[0]}, {tar[1]}, {tar[2]}!");
+
+            int atkTotal = atk[0] + atk[1] + atk[2];
+            int tarTotal = tar[0] + tar[1] + tar[2];
+            // Pew pew pew wooo.
+            if (atkTotal > tarTotal)
+            {
+                int dmg = atkTotal - tarTotal;
+                target.Health -= dmg;
+                log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} struck {Syntax.ToCodeLine(target.Name)} for {dmg} hitpoints.");
+            }
+            else
+            {
+                log = log.AddLine("Optic Blast missed.");
+            }
         }
 
         // Speech: XD(INT+STR) --> XD(PER+FOR)
@@ -140,11 +213,11 @@ namespace HSRP
         {
             log = Toolbox.GetRandomMessage("speechAttackStart", attacker.Name, target.Name) + "\n\n";
 
-            // Player XDY roll.
+            // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
             int atkY = attacker.Abilities.Intimidation + attacker.Abilities.Strength;
 
-            // NPC XDY roll.
+            // Target XDY roll.
             int tarX = target.DiceRolls;
             int tarY = target.Abilities.Persuasion + target.Abilities.Fortitude;
 

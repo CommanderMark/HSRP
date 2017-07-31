@@ -4,6 +4,7 @@ namespace HSRP
 {
     public interface IEntity
     {
+        ulong ID { get; set; }
         string Name { get; set; }
 
         bool LikesPineappleOnPizza { get; set; }
@@ -18,5 +19,6 @@ namespace HSRP
         string Specibus { get; set; }
 
         int DiceRolls { get; }
+        ulong Controller { get; set; }
     }
 }
