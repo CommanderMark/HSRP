@@ -48,7 +48,7 @@ namespace HSRP
         // If XDSTR rolls higher than difference between both is the damage on the target.
         // Assuming they're not equal, then the target has a chance to counter attack if they rolls higher.
         // XDSTR <-- XDPER: Debuff of the difference between both roles is applied to the attacker's strength.
-        private void PhysicalAttack(ref StrifePlayer attacker, ref NPC target)
+        private void PhysicalAttack(ref IEntity attacker, ref IEntity target)
         {
             log = $"{Syntax.ToCodeLine(attacker.Name)} attacks {Syntax.ToCodeLine(target.Name)}.\n\n";
 
@@ -125,6 +125,10 @@ namespace HSRP
         }
 
         // Mental: XDPSI --> XDFOR
+        private void MindControl(ref IEntity attacker, ref IEntity target)
+        {
+
+        }
 
         // Speech: XD(INT+STR) --> XD(PER+FOR)
         // Random chance to do 3 things on success:
@@ -132,7 +136,7 @@ namespace HSRP
         // Roll 1DPER to debuff FOR for 1 turn.
         // Roll 1DINT to debuff INT for 1 turn.
         // If STR or FOR reach 0 they leave the strife.
-        private void SpeechAttack(ref StrifePlayer attacker, ref NPC target)
+        private void SpeechAttack(ref IEntity attacker, ref IEntity target)
         {
             log = Toolbox.GetRandomMessage("speechAttackStart", attacker.Name, target.Name) + "\n\n";
 
@@ -155,7 +159,8 @@ namespace HSRP
             // Attack rolls higher, random chance begins.
             if (atk > tar)
             {
-                switch (Toolbox.RandInt(2))
+                int rng = Toolbox.RandInt(2, true);
+                switch (rng)
                 {
                     // Roll 1DINT to debuff STR for 3 turns.
                     case 0:
@@ -170,14 +175,35 @@ namespace HSRP
                         {
                             int y = attacker.Abilities.Persuasion;
                             int debuff = -Toolbox.DiceRoll(1, y);
-                            ApplyTempMod(ref target, "strength", debuff, 0);
+                            ApplyTempMod(ref target, "fortitude", debuff, 0);
                         } break;
+                    
+                    // Roll 1DINT to debuff INT for 1 turn.
+                    case 2:
+                        {
+                            int y = attacker.Abilities.Intimidation;
+                            int debuff = -Toolbox.DiceRoll(1, y);
+                            ApplyTempMod(ref target, "intimidation", debuff, 0);
+                        } break;
+                }
+
+                // If STR or FOR reach 0 they leave the strife.
+                if (target.Abilities.Strength < 1 && rng == 0)
+                {
+                    log = log.AddLine($"{target.Name.ToApostrophe()} strength has fallen below 1.");
+                    log = log.AddLine(Toolbox.GetRandomMessage("speechKill", target.Name));
+                    // TODO: Leave strife code.
+                }
+                else if (target.Abilities.Fortitude < 1 && rng == 1)
+                {
+                    log = log.AddLine($"{target.Name.ToApostrophe()} fortitude has fallen below 1.");
+                    log = log.AddLine(Toolbox.GetRandomMessage("speechKill", target.Name));
                 }
             }
         }
 
         // Guard CON += XDCON
-        private void Guard(ref StrifePlayer plyr)
+        private void Guard(ref IEntity plyr)
         {
             log = $"{plyr.Name} is guarding.\n";
 
@@ -185,7 +211,7 @@ namespace HSRP
             ApplyTempMod(ref plyr, "constitution", Toolbox.DiceRoll(1, plyr.Abilities.Constitution), 0);
         }
 
-        private void ApplyTempMod(ref StrifePlayer ent, string stat, int value, int turns)
+        private void ApplyTempMod(ref IEntity ent, string stat, int value, int turns)
         {
             AbilitySet set = new AbilitySet();
             foreach (PropertyInfo prop in set.GetType().GetProperties())
@@ -195,27 +221,7 @@ namespace HSRP
                     prop.SetValue(set, value);
                     ent.AddTempMod(set, turns);
 
-                    string plural = turns == 1
-                        ? "1 turn"
-                        : (turns + 1).ToString() + " turns";
-                    log = log.AddLine($"{ent.Name} was inflicted with {value} {prop.Name} for {plural}.");
-
-                    return;
-                }
-            }
-        }
-
-        private void ApplyTempMod(ref NPC ent, string stat, int value, int turns)
-        {
-            AbilitySet set = new AbilitySet();
-            foreach (PropertyInfo prop in set.GetType().GetProperties())
-            {
-                if (prop.Name.Contains(stat, StringComparison.OrdinalIgnoreCase))
-                {
-                    prop.SetValue(set, value);
-                    ent.AddTempMod(set, turns);
-
-                    string plural = turns == 1
+                    string plural = turns == 0
                         ? "1 turn"
                         : (turns + 1).ToString() + " turns";
                     log = log.AddLine($"{ent.Name} was inflicted with {value} {prop.Name} for {plural}.");

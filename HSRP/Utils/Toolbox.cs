@@ -99,6 +99,13 @@ namespace HSRP
             return str += appended + "\n";
         }
 
+        public static string ToApostrophe(this string str)
+        {
+            return str.EndsWith("s", StringComparison.CurrentCultureIgnoreCase)
+                ? str + "'"
+                : str + "'s";
+        }
+
         public static string FirstCharUpper(this string text)
         {
             return text.Substring(0, 1).ToUpper() + text.Substring(1, text.Length - 1).ToLower();

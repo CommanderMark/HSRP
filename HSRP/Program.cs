@@ -132,16 +132,12 @@ namespace HSRP
 
             if (message.HasStringPrefix(Constants.BotPrefix, ref argPos))
             {
+                await Console.Out.WriteLineAsync($"[{message.Author}] [{message.Channel.Name}] -> {message.Content}");
                 IResult result = await commands.ExecuteAsync(context, argPos);
-
-                if (!result.IsSuccess)
-                {
-                    Toolbox.DebugWriteLine("[WHOOPS] " + message.Author.Username, message.Content, result.ErrorReason);
-                }
-                else
-                {
-                    await Console.Out.WriteLineAsync($"[{message.Author}] [{message.Channel.Name}] -> {message.Content}");
-                }
+            }
+            else if (context.IsPrivate && !message.Author.IsBot)
+            {
+                await Console.Out.WriteLineAsync($"[{message.Channel.Name}] -> {message.Content}");
             }
         }
     }

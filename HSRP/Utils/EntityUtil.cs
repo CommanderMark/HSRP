@@ -11,5 +11,17 @@
             ent.Health -= amount;
             return ent.Health <= 0;
         }
+
+        public static void AddTempMod(this IEntity ent, AbilitySet mod, int turnsUntilRemoval)
+        {
+            if (ent.TempMods.ContainsKey(turnsUntilRemoval))
+            {
+                ent.TempMods[turnsUntilRemoval] += mod;
+            }
+            else
+            {
+                ent.TempMods.Add(turnsUntilRemoval, mod);
+            }
+        }
     }
 }

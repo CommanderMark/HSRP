@@ -2,9 +2,10 @@ namespace HSRP
 {
     public enum StrifeAction
     {
-        AttackPhysical,
-        AttackMental,
-        AttackSpeech,
+        PhysicalAttack,
+        MindControl,
+        OpticBlast,
+        SpeechAttack,
         Guard,
         Abscond
     }

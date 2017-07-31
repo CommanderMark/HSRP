@@ -24,7 +24,30 @@ namespace HSRP
         public string LususDescription { get; set; }
         public bool LikesPineappleOnPizza { get; set; }
         
-        public virtual AbilitySet Abilities { get; set; }
+        public AbilitySet Abilities { get; set; }
+        public AbilitySet Modifiers { get; set; }
+        public Dictionary<int, AbilitySet> TempMods { get; set; }
+        public AbilitySet TotalAbilities
+        {
+            get
+            {
+                AbilitySet aSet = Abilities + Modifiers;
+                if (TempMods.Any())
+                {
+                    foreach (KeyValuePair<int, AbilitySet> set in TempMods)
+                    {
+                        aSet += set.Value;
+                    }
+                }
+
+                return aSet;
+            }
+
+            set
+            {
+                Abilities = value;
+            }
+        }
 
         public int Health { get; set; }
         public int MaxHealth { get; set; }

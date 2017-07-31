@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace HSRP
 {
-    public class NPC : IEntity, IStrifeEntity
+    public class NPC : IEntity
     {
         public string Name { get; set; }
         public string Title
@@ -25,7 +25,7 @@ namespace HSRP
 
         public bool LikesPineappleOnPizza { get; set; }
 
-        private AbilitySet _abilities;
+        public AbilitySet Abilities { get; set; }
 
         // TODO: XML these.
         /// <summary>
@@ -42,11 +42,11 @@ namespace HSRP
         /// <summary>
         /// An AbilitySet containing both the character's base ability stats and their modifiers.
         /// </summary>
-        public AbilitySet Abilities
+        public AbilitySet TotalAbilities
         {
             get
             {
-                AbilitySet aSet = _abilities + Modifiers;
+                AbilitySet aSet = Abilities + Modifiers;
                 if (TempMods.Any())
                 {
                     foreach (KeyValuePair<int, AbilitySet> set in TempMods)
@@ -60,7 +60,7 @@ namespace HSRP
 
             set
             {
-                _abilities = value;
+                Abilities = value;
             }
         }
 
