@@ -7,6 +7,7 @@ namespace HSRP
 {
     public class NPC : IEntity
     {
+        public ulong ID { get; set; }
         public string Name { get; set; }
         public string Title
         {

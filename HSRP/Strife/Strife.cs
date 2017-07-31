@@ -14,11 +14,11 @@ namespace HSRP
         /// <summary>
         /// Whether the Attackers team is taking their turn or not.
         /// </summary>
-        public bool AttackTurn { get; set; }
+        private bool attackTurn { get; set; }
         /// <summary>
         /// Who in the current team's (Attackers or Targets) turn it is. Starts at 0.
         /// </summary>
-        public int Turn { get; set; }
+        private int turn { get; set; }
 
         /// <summary>
         /// Log of events that have occurred in the strife so far.
@@ -41,8 +41,58 @@ namespace HSRP
             Attackers = new List<IEntity>();
             Targets = new List<IEntity>();
         }
+        
+        /// <summary>
+        /// Checks if the supplied entity is up next to take their turn.
+        /// </summary>
+        public bool IsTurn(IEntity ent)
+        {
+            bool isTurn = false;
+            if (Attackers.Contains(ent))
+            {
+                isTurn = attackTurn && Attackers.IndexOf(ent) == turn;
+            }
+            else if (Targets.Contains(ent))
+            {
+                isTurn = !attackTurn && Targets.IndexOf(ent) == turn;
+            }
 
-        // Player targeting NPC. Other way around is done in a function overload. (same for PvP if that's ever a thing)
+            return isTurn;
+        }
+
+        /// <summary>
+        /// Updates the strife by checking if any AI controlled characters need to take their turn.
+        /// </summary>
+        /// <returns>A string containing the log of events that transpired when updating the strife.</returns>
+        public string UpdateStrife()
+        {
+
+
+            return log;
+        }
+
+        /// <summary>
+        /// Let's an entity take their turn. Also handles whether they die this turn or not.
+        /// </summary>
+        /// <returns>A string containing the log of events that transpired when taking this turn.</returns>
+        public string TakeTurn(StrifeAction action)
+        {
+
+        }
+
+        /// <summary>
+        /// Let's an AI take their turn. Also handles whether they die this turn or not.
+        /// Note that no string is returned here as that should be handled by the UpdateStrife() function.
+        /// </summary>
+        private void TakeAITurn()
+        {
+
+        }
+
+        private void LeaveStrife(IEntity ent)
+        {
+
+        }
 
         // Physical: XDSTR --> XDCON.
         // If XDSTR rolls higher than difference between both is the damage on the target.
@@ -50,7 +100,7 @@ namespace HSRP
         // XDSTR <-- XDPER: Debuff of the difference between both roles is applied to the attacker's strength.
         private void PhysicalAttack(ref IEntity attacker, ref IEntity target)
         {
-            log = $"{Syntax.ToCodeLine(attacker.Name)} attacks {Syntax.ToCodeLine(target.Name)}.\n\n";
+            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} attacks {Syntax.ToCodeLine(target.Name)}.\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -127,7 +177,7 @@ namespace HSRP
         // Mental: XDPSI --> XDFOR 3 times in a row.
         private void MindControl(ref IEntity attacker, ref IEntity target)
         {
-            log = $"{Syntax.ToCodeLine(attacker.Name)} attempts to mind control {Syntax.ToCodeLine(target.Name)}.\n\n";
+            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} attempts to mind control {Syntax.ToCodeLine(target.Name)}.\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -165,7 +215,7 @@ namespace HSRP
         }
         private void OpticBlast(ref IEntity attacker, ref IEntity target)
         {
-            log = $"{Syntax.ToCodeLine(attacker.Name)} is preparing an Optic Blast.\n\n";
+            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} is preparing an Optic Blast.\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -211,7 +261,7 @@ namespace HSRP
         // If STR or FOR reach 0 they leave the strife.
         private void SpeechAttack(ref IEntity attacker, ref IEntity target)
         {
-            log = Toolbox.GetRandomMessage("speechAttackStart", attacker.Name, target.Name) + "\n\n";
+            log = log.AddLine(Toolbox.GetRandomMessage("speechAttackStart", attacker.Name, target.Name) + "\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -278,10 +328,22 @@ namespace HSRP
         // Guard CON += XDCON
         private void Guard(ref IEntity plyr)
         {
-            log = $"{plyr.Name} is guarding.\n";
+            log = log.AddLine($"{plyr.Name} is guarding.");
 
             AbilitySet mod = new AbilitySet();
             ApplyTempMod(ref plyr, "constitution", Toolbox.DiceRoll(1, plyr.Abilities.Constitution), 0);
+        }
+
+        private string AddLog()
+        {
+            log = log.AddLine("\n------------\n");
+            string str = log;
+
+            Logs.Add(log);
+            log = "";
+
+            // Return the original so it can be used for reply messages.
+            return str;
         }
 
         private void ApplyTempMod(ref IEntity ent, string stat, int value, int turns)

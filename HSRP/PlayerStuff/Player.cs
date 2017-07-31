@@ -24,6 +24,7 @@ namespace HSRP
         public string LususDescription { get; set; }
         public bool LikesPineappleOnPizza { get; set; }
         
+        // TODO: XML these.
         public AbilitySet Abilities { get; set; }
         public AbilitySet Modifiers { get; set; }
         public Dictionary<int, AbilitySet> TempMods { get; set; }
@@ -74,6 +75,7 @@ namespace HSRP
                 return dmg;
             }
         }
+        public ulong Controller { get; set; }
 
         public int Echeladder{ get; private set; }
         public int PendingSkillPointAllocations { get; set; }
