@@ -45,19 +45,25 @@ namespace HSRP
         /// <summary>
         /// Checks if the supplied entity is up next to take their turn.
         /// </summary>
-        public bool IsTurn(IEntity ent)
+        public bool IsTurn(ulong id)
         {
-            bool isTurn = false;
-            if (Attackers.Contains(ent))
+            foreach (IEntity ent in Attackers)
             {
-                isTurn = attackTurn && Attackers.IndexOf(ent) == turn;
-            }
-            else if (Targets.Contains(ent))
-            {
-                isTurn = !attackTurn && Targets.IndexOf(ent) == turn;
+                if (ent.ID == id)
+                {
+                    return true;
+                }
             }
 
-            return isTurn;
+            foreach (IEntity ent in Targets)
+            {
+                if (ent.ID == id)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -75,9 +81,78 @@ namespace HSRP
         /// Let's an entity take their turn. Also handles whether they die this turn or not.
         /// </summary>
         /// <returns>A string containing the log of events that transpired when taking this turn.</returns>
-        public string TakeTurn(StrifeAction action)
+        public string TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers = false)
         {
+            IEntity attacker = attackTurn ? Attackers[turn] : Targets[turn];
+            IEntity target = targetingAttackers ? Attackers[targetNum] : Targets[targetNum];
 
+            switch (action)
+            {
+                case StrifeAction.PhysicalAttack:
+                    PhysicalAttack(ref attacker, ref target);
+                    break;
+
+                case StrifeAction.MindControl:
+                    MindControl(ref attacker, ref target);
+                    break;
+
+                case StrifeAction.OpticBlast:
+                    OpticBlast(ref attacker, ref target);
+                    break;
+
+                case StrifeAction.SpeechAttack:
+                    SpeechAttack(ref attacker, ref target);
+                    break;
+
+                case StrifeAction.Guard:
+                    Guard(ref attacker);
+                    break;
+                
+                // TODO: Whoops.
+                case StrifeAction.Abscond:
+                    break;
+            }
+
+            if (attackTurn)
+            {
+                Attackers[turn] = attacker;
+                Targets[targetNum] = target;
+
+                // Rotate turn.
+                ++turn;
+                while (Attackers[turn] == null && attackTurn)
+                {
+                    ++turn;
+                    if (turn >= Attackers.Count)
+                    {
+                        attackTurn = false;
+                        turn = 0;
+
+                        log = log.AddLine("Targets are now taking their turns.");
+                    }
+                }
+            }
+            else
+            {
+                Targets[turn] = attacker;
+                Attackers[targetNum] = target;
+
+                // Rotate turn.
+                ++turn;
+                while (Attackers[turn] == null && attackTurn)
+                {
+                    ++turn;
+                    if (turn >= Attackers.Count)
+                    {
+                        attackTurn = false;
+                        turn = 0;
+
+                        log = log.AddLine("Attackers are now taking their turns.");
+                    }
+                }
+            }
+
+            return log;
         }
 
         /// <summary>
@@ -89,9 +164,10 @@ namespace HSRP
 
         }
 
-        private void LeaveStrife(IEntity ent)
+        private void LeaveStrife(ref IEntity ent)
         {
-
+            ent = null;
+            log = log.AddLine(ent.Name + " is no longer in the strife.");
         }
 
         // Physical: XDSTR --> XDCON.
@@ -277,7 +353,6 @@ namespace HSRP
             log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
             log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
 
-            // TODO;
             // Log messages.
             // Attack rolls higher, random chance begins.
             if (atk > tar)
@@ -315,12 +390,15 @@ namespace HSRP
                 {
                     log = log.AddLine($"{target.Name.ToApostrophe()} strength has fallen below 1.");
                     log = log.AddLine(Toolbox.GetRandomMessage("speechKill", target.Name));
-                    // TODO: Leave strife code.
+
+                    LeaveStrife(ref target);
                 }
                 else if (target.Abilities.Fortitude < 1 && rng == 1)
                 {
                     log = log.AddLine($"{target.Name.ToApostrophe()} fortitude has fallen below 1.");
                     log = log.AddLine(Toolbox.GetRandomMessage("speechKill", target.Name));
+
+                    LeaveStrife(ref target);
                 }
             }
         }

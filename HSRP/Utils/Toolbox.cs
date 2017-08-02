@@ -13,7 +13,7 @@ namespace HSRP
 
         public static int DiceRoll(int rolls, int dieType = 6)
         {
-            if (rolls < 1 || dieType < 1) { return 0; }
+            if (rolls < 1 || dieType < 1) { return 1; }
 
             int total = 0;
             for (int i = 0; i < rolls; i++)

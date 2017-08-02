@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Discord.Commands;
+using Discord;
 
 namespace HSRP.Commands
 {
