@@ -30,7 +30,7 @@ namespace HSRP
         private string log;
 
         /// <summary>
-        /// The IDs of every attacker's character.
+        /// The enitites on the team that initiated the strife.
         /// </summary>
         public List<IEntity> Attackers { get; set; }
         public List<IEntity> Targets { get; set; }
@@ -80,6 +80,9 @@ namespace HSRP
         /// <summary>
         /// Let's an entity take their turn. Also handles whether they die this turn or not.
         /// </summary>
+        /// <param name="action">The type of action the attacker is taking.</param>
+        /// <param name="targetNum">The index of the user being targeted.</param>
+        /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
         /// <returns>A string containing the log of events that transpired when taking this turn.</returns>
         public string TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers = false)
         {
@@ -116,40 +119,56 @@ namespace HSRP
             if (attackTurn)
             {
                 Attackers[turn] = attacker;
-                Targets[targetNum] = target;
-
-                // Rotate turn.
-                ++turn;
-                while (Attackers[turn] == null && attackTurn)
+                if (targetingAttackers)
                 {
+                    Attackers[targetNum] = target;
+                }
+                else
+                {
+                    Targets[targetNum] = target;
+                }
+
+                // If the current index lands on a user that is no longer in the strife continue incrementing.
+                do
+                {
+                    // Rotate turn.
                     ++turn;
                     if (turn >= Attackers.Count)
                     {
+                        // Reached the end of the attackers list.
                         attackTurn = false;
                         turn = 0;
 
                         log = log.AddLine("Targets are now taking their turns.");
                     }
-                }
+                } while (Attackers[turn] == null && attackTurn);
             }
             else
             {
                 Targets[turn] = attacker;
-                Attackers[targetNum] = target;
-
-                // Rotate turn.
-                ++turn;
-                while (Attackers[turn] == null && attackTurn)
+                if (targetingAttackers)
                 {
+                    Attackers[targetNum] = target;
+                }
+                else
+                {
+                    Targets[targetNum] = target;
+                }
+
+                // If the current index lands on a user that is no longer in the strife continue incrementing.
+                do
+                {
+                    // Rotate turn.
                     ++turn;
                     if (turn >= Attackers.Count)
                     {
+                        // Reached the end of the attackers list.
                         attackTurn = false;
                         turn = 0;
 
-                        log = log.AddLine("Attackers are now taking their turns.");
+                        log = log.AddLine("Targets are now taking their turns.");
                     }
-                }
+                } while (Attackers[turn] == null && !attackTurn);
             }
 
             return log;
