@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace HSRP
 {
@@ -34,6 +34,37 @@ namespace HSRP
         /// </summary>
         public List<IEntity> Attackers { get; set; }
         public List<IEntity> Targets { get; set; }
+        public IEnumerable<IEntity> Entities
+        {
+            get
+            {
+                return Attackers.Concat(Targets);
+            }
+        }
+
+        /// <summary>
+        /// Returns the entity who is currently ready for their turn.
+        /// </summary>
+        public IEntity CurrentEntity
+        {
+            get
+            {
+                if (attackTurn && Attackers.Count > turn)
+                {
+                    return Attackers[turn];
+                }
+                else if (!attackTurn && Targets.Count > turn)
+                {
+                    return Targets[turn];
+                }
+
+                throw new NullReferenceException($"Current entity is null. (TURN: {turn}, ATTACKTURN: {attackTurn.ToString()})");
+            }
+        }
+        /// <summary>
+        /// The user who is responsible for the next turn.
+        /// </summary>
+        public IEntity CurrentTurner { private set; get; }
 
         public Strife()
         {
@@ -41,40 +72,71 @@ namespace HSRP
             Attackers = new List<IEntity>();
             Targets = new List<IEntity>();
         }
-        
-        /// <summary>
-        /// Checks if the supplied entity is up next to take their turn.
-        /// </summary>
-        public bool IsTurn(ulong id)
-        {
-            foreach (IEntity ent in Attackers)
-            {
-                if (ent.ID == id)
-                {
-                    return true;
-                }
-            }
-
-            foreach (IEntity ent in Targets)
-            {
-                if (ent.ID == id)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
 
         /// <summary>
-        /// Updates the strife by checking if any AI controlled characters need to take their turn.
+        /// Updates the strife by checking if any AI-controlled characters need to take their turn.
+        /// Also used for performing turns for human-controlled characters by specifying an action.
         /// </summary>
+        /// <param name="ntty">Returns the character whose turn is the next non-AI one.</param>
         /// <returns>A string containing the log of events that transpired when updating the strife.</returns>
-        public string UpdateStrife()
+        public string UpdateStrife(out Player ntty)
         {
+            // Check who the next user is.
+            IEntity turner = CurrentEntity;
+            CurrentTurner = turner;
+            string txt;
 
+            // Are they being mind-controlled?
+            if (turner.Controller > 0)
+            {
+                bool match = false;
+                foreach (IEntity ent in Entities)
+                {
+                    if (turner.Controller == ent?.ID)
+                    {
+                        log = log.AddLine($"{turner.Name}, controlled by {ent.Name}, is taking their turn!");
+                        CurrentTurner = ent;
+                        match = true;
+                        break;
+                    }
+                }
+                // Their controller isn't in the strife anymore (hopefully).
+                if (!match)
+                {
+                    log = log.AddLine($"{turner.Name} is no longer mind-controlled!");
+                    turner.Controller = 0;
+                }
 
-            return log;
+                txt = log;
+                AddLog();
+                
+                // AI is taking a turn, do that until a human is found.
+                if (CurrentTurner is NPC)
+                {
+                    TakeAITurn();
+                    txt += UpdateStrife(out Player ent);
+                    CurrentTurner = ent;
+                    AddLog();
+                }
+            }
+            else
+            {
+                txt = log;
+                AddLog();
+
+                log = log.AddLine($"{turner.Name} is taking their turn!");
+                // AI is taking a turn, do that until a human is found.
+                if (turner is NPC)
+                {
+                    TakeAITurn();
+                    txt += UpdateStrife(out Player ent);
+                    CurrentTurner = ent;
+                    AddLog();
+                }
+            }
+
+            ntty = (Player)CurrentTurner;
+            return txt;
         }
 
         /// <summary>
@@ -86,7 +148,7 @@ namespace HSRP
         /// <returns>A string containing the log of events that transpired when taking this turn.</returns>
         public string TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers = false)
         {
-            IEntity attacker = attackTurn ? Attackers[turn] : Targets[turn];
+            IEntity attacker = CurrentEntity;
             IEntity target = targetingAttackers ? Attackers[targetNum] : Targets[targetNum];
 
             switch (action)
@@ -116,15 +178,16 @@ namespace HSRP
                     break;
             }
 
-            if (attacker.Health < 1)
+            if (attacker?.Health < 1)
             {
                 LeaveStrife(ref attacker);
             }
-            if (target.Health < 1)
+            if (target?.Health < 1)
             {
                 LeaveStrife(ref target);
             }
 
+            // Update turn.
             if (attackTurn)
             {
                 Attackers[turn] = attacker;
@@ -189,7 +252,31 @@ namespace HSRP
         /// </summary>
         private void TakeAITurn()
         {
+            IEntity ai = CurrentEntity;
+            if (ai == null)
+            {
+                throw new NullReferenceException($"Current entity is null. (TURN: {turn}, ATTACKTURN: {attackTurn.ToString()})");
+            }
+            int targetID = attackTurn
+                ? Toolbox.RandInt(Targets.Count)
+                : Toolbox.RandInt(Attackers.Count);
 
+            // TODO: More AI-y stuff.
+            if (ai is NPC npc)
+            {
+                // TODO: Guard when some arbitrary event occurs?
+                switch (npc.Type)
+                {
+                    case NPCType.Lusus:
+                    case NPCType.Normal:
+                        TakeTurn(StrifeAction.PhysicalAttack, targetID, !attackTurn);
+                        break;
+
+                    case NPCType.Psionic:
+                        TakeTurn(StrifeAction.OpticBlast, targetID, !attackTurn);
+                        break;
+                }
+            }
         }
 
         private void LeaveStrife(ref IEntity ent)
@@ -279,6 +366,7 @@ namespace HSRP
         }
 
         // Mental: XDPSI --> XDFOR 3 times in a row.
+        // TODO: Mind control can break somehow?
         private void MindControl(ref IEntity attacker, ref IEntity target)
         {
             log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} attempts to mind control {Syntax.ToCodeLine(target.Name)}.\n");
