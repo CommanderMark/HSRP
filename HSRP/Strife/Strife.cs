@@ -116,6 +116,15 @@ namespace HSRP
                     break;
             }
 
+            if (attacker.Health < 1)
+            {
+                LeaveStrife(ref attacker);
+            }
+            if (target.Health < 1)
+            {
+                LeaveStrife(ref target);
+            }
+
             if (attackTurn)
             {
                 Attackers[turn] = attacker;
@@ -163,7 +172,7 @@ namespace HSRP
                     if (turn >= Attackers.Count)
                     {
                         // Reached the end of the attackers list.
-                        attackTurn = false;
+                        attackTurn = true;
                         turn = 0;
 
                         log = log.AddLine("Targets are now taking their turns.");

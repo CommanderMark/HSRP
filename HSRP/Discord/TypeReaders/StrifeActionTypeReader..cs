@@ -12,16 +12,16 @@ namespace HSRP.Commands
     {
         public override async Task<TypeReaderResult> Read(ICommandContext context, string input, IServiceProvider services)
         {
-            Type type = typeof(StrifeAction);
-            foreach (FieldInfo fld in type.GetFields())
+            var fields = Enum.GetValues(typeof(StrifeAction)).Cast<StrifeAction>();
+            foreach (StrifeAction sa in fields)
             {
-                if (fld.Name.StartsWith(input, StringComparison.OrdinalIgnoreCase))
+                if (sa.ToString().StartsWith(input, StringComparison.OrdinalIgnoreCase))
                 {
-                    return await Task.FromResult(TypeReaderResult.FromSuccess(fld));
+                    return await Task.FromResult(TypeReaderResult.FromSuccess(sa));
                 }
             }
-            await context.Channel.SendMessageAsync("No such ability found.");
-            return TypeReaderResult.FromError(CommandError.ParseFailed, "No such ability found.");
+            await context.Channel.SendMessageAsync("No such command found.");
+            return TypeReaderResult.FromError(CommandError.ParseFailed, "No such command found.");
         }
     }
 }
