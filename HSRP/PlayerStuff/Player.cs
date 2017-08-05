@@ -24,7 +24,6 @@ namespace HSRP
         public string LususDescription { get; set; }
         public bool LikesPineappleOnPizza { get; set; }
         
-        // TODO: XML these.
         public AbilitySet Abilities { get; set; }
         public AbilitySet Modifiers { get; set; }
         public Dictionary<int, AbilitySet> TempMods { get; set; }
@@ -89,6 +88,8 @@ namespace HSRP
         public Player()
         {
             Abilities = new AbilitySet();
+            Modifiers = new AbilitySet();
+            TempMods = new Dictionary<int, AbilitySet>();
             Inventory = new List<Item>();
 
             Name = "";
@@ -126,7 +127,6 @@ namespace HSRP
                         Health = XmlToolbox.GetAttributeInt(ele, "hp", -1);
                         MaxHealth = XmlToolbox.GetAttributeInt(ele, "maxhp", Health);
                         Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
-                        StrifeID = XmlToolbox.GetAttributeInt(ele, "strife", 0);
                         break;
 
                     case "levels":
@@ -151,6 +151,27 @@ namespace HSRP
                             Inventory.Add(i);
                         }
                         break;
+
+                    case "strife":
+                        StrifeID = XmlToolbox.GetAttributeInt(ele, "id", 0);
+
+                        if (StrifeID > 0)
+                        {
+                            foreach (XElement strifeEle in ele.Elements())
+                            {
+                                int? turns = XmlToolbox.GetAttributeNullableInt(strifeEle, "turns", null);
+                                if (turns == null)
+                                {
+                                    Modifiers = new AbilitySet(strifeEle);
+                                }
+                                else
+                                {
+                                    TempMods.Add((int)turns, new AbilitySet(strifeEle));
+                                }
+                            }
+                        }
+                        break;
+
                 }
             }
         }
@@ -172,8 +193,7 @@ namespace HSRP
             XElement status = new XElement("status",
                 new XAttribute("hp", Health),
                 new XAttribute("maxhp", MaxHealth),
-                new XAttribute("specibus", Specibus),
-                new XAttribute("strife", StrifeID)
+                new XAttribute("specibus", Specibus)
                 );
 
             XElement levels = new XElement("levels",
@@ -203,6 +223,20 @@ namespace HSRP
             }
 
             player.Add(info, lusus, status, levels, abilities, inventory);
+
+            if (StrifeID > 0)
+            {
+                XElement strife = new XElement("strife");
+                strife.Add(Modifiers.ToXmlElement());
+                foreach (KeyValuePair<int, AbilitySet> mod in TempMods)
+                {
+                    XElement modEle = mod.Value.ToXmlElement();
+                    modEle.Add(new XAttribute("turns", mod.Key));
+                }
+                player.Add(strife);
+            }
+
+            
             doc.Add(player);
             XmlToolbox.WriteXml(this.ToXmlPath(), doc);
         }

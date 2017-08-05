@@ -28,7 +28,6 @@ namespace HSRP
 
         public AbilitySet Abilities { get; set; }
 
-        // TODO: XML these.
         /// <summary>
         /// Buffs or debuffs applied to stats that remain until the end of the strife.
         /// </summary>
@@ -113,6 +112,21 @@ namespace HSRP
                     case "abilities":
                         Abilities = new AbilitySet(ele);
                         break;
+                    
+                    case "strife":
+                        foreach (XElement strifeEle in ele.Elements())
+                        {
+                            int? turns = XmlToolbox.GetAttributeNullableInt(strifeEle, "turns", null);
+                            if (turns == null)
+                            {
+                                Modifiers = new AbilitySet(strifeEle);
+                            }
+                            else
+                            {
+                                TempMods.Add((int)turns, new AbilitySet(strifeEle));
+                            }
+                        }
+                        break;
                 }
             }
         }
@@ -137,8 +151,17 @@ namespace HSRP
                 );
 
             XElement abilities = Abilities.ToXmlElement();
+                
+            XElement strife = new XElement("strife");
 
-            npc.Add(info, status, abilities);
+            strife.Add(Modifiers.ToXmlElement());
+            foreach (KeyValuePair<int, AbilitySet> mod in TempMods)
+            {
+                XElement modEle = mod.Value.ToXmlElement();
+                modEle.Add(new XAttribute("turns", mod.Key));
+            }
+
+            npc.Add(info, status, abilities, strife);
             return npc;
         }
     }

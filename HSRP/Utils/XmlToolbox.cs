@@ -127,6 +127,24 @@ namespace HSRP
             return val;
         }
 
+        public static int? GetAttributeNullableInt(XElement element, string name, int? defaultValue)
+        {
+            if (element == null || element.Attribute(name) == null) return defaultValue;
+
+            int? val = defaultValue;
+
+            try
+            {
+                val = int.Parse(element.Attribute(name).Value);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("[XML] " + "Error in " + element + "! \n" + e);
+            }
+
+            return val;
+        }
+
         public static uint GetAttributeUnsignedInt(XElement element, string name, uint defaultValue)
         {
             if (element == null || element.Attribute(name) == null) return defaultValue;

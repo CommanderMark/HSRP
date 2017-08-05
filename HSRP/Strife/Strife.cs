@@ -281,6 +281,11 @@ namespace HSRP
 
         private void LeaveStrife(ref IEntity ent)
         {
+            if (ent is Player plyr)
+            {
+                plyr.StrifeID = 0;
+                plyr.Save();
+            }
             ent = null;
             log = log.AddLine(ent.Name + " is no longer in the strife.");
         }
