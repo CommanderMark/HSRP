@@ -28,5 +28,6 @@
     {
         public const string Config = "config";
         public const string Players = "players";
+        public const string Strifes = "strifes";
     }
 }

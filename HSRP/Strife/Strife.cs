@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace HSRP
 {
@@ -9,16 +11,17 @@ namespace HSRP
     // and other stuff (oh GAWD the other stuff) is done here.
     public class Strife
     {
-        public static List<Strife> Strifes { get; set; }
+        public int ID;
+        public bool Active;
 
         /// <summary>
         /// Whether the Attackers team is taking their turn or not.
         /// </summary>
-        private bool attackTurn { get; set; }
+        private bool attackTurn;
         /// <summary>
         /// Who in the current team's (Attackers or Targets) turn it is. Starts at 0.
         /// </summary>
-        private int turn { get; set; }
+        private int turn;
 
         /// <summary>
         /// Log of events that have occurred in the strife so far.
@@ -72,6 +75,159 @@ namespace HSRP
             Attackers = new List<IEntity>();
             Targets = new List<IEntity>();
         }
+
+        public Strife(string filePath) : this()
+        {
+            string path = filePath.Contains(Dirs.Strifes)
+                ? filePath
+                : Path.Combine(Dirs.Strifes, filePath);
+
+            XDocument doc = XmlToolbox.TryLoadXml(path);
+            if (doc == null || doc.Root == null)
+            {
+                Console.WriteLine("[WHITE LINE] Strife " + path + " did not load!");
+                return;
+            }
+
+            ID = XmlToolbox.GetAttributeInt(doc.Root, "id", 0);
+            Active = XmlToolbox.GetAttributeBool(doc.Root, "active", false);
+
+            foreach (XElement ele in doc.Root.Elements())
+            {
+                switch (ele.Name.LocalName)
+                {
+                    case "status":
+                        attackTurn = XmlToolbox.GetAttributeBool(ele, "attackTurn", true);
+                        turn = XmlToolbox.GetAttributeInt(ele, "turn", 0);
+                        break;
+
+                    case "logs":
+                        foreach (XElement logEle in ele.Elements())
+                        {
+                            string text = logEle.ElementInnerText();
+                            Logs.Add(text);
+                        }
+                        break;
+
+                    case "attackers":
+                        foreach (XElement atkEle in ele.Elements())
+                        {
+                            string type = XmlToolbox.GetAttributeString(atkEle, "type", string.Empty);
+                            switch (type)
+                            {
+                                case "player":
+                                    Player plyr = new Player(XmlToolbox.GetAttributeUnsignedLong(atkEle, "id", 0));
+                                    if (!plyr.Errored)
+                                    {
+                                        Attackers.Add(plyr);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("[WHITE LINE] Attacker " + plyr.ID + " did not load!");
+                                    }
+                                    break;
+
+                                case "npc":
+                                    Attackers.Add(new NPC(atkEle));
+                                    break;
+                            }
+                        }
+                        break;
+
+                    case "targets":
+                        foreach (XElement atkEle in ele.Elements())
+                        {
+                            string type = XmlToolbox.GetAttributeString(atkEle, "type", string.Empty);
+                            switch (type)
+                            {
+                                case "player":
+                                    Player plyr = new Player(XmlToolbox.GetAttributeUnsignedLong(atkEle, "id", 0));
+                                    if (!plyr.Errored)
+                                    {
+                                        Targets.Add(plyr);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("[WHITE LINE] Target " + plyr.ID + " did not load!");
+                                    }
+                                    break;
+
+                                case "npc":
+                                    Targets.Add(new NPC(atkEle));
+                                    break;
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+
+        public void Save()
+        {
+            XDocument doc = new XDocument();
+            XElement strife = new XElement("strife",
+                new XAttribute("id", ID),
+                new XAttribute("active", Active.ToString())
+                );
+
+            XElement status = new XElement("status",
+                new XAttribute("attackTurn", attackTurn),
+                new XAttribute("turn", 0)
+                );
+
+            XElement logs = new XElement("logs");
+            foreach (string log in Logs)
+            {
+                logs.Add(new XElement("log", new XText(log)));
+            }
+
+            XElement attackers = new XElement("attackers");
+            foreach (IEntity ent in Attackers)
+            {
+                if (ent is Player plyr)
+                {
+                    plyr.Save();
+                    attackers.Add("entity",
+                        new XAttribute("type", "player"),
+                        new XAttribute("id", plyr.ID)
+                        );
+                }
+                else if (ent is NPC npc)
+                {
+                    attackers.Add("entity",
+                        new XAttribute("type", "npc"),
+                        npc.Save()
+                        );
+                }
+            }
+
+            XElement targets = new XElement("targets");
+            foreach (IEntity ent in Targets)
+            {
+                if (ent is Player plyr)
+                {
+                    plyr.Save();
+                    targets.Add("entity",
+                        new XAttribute("type", "player"),
+                        new XAttribute("id", plyr.ID)
+                        );
+                }
+                else if (ent is NPC npc)
+                {
+                    targets.Add("entity",
+                        new XAttribute("type", "npc"),
+                        npc.Save()
+                        );
+                }
+            }
+
+            strife.Add(status, logs, attackers, targets);
+            doc.Add(strife);
+
+            XmlToolbox.WriteXml(this.ToXmlPath(), doc);
+        }
+
+        public string ToXmlPath() => Path.Combine(Dirs.Players, ID.ToString() + ".xml");
 
         /// <summary>
         /// Updates the strife by checking if any AI-controlled characters need to take their turn.
