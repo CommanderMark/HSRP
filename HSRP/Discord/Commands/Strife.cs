@@ -22,9 +22,16 @@ namespace HSRP.Commands
                     await ReplyAsync("Invalid index.");
                 }
 
-                if (strf.CurrentTurner == plyr)
+                if (strf.CurrentTurner.ID == plyr.ID)
                 {
                     await ReplyStrifeAsync(strf.TakeTurn(sa, index, true));
+                    await ReplyStrifeAsync(strf.UpdateStrife(out Player next));
+                    await ReplyStrifeAsync($"It is {next.Name}'s turn.");
+                    strf.Save();
+                }
+                else
+                {
+                    await ReplyAsync($"It is {strf.CurrentTurner.Name}'s turn.");
                 }
             }
             else if ("targets".StartsWith(who, StringComparison.OrdinalIgnoreCase))
@@ -34,9 +41,16 @@ namespace HSRP.Commands
                     await ReplyAsync("Invalid index.");
                 }
 
-                if (strf.CurrentTurner == plyr)
+                if (strf.CurrentTurner.ID == plyr.ID)
                 {
                     await ReplyStrifeAsync(strf.TakeTurn(sa, index, false));
+                    await ReplyStrifeAsync(strf.UpdateStrife(out Player next));
+                    await ReplyStrifeAsync($"It is {next.Name}'s turn.");
+                    strf.Save();
+                }
+                else
+                {
+                    await ReplyAsync($"It is {strf.CurrentTurner.Name}'s turn.");
                 }
             }
             else
@@ -61,7 +75,7 @@ namespace HSRP.Commands
                 await ReplyAsync("Strife activated!");
 
                 await ReplyStrifeAsync("A strife has begun.");
-                await ReplyStrifeAsync(strf.Display());
+                await ReplyStrifeAsync(Syntax.ToCodeBlock(strf.Display()));
                 strf.Save();
             }
             else
@@ -70,6 +84,7 @@ namespace HSRP.Commands
             }
         }
 
+        // TODO: Ability to check individual entity stats.
         [Command("check"), InStrife]
         public async Task Check()
         {

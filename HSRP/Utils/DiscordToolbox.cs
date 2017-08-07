@@ -81,11 +81,15 @@ namespace HSRP
             Player plyr = context.GetPlayerEntity();
             if (plyr == null) { return null; }
 
-            foreach (string dir in Directory.GetFiles(Dirs.Strifes))
+            foreach (int id in Strife.ActiveStrifes)
             {
-                if (dir.Contains(plyr.StrifeID.ToString()))
+                if (id == plyr.StrifeID)
                 {
-                    return new Strife(dir);
+                    Strife strf = new Strife(id.ToString());
+                    if (!strf.Errored)
+                    {
+                        return new Strife(id.ToString());
+                    }
                 }
             }
 

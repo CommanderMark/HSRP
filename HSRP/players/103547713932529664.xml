@@ -2,7 +2,7 @@
 <player>
   <info name="Sidewind Langston" id="103547713932529664" blood="Violet" pineappleOnPizza="false" />
   <lusus>Amaryllis. A goat-like creature...yeah that about covers it.</lusus>
-  <status hp="71" maxhp="106" specibus="Hatchetkind" strife="0" />
+  <status hp="70" maxhp="106" specibus="Hatchetkind" />
   <levels echeladder="1" pendingSkillPoints="0" xp="5" nextLevel="15" />
   <abilities>
     <strength value="2" />
@@ -23,4 +23,7 @@
     <item value="Ultimate Hatchet from Hell" quantity="1" />
     <item value="Assassin Hatchet" quantity="1" />
   </inventory>
+  <strife id="37">
+    <abilities />
+  </strife>
 </player>

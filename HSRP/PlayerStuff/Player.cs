@@ -226,11 +226,11 @@ namespace HSRP
 
             if (StrifeID > 0)
             {
-                XElement strife = new XElement("strife");
-                strife.Add(Modifiers.ToXmlElement());
+                XElement strife = new XElement("strife", new XAttribute("id", StrifeID));
+                strife.Add(Modifiers.ToXmlWithoutEmpties());
                 foreach (KeyValuePair<int, AbilitySet> mod in TempMods)
                 {
-                    XElement modEle = mod.Value.ToXmlElement();
+                    XElement modEle = mod.Value.ToXmlWithoutEmpties();
                     modEle.Add(new XAttribute("turns", mod.Key));
                 }
                 player.Add(strife);

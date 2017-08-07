@@ -87,6 +87,7 @@ namespace HSRP
         public NPC()
         {
             Abilities = new AbilitySet();
+            Modifiers = new AbilitySet();
             TempMods = new Dictionary<int, AbilitySet>();
 
             Name = "";
@@ -146,7 +147,7 @@ namespace HSRP
                 );
 
             XElement info = new XElement("info",
-                new XAttribute("name", Name),
+                new XAttribute("name", Title),
                 new XAttribute("type", Type),
                 new XAttribute("pineappleOnPizza", LikesPineappleOnPizza),
                 new XText(Description)
@@ -164,10 +165,10 @@ namespace HSRP
                 
             XElement strife = new XElement("strife");
 
-            strife.Add(Modifiers.ToXmlElement());
+            strife.Add(Modifiers.ToXmlWithoutEmpties());
             foreach (KeyValuePair<int, AbilitySet> mod in TempMods)
             {
-                XElement modEle = mod.Value.ToXmlElement();
+                XElement modEle = mod.Value.ToXmlWithoutEmpties();
                 modEle.Add(new XAttribute("turns", mod.Key));
             }
 

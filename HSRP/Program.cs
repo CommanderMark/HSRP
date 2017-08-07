@@ -88,7 +88,14 @@ namespace HSRP
                 try
                 {
                     Instance.RpGuild = Client.GetGuild(Constants.RP_GUILD) as IGuild;
-                    Toolbox.UpdateRandomMessages();        
+                    Toolbox.UpdateRandomMessages();
+
+                    // ActiveStrifes.
+                    XDocument config = XmlToolbox.TryLoadXml(Strife.ToConfigActiveStrifes());
+                    foreach (XElement ele in config.Root.Elements())
+                    {
+                        Strife.ActiveStrifes.Add(XmlToolbox.GetAttributeInt(ele, "id", -1));
+                    }
                 }
                 catch (Exception e)
                 {

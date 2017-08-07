@@ -13,7 +13,7 @@ namespace HSRP
     // and other stuff (oh GAWD the other stuff) is done here.
     public class Strife
     {
-        public static List<int> ActiveStrifes;
+        public static List<int> ActiveStrifes = new List<int>();
 
         public int ID;
         public bool Active;
@@ -85,8 +85,8 @@ namespace HSRP
         public Strife(string filePath) : this()
         {
             string path = filePath.Contains(Dirs.Strifes)
-                ? filePath
-                : Path.Combine(Dirs.Strifes, filePath);
+                ? filePath + ".xml"
+                : Path.Combine(Dirs.Strifes, filePath) + ".xml";
 
             XDocument doc = XmlToolbox.TryLoadXml(path);
             if (doc == null || doc.Root == null)
@@ -119,8 +119,7 @@ namespace HSRP
                     case "attackers":
                         foreach (XElement atkEle in ele.Elements())
                         {
-                            string type = XmlToolbox.GetAttributeString(atkEle, "type", string.Empty);
-                            switch (type)
+                            switch (atkEle.Name.LocalName)
                             {
                                 case "player":
                                     Player plyr = new Player(XmlToolbox.GetAttributeUnsignedLong(atkEle, "id", 0));
@@ -144,8 +143,7 @@ namespace HSRP
                     case "targets":
                         foreach (XElement atkEle in ele.Elements())
                         {
-                            string type = XmlToolbox.GetAttributeString(atkEle, "type", string.Empty);
-                            switch (type)
+                            switch (atkEle.Name.LocalName)
                             {
                                 case "player":
                                     Player plyr = new Player(XmlToolbox.GetAttributeUnsignedLong(atkEle, "id", 0));
@@ -209,17 +207,11 @@ namespace HSRP
                 if (ent is Player plyr)
                 {
                     plyr.Save();
-                    attackers.Add("entity",
-                        new XAttribute("type", "player"),
-                        new XAttribute("id", plyr.ID)
-                        );
+                    attackers.Add(new XElement("player", new XAttribute("id", plyr.ID)));
                 }
                 else if (ent is NPC npc)
                 {
-                    attackers.Add("entity",
-                        new XAttribute("type", "npc"),
-                        npc.Save()
-                        );
+                    attackers.Add(npc.Save());
                 }
             }
 
@@ -229,17 +221,11 @@ namespace HSRP
                 if (ent is Player plyr)
                 {
                     plyr.Save();
-                    targets.Add("entity",
-                        new XAttribute("type", "player"),
-                        new XAttribute("id", plyr.ID)
-                        );
+                    targets.Add(new XElement("player", new XAttribute("id", plyr.ID)));
                 }
                 else if (ent is NPC npc)
                 {
-                    targets.Add("entity",
-                        new XAttribute("type", "npc"),
-                        npc.Save()
-                        );
+                    targets.Add(npc.Save());
                 }
             }
 
@@ -247,9 +233,19 @@ namespace HSRP
             doc.Add(strife);
 
             XmlToolbox.WriteXml(this.ToXmlPath(), doc);
+
+            XDocument config = new XDocument();
+            XElement strifes = new XElement("strifes");
+            foreach(int i in ActiveStrifes)
+            {
+                strifes.Add(new XElement("strife", new XAttribute("id", i)));
+            }
+            config.Add(strifes);
+            XmlToolbox.WriteXml(ToConfigActiveStrifes(), config);
         }
 
-        public string ToXmlPath() => Path.Combine(Dirs.Players, ID.ToString() + ".xml");
+        public string ToXmlPath() => Path.Combine(Dirs.Strifes, ID.ToString() + ".xml");
+        public static string ToConfigActiveStrifes() => Path.Combine(Dirs.Config, "active_strifes.xml");
 
         /// <summary>
         /// Returns a string detailing the status of each entity on each team of the strife.
@@ -282,7 +278,11 @@ namespace HSRP
         {
             Active = true;
             ActiveStrifes.Add(ID);
+
+            turn = 0;
+            attackTurn = true;
             CurrentTurner = CurrentEntity;
+
             log = Display();
             AddLog();
 
@@ -291,6 +291,7 @@ namespace HSRP
             {
                 if (ent is Player plyr)
                 {
+                    plyr.StrifeID = ID;
                     IGuildUser user =  await plyr.GuildUser;
                     await DiscordToolbox.DMUser(user, $"{plyr.Name} has engaged in a strife!");
                 }
@@ -301,6 +302,7 @@ namespace HSRP
             {
                 if (ent is Player plyr)
                 {
+                    plyr.StrifeID = ID;
                     IGuildUser user =  await plyr.GuildUser;
                     await DiscordToolbox.DMUser(user, $"{plyr.Name} has engaged in a strife!");
                 }

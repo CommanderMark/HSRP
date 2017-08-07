@@ -18,7 +18,7 @@ namespace HSRP.Commands
             {
                 return PreconditionResult.FromSuccess();
             }
-            
+
             return PreconditionResult.FromError(context.User + "isn't in a strife.");
         }
     }

@@ -121,6 +121,29 @@ namespace HSRP
             return ele;
         }
 
+        public XElement ToXmlWithoutEmpties()
+        {
+            XElement ele = new XElement("abilities");
+            Type type = this.GetType();
+            foreach (PropertyInfo property in type.GetProperties())
+            {
+                if (property.CanRead)
+                {
+                    int value = (int)property.GetValue(this);
+                    if (value != 0)
+                    {
+                        ele.Add(
+                        new XElement(property.Name.ToLower(),
+                            new XAttribute("value", value)
+                            )
+                        );
+                    }
+                }
+            }
+
+            return ele;
+        }
+
         public string Display()
         {
             string disp = "";
