@@ -1,13 +1,50 @@
 using Discord.Commands;
 using System.Threading.Tasks;
-using Discord;
 using System.IO;
+using System;
 
 namespace HSRP.Commands
 {
     [Group("strife")]
     public class StrifeCommands : JModuleBase
     {
+        [Command("action"), InStrife]
+        public async Task Action(string who, int index, StrifeAction sa)
+        {
+            Strife strf = Context.GetStrife();
+            Player plyr = Context.GetPlayerEntity();
+
+            if ("attackers".StartsWith(who, StringComparison.OrdinalIgnoreCase)
+                || who.Equals("atk", StringComparison.OrdinalIgnoreCase))
+            {
+                if (index >= strf.Attackers.Count)
+                {
+                    await ReplyAsync("Invalid index.");
+                }
+
+                if (strf.CurrentTurner == plyr)
+                {
+                    await ReplyStrifeAsync(strf.TakeTurn(sa, index, true));
+                }
+            }
+            else if ("targets".StartsWith(who, StringComparison.OrdinalIgnoreCase))
+            {
+                if (index >= strf.Targets.Count)
+                {
+                    await ReplyAsync("Invalid index.");
+                }
+
+                if (strf.CurrentTurner == plyr)
+                {
+                    await ReplyStrifeAsync(strf.TakeTurn(sa, index, false));
+                }
+            }
+            else
+            {
+                await ReplyAsync("Invalid input.");
+            }
+        }
+
         [Command("activate"), RequireGM]
         public async Task Activate(int id)
         {
@@ -19,9 +56,12 @@ namespace HSRP.Commands
                     await ReplyAsync("Strife is already activated.");
                     return;
                 }
+
+                await strf.ActivateStrife();
                 await ReplyAsync("Strife activated!");
 
-                await ReplyStrifeAsync(await strf.ActivateStrife());
+                await ReplyStrifeAsync("A strife has begun.");
+                await ReplyStrifeAsync(strf.Display());
                 strf.Save();
             }
             else

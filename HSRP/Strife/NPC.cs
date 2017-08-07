@@ -96,6 +96,8 @@ namespace HSRP
 
         public NPC(XElement element) : this()
         {
+            ID = XmlToolbox.GetAttributeUnsignedLong(element, "id", 0);
+
             foreach (XElement ele in element.Elements())
             {
                 switch (ele.Name.LocalName)
@@ -139,7 +141,9 @@ namespace HSRP
 
         public XElement Save()
         {
-            XElement npc = new XElement("npc");
+            XElement npc = new XElement("npc",
+                new XAttribute("id", ID)
+                );
 
             XElement info = new XElement("info",
                 new XAttribute("name", Name),

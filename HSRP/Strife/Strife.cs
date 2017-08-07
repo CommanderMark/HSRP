@@ -167,6 +167,20 @@ namespace HSRP
                         break;
                 }
             }
+
+            ulong id = XmlToolbox.GetAttributeUnsignedLong(doc.Root, "currentTurn", 0);
+            foreach (IEntity ent in Entities)
+            {
+                if (id == ent.ID)
+                {
+                    CurrentTurner = ent;
+                }
+            }
+
+            if (CurrentTurner == null)
+            {
+                CurrentTurner = CurrentEntity;
+            }
         }
 
         public void Save()
@@ -174,7 +188,8 @@ namespace HSRP
             XDocument doc = new XDocument();
             XElement strife = new XElement("strife",
                 new XAttribute("id", ID),
-                new XAttribute("active", Active.ToString())
+                new XAttribute("active", Active.ToString()),
+                new XAttribute("currentTurn", CurrentTurner.ID)
                 );
 
             XElement status = new XElement("status",
@@ -243,15 +258,17 @@ namespace HSRP
         public string Display()
         {
             string txt = "Team A:\n";
-            foreach (IEntity ent in Attackers)
+            for (int i = 0; i < Attackers.Count; i++)
             {
-                txt = txt.AddLine($"{ent.Name} - {ent.Health}/{ent.MaxHealth}");
+                IEntity ent = Attackers[i];
+                txt = txt.AddLine($"{i} - {ent.Name} - {ent.Health}/{ent.MaxHealth}");
             }
 
             txt = txt.AddLine("\nTeam T: ");
-            foreach (IEntity ent in Targets)
+            for (int i = 0; i < Targets.Count; i++)
             {
-                txt = txt.AddLine($"{ent.Name} - {ent.Health}/{ent.MaxHealth}");
+                IEntity ent = Targets[i];
+                txt = txt.AddLine($"{i} - {ent.Name} - {ent.Health}/{ent.MaxHealth}");
             }
 
             return txt;
@@ -261,16 +278,17 @@ namespace HSRP
         /// Activates the strife. Notifies every player in the strife that they have been engaged.
         /// </summary>
         /// <returns>A string detailing the entities on each team of the strife.</returns>
-        public async Task<string> ActivateStrife()
+        public async Task ActivateStrife()
         {
             Active = true;
             ActiveStrifes.Add(ID);
+            CurrentTurner = CurrentEntity;
+            log = Display();
+            AddLog();
 
             // Notify any player involved.
-            log = "Team A: ";
             foreach (IEntity ent in Attackers)
             {
-                log += $"{ent.Name};";
                 if (ent is Player plyr)
                 {
                     IGuildUser user =  await plyr.GuildUser;
@@ -281,17 +299,12 @@ namespace HSRP
             log = "\nTeam T: ";
             foreach (IEntity ent in Targets)
             {
-                log += $"{ent.Name};";
                 if (ent is Player plyr)
                 {
                     IGuildUser user =  await plyr.GuildUser;
                     await DiscordToolbox.DMUser(user, $"{plyr.Name} has engaged in a strife!");
                 }
             }
-
-            string txt = log;
-            AddLog();
-            return txt;
         }
 
         /// <summary>
@@ -366,7 +379,7 @@ namespace HSRP
         /// <param name="targetNum">The index of the user being targeted.</param>
         /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
         /// <returns>A string containing the log of events that transpired when taking this turn.</returns>
-        public string TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers = false)
+        public string TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers)
         {
             IEntity attacker = CurrentEntity;
             IEntity target = targetingAttackers ? Attackers[targetNum] : Targets[targetNum];
