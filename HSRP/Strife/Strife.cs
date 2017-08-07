@@ -69,6 +69,8 @@ namespace HSRP
         /// </summary>
         public IEntity CurrentTurner { private set; get; }
 
+        public bool Errored;
+
         public Strife()
         {
             Logs = new List<string>();
@@ -86,6 +88,7 @@ namespace HSRP
             if (doc == null || doc.Root == null)
             {
                 Console.WriteLine("[WHITE LINE] Strife " + path + " did not load!");
+                Errored = true;
                 return;
             }
 
