@@ -9,8 +9,9 @@ using Discord;
 
 namespace HSRP
 {
-    // Could make this an abstract class for PvE + PvP. So saving methods are abstract but properties
-    // and other stuff (oh GAWD the other stuff) is done here.
+    // TODO: XP?
+    // TODO: Mentions?
+    // TODO: Health restored after strife?
     public class Strife
     {
         public static List<int> ActiveStrifes = new List<int>();
@@ -233,15 +234,6 @@ namespace HSRP
             doc.Add(strife);
 
             XmlToolbox.WriteXml(this.ToXmlPath(), doc);
-
-            XDocument config = new XDocument();
-            XElement strifes = new XElement("strifes");
-            foreach(int i in ActiveStrifes)
-            {
-                strifes.Add(new XElement("strife", new XAttribute("id", i)));
-            }
-            config.Add(strifes);
-            XmlToolbox.WriteXml(ToConfigActiveStrifes(), config);
         }
 
         public string ToXmlPath() => Path.Combine(Dirs.Strifes, ID.ToString() + ".xml");
@@ -279,6 +271,16 @@ namespace HSRP
             Active = true;
             ActiveStrifes.Add(ID);
 
+            // Update the ActiveStrifes config file.
+            XDocument config = new XDocument();
+            XElement strifes = new XElement("strifes");
+            foreach(int i in ActiveStrifes)
+            {
+                strifes.Add(new XElement("strife", new XAttribute("id", i)));
+            }
+            config.Add(strifes);
+            XmlToolbox.WriteXml(ToConfigActiveStrifes(), config);
+
             turn = 0;
             attackTurn = true;
             CurrentTurner = CurrentEntity;
@@ -287,24 +289,13 @@ namespace HSRP
             AddLog();
 
             // Notify any player involved.
-            foreach (IEntity ent in Attackers)
+            foreach (IEntity ent in Entities)
             {
                 if (ent is Player plyr)
                 {
                     plyr.StrifeID = ID;
                     IGuildUser user =  await plyr.GuildUser;
-                    await DiscordToolbox.DMUser(user, $"{plyr.Name} has engaged in a strife!");
-                }
-            }
-
-            log = "\nTeam T: ";
-            foreach (IEntity ent in Targets)
-            {
-                if (ent is Player plyr)
-                {
-                    plyr.StrifeID = ID;
-                    IGuildUser user =  await plyr.GuildUser;
-                    await DiscordToolbox.DMUser(user, $"{plyr.Name} has engaged in a strife!");
+                    await DiscordToolbox.DMUser(user, $"{Syntax.ToCodeLine(plyr.Name)} has engaged in a strife!");
                 }
             }
         }
@@ -319,7 +310,7 @@ namespace HSRP
             // Check who the next user is.
             IEntity turner = CurrentEntity;
             CurrentTurner = turner;
-            string txt;
+            string txt = "";
 
             // Are they being mind-controlled?
             if (turner.Controller > 0)
@@ -329,7 +320,7 @@ namespace HSRP
                 {
                     if (turner.Controller == ent?.ID)
                     {
-                        log = log.AddLine($"{turner.Name}, controlled by {ent.Name}, is taking their turn!");
+                        log = log.AddLine($"{Syntax.ToCodeLine(turner.Name)}, controlled by {Syntax.ToCodeLine(ent.Name)}, is taking their turn!");
                         CurrentTurner = ent;
                         match = true;
                         break;
@@ -338,12 +329,11 @@ namespace HSRP
                 // Their controller isn't in the strife anymore (hopefully).
                 if (!match)
                 {
-                    log = log.AddLine($"{turner.Name} is no longer mind-controlled!");
+                    log = log.AddLine($"{Syntax.ToCodeLine(turner.Name)} is no longer mind-controlled!");
                     turner.Controller = 0;
                 }
 
-                txt = log;
-                AddLog();
+                txt = AddLog();
                 
                 // AI is taking a turn, do that until a human is found.
                 if (CurrentTurner is NPC)
@@ -356,10 +346,9 @@ namespace HSRP
             }
             else
             {
-                txt = log;
-                AddLog();
+                txt = AddLog();
 
-                log = log.AddLine($"{turner.Name} is taking their turn!");
+                log = log.AddLine($"{Syntax.ToCodeLine(turner.Name)} is taking their turn!");
                 // AI is taking a turn, do that until a human is found.
                 if (turner is NPC)
                 {
@@ -413,11 +402,11 @@ namespace HSRP
                     break;
             }
 
-            if (attacker?.Health < 1)
+            if (attacker.Health < 1 && !attacker.Dead)
             {
                 LeaveStrife(ref attacker);
             }
-            if (target?.Health < 1)
+            if (target.Health < 1 && !target.Dead)
             {
                 LeaveStrife(ref target);
             }
@@ -448,7 +437,7 @@ namespace HSRP
 
                         log = log.AddLine("Targets are now taking their turns.");
                     }
-                } while (Attackers[turn] == null && attackTurn);
+                } while (Attackers[turn].Dead && attackTurn);
             }
             else
             {
@@ -475,7 +464,7 @@ namespace HSRP
 
                         log = log.AddLine("Targets are now taking their turns.");
                     }
-                } while (Attackers[turn] == null && !attackTurn);
+                } while (Attackers[turn].Dead && !attackTurn);
             }
 
             return log;
@@ -516,13 +505,8 @@ namespace HSRP
 
         private void LeaveStrife(ref IEntity ent)
         {
-            if (ent is Player plyr)
-            {
-                plyr.StrifeID = 0;
-                plyr.Save();
-            }
-            ent = null;
-            log = log.AddLine(ent.Name + " is no longer in the strife.");
+            ent.Dead = true;
+            log = log.AddLine(ent.Name + " is no longer participating in the strife.");
         }
 
         // Physical: XDSTR --> XDCON.

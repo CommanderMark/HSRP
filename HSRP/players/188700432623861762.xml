@@ -2,7 +2,7 @@
 <player>
   <info name="I am Wood" id="188700432623861762" blood="Teal" pineappleOnPizza="true" />
   <lusus>Teleporting manifestation of stupidity. Known as "duwang"</lusus>
-  <status hp="100" maxhp="100" specibus="stupid" />
+  <status hp="100" maxhp="100" dead="false" specibus="stupid" />
   <levels echeladder="0" pendingSkillPoints="0" xp="0" nextLevel="0" />
   <abilities>
     <strength value="3" />

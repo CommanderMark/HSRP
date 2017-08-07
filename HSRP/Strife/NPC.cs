@@ -72,6 +72,7 @@ namespace HSRP
 
         public int Health { get; set; }
         public int MaxHealth { get; set; }
+        public bool Dead { get; set; }
         public string Specibus { get; set; }
         
         /// <summary>
@@ -113,6 +114,7 @@ namespace HSRP
                     case "status":
                         Health = XmlToolbox.GetAttributeInt(ele, "hp", -1);
                         MaxHealth = XmlToolbox.GetAttributeInt(ele, "maxhp", Health);
+                        Dead = XmlToolbox.GetAttributeBool(ele, "dead", false);
                         Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
                         DiceRolls = XmlToolbox.GetAttributeInt(ele, "diceRolls", 1);
                         Controller = XmlToolbox.GetAttributeUnsignedLong(ele, "controller", 0);
@@ -156,6 +158,7 @@ namespace HSRP
             XElement status = new XElement("status",
                 new XAttribute("hp", Health),
                 new XAttribute("maxhp", MaxHealth),
+                new XAttribute("dead", Dead),
                 new XAttribute("specibus", Specibus),
                 new XAttribute("diceRolls", DiceRolls),
                 new XAttribute("controller", Controller)

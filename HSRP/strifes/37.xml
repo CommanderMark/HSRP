@@ -3,32 +3,47 @@
   <status attackTurn="true" turn="0" />
   <logs>
     <log>Team A:
-0 - Sidewind Langston - 71/106
+0 - Sidewind Langston - 70/106
 
 Team T: 
 0 - Tester - 100/100
+1 - Tester2 - 100/100
 
+------------
+
+</log>
+    <log>Team A:
+0 - Sidewind Langston - 70/106
+
+Team T: 
+0 - Tester - 100/100
+1 - Tester2 - 100/100
+
+------------
+
+</log>
+    <log>
 ------------
 
 </log>
     <log>`Sidewind Langston` attacks `Tester`.
 
-`Sidewind Langston` rolls 1!
-`Tester` rolls 3!
+`Sidewind Langston` rolls 2!
+`Tester` rolls 6!
 
 `Tester` is counter attacking.
 ...
-Nothing happened.
+The enemy appears to have forgotten what they were doing.
 Targets are now taking their turns.
 
 ------------
 
 </log>
-    <log>Tester is taking their turn!
+    <log>`Tester` is taking their turn!
 `Tester` attacks `Sidewind Langston`.
 
-`Tester` rolls 4!
-`Sidewind Langston` rolls 3!
+`Tester` rolls 3!
+`Sidewind Langston` rolls 2!
 
 `Sidewind Langston` took 1 hitpoints of damage.
 Targets are now taking their turns.
@@ -36,7 +51,7 @@ Targets are now taking their turns.
 ------------
 
 </log>
-    <log>Sidewind Langston is taking their turn!
+    <log>`Sidewind Langston` is taking their turn!
 
 ------------
 
@@ -48,7 +63,22 @@ Targets are now taking their turns.
   <targets>
     <npc id="43">
       <info name="Tester" type="Normal" pineappleOnPizza="false">He tests stuff.</info>
-      <status hp="100" maxhp="100" specibus="SPECIBUS" diceRolls="2" controller="0" />
+      <status hp="100" maxhp="100" dead="false" specibus="SPECIBUS" diceRolls="2" controller="0" />
+      <abilities>
+        <strength value="2" />
+        <constitution value="3" />
+        <psion value="0" />
+        <fortitude value="0" />
+        <intimidation value="0" />
+        <persuasion value="0" />
+      </abilities>
+      <strife>
+        <abilities />
+      </strife>
+    </npc>
+    <npc id="44">
+      <info name="Tester2" type="Normal" pineappleOnPizza="false">He tests stuff.</info>
+      <status hp="100" maxhp="100" dead="false" specibus="SPECIBUS" diceRolls="2" controller="0" />
       <abilities>
         <strength value="2" />
         <constitution value="3" />

@@ -76,6 +76,7 @@ namespace HSRP.Commands
 
                 await ReplyStrifeAsync("A strife has begun.");
                 await ReplyStrifeAsync(Syntax.ToCodeBlock(strf.Display()));
+                await ReplyStrifeAsync(strf.UpdateStrife(out Player next));
                 strf.Save();
             }
             else

@@ -2,7 +2,7 @@
 <player>
   <info name="Rezkas Kabsen" id="164204195069689857" blood="Teal" pineappleOnPizza="false" />
   <lusus>large snake</lusus>
-  <status hp="100" maxhp="100" specibus="Bladekind" />
+  <status hp="100" maxhp="100" dead="false" specibus="Bladekind" />
   <levels echeladder="0" pendingSkillPoints="24" xp="0" nextLevel="0" />
   <abilities>
     <strength value="0" />

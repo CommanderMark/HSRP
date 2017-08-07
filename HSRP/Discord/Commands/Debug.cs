@@ -43,6 +43,18 @@ namespace HSRP.Commands
             }
         }
 
+        [Command("strifelist"), RequireGM]
+        public async Task Strifes()
+        {
+            string txt = "";
+            foreach (int i in Strife.ActiveStrifes)
+            {
+                txt = txt.AddLine(i.ToString());
+            }
+
+            await ReplyAsync(txt);
+        }
+
         private string ToQuirk(string str)
         {
             str = Regex.Replace(str, @"\b(\w)", m => m.ToString().ToUpper());

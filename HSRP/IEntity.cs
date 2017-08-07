@@ -16,6 +16,7 @@ namespace HSRP
 
         int Health { get; set; }
         int MaxHealth { get; set; }
+        bool Dead { get; set; }
         string Specibus { get; set; }
 
         int DiceRolls { get; }
