@@ -236,6 +236,31 @@ namespace HSRP
 
         public string ToXmlPath() => Path.Combine(Dirs.Players, ID.ToString() + ".xml");
 
+        /// <summary>
+        /// Returns a string detailing the status of each entity on each team of the strife.
+        /// </summary>
+        /// <returns>A string detailing the status of each entity on each team of the strife.</returns>
+        public string Display()
+        {
+            string txt = "Team A:\n";
+            foreach (IEntity ent in Attackers)
+            {
+                txt = txt.AddLine($"{ent.Name} - {ent.Health}/{ent.MaxHealth}");
+            }
+
+            txt = txt.AddLine("\nTeam T: ");
+            foreach (IEntity ent in Targets)
+            {
+                txt = txt.AddLine($"{ent.Name} - {ent.Health}/{ent.MaxHealth}");
+            }
+
+            return txt;
+        }
+
+        /// <summary>
+        /// Activates the strife. Notifies every player in the strife that they have been engaged.
+        /// </summary>
+        /// <returns>A string detailing the entities on each team of the strife.</returns>
         public async Task<string> ActivateStrife()
         {
             Active = true;

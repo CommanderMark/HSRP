@@ -21,8 +21,7 @@ namespace HSRP.Commands
                     return PreconditionResult.FromSuccess();
                 }
             }
-
-            await DiscordToolbox.DMUser(context.User, "You must be registered before that command can be accessed.");
+            
             return PreconditionResult.FromError(context.User + "isn't registered.");
         }
     }
