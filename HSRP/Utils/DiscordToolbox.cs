@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Discord;
 using Discord.Commands;
+using System.IO;
 
 namespace HSRP
 {
@@ -78,7 +79,17 @@ namespace HSRP
         public static Strife GetStrife(this ICommandContext context)
         {
             Player plyr = context.GetPlayerEntity();
-            return Strife.Strifes.ElementAtOrDefault(plyr.StrifeID);
+            if (plyr == null) { return null; }
+
+            foreach (string dir in Directory.GetFiles(Dirs.Strifes))
+            {
+                if (dir.Contains(plyr.StrifeID.ToString()))
+                {
+                    return new Strife(dir);
+                }
+            }
+
+            return null;
         }
     }
 

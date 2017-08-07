@@ -8,19 +8,25 @@ namespace HSRP
     public class NPC : IEntity
     {
         public ulong ID { get; set; }
-        public string Name { get; set; }
-        public string Title
+        public string Title;
+        public string Name
         {
             get
             {
                 if (Type == NPCType.Lusus)
                 {
-                    return Name + " (Lusus)";
+                    return Title + " (Lusus)";
                 }
 
-                return Name;
+                return Title;
+            }
+
+            set
+            {
+                Title = value;
             }
         }
+        
         public string Description { get; set; }
         public NPCType Type { get; set; }
 

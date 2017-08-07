@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Xml.Linq;
+using Discord;
 
 namespace HSRP
 {
@@ -11,6 +13,8 @@ namespace HSRP
     // and other stuff (oh GAWD the other stuff) is done here.
     public class Strife
     {
+        public static List<int> ActiveStrifes;
+
         public int ID;
         public bool Active;
 
@@ -232,9 +236,41 @@ namespace HSRP
 
         public string ToXmlPath() => Path.Combine(Dirs.Players, ID.ToString() + ".xml");
 
+        public async Task<string> ActivateStrife()
+        {
+            Active = true;
+            ActiveStrifes.Add(ID);
+
+            // Notify any player involved.
+            log = "Team A: ";
+            foreach (IEntity ent in Attackers)
+            {
+                log += $"{ent.Name};";
+                if (ent is Player plyr)
+                {
+                    IGuildUser user =  await plyr.GuildUser;
+                    await DiscordToolbox.DMUser(user, $"{plyr.Name} has engaged in a strife!");
+                }
+            }
+
+            log = "\nTeam T: ";
+            foreach (IEntity ent in Targets)
+            {
+                log += $"{ent.Name};";
+                if (ent is Player plyr)
+                {
+                    IGuildUser user =  await plyr.GuildUser;
+                    await DiscordToolbox.DMUser(user, $"{plyr.Name} has engaged in a strife!");
+                }
+            }
+
+            string txt = log;
+            AddLog();
+            return txt;
+        }
+
         /// <summary>
         /// Updates the strife by checking if any AI-controlled characters need to take their turn.
-        /// Also used for performing turns for human-controlled characters by specifying an action.
         /// </summary>
         /// <param name="ntty">Returns the character whose turn is the next non-AI one.</param>
         /// <returns>A string containing the log of events that transpired when updating the strife.</returns>
