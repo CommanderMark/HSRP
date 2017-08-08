@@ -10,7 +10,6 @@ using Discord;
 namespace HSRP
 {
     // TODO: XP?
-    // TODO: Mentions?
     // TODO: Health restored after strife?
     public class Strife
     {
@@ -36,6 +35,7 @@ namespace HSRP
         /// Log of current event.
         /// </summary>
         private string log;
+        private int postedLogs;
 
         /// <summary>
         /// The enitites on the team that initiated the strife.
@@ -109,14 +109,6 @@ namespace HSRP
                         turn = XmlToolbox.GetAttributeInt(ele, "turn", 0);
                         break;
 
-                    case "logs":
-                        foreach (XElement logEle in ele.Elements())
-                        {
-                            string text = logEle.ElementInnerText();
-                            Logs.Add(text);
-                        }
-                        break;
-
                     case "attackers":
                         foreach (XElement atkEle in ele.Elements())
                         {
@@ -164,6 +156,15 @@ namespace HSRP
                             }
                         }
                         break;
+
+                    case "logs":
+                        postedLogs = XmlToolbox.GetAttributeInt(ele, "posted", 0);
+                        foreach (XElement logEle in ele.Elements())
+                        {
+                            string text = logEle.ElementInnerText();
+                            Logs.Add(text);
+                        }
+                        break;
                 }
             }
 
@@ -196,12 +197,6 @@ namespace HSRP
                 new XAttribute("turn", 0)
                 );
 
-            XElement logs = new XElement("logs");
-            foreach (string log in Logs)
-            {
-                logs.Add(new XElement("log", new XText(log)));
-            }
-
             XElement attackers = new XElement("attackers");
             foreach (IEntity ent in Attackers)
             {
@@ -230,7 +225,13 @@ namespace HSRP
                 }
             }
 
-            strife.Add(status, logs, attackers, targets);
+            XElement logs = new XElement("logs", new XAttribute("posted", postedLogs));
+            foreach (string log in Logs)
+            {
+                logs.Add(new XElement("log", new XText(log)));
+            }
+
+            strife.Add(status, attackers, targets, logs);
             doc.Add(strife);
 
             XmlToolbox.WriteXml(this.ToXmlPath(), doc);
@@ -305,12 +306,11 @@ namespace HSRP
         /// </summary>
         /// <param name="ntty">Returns the character whose turn is the next non-AI one.</param>
         /// <returns>A string containing the log of events that transpired when updating the strife.</returns>
-        public string UpdateStrife(out Player ntty)
+        public string[] UpdateStrife(out Player ntty, bool returnEmp = false)
         {
             // Check who the next user is.
             IEntity turner = CurrentEntity;
             CurrentTurner = turner;
-            string txt = "";
 
             // Are they being mind-controlled?
             if (turner.Controller > 0)
@@ -318,7 +318,7 @@ namespace HSRP
                 bool match = false;
                 foreach (IEntity ent in Entities)
                 {
-                    if (turner.Controller == ent?.ID)
+                    if (turner.Controller == ent.ID)
                     {
                         log = log.AddLine($"{Syntax.ToCodeLine(turner.Name)}, controlled by {Syntax.ToCodeLine(ent.Name)}, is taking their turn!");
                         CurrentTurner = ent;
@@ -333,34 +333,39 @@ namespace HSRP
                     turner.Controller = 0;
                 }
 
-                txt = AddLog();
+                AddLog();
                 
                 // AI is taking a turn, do that until a human is found.
                 if (CurrentTurner is NPC)
                 {
                     TakeAITurn();
-                    txt += UpdateStrife(out Player ent);
+                    UpdateStrife(out Player ent, true);
                     CurrentTurner = ent;
                     AddLog();
                 }
             }
             else
             {
-                txt = AddLog();
+                AddLog();
 
                 log = log.AddLine($"{Syntax.ToCodeLine(turner.Name)} is taking their turn!");
                 // AI is taking a turn, do that until a human is found.
                 if (turner is NPC)
                 {
                     TakeAITurn();
-                    txt += UpdateStrife(out Player ent);
+                    UpdateStrife(out Player ent, true);
                     CurrentTurner = ent;
                     AddLog();
                 }
             }
 
             ntty = (Player)CurrentTurner;
-            return txt;
+            if (returnEmp)
+            {
+                return new string[1];
+            }
+
+            return GetLogs();
         }
 
         /// <summary>
@@ -370,10 +375,12 @@ namespace HSRP
         /// <param name="targetNum">The index of the user being targeted.</param>
         /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
         /// <returns>A string containing the log of events that transpired when taking this turn.</returns>
-        public string TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers)
+        public string[] TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers)
         {
             IEntity attacker = CurrentEntity;
             IEntity target = targetingAttackers ? Attackers[targetNum] : Targets[targetNum];
+            // If it's an NPC then don't update the logs.
+            bool returnEmp = attacker is NPC ? true : false;
 
             switch (action)
             {
@@ -434,6 +441,7 @@ namespace HSRP
                         // Reached the end of the attackers list.
                         attackTurn = false;
                         turn = 0;
+                        AddLog();
 
                         log = log.AddLine("Targets are now taking their turns.");
                     }
@@ -456,18 +464,24 @@ namespace HSRP
                 {
                     // Rotate turn.
                     ++turn;
-                    if (turn >= Attackers.Count)
+                    if (turn >= Targets.Count)
                     {
                         // Reached the end of the attackers list.
                         attackTurn = true;
                         turn = 0;
+                        AddLog();
 
-                        log = log.AddLine("Targets are now taking their turns.");
+                        log = log.AddLine("Attackers are now taking their turns.");
                     }
-                } while (Attackers[turn].Dead && !attackTurn);
+                } while (Targets[turn].Dead && !attackTurn);
             }
 
-            return log;
+            if (returnEmp)
+            {
+                return new string[1];
+            }
+
+            return GetLogs();
         }
 
         /// <summary>
@@ -573,7 +587,6 @@ namespace HSRP
                         int debuff = Math.Max(nonBuff - (tar - atk), -tarY);
                         attacker.TempMods.Remove(1);
                         ApplyTempMod(ref attacker, "strength", debuff, 1);
-                        log = log.AddLine($"\nStrenth debuff of {debuff - nonBuff} inflicted on {Syntax.ToCodeLine(attacker.Name)}.");
                     }
                 }
                 else
@@ -752,16 +765,38 @@ namespace HSRP
             ApplyTempMod(ref plyr, "constitution", Toolbox.DiceRoll(1, plyr.Abilities.Constitution), 0);
         }
 
-        private string AddLog()
+        private void AddLog()
         {
+            if (string.IsNullOrWhiteSpace(log)) { return; }
+
             log = log.AddLine("\n------------\n");
             string str = log;
 
             Logs.Add(log);
             log = "";
+        }
 
-            // Return the original so it can be used for reply messages.
-            return str;
+        /// <summary>
+        /// Returns the logs which have not been posted yet. Updates the counter to indicate that they are now posted.
+        /// </summary>
+        private string[] GetLogs()
+        {
+            List<string> wha = new List<string>();
+            wha.Add("");
+            int index = 0;
+
+            for (int i = postedLogs; i < Logs.Count; i++)
+            {
+                if ((wha[index].Length + Logs[i].Length) > 1900) {
+                    ++index;
+                    wha.Add("");
+                }
+
+                wha[index] = wha[index].AddLine(Logs[i]);
+            }
+            postedLogs = Logs.Count;
+
+            return wha.ToArray();
         }
 
         private void ApplyTempMod(ref IEntity ent, string stat, int value, int turns)
@@ -777,7 +812,7 @@ namespace HSRP
                     string plural = turns == 0
                         ? "1 turn"
                         : (turns + 1).ToString() + " turns";
-                    log = log.AddLine($"{ent.Name} was inflicted with {value} {prop.Name} for {plural}.");
+                    log = log.AddLine($"{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString())} {prop.Name} for {plural}.");
 
                     return;
                 }

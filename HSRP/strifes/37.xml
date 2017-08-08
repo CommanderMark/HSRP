@@ -1,62 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <strife id="37" active="True" currentTurn="103547713932529664">
   <status attackTurn="true" turn="0" />
-  <logs>
-    <log>Team A:
-0 - Sidewind Langston - 70/106
-
-Team T: 
-0 - Tester - 100/100
-1 - Tester2 - 100/100
-
-------------
-
-</log>
-    <log>Team A:
-0 - Sidewind Langston - 70/106
-
-Team T: 
-0 - Tester - 100/100
-1 - Tester2 - 100/100
-
-------------
-
-</log>
-    <log>
-------------
-
-</log>
-    <log>`Sidewind Langston` attacks `Tester`.
-
-`Sidewind Langston` rolls 2!
-`Tester` rolls 6!
-
-`Tester` is counter attacking.
-...
-The enemy appears to have forgotten what they were doing.
-Targets are now taking their turns.
-
-------------
-
-</log>
-    <log>`Tester` is taking their turn!
-`Tester` attacks `Sidewind Langston`.
-
-`Tester` rolls 3!
-`Sidewind Langston` rolls 2!
-
-`Sidewind Langston` took 1 hitpoints of damage.
-Targets are now taking their turns.
-
-------------
-
-</log>
-    <log>`Sidewind Langston` is taking their turn!
-
-------------
-
-</log>
-  </logs>
   <attackers>
     <player id="103547713932529664" />
   </attackers>
@@ -92,4 +36,155 @@ Targets are now taking their turns.
       </strife>
     </npc>
   </targets>
+  <logs posted="18">
+    <log>`Sidewind Langston` attacks `Tester2`.
+
+`Sidewind Langston` rolls 2!
+`Tester2` rolls 4!
+
+`Tester2` is counter attacking.
+Maximum amount of counter attacks reached.
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester` is taking their turn!
+`Tester` attacks `Sidewind Langston`.
+
+`Tester` rolls 2!
+`Sidewind Langston` rolls 4!
+
+`Sidewind Langston` is counter attacking.
+`Tester` rolls 2!
+`Sidewind Langston` rolls 8!
+Tester was inflicted with -6 Strength for 2 turns.
+
+Strenth debuff of -6 inflicted on `Tester`.
+
+------------
+
+</log>
+    <log>`Tester2` is taking their turn!
+`Tester2` attacks `Sidewind Langston`.
+
+`Tester2` rolls 4!
+`Sidewind Langston` rolls 3!
+
+`Sidewind Langston` took 1 hitpoints of damage.
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+    <log>
+------------
+
+</log>
+    <log>`Sidewind Langston` attacks `Tester2`.
+
+`Sidewind Langston` rolls 1!
+`Tester2` rolls 4!
+
+`Tester2` is counter attacking.
+...
+Nothing happened.
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester` is taking their turn!
+`Tester` attacks `Sidewind Langston`.
+
+`Tester` rolls 4!
+`Sidewind Langston` rolls 4!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Tester2` is taking their turn!
+`Tester2` attacks `Sidewind Langston`.
+
+`Tester2` rolls 2!
+`Sidewind Langston` rolls 1!
+
+`Sidewind Langston` took 1 hitpoints of damage.
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attacks `Tester2`.
+
+`Sidewind Langston` rolls 1!
+`Tester2` rolls 6!
+
+`Tester2` is counter attacking.
+Maximum amount of counter attacks reached.
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester` is taking their turn!
+`Tester` attacks `Sidewind Langston`.
+
+`Tester` rolls 2!
+`Sidewind Langston` rolls 2!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Tester2` is taking their turn!
+`Tester2` attacks `Sidewind Langston`.
+
+`Tester2` rolls 4!
+`Sidewind Langston` rolls 4!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+  </logs>
 </strife>

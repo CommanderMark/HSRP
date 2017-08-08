@@ -24,14 +24,18 @@ namespace HSRP.Commands
 
                 if (strf.CurrentTurner.ID == plyr.ID)
                 {
-                    await ReplyStrifeAsync(strf.TakeTurn(sa, index, true));
-                    await ReplyStrifeAsync(strf.UpdateStrife(out Player next));
-                    await ReplyStrifeAsync($"It is {next.Name}'s turn.");
+                    await ReplyStrifeAsync(string.Join("\n", strf.TakeTurn(sa, index, false)));
+                    // Split the logs into <2000 character messages.
+                    string[] messages = strf.UpdateStrife(out Player next);
+                    foreach (string str in messages)
+                    {
+                        await ReplyStrifeAsync(str);
+                    }
                     strf.Save();
                 }
                 else
                 {
-                    await ReplyAsync($"It is {strf.CurrentTurner.Name}'s turn.");
+                    await ReplyAsync($"It is {Syntax.ToCodeLine(strf.CurrentTurner.Name.ToApostrophe())} turn.");
                 }
             }
             else if ("targets".StartsWith(who, StringComparison.OrdinalIgnoreCase))
@@ -43,14 +47,18 @@ namespace HSRP.Commands
 
                 if (strf.CurrentTurner.ID == plyr.ID)
                 {
-                    await ReplyStrifeAsync(strf.TakeTurn(sa, index, false));
-                    await ReplyStrifeAsync(strf.UpdateStrife(out Player next));
-                    await ReplyStrifeAsync($"It is {next.Name}'s turn.");
+                    await ReplyStrifeAsync(string.Join("\n", strf.TakeTurn(sa, index, false)));
+                    // Split the logs into <2000 character messages.
+                    string[] messages = strf.UpdateStrife(out Player next);
+                    foreach (string str in messages)
+                    {
+                        await ReplyStrifeAsync(str);
+                    }
                     strf.Save();
                 }
                 else
                 {
-                    await ReplyAsync($"It is {strf.CurrentTurner.Name}'s turn.");
+                    await ReplyAsync($"It is {Syntax.ToCodeLine(strf.CurrentTurner.Name.ToApostrophe())} turn.");
                 }
             }
             else
@@ -76,7 +84,7 @@ namespace HSRP.Commands
 
                 await ReplyStrifeAsync("A strife has begun.");
                 await ReplyStrifeAsync(Syntax.ToCodeBlock(strf.Display()));
-                await ReplyStrifeAsync(strf.UpdateStrife(out Player next));
+                await ReplyStrifeAsync(string.Join("\n", strf.UpdateStrife(out Player next)));
                 strf.Save();
             }
             else
@@ -105,7 +113,7 @@ namespace HSRP.Commands
         {
             Strife strf = Context.GetStrife();
             string txt = string.Join("\n", strf.Logs);
-            string path = Path.Combine(Dirs.Config, $"LOG_{strf.ID}.txt");
+            string path = Path.Combine(Dirs.Config, $"STRIFE_LOG_{strf.ID}.txt");
             File.WriteAllText(path, txt);
 
             await Context.Channel.SendFileAsync(path);
@@ -122,6 +130,15 @@ namespace HSRP.Commands
 
             await Context.Channel.SendFileAsync(path);
             File.Delete(path);
+        }
+
+        [Command("clear"), RequireGM]
+        public async Task ClearLogs(int id)
+        {
+            Strife strf = new Strife(id.ToString());
+            strf.Logs.Clear();
+
+            await ReplyAsync("Logs cleared.");
         }
     }
 }
