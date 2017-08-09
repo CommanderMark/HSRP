@@ -89,24 +89,14 @@ namespace HSRP.Commands
         }
 
         [Command("log"), InStrife]
-        public async Task Log()
-        {
-            Strife strf = Context.GetStrife();
-            string txt = string.Join("\n", strf.Logs);
-            string path = Path.Combine(Dirs.Config, $"STRIFE_LOG_{strf.ID}.txt");
-            File.WriteAllText(path, txt);
-
-            await Context.Channel.SendFileAsync(path);
-            File.Delete(path);
-        }
+        public async Task Log() => await Log(Context.GetPlayerEntity().StrifeID);
 
         [Command("log"), RequireGM]
         public async Task Log(int id)
         {
             Strife strf = new Strife(id.ToString());
             string txt = string.Join("\n", strf.Logs);
-            string path = Path.Combine(Dirs.Config, $"LOG_{strf.ID}.txt");
-            File.WriteAllText(path, txt);
+            string path = strf.LogLogs();
 
             await Context.Channel.SendFileAsync(path);
             File.Delete(path);
@@ -115,12 +105,11 @@ namespace HSRP.Commands
         [Command("clear"), RequireGM]
         public async Task ClearLogs(int id)
         {
-            await Log(id);
             Strife strf = new Strife(id.ToString());
+            string path = strf.ClearLogs();
 
-            strf.Logs.Clear();
-
-            await ReplyAsync("Logs cleared.");
+            await Context.Channel.SendFileAsync(path, "Logs cleared.");
+            File.Delete(path);
         }
     }
 }

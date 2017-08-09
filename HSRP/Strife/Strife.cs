@@ -787,7 +787,7 @@ namespace HSRP
 
             for (int i = postedLogs; i < Logs.Count; i++)
             {
-                if ((wha[index].Length + Logs[i].Length) > 1900) {
+                if ((wha[index].Length + Logs[i].Length) > Constants.DiscordCharLimit) {
                     ++index;
                     wha.Add("");
                 }
