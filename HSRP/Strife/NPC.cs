@@ -173,6 +173,8 @@ namespace HSRP
             {
                 XElement modEle = mod.Value.ToXmlWithoutEmpties();
                 modEle.Add(new XAttribute("turns", mod.Key));
+
+                strife.Add(modEle);
             }
 
             npc.Add(info, status, abilities, strife);

@@ -235,6 +235,8 @@ namespace HSRP
                 {
                     XElement modEle = mod.Value.ToXmlWithoutEmpties();
                     modEle.Add(new XAttribute("turns", mod.Key));
+
+                    strife.Add(modEle);
                 }
                 player.Add(strife);
             }

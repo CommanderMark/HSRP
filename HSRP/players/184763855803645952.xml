@@ -21,4 +21,7 @@
     <item value="Powdered Uranium" quantity="0" />
     <item value="Cash" quantity="701" />
   </inventory>
+  <strife id="48">
+    <abilities />
+  </strife>
 </player>
