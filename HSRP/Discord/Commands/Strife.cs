@@ -14,56 +14,40 @@ namespace HSRP.Commands
             Strife strf = Context.GetStrife();
             Player plyr = Context.GetPlayerEntity();
 
+            bool attackAtks = false;
             if ("attackers".StartsWith(who, StringComparison.OrdinalIgnoreCase)
                 || who.Equals("atk", StringComparison.OrdinalIgnoreCase))
             {
-                if (index >= strf.Attackers.Count)
-                {
-                    await ReplyAsync("Invalid index.");
-                }
-
-                if (strf.CurrentTurner.ID == plyr.ID)
-                {
-                    await ReplyStrifeAsync(string.Join("\n", strf.TakeTurn(sa, index, false)));
-                    // Split the logs into <2000 character messages.
-                    string[] messages = strf.UpdateStrife(out Player next);
-                    foreach (string str in messages)
-                    {
-                        await ReplyStrifeAsync(str);
-                    }
-                    strf.Save();
-                }
-                else
-                {
-                    await ReplyAsync($"It is {Syntax.ToCodeLine(strf.CurrentTurner.Name.ToApostrophe())} turn.");
-                }
+                attackAtks = true;
             }
             else if ("targets".StartsWith(who, StringComparison.OrdinalIgnoreCase))
             {
-                if (index >= strf.Targets.Count)
-                {
-                    await ReplyAsync("Invalid index.");
-                }
-
-                if (strf.CurrentTurner.ID == plyr.ID)
-                {
-                    await ReplyStrifeAsync(string.Join("\n", strf.TakeTurn(sa, index, false)));
-                    // Split the logs into <2000 character messages.
-                    string[] messages = strf.UpdateStrife(out Player next);
-                    foreach (string str in messages)
-                    {
-                        await ReplyStrifeAsync(str);
-                    }
-                    strf.Save();
-                }
-                else
-                {
-                    await ReplyAsync($"It is {Syntax.ToCodeLine(strf.CurrentTurner.Name.ToApostrophe())} turn.");
-                }
+                attackAtks = false;
             }
             else
             {
                 await ReplyAsync("Invalid input.");
+            }
+
+            if (index >= strf.Attackers.Count)
+            {
+                await ReplyAsync("Invalid index.");
+            }
+
+            if (strf.CurrentTurner.ID == plyr.ID)
+            {
+                await ReplyStrifeAsync(string.Join("\n", strf.TakeTurn(sa, index, attackAtks)));
+                // Split the logs into <2000 character messages.
+                string[] messages = strf.UpdateStrife(out Player next);
+                foreach (string str in messages)
+                {
+                    await ReplyStrifeAsync(str);
+                }
+                strf.Save();
+            }
+            else
+            {
+                await ReplyAsync($"It is {Syntax.ToCodeLine(strf.CurrentTurner.Name.ToApostrophe())} turn.");
             }
         }
 

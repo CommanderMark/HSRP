@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strife id="37" active="false" currentTurn="0">
+  <status attackTurn="true" turn="0" />
+  <attackers>
+    <player id="103547713932529664" />
+	<npc id="3">
+	  <info name="Ally Tester" type="Normal" pineappleOnPizza="false">He tests stuff.</info>
+	  <!-- diceRolls just determines their X for XDY rolls.-->
+	  <!-- Controller is used to determine if an enemy is mind controlling them or if they're just inherently controlled by someone else (such as a lusus for instance). -->
+	  <status hp="100" maxhp="100" specibus="SPECIBUS" diceRolls="2" controller="0" />
+	  <abilities>
+		<strength value="2" />
+		<constitution value="3" />
+		<psion value="0" />
+		<fortitude value="0" />
+		<intimidation value="0" />
+		<persuasion value="0" />
+	  </abilities>
+	</npc>
+	<player id="184763855803645952" />
+  </attackers>
+  <targets>
+    <npc id="43">
+	  <info name="Tester" type="Normal" pineappleOnPizza="false">He tests stuff.</info>
+	  <!-- diceRolls just determines their X for XDY rolls.-->
+	  <!-- Controller is used to determine if an enemy is mind controlling them or if they're just inherently controlled by someone else (such as a lusus for instance). -->
+	  <status hp="100" maxhp="100" specibus="SPECIBUS" diceRolls="2" controller="0" />
+	  <abilities>
+		<strength value="2" />
+		<constitution value="3" />
+		<psion value="0" />
+		<fortitude value="0" />
+		<intimidation value="0" />
+		<persuasion value="0" />
+	  </abilities>
+	</npc>
+  </targets>
+</strife>

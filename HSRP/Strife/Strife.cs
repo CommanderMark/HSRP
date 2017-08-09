@@ -194,7 +194,7 @@ namespace HSRP
 
             XElement status = new XElement("status",
                 new XAttribute("attackTurn", attackTurn),
-                new XAttribute("turn", 0)
+                new XAttribute("turn", turn)
                 );
 
             XElement attackers = new XElement("attackers");
@@ -286,8 +286,10 @@ namespace HSRP
             attackTurn = true;
             CurrentTurner = CurrentEntity;
 
+            // Add list of users to log but skip it when posting as that's done separately.
             log = Display();
             AddLog();
+            postedLogs = 1;
 
             // Notify any player involved.
             foreach (IEntity ent in Entities)
@@ -341,9 +343,11 @@ namespace HSRP
                     TakeAITurn();
                     UpdateStrife(out Player ent, true);
                     CurrentTurner = ent;
+
                     AddLog();
                 }
             }
+            // Not mind-controlled.
             else
             {
                 AddLog();
@@ -355,17 +359,14 @@ namespace HSRP
                     TakeAITurn();
                     UpdateStrife(out Player ent, true);
                     CurrentTurner = ent;
-                    AddLog();
                 }
+
+                AddLog();
             }
 
             ntty = (Player)CurrentTurner;
-            if (returnEmp)
-            {
-                return new string[1];
-            }
 
-            return GetLogs();
+            return returnEmp ? new string[1] : GetLogs();
         }
 
         /// <summary>
@@ -379,8 +380,8 @@ namespace HSRP
         {
             IEntity attacker = CurrentEntity;
             IEntity target = targetingAttackers ? Attackers[targetNum] : Targets[targetNum];
-            // If it's an NPC then don't update the logs.
-            bool returnEmp = attacker is NPC ? true : false;
+            // If it's an NPC then don't update the logs. Unless they're mind-controlled.
+            bool returnEmp = attacker is NPC && attacker.Controller <= 0 ? true : false;
 
             switch (action)
             {
@@ -476,12 +477,8 @@ namespace HSRP
                 } while (Targets[turn].Dead && !attackTurn);
             }
 
-            if (returnEmp)
-            {
-                return new string[1];
-            }
-
-            return GetLogs();
+            AddLog();
+            return returnEmp ? new string[1] : GetLogs();
         }
 
         /// <summary>
@@ -520,7 +517,7 @@ namespace HSRP
         private void LeaveStrife(ref IEntity ent)
         {
             ent.Dead = true;
-            log = log.AddLine(ent.Name + " is no longer participating in the strife.");
+            log = log.AddLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
         }
 
         // Physical: XDSTR --> XDCON.
@@ -690,7 +687,7 @@ namespace HSRP
         // If STR or FOR reach 0 they leave the strife.
         private void SpeechAttack(ref IEntity attacker, ref IEntity target)
         {
-            log = log.AddLine(Toolbox.GetRandomMessage("speechAttackStart", attacker.Name, target.Name) + "\n");
+            log = log.AddLine(Toolbox.GetRandomMessage("speechAttackStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)) + "\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -705,8 +702,7 @@ namespace HSRP
             int tar = Toolbox.DiceRoll(tarX, tarY);
             log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
             log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
-
-            // Log messages.
+            
             // Attack rolls higher, random chance begins.
             if (atk > tar)
             {
@@ -754,6 +750,10 @@ namespace HSRP
                     LeaveStrife(ref target);
                 }
             }
+            else
+            {
+
+            }
         }
 
         // Guard CON += XDCON
@@ -769,7 +769,7 @@ namespace HSRP
         {
             if (string.IsNullOrWhiteSpace(log)) { return; }
 
-            log = log.AddLine("\n------------\n");
+            log = log.AddLine("\n------------");
             string str = log;
 
             Logs.Add(log);
@@ -812,7 +812,7 @@ namespace HSRP
                     string plural = turns == 0
                         ? "1 turn"
                         : (turns + 1).ToString() + " turns";
-                    log = log.AddLine($"{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString())} {prop.Name} for {plural}.");
+                    log = log.AddLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString())} {prop.Name} for {Syntax.ToCodeLine(plural)}.");
 
                     return;
                 }

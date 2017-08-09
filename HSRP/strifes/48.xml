@@ -1,0 +1,948 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strife id="48" active="True" currentTurn="103547713932529664">
+  <status attackTurn="false" turn="0" />
+  <attackers>
+    <player id="103547713932529664" />
+    <npc id="3">
+      <info name="Ally Tester" type="Normal" pineappleOnPizza="false">He tests stuff.</info>
+      <status hp="99" maxhp="100" dead="true" specibus="SPECIBUS" diceRolls="2" controller="0" />
+      <abilities>
+        <strength value="2" />
+        <constitution value="3" />
+        <psion value="0" />
+        <fortitude value="0" />
+        <intimidation value="0" />
+        <persuasion value="0" />
+      </abilities>
+      <strife>
+        <abilities />
+        <abilities turns="0">
+          <fortitude value="-4" />
+          <intimidation value="-5" />
+        </abilities>
+      </strife>
+    </npc>
+    <player id="184763855803645952" />
+  </attackers>
+  <targets>
+    <npc id="43">
+      <info name="Tester" type="Normal" pineappleOnPizza="false">He tests stuff.</info>
+      <status hp="98" maxhp="100" dead="false" specibus="SPECIBUS" diceRolls="2" controller="103547713932529664" />
+      <abilities>
+        <strength value="2" />
+        <constitution value="3" />
+        <psion value="0" />
+        <fortitude value="0" />
+        <intimidation value="0" />
+        <persuasion value="0" />
+      </abilities>
+      <strife>
+        <abilities />
+      </strife>
+    </npc>
+  </targets>
+  <logs posted="116">
+    <log>Team A:
+0 - Sidewind Langston - 106/106
+1 - Ally Tester - 100/100
+2 - Sicarius Anathera - 110/110
+
+Team T: 
+0 - Tester - 100/100
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attacks `Tester`.
+
+`Sidewind Langston` rolls 2!
+`Tester` rolls 3!
+
+`Tester` is counter attacking.
+Maximum amount of counter attacks reached.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 2!
+`Tester` rolls 3!
+
+`Tester` is counter attacking.
+...
+The enemy appears to have forgotten what they were doing.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>Sidewind Langston attempts to intimidate Tester.
+
+`Sidewind Langston` rolls 6!
+`Tester` rolls 1!
+`Tester` was inflicted with `-2` Intimidation for 1 turn.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 3!
+`Tester` rolls 3!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attacks `Tester`.
+
+`Sidewind Langston` rolls 2!
+`Tester` rolls 4!
+
+`Tester` is counter attacking.
+Maximum amount of counter attacks reached.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 4!
+`Tester` rolls 4!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attacks `Tester`.
+
+`Sidewind Langston` rolls 2!
+`Tester` rolls 2!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 2!
+`Tester` rolls 4!
+
+`Tester` is counter attacking.
+...
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>Sidewind Langston attempts to intimidate Tester.
+
+`Sidewind Langston` rolls 6!
+`Tester` rolls 1!
+`Tester` was inflicted with `-9` Intimidation for 1 turn.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 4!
+`Tester` rolls 4!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attacks `Tester`.
+
+`Sidewind Langston` rolls 1!
+`Tester` rolls 2!
+
+`Tester` is counter attacking.
+Maximum amount of counter attacks reached.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 3!
+`Tester` rolls 2!
+
+`Tester` took 1 hitpoints of damage.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attacks `Tester`.
+
+`Sidewind Langston` rolls 2!
+`Tester` rolls 4!
+
+`Tester` is counter attacking.
+...
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 3!
+`Tester` rolls 6!
+
+`Tester` is counter attacking.
+...
+The enemy appears to have forgotten what they were doing.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attacks `Tester`.
+
+`Sidewind Langston` rolls 2!
+`Tester` rolls 3!
+
+`Tester` is counter attacking.
+...
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 2!
+`Tester` rolls 3!
+
+`Tester` is counter attacking.
+Maximum amount of counter attacks reached.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` attacks `Tester`.
+
+`Sicarius Anathera` rolls 1!
+`Tester` rolls 4!
+
+`Tester` is counter attacking.
+Maximum amount of counter attacks reached.
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester` is taking their turn!
+`Tester` attacks `Sidewind Langston`.
+
+`Tester` rolls 4!
+`Sidewind Langston` rolls 4!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attempts to mind control `Tester`.
+
+`Sidewind Langston` rolls 1, 1, 1!
+`Tester` rolls 1, 1, 1!
+Mind control failed.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 3!
+`Tester` rolls 5!
+
+`Tester` is counter attacking.
+Maximum amount of counter attacks reached.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` attempts to mind control `Tester`.
+
+`Sicarius Anathera` rolls 1, 1, 1!
+`Tester` rolls 1, 1, 1!
+Mind control failed.
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester` is taking their turn!
+`Tester` attacks `Sicarius Anathera`.
+
+`Tester` rolls 3!
+`Sicarius Anathera` rolls 2!
+
+`Sicarius Anathera` took 1 hitpoints of damage.
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attempts to mind control `Tester`.
+
+`Sidewind Langston` rolls 3, 1, 4!
+`Tester` rolls 1, 1, 1!
+`Sidewind Langston` has successfully mind controlled `Tester`.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 3!
+`Tester` rolls 4!
+
+`Tester` is counter attacking.
+Maximum amount of counter attacks reached.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` attempts to mind control `Tester`.
+
+`Sicarius Anathera` rolls 1, 1, 1!
+`Tester` rolls 1, 1, 1!
+Mind control failed.
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester`, controlled by `Sidewind Langston`, is taking their turn!
+
+------------
+
+</log>
+    <log>`Tester` attacks `Sicarius Anathera`.
+
+`Tester` rolls 4!
+`Sicarius Anathera` rolls 1!
+
+`Sicarius Anathera` took 3 hitpoints of damage.
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attacks `Sicarius Anathera`.
+
+`Sidewind Langston` rolls 1!
+`Sicarius Anathera` rolls 2!
+
+`Sicarius Anathera` is counter attacking.
+`Sidewind Langston` rolls 1!
+`Sicarius Anathera` rolls 5!
+`Sidewind Langston` was inflicted with `-4` Strength for 2 turns.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 4!
+`Tester` rolls 5!
+
+`Tester` is counter attacking.
+...
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` attacks `Ally Tester`.
+
+`Sicarius Anathera` rolls 3!
+`Ally Tester` rolls 2!
+
+`Ally Tester` took 1 hitpoints of damage.
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester`, controlled by `Sidewind Langston`, is taking their turn!
+
+------------
+
+</log>
+    <log>`Tester` attacks `Sicarius Anathera`.
+
+`Tester` rolls 3!
+`Sicarius Anathera` rolls 1!
+
+`Sicarius Anathera` took 2 hitpoints of damage.
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attacks `Sicarius Anathera`.
+
+`Sidewind Langston` rolls 2!
+`Sicarius Anathera` rolls 4!
+
+`Sicarius Anathera` is counter attacking.
+`Sidewind Langston` rolls 1!
+`Sicarius Anathera` rolls 7!
+`Sidewind Langston` was inflicted with `-6` Strength for 2 turns.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 4!
+`Tester` rolls 4!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` attacks `Ally Tester`.
+
+`Sicarius Anathera` rolls 4!
+`Ally Tester` rolls 4!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester`, controlled by `Sidewind Langston`, is taking their turn!
+
+------------
+
+</log>
+    <log>`Tester` attacks `Sidewind Langston`.
+
+`Tester` rolls 4!
+`Sidewind Langston` rolls 4!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attacks `Ally Tester`.
+
+`Sidewind Langston` rolls 2!
+`Ally Tester` rolls 2!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 2!
+`Tester` rolls 5!
+
+`Tester` is counter attacking.
+...
+The enemy appears to have forgotten what they were suppose to do.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` attacks `Ally Tester`.
+
+`Sicarius Anathera` rolls 1!
+`Ally Tester` rolls 4!
+
+`Ally Tester` is counter attacking.
+...
+The enemy appears to have forgotten what they were doing.
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester`, controlled by `Sidewind Langston`, is taking their turn!
+
+------------
+
+</log>
+    <log>Tester attempts to intimidate Sicarius Anathera.
+
+`Tester` rolls 3!
+`Sicarius Anathera` rolls 10!
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+    <log>`Sidewind Langston` attacks `Sicarius Anathera`.
+
+`Sidewind Langston` rolls 2!
+`Sicarius Anathera` rolls 2!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 2!
+`Tester` rolls 6!
+
+`Tester` is counter attacking.
+...
+The enemy appears to have forgotten what they were doing.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>Sicarius Anathera attempts to intimidate Ally Tester.
+
+`Sicarius Anathera` rolls 7!
+`Ally Tester` rolls 1!
+`Ally Tester` was inflicted with `-5` Intimidation for 1 turn.
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester`, controlled by `Sidewind Langston`, is taking their turn!
+
+------------
+
+</log>
+    <log>Tester attempts to intimidate Sicarius Anathera.
+
+`Tester` rolls 2!
+`Sicarius Anathera` rolls 13!
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+    <log>Sidewind Langston attempts to intimidate Sicarius Anathera.
+
+`Sidewind Langston` rolls 11!
+`Sicarius Anathera` rolls 12!
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 3!
+`Tester` rolls 4!
+
+`Tester` is counter attacking.
+Maximum amount of counter attacks reached.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>Sicarius Anathera attempts to intimidate Sidewind Langston.
+
+`Sicarius Anathera` rolls 10!
+`Sidewind Langston` rolls 14!
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester`, controlled by `Sidewind Langston`, is taking their turn!
+
+------------
+
+</log>
+    <log>`Tester` attacks `Sicarius Anathera`.
+
+`Tester` rolls 3!
+`Sicarius Anathera` rolls 3!
+
+Nothing happened.
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+    <log>Sidewind Langston attempts to intimidate Sicarius Anathera.
+
+`Sidewind Langston` rolls 11!
+`Sicarius Anathera` rolls 11!
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 3!
+`Tester` rolls 2!
+
+`Tester` took 1 hitpoints of damage.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>Sicarius Anathera attempts to intimidate Sidewind Langston.
+
+`Sicarius Anathera` rolls 4!
+`Sidewind Langston` rolls 14!
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester`, controlled by `Sidewind Langston`, is taking their turn!
+
+------------
+
+</log>
+    <log>Tester attempts to intimidate Sidewind Langston.
+
+`Tester` rolls 4!
+`Sidewind Langston` rolls 11!
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+    <log>Sidewind Langston attempts to intimidate Sicarius Anathera.
+
+`Sidewind Langston` rolls 6!
+`Sicarius Anathera` rolls 3!
+
+`Sicarius Anathera` was inflicted with `-6` Intimidation for `1 turn`.
+
+------------
+
+</log>
+    <log>`Ally Tester` is taking their turn!
+`Ally Tester` attacks `Tester`.
+
+`Ally Tester` rolls 2!
+`Tester` rolls 4!
+
+`Tester` is counter attacking.
+...
+The enemy appears to have forgotten what they were suppose to do.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>Sicarius Anathera attempts to intimidate Ally Tester.
+
+`Sicarius Anathera` rolls 12!
+`Ally Tester` rolls 1!
+
+`Ally Tester` was inflicted with `-3` Fortitude for `1 turn`.
+Ally Tester's fortitude has fallen below 1.
+
+Ally Tester is no longer participating in the strife.
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester`, controlled by `Sidewind Langston`, is taking their turn!
+
+------------
+
+</log>
+    <log>Tester attempts to intimidate Ally Tester.
+
+`Tester` rolls 3!
+`Ally Tester` rolls 1!
+
+`Ally Tester` was inflicted with `-1` Fortitude for `1 turn`.
+Ally Tester's fortitude has fallen below 1.
+
+Ally Tester is no longer participating in the strife.
+
+------------
+
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+
+</log>
+    <log>Sidewind Langston attempts to intimidate Ally Tester.
+
+`Sidewind Langston` rolls 6!
+`Ally Tester` rolls 1!
+
+`Ally Tester` was inflicted with `-5` Intimidation for `1 turn`.
+
+------------
+
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+
+</log>
+    <log>Sicarius Anathera attempts to intimidate Sicarius Anathera.
+
+`Sicarius Anathera` rolls 11!
+`Sicarius Anathera` rolls 11!
+
+------------
+
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+
+</log>
+    <log>`Tester`, controlled by `Sidewind Langston`, is taking their turn!
+
+------------
+
+</log>
+  </logs>
+</strife>
