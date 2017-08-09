@@ -370,6 +370,57 @@ namespace HSRP
         }
 
         /// <summary>
+        /// Validates a strife turn against a series of arbitrary parameters based on the action and state of the current turner.
+        /// </summary>
+        /// <param name="action">The action that is being performed this turn.</param>
+        /// <param name="targetNum">The index of the user being targeted.</param>
+        /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
+        /// <param name="reason">The reason for a turn being rejected if done so.</param>
+        /// <returns>Whether or not the action is valid.</returns>
+        public bool ValidateTurn(StrifeAction action, int targetNum, bool targetingAttackers, out string reason)
+        {
+            IEntity attacker = CurrentEntity;
+            IEntity target = GetTarget(targetNum, targetingAttackers);
+
+            // Are they targeting someone who exist?
+            if (target == null)
+            {
+                reason = $"Invalid target entity. Use {Syntax.ToCodeLine(Constants.BotPrefix + "strife check")} to see the indexes of each strifer.";
+                return false;
+            }
+
+            // Are they targeting someone who is dead?
+            if (target.Dead)
+            {
+                reason = $"Invalid target. The targeted user is no longer in the strife.";
+                return false;
+            }
+
+            // Are they targeting themselves?
+            if (attacker.ID == target.ID)
+            {
+                reason = $"Invalid target. You cannot target yourself.";
+                return false;
+            }
+
+            // Are they trying to mind-control while mind-controlling?
+            if (attacker.Controller > 0 && action == StrifeAction.MindControl)
+            {
+                reason = $"Invalid attack. Cannot mind-control while controlling someone else.";
+                return false;
+            }
+
+            // Are they trying to use a lusus to perform psionic attacks?
+            if (attacker is NPC npc && npc.Type == NPCType.Lusus
+                && (action == StrifeAction.MindControl || action == StrifeAction.OpticBlast)
+                )
+            {
+                reason = $"Invalid attack. A lusus cannot perform psionic attacks.";
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Let's an entity take their turn. Also handles whether they die this turn or not.
         /// </summary>
         /// <param name="action">The type of action the attacker is taking.</param>
@@ -379,7 +430,7 @@ namespace HSRP
         public string[] TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers)
         {
             IEntity attacker = CurrentEntity;
-            IEntity target = targetingAttackers ? Attackers[targetNum] : Targets[targetNum];
+            IEntity target = GetTarget(targetNum, targetingAttackers);
             // If it's an NPC then don't update the logs. Unless they're mind-controlled.
             bool returnEmp = attacker is NPC && attacker.Controller <= 0 ? true : false;
 
@@ -409,6 +460,8 @@ namespace HSRP
                 case StrifeAction.Abscond:
                     break;
             }
+
+            attacker.UpdateTempMods();
 
             if (attacker.Health < 1 && !attacker.Dead)
             {
@@ -512,6 +565,22 @@ namespace HSRP
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets the entity being targeted based on the inputted values.
+        /// </summary>
+        /// <param name="targetNum">The index of the user being targeted.</param>
+        /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
+        /// <returns>The target entity.</returns>
+        private IEntity GetTarget(int targetNum, bool targetingAttackers)
+        {
+            if (targetingAttackers)
+            {
+                return targetNum >= Attackers.Count ? null : Attackers[targetNum];
+            }
+
+            return targetNum >= Targets.Count ? null : Targets[targetNum];
         }
 
         private void LeaveStrife(ref IEntity ent)

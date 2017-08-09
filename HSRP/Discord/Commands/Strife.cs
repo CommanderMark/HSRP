@@ -29,21 +29,23 @@ namespace HSRP.Commands
                 await ReplyAsync("Invalid input.");
             }
 
-            if (index >= strf.Attackers.Count)
-            {
-                await ReplyAsync("Invalid index.");
-            }
-
             if (strf.CurrentTurner.ID == plyr.ID)
             {
-                await ReplyStrifeAsync(string.Join("\n", strf.TakeTurn(sa, index, attackAtks)));
-                // Split the logs into <2000 character messages.
-                string[] messages = strf.UpdateStrife(out Player next);
-                foreach (string str in messages)
+                if (strf.ValidateTurn(sa, index, attackAtks, out string reason))
                 {
-                    await ReplyStrifeAsync(str);
+                    await ReplyStrifeAsync(string.Join("\n", strf.TakeTurn(sa, index, attackAtks)));
+                    // Split the logs into <2000 character messages.
+                    string[] messages = strf.UpdateStrife(out Player next);
+                    foreach (string str in messages)
+                    {
+                        await ReplyStrifeAsync(str);
+                    }
+                    strf.Save();
                 }
-                strf.Save();
+                else
+                {
+                    await ReplyAsync(reason);
+                }
             }
             else
             {

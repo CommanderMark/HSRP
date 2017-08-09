@@ -1,4 +1,6 @@
-﻿namespace HSRP
+﻿using System.Collections.Generic;
+
+namespace HSRP
 {
     static class EntityUtil
     {
@@ -21,6 +23,27 @@
             else
             {
                 ent.TempMods.Add(turnsUntilRemoval, mod);
+            }
+        }
+
+        /// <summary>
+        /// Updates the turn count for every temporary modifier. Removes the modifier if there are 0 turns remaining.
+        /// </summary>
+        public static void UpdateTempMods(this IEntity ent)
+        {
+            // If 0 turns left remove 
+            if (ent.TempMods.ContainsKey(0))
+            {
+                ent.TempMods.Remove(0);
+            }
+
+            // De-increment the rest.
+            foreach (KeyValuePair<int, AbilitySet> mod in ent.TempMods)
+            {
+                if (mod.Key > 0)
+                {
+                    ent.TempMods[mod.Key - 1] = mod.Value;
+                }
             }
         }
     }
