@@ -799,6 +799,25 @@ namespace HSRP
             return wha.ToArray();
         }
 
+        public string LogLogs()
+        {
+            string txt = string.Join("\n", Logs);
+            string path = Path.Combine(Dirs.Config, $"{Dirs.StrifeLogs}{ID}.txt");
+            File.WriteAllText(path, txt);
+
+            return path;
+        }
+
+        public string ClearLogs()
+        {
+            string path = LogLogs();
+
+            Logs.Clear();
+            postedLogs = 0;
+
+            return path;
+        }
+
         private void ApplyTempMod(ref IEntity ent, string stat, int value, int turns)
         {
             AbilitySet set = new AbilitySet();

@@ -13,17 +13,13 @@ namespace HSRP.Commands
     {
         public override async Task<PreconditionResult> CheckPermissions(ICommandContext context, CommandInfo command, IServiceProvider services)
         {
-            // await Task.Run(() =>
-            // {
-                Strife strf = context.GetStrife();
-                if (strf != null)
-                {
-                    return PreconditionResult.FromSuccess();
-                }
-                return PreconditionResult.FromError(context.User + "isn't in a strife.");
-            // });
-
-            // return PreconditionResult.FromError(context.User + "isn't in a strife.");
+            Strife strf = context.GetStrife();
+            if (strf != null)
+            {
+                return PreconditionResult.FromSuccess();
+            }
+            
+            return PreconditionResult.FromError(context.User + "isn't in a strife.");
         }
     }
 }

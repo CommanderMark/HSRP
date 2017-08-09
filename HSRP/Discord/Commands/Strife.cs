@@ -95,11 +95,7 @@ namespace HSRP.Commands
 
         // TODO: Ability to check individual entity stats.
         [Command("check"), InStrife]
-        public async Task Check()
-        {
-            Strife strf = Context.GetStrife();
-            await ReplyAsync(Syntax.ToCodeBlock(strf.Display()));
-        }
+        public async Task Check() => await Check(Context.GetPlayerEntity().StrifeID);
 
         [Command("check"), RequireGM]
         public async Task Check(int id)
@@ -135,7 +131,9 @@ namespace HSRP.Commands
         [Command("clear"), RequireGM]
         public async Task ClearLogs(int id)
         {
+            await Log(id);
             Strife strf = new Strife(id.ToString());
+
             strf.Logs.Clear();
 
             await ReplyAsync("Logs cleared.");

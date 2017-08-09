@@ -10,6 +10,7 @@ namespace HSRP
     public static class Toolbox
     {
         public static Dictionary<string, string[]> Messages;
+        public static Dictionary<string, string> SingleMsg;
 
         public static int DiceRoll(int rolls, int dieType = 6)
         {
@@ -41,29 +42,42 @@ namespace HSRP
 
         public static int RandInt(int max, bool inclusive = false) => RandInt(0, max, inclusive);
 
-        public static void UpdateRandomMessages()
+        public static void UpdateMessages()
         {
             Messages = new Dictionary<string, string[]>();
+            SingleMsg = new Dictionary<string, string>();
 
             XDocument doc = XmlToolbox.TryLoadXml(Path.Combine(Dirs.Config, "messages.xml"));
             if (doc == null || doc.Root == null) { return; }
 
             foreach (XElement ele in doc.Root.Elements())
             {
-                string key = XmlToolbox.GetAttributeString(ele, "trigger", string.Empty);
-                if (string.IsNullOrEmpty(key)) { continue; }
-
-                List<string> value = new List<string>();
-                foreach (XElement msg in ele.Elements())
+                switch (ele.Name.LocalName)
                 {
-                    value.Add(XmlToolbox.ElementInnerText(msg));
-                }
+                    case "messages":
+                        string key = XmlToolbox.GetAttributeString(ele, "trigger", string.Empty);
+                        if (string.IsNullOrEmpty(key)) { continue; }
 
-                Toolbox.Messages.Add(key, value.ToArray());
+                        List<string> value = new List<string>();
+                        foreach (XElement msg in ele.Elements())
+                        {
+                            value.Add(XmlToolbox.ElementInnerText(msg));
+                        }
+
+                        Messages.Add(key, value.ToArray());
+                        break;
+                    
+                    case "msg":
+                        string singleKey = XmlToolbox.GetAttributeString(ele, "trigger", string.Empty);
+                        string singleValue = XmlToolbox.ElementInnerText(ele);
+                        SingleMsg.Add(singleKey, singleValue);
+                        break;
+                }
+                
             }
         }
         /// <summary>
-        /// Generates a random message from a specific category
+        /// Generates a random message from a specific category.
         /// </summary>
         public static string GetRandomMessage(string key, params string[] args)
         {
@@ -80,6 +94,27 @@ namespace HSRP
                     msg = msg.Replace("{" + i + "}", args[i]);
                 }
                 return msg;
+            }
+
+            return string.Empty;
+        }
+        /// <summary>
+        /// Gets a message from a specific category.
+        /// </summary>
+        public static string GetSingleMessage(string key, params string[] args)
+        {
+            if (SingleMsg.TryGetValue(key, out string value))
+            {
+                if (args == null)
+                {
+                    return value;
+                }
+                
+                for (int i = 0; i < args.Length; i++)
+                {
+                    value = value.Replace("{" + i + "}", args[i]);
+                }
+                return value;
             }
 
             return string.Empty;
