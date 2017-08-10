@@ -21,6 +21,7 @@ namespace HSRP.Commands
             {
                 plyr = new Player();
                 plyr.ID = Context.User.Id;
+                plyr.OwnerUsername = Context.User.Username;
             }
             else
             {

@@ -14,6 +14,11 @@ namespace HSRP
             return ent.Health <= 0;
         }
 
+        /// <summary>
+        /// Adds a temporary modifier to the entity. If a modifier with that number of turns already exists, add the new modifier to the existing one.
+        /// </summary>
+        /// <param name="mod">The modifier.</param>
+        /// <param name="turnsUntilRemoval">The number of turns that will pass under the modifier is removed.</param>
         public static void AddTempMod(this IEntity ent, AbilitySet mod, int turnsUntilRemoval)
         {
             if (ent.TempMods.ContainsKey(turnsUntilRemoval))

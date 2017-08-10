@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
@@ -179,6 +180,11 @@ namespace HSRP
 
             npc.Add(info, status, abilities, strife);
             return npc;
+        }
+
+        public string Display()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -14,8 +14,7 @@ namespace HSRP.Commands
         [Command("profile"), Alias("stats", "prof")]
         public async Task Profile(Player plyr)
         {
-            IGuildUser user = await plyr.GuildUser;
-            await ReplyAsync(Syntax.ToCodeBlock(plyr.Display(user)));
+            await ReplyAsync(Syntax.ToCodeBlock(plyr.Display()));
         }
 
         [Command("roll")]

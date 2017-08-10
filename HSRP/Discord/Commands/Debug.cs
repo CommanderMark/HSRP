@@ -18,16 +18,18 @@ namespace HSRP.Commands
                 string err = "";
                 string[] dirs = Directory.GetFiles(Dirs.Players);
 
-                foreach (string dir in dirs)
+                foreach (string file in dirs)
                 {
-                    if (dir.Contains("DS_Store")) { continue; }
+                    if (file.Contains("DS_Store")) { continue; }
                     
-                    Player plyr = new Player(dir);
+                    Player plyr = new Player(file);
                     if (plyr.Errored)
                     {
-                        err = err.AddLine(dir);
+                        err = err.AddLine(file);
                         continue;
                     }
+                    IGuildUser us = await plyr.GuildUser;
+                    plyr.OwnerUsername = us.Username;
 
                     plyr.Save();
                 }

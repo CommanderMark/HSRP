@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
-  <info name="The Loverspy" id="262355247702212608" blood="Olive" pineappleOnPizza="false" />
+  <info name="The Loverspy" id="262355247702212608" owner="voreska-serket" blood="Olive" pineappleOnPizza="false" />
   <lusus>Bat</lusus>
   <status hp="100" maxhp="100" dead="false" specibus="Ropekind" />
   <levels echeladder="0" pendingSkillPoints="0" xp="0" nextLevel="0" />

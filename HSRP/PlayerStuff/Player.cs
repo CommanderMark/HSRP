@@ -19,6 +19,10 @@ namespace HSRP
             }
         }
         public string Name { get; set; }
+        /// <summary>
+        /// The then-username of the owner of this player.
+        /// </summary>
+        public string OwnerUsername;
 
         public BloodType BloodColor { get; set; }
         public string LususDescription { get; set; }
@@ -116,6 +120,7 @@ namespace HSRP
                     case "info":
                         Name = XmlToolbox.GetAttributeString(ele, "name", string.Empty);
                         ID = XmlToolbox.GetAttributeUnsignedLong(ele, "id", 0);
+                        OwnerUsername = XmlToolbox.GetAttributeString(ele, "owner", string.Empty);
                         BloodColor = XmlToolbox.GetAttributeEnum(ele, "blood", BloodType.None);
                         LikesPineappleOnPizza = XmlToolbox.GetAttributeBool(ele, "pineappleOnPizza", false);
                         break;
@@ -186,6 +191,7 @@ namespace HSRP
             XElement info = new XElement("info",
                 new XAttribute("name", Name),
                 new XAttribute("id", ID),
+                new XAttribute("owner", OwnerUsername),
                 new XAttribute("blood", BloodColor.ToString()),
                 new XAttribute("pineappleOnPizza", LikesPineappleOnPizza)
                 );
@@ -244,6 +250,53 @@ namespace HSRP
             
             doc.Add(player);
             XmlToolbox.WriteXml(this.ToXmlPath(), doc);
+        }
+
+        public string ToXmlPath() => Path.Combine(Dirs.Players, ID.ToString() + ".xml");
+
+        public string Display()
+        {
+            string result = "";
+
+            result = result.AddLine("Name: " + Name);
+            result = result.AddLine($"Owned by: {OwnerUsername} ({ID})");
+            result = result.AddLine("Blood Color: " + BloodColor);
+            result = result.AddLine("Lusus Desc: " + LususDescription);
+            result = result.AddLine("");
+
+            result = result.AddLine("Health Vial: " + Health + "/" + MaxHealth);
+            result = result.AddLine("Strife Specibus " + Specibus);
+            result = result.AddLine("");
+
+            result = result.AddLine("Echeladder Rung: " + Echeladder);
+            result = result.AddLine("Total XP: " + XP);
+            result = result.AddLine("Next Level In: " + (NextLevelXP - XP));
+            result = result.AddLine("Pending Skill Points: " + PendingSkillPointAllocations);
+            result = result.AddLine("");
+
+            result = result.AddLine("Base Statistics");
+            result = result.AddLine(Abilities.Display());
+
+            return result;
+        }
+
+        public string DisplayInventory()
+        {
+            string result = "";
+            for (int i = 0; i < Inventory.Count; i++)
+            {
+                result += Inventory.ElementAt(i).Quantity > 1
+                    ? $"{i} - {Inventory.ElementAt(i).Name} ({Inventory.ElementAt(i).Quantity})"
+                    : $"{i} - {Inventory.ElementAt(i).Name}";
+
+                if (Inventory.ElementAt(i).Equipped)
+                {
+                    result += " (Equipped)";
+                }
+                result = result.AddLine("");
+            }
+
+            return result;
         }
 
         public bool Register(string input)
@@ -333,7 +386,7 @@ namespace HSRP
             XP += amount;
             int i = 0;
 
-            while (NextLevelXP < XP && Echeladder < 30)
+            while (NextLevelXP < XP && Echeladder < Constants.XPMilestones.Length)
             {
                 this.LevelUp();
                 NextLevelXP = Constants.XPMilestones[Echeladder];
@@ -359,53 +412,6 @@ namespace HSRP
                 PendingSkillPointAllocations += Constants.SkillPointsPerLevel;
             }
         }
-
-        public string Display(Discord.IUser user)
-        {
-            string result = "";
-
-            result = result.AddLine("Name: " + Name);
-            result = result.AddLine($"Owned by: {user.Username} ({user.Id})");
-            result = result.AddLine("Blood Color: " + BloodColor);
-            result = result.AddLine("Lusus Desc: " + LususDescription);
-            result = result.AddLine("");
-
-            result = result.AddLine("Health Vial: " + Health + "/" + MaxHealth);
-            result = result.AddLine("Strife Specibus " + Specibus);
-            result = result.AddLine("");
-
-            result = result.AddLine("Echeladder Rung: " + Echeladder);
-            result = result.AddLine("Total XP: " + XP);
-            result = result.AddLine("Next Level In: " + (NextLevelXP - XP));
-            result = result.AddLine("Pending Skill Points: " + PendingSkillPointAllocations);
-            result = result.AddLine("");
-
-            result = result.AddLine("Base Statistics");
-            result = result.AddLine(Abilities.Display());
-
-            return result;
-        }
-
-        public string DisplayInventory()
-        {
-            string result = "";
-            for (int i = 0; i < Inventory.Count; i++)
-            {
-                result += Inventory.ElementAt(i).Quantity > 1
-                    ? $"{i} - {Inventory.ElementAt(i).Name} ({Inventory.ElementAt(i).Quantity})"
-                    : $"{i} - {Inventory.ElementAt(i).Name}";
-                
-                if (Inventory.ElementAt(i).Equipped)
-                {
-                    result += " (Equipped)";
-                }
-                result = result.AddLine("");
-            }
-
-            return result;
-        }
-
-        public string ToXmlPath() => Path.Combine(Dirs.Players, ID.ToString() + ".xml");
 
         // Static utils.
         public static bool Registered(ulong plyer)
