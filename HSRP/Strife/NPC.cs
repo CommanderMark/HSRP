@@ -184,7 +184,20 @@ namespace HSRP
 
         public string Display()
         {
-            throw new NotImplementedException();
+            string result = "";
+
+            result = result.AddLine("Name: " + Name);
+            result = result.AddLine("Description: " + Description);
+            result = result.AddLine("");
+
+            result = result.AddLine("Health Vial: " + Health + "/" + MaxHealth);
+            result = result.AddLine("Strife Specibus " + Specibus);
+            result = result.AddLine("");
+
+            result = result.AddLine("Base Statistics");
+            result = result.AddLine(Abilities.Display());
+
+            return result;
         }
     }
 }

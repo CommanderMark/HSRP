@@ -27,6 +27,7 @@ namespace HSRP.Commands
             else
             {
                 await ReplyAsync("Invalid input.");
+                return;
             }
 
             if (strf.CurrentTurner.ID == plyr.ID)
@@ -88,6 +89,41 @@ namespace HSRP.Commands
         {
             Strife strf = new Strife(id.ToString());
             await ReplyAsync(Syntax.ToCodeBlock(strf.Display()));
+        }
+
+        [Command("identify"), InStrife]
+        public async Task Identify(string who, int index) => await Identify(Context.GetPlayerEntity().StrifeID, who, index);
+
+        [Command("identify"), RequireGM]
+        public async Task Identify(int id, string who, int index)
+        {
+            Strife strf = new Strife(id.ToString());
+
+            bool attackAtks = false;
+            if ("attackers".StartsWith(who, StringComparison.OrdinalIgnoreCase)
+                || who.Equals("atk", StringComparison.OrdinalIgnoreCase))
+            {
+                attackAtks = true;
+            }
+            else if ("targets".StartsWith(who, StringComparison.OrdinalIgnoreCase))
+            {
+                attackAtks = false;
+            }
+            else
+            {
+                await ReplyAsync("Invalid input.");
+                return;
+            }
+
+            IEntity ent = strf.GetTarget(index, attackAtks);
+            if (ent == null)
+            {
+                await ReplyAsync("Invalid strifer.");
+            }
+            else
+            {
+                await ReplyAsync(Syntax.ToCodeBlock(ent.Display())));
+            }
         }
 
         [Command("log"), InStrife]

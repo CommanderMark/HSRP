@@ -435,7 +435,7 @@ namespace HSRP
             IEntity attacker = CurrentEntity;
             IEntity target = GetTarget(targetNum, targetingAttackers);
             // If it's an NPC then don't update the logs. Unless they're mind-controlled.
-            bool returnEmp = attacker is NPC && attacker.Controller <= 0 ? true : false;
+            bool returnEmp = (attacker is NPC && attacker.Controller <= 0) || (attacker is Player && attacker.Controller > 0) ? true : false;
 
             switch (action)
             {
@@ -563,6 +563,7 @@ namespace HSRP
                         TakeTurn(StrifeAction.PhysicalAttack, targetID, !attackTurn);
                         break;
 
+                    // TODO: Add case for mind-controlled players if that's ever a thing.
                     case NPCType.Psionic:
                         TakeTurn(StrifeAction.OpticBlast, targetID, !attackTurn);
                         break;
@@ -576,7 +577,7 @@ namespace HSRP
         /// <param name="targetNum">The index of the user being targeted.</param>
         /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
         /// <returns>The target entity.</returns>
-        private IEntity GetTarget(int targetNum, bool targetingAttackers)
+        public IEntity GetTarget(int targetNum, bool targetingAttackers)
         {
             if (targetingAttackers)
             {
