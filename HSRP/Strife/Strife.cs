@@ -418,6 +418,9 @@ namespace HSRP
                 reason = $"Invalid attack. A lusus cannot perform psionic attacks.";
                 return false;
             }
+
+            reason = "Strife action valid.";
+            return true;
         }
 
         /// <summary>
@@ -427,7 +430,7 @@ namespace HSRP
         /// <param name="targetNum">The index of the user being targeted.</param>
         /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
         /// <returns>A string containing the log of events that transpired when taking this turn.</returns>
-        public string[] TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers)
+        public string TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers)
         {
             IEntity attacker = CurrentEntity;
             IEntity target = GetTarget(targetNum, targetingAttackers);
@@ -531,7 +534,7 @@ namespace HSRP
             }
 
             AddLog();
-            return returnEmp ? new string[1] : GetLogs();
+            return returnEmp ? string.Empty : GetLogsToString();
         }
 
         /// <summary>
@@ -866,6 +869,22 @@ namespace HSRP
             postedLogs = Logs.Count;
 
             return wha.ToArray();
+        }
+
+        /// <summary>
+        /// Returns the logs which have not been posted yet. Updates the counter to indicate that they are now posted.
+        /// </summary>
+        private string GetLogsToString()
+        {
+            string wha = "";
+
+            for (int i = postedLogs; i < Logs.Count; i++)
+            {
+                wha = wha.AddLine(Logs[i]);
+            }
+            postedLogs = Logs.Count;
+
+            return wha;
         }
 
         public string LogLogs()

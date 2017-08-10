@@ -88,7 +88,7 @@ namespace HSRP
                 try
                 {
                     Instance.RpGuild = Client.GetGuild(Constants.RP_GUILD) as IGuild;
-                    Toolbox.UpdateRandomMessages();
+                    Toolbox.UpdateMessages();
 
                     // ActiveStrifes.
                     XDocument config = XmlToolbox.TryLoadXml(Strife.ToConfigActiveStrifes());

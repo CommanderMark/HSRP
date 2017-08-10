@@ -21,5 +21,7 @@ namespace HSRP
 
         int DiceRolls { get; }
         ulong Controller { get; set; }
+
+        string Display();
     }
 }
