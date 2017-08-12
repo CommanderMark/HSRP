@@ -54,6 +54,17 @@ namespace HSRP.Commands
             }
         }
 
+        [Command("turn"), InStrife]
+        public async Task Turn()
+        {
+            Strife strf = Context.GetStrife();
+            string[] messages = strf.UpdateStrife(out Player next);
+            foreach (string str in messages)
+            {
+                await ReplyAsync(str);
+            }
+        }
+
         [Command("activate"), RequireGM]
         public async Task Activate(int id)
         {

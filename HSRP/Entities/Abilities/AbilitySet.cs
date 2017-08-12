@@ -164,11 +164,7 @@ namespace HSRP
                     int modVal = (int)prop.GetValue(mod);
 
                     disp += prop.Name + ": " + value;
-                    if (modVal != 0)
-                    {
-                        disp += ($" ({modVal.ToString("+0;-#")}");
-                    }
-                    disp = disp.AddLine("");
+                    disp = disp.AddLine($" ({modVal.ToString("+0;-#")})");
                 }
             }
 
