@@ -46,14 +46,11 @@ namespace HSRP
         /// </summary>
         public Dictionary<int, AbilitySet> TempMods { get; set; }
 
-        /// <summary>
-        /// An AbilitySet containing both the character's base ability stats and their modifiers.
-        /// </summary>
-        public AbilitySet TotalAbilities
+        public AbilitySet TotalMods
         {
             get
             {
-                AbilitySet aSet = Abilities + Modifiers;
+                AbilitySet aSet = Modifiers;
                 if (TempMods.Any())
                 {
                     foreach (KeyValuePair<int, AbilitySet> set in TempMods)
@@ -64,10 +61,16 @@ namespace HSRP
 
                 return aSet;
             }
+        }
 
-            set
+        /// <summary>
+        /// An AbilitySet containing both the character's base ability stats and their modifiers.
+        /// </summary>
+        public AbilitySet TotalAbilities
+        {
+            get
             {
-                Abilities = value;
+                return Abilities + TotalMods;
             }
         }
 
@@ -182,7 +185,7 @@ namespace HSRP
             return npc;
         }
 
-        public string Display()
+        public string Display(bool showMods = false)
         {
             string result = "";
 
@@ -195,7 +198,9 @@ namespace HSRP
             result = result.AddLine("");
 
             result = result.AddLine("Base Statistics");
-            result = result.AddLine(Abilities.Display());
+            result = result.AddLine(showMods
+                ? Abilities.Display(TotalMods)
+                : Abilities.Display());
 
             return result;
         }

@@ -12,7 +12,7 @@ namespace HSRP
     {
         public ulong ID { get; set; }
         public Task<Discord.IGuildUser> GuildUser
-        { 
+        {
             get
             {
                 return Program.Instance.RpGuild.GetUserAsync(ID);
@@ -27,15 +27,15 @@ namespace HSRP
         public BloodType BloodColor { get; set; }
         public string LususDescription { get; set; }
         public bool LikesPineappleOnPizza { get; set; }
-        
+
         public AbilitySet Abilities { get; set; }
         public AbilitySet Modifiers { get; set; }
         public Dictionary<int, AbilitySet> TempMods { get; set; }
-        public AbilitySet TotalAbilities
+        public AbilitySet TotalMods
         {
             get
             {
-                AbilitySet aSet = Abilities + Modifiers;
+                AbilitySet aSet = Modifiers;
                 if (TempMods.Any())
                 {
                     foreach (KeyValuePair<int, AbilitySet> set in TempMods)
@@ -46,10 +46,13 @@ namespace HSRP
 
                 return aSet;
             }
+        }
 
-            set
+        public AbilitySet TotalAbilities
+        {
+            get
             {
-                Abilities = value;
+                return Abilities + TotalMods;
             }
         }
 
@@ -254,7 +257,7 @@ namespace HSRP
 
         public string ToXmlPath() => Path.Combine(Dirs.Players, ID.ToString() + ".xml");
 
-        public string Display()
+        public string Display(bool showMods = false)
         {
             string result = "";
 
@@ -275,7 +278,9 @@ namespace HSRP
             result = result.AddLine("");
 
             result = result.AddLine("Base Statistics");
-            result = result.AddLine(Abilities.Display());
+            result = result.AddLine(showMods
+                ? Abilities.Display(TotalMods)
+                : Abilities.Display());
 
             return result;
         }

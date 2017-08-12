@@ -12,7 +12,8 @@ namespace HSRP
         AbilitySet Abilities { get; set; }
         AbilitySet Modifiers { get; set; }
         Dictionary<int, AbilitySet> TempMods { get; set; }
-        AbilitySet TotalAbilities { get; set; }
+        AbilitySet TotalMods { get; }
+        AbilitySet TotalAbilities { get; }
 
         int Health { get; set; }
         int MaxHealth { get; set; }
@@ -22,6 +23,6 @@ namespace HSRP
         int DiceRolls { get; }
         ulong Controller { get; set; }
 
-        string Display();
+        string Display(bool showMods);
     }
 }

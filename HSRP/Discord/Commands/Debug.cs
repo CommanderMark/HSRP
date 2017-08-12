@@ -28,8 +28,6 @@ namespace HSRP.Commands
                         err = err.AddLine(file);
                         continue;
                     }
-                    IGuildUser us = await plyr.GuildUser;
-                    plyr.OwnerUsername = us.Username;
 
                     plyr.Save();
                 }
