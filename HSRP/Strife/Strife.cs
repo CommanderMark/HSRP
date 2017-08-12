@@ -308,7 +308,7 @@ namespace HSRP
         /// </summary>
         /// <param name="ntty">Returns the character whose turn is the next non-AI one.</param>
         /// <returns>A string containing the log of events that transpired when updating the strife.</returns>
-        public string[] UpdateStrife(out Player ntty, bool returnEmp = false)
+        public string UpdateStrife(out Player ntty, bool returnEmp = false)
         {
             // Check who the next user is.
             IEntity turner = CurrentEntity;
@@ -366,7 +366,7 @@ namespace HSRP
 
             ntty = (Player)CurrentTurner;
 
-            return returnEmp ? new string[1] : GetLogs();
+            return returnEmp ? string.Empty : GetLogs();
         }
 
         /// <summary>
@@ -534,7 +534,7 @@ namespace HSRP
             }
 
             AddLog();
-            return returnEmp ? string.Empty : GetLogsToString();
+            return returnEmp ? string.Empty : GetLogs();
         }
 
         /// <summary>
@@ -852,30 +852,7 @@ namespace HSRP
         /// <summary>
         /// Returns the logs which have not been posted yet. Updates the counter to indicate that they are now posted.
         /// </summary>
-        private string[] GetLogs()
-        {
-            List<string> wha = new List<string>();
-            wha.Add("");
-            int index = 0;
-
-            for (int i = postedLogs; i < Logs.Count; i++)
-            {
-                if ((wha[index].Length + Logs[i].Length) > Constants.DiscordCharLimit) {
-                    ++index;
-                    wha.Add("");
-                }
-
-                wha[index] = wha[index].AddLine(Logs[i]);
-            }
-            postedLogs = Logs.Count;
-
-            return wha.ToArray();
-        }
-
-        /// <summary>
-        /// Returns the logs which have not been posted yet. Updates the counter to indicate that they are now posted.
-        /// </summary>
-        private string GetLogsToString()
+        private string GetLogs()
         {
             string wha = "";
 

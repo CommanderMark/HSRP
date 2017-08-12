@@ -3,7 +3,7 @@
     public static class Constants
     {
         public const string BotPrefix = "==>";
-        public const int DiscordCharLimit = 1900;
+        public const int DiscordCharLimit = 1950;
 
         public const int StartingSkillPoints = 24;
         public const int SkillPointsPerLevel = 6;

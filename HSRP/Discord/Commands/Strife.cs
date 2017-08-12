@@ -35,12 +35,7 @@ namespace HSRP.Commands
                 if (strf.ValidateTurn(sa, index, attackAtks, out string reason))
                 {
                     await ReplyStrifeAsync(strf.TakeTurn(sa, index, attackAtks));
-                    // Split the logs into <2000 character messages.
-                    string[] messages = strf.UpdateStrife(out Player next);
-                    foreach (string str in messages)
-                    {
-                        await ReplyStrifeAsync(str);
-                    }
+                    await ReplyStrifeSegmentAsync(strf.UpdateStrife(out Player next));
                     strf.Save();
                 }
                 else
@@ -58,11 +53,7 @@ namespace HSRP.Commands
         public async Task Turn()
         {
             Strife strf = Context.GetStrife();
-            string[] messages = strf.UpdateStrife(out Player next);
-            foreach (string str in messages)
-            {
-                await ReplyAsync(str);
-            }
+            await ReplyAsync(strf.UpdateStrife(out Player next));
         }
 
         [Command("activate"), RequireGM]
@@ -82,7 +73,7 @@ namespace HSRP.Commands
 
                 await ReplyStrifeAsync("A strife has begun.");
                 await ReplyStrifeAsync(Syntax.ToCodeBlock(strf.Display()));
-                await ReplyStrifeAsync(string.Join("\n", strf.UpdateStrife(out Player next)));
+                await ReplyStrifeAsync(strf.UpdateStrife(out Player next));
                 strf.Save();
             }
             else
