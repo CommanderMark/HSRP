@@ -122,7 +122,7 @@ namespace HSRP.Commands
             }
             else
             {
-                await ReplyAsync(Syntax.ToCodeBlock(ent.Display())));
+                await ReplyAsync(Syntax.ToCodeBlock(ent.Display()));
             }
         }
 

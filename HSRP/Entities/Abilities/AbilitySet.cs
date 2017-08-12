@@ -144,14 +144,32 @@ namespace HSRP
             return ele;
         }
 
-        public string Display()
+        public string Display(AbilitySet mod = null)
         {
             string disp = "";
             
-            foreach (PropertyInfo prop in GetType().GetProperties())
+            if (mod == null)
             {
-                int value = (int)prop.GetValue(this);
-                disp = disp.AddLine(prop.Name + ": " + value);
+                foreach (PropertyInfo prop in GetType().GetProperties())
+                {
+                    int value = (int)prop.GetValue(this);
+                    disp = disp.AddLine(prop.Name + ": " + value);
+                }
+            }
+            else
+            {
+                foreach (PropertyInfo prop in GetType().GetProperties())
+                {
+                    int value = (int)prop.GetValue(this);
+                    int modVal = (int)prop.GetValue(mod);
+
+                    disp += prop.Name + ": " + value;
+                    if (modVal != 0)
+                    {
+                        disp += ($" ({modVal.ToString("+0;-#")}");
+                    }
+                    disp = disp.AddLine("");
+                }
             }
 
             return disp;

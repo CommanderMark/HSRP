@@ -440,23 +440,23 @@ namespace HSRP
             switch (action)
             {
                 case StrifeAction.PhysicalAttack:
-                    PhysicalAttack(ref attacker, ref target);
+                    PhysicalAttack(attacker, target);
                     break;
 
                 case StrifeAction.MindControl:
-                    MindControl(ref attacker, ref target);
+                    MindControl(attacker, target);
                     break;
 
                 case StrifeAction.OpticBlast:
-                    OpticBlast(ref attacker, ref target);
+                    OpticBlast(attacker, target);
                     break;
 
                 case StrifeAction.SpeechAttack:
-                    SpeechAttack(ref attacker, ref target);
+                    SpeechAttack(attacker, target);
                     break;
 
                 case StrifeAction.Guard:
-                    Guard(ref attacker);
+                    Guard(attacker);
                     break;
                 
                 // TODO: Whoops.
@@ -468,11 +468,11 @@ namespace HSRP
 
             if (attacker.Health < 1 && !attacker.Dead)
             {
-                LeaveStrife(ref attacker);
+                LeaveStrife(attacker);
             }
             if (target.Health < 1 && !target.Dead)
             {
-                LeaveStrife(ref target);
+                LeaveStrife(target);
             }
 
             // Update turn.
@@ -587,7 +587,7 @@ namespace HSRP
             return targetNum >= Targets.Count ? null : Targets[targetNum];
         }
 
-        private void LeaveStrife(ref IEntity ent)
+        private void LeaveStrife(IEntity ent)
         {
             ent.Dead = true;
             log = log.AddLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
@@ -597,7 +597,7 @@ namespace HSRP
         // If XDSTR rolls higher than difference between both is the damage on the target.
         // Assuming they're not equal, then the target has a chance to counter attack if they rolls higher.
         // XDSTR <-- XDPER: Debuff of the difference between both roles is applied to the attacker's strength.
-        private void PhysicalAttack(ref IEntity attacker, ref IEntity target)
+        private void PhysicalAttack(IEntity attacker, IEntity target)
         {
             log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} attacks {Syntax.ToCodeLine(target.Name)}.\n");
 
@@ -656,7 +656,7 @@ namespace HSRP
                             : 0;
                         int debuff = Math.Max(nonBuff - (tar - atk), -tarY);
                         attacker.TempMods.Remove(1);
-                        ApplyTempMod(ref attacker, "strength", debuff, 1);
+                        ApplyTempMod(attacker, "strength", debuff, 1);
                     }
                 }
                 else
@@ -674,7 +674,7 @@ namespace HSRP
 
         // Mental: XDPSI --> XDFOR 3 times in a row.
         // TODO: Mind control can break somehow?
-        private void MindControl(ref IEntity attacker, ref IEntity target)
+        private void MindControl(IEntity attacker, IEntity target)
         {
             log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} attempts to mind control {Syntax.ToCodeLine(target.Name)}.\n");
 
@@ -712,7 +712,7 @@ namespace HSRP
                 log = log.AddLine("Mind control failed.");
             }
         }
-        private void OpticBlast(ref IEntity attacker, ref IEntity target)
+        private void OpticBlast(IEntity attacker, IEntity target)
         {
             log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} is preparing an Optic Blast.\n");
 
@@ -758,7 +758,7 @@ namespace HSRP
         // Roll 1DPER to debuff FOR for 1 turn.
         // Roll 1DINT to debuff INT for 1 turn.
         // If STR or FOR reach 0 they leave the strife.
-        private void SpeechAttack(ref IEntity attacker, ref IEntity target)
+        private void SpeechAttack(IEntity attacker, IEntity target)
         {
             log = log.AddLine(Toolbox.GetRandomMessage("speechAttackStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)) + "\n");
 
@@ -787,7 +787,7 @@ namespace HSRP
                         {
                             int y = attacker.Abilities.Intimidation;
                             int debuff = -Toolbox.DiceRoll(1, y);
-                            ApplyTempMod(ref target, "strength", debuff, 2);
+                            ApplyTempMod(target, "strength", debuff, 2);
                         } break;
 
                     // Roll 1DPER to debuff FOR for 1 turn.
@@ -795,7 +795,7 @@ namespace HSRP
                         {
                             int y = attacker.Abilities.Persuasion;
                             int debuff = -Toolbox.DiceRoll(1, y);
-                            ApplyTempMod(ref target, "fortitude", debuff, 0);
+                            ApplyTempMod(target, "fortitude", debuff, 0);
                         } break;
                     
                     // Roll 1DINT to debuff INT for 1 turn.
@@ -803,7 +803,7 @@ namespace HSRP
                         {
                             int y = attacker.Abilities.Intimidation;
                             int debuff = -Toolbox.DiceRoll(1, y);
-                            ApplyTempMod(ref target, "intimidation", debuff, 0);
+                            ApplyTempMod(target, "intimidation", debuff, 0);
                         } break;
                 }
 
@@ -813,14 +813,14 @@ namespace HSRP
                     log = log.AddLine($"{target.Name.ToApostrophe()} strength has fallen below 1.");
                     log = log.AddLine(Toolbox.GetRandomMessage("speechKill", target.Name));
 
-                    LeaveStrife(ref target);
+                    LeaveStrife(target);
                 }
                 else if (target.Abilities.Fortitude < 1 && rng == 1)
                 {
                     log = log.AddLine($"{target.Name.ToApostrophe()} fortitude has fallen below 1.");
                     log = log.AddLine(Toolbox.GetRandomMessage("speechKill", target.Name));
 
-                    LeaveStrife(ref target);
+                    LeaveStrife(target);
                 }
             }
             else
@@ -830,12 +830,12 @@ namespace HSRP
         }
 
         // Guard CON += XDCON
-        private void Guard(ref IEntity plyr)
+        private void Guard(IEntity plyr)
         {
             log = log.AddLine($"{plyr.Name} is guarding.");
 
             AbilitySet mod = new AbilitySet();
-            ApplyTempMod(ref plyr, "constitution", Toolbox.DiceRoll(1, plyr.Abilities.Constitution), 0);
+            ApplyTempMod(plyr, "constitution", Toolbox.DiceRoll(1, plyr.Abilities.Constitution), 0);
         }
 
         private void AddLog()
@@ -907,7 +907,7 @@ namespace HSRP
             return path;
         }
 
-        private void ApplyTempMod(ref IEntity ent, string stat, int value, int turns)
+        private void ApplyTempMod(IEntity ent, string stat, int value, int turns)
         {
             AbilitySet set = new AbilitySet();
             foreach (PropertyInfo prop in set.GetType().GetProperties())
