@@ -2,6 +2,7 @@
 
 namespace HSRP
 {
+    // When you don't feel like using abstract classes you get this.
     static class EntityUtil
     {
         /// <summary>

@@ -10,13 +10,18 @@ using Discord;
 namespace HSRP
 {
     // TODO: XP?
-    // TODO: Health restored after strife?
     public class Strife
     {
         public static List<int> ActiveStrifes = new List<int>();
 
         public int ID;
-        public bool Active;
+        public bool Active
+        {
+            get
+            {
+                return ActiveStrifes.Contains(ID);
+            }
+        }
 
         /// <summary>
         /// Whether the Attackers team is taking their turn or not.
@@ -72,7 +77,7 @@ namespace HSRP
         /// <summary>
         /// The user who is responsible for the next turn.
         /// </summary>
-        public IEntity CurrentTurner { private set; get; }
+        private IEntity CurrentTurner;
 
         public bool Errored;
 
@@ -98,7 +103,6 @@ namespace HSRP
             }
 
             ID = XmlToolbox.GetAttributeInt(doc.Root, "id", 0);
-            Active = XmlToolbox.GetAttributeBool(doc.Root, "active", false);
 
             foreach (XElement ele in doc.Root.Elements())
             {
@@ -188,7 +192,6 @@ namespace HSRP
             XDocument doc = new XDocument();
             XElement strife = new XElement("strife",
                 new XAttribute("id", ID),
-                new XAttribute("active", Active.ToString()),
                 new XAttribute("currentTurn", CurrentTurner.ID)
                 );
 
@@ -269,7 +272,6 @@ namespace HSRP
         /// <returns>A string detailing the entities on each team of the strife.</returns>
         public async Task ActivateStrife()
         {
-            Active = true;
             ActiveStrifes.Add(ID);
 
             // Update the ActiveStrifes config file.
@@ -286,7 +288,7 @@ namespace HSRP
             attackTurn = true;
             CurrentTurner = CurrentEntity;
 
-            // Add list of users to log but skip it when posting as that's done separately.
+            // Add list of users to log but skip it when posting the logs as that's posted separately.
             log = Display();
             AddLog();
             postedLogs = 1;
@@ -381,6 +383,13 @@ namespace HSRP
         {
             IEntity attacker = CurrentEntity;
             IEntity target = GetTarget(targetNum, targetingAttackers);
+
+            // Is it their turn?
+            if (CurrentTurner.ID != attacker.ID)
+            {
+                reason = $"It is {Syntax.ToCodeLine(CurrentTurner.Name.ToApostrophe())} turn.";
+                return false;
+            }
 
             // Are they targeting someone who exist?
             if (target == null)

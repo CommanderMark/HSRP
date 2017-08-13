@@ -30,22 +30,15 @@ namespace HSRP.Commands
                 return;
             }
 
-            if (strf.CurrentTurner.ID == plyr.ID)
+            if (strf.ValidateTurn(sa, index, attackAtks, out string reason))
             {
-                if (strf.ValidateTurn(sa, index, attackAtks, out string reason))
-                {
-                    await ReplyStrifeAsync(strf.TakeTurn(sa, index, attackAtks));
-                    await ReplyStrifeSegmentAsync(strf.UpdateStrife(out Player next));
-                    strf.Save();
-                }
-                else
-                {
-                    await ReplyAsync(reason);
-                }
+                await ReplyStrifeAsync(strf.TakeTurn(sa, index, attackAtks));
+                await ReplyStrifeSegmentAsync(strf.UpdateStrife(out Player next));
+                strf.Save();
             }
             else
             {
-                await ReplyAsync($"It is {Syntax.ToCodeLine(strf.CurrentTurner.Name.ToApostrophe())} turn.");
+                await ReplyAsync(reason);
             }
         }
 
