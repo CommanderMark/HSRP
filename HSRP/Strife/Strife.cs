@@ -224,7 +224,7 @@ namespace HSRP
                     targets.Add(npc.Save());
                 }
             }
-
+            
             XElement logs = new XElement("logs", new XAttribute("posted", postedLogs));
             foreach (string log in Logs)
             {

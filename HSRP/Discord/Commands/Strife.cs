@@ -135,6 +135,11 @@ namespace HSRP.Commands
         public async Task Log(int id)
         {
             Strife strf = new Strife(id.ToString());
+            if (strf.Logs.Count < 1)
+            {
+                await ReplyAsync("There are no logs in this strife.");
+                return;
+            }
             string txt = string.Join("\n", strf.Logs);
             string path = strf.LogLogs();
 
@@ -146,10 +151,16 @@ namespace HSRP.Commands
         public async Task ClearLogs(int id)
         {
             Strife strf = new Strife(id.ToString());
+            if (strf.Logs.Count < 1)
+            {
+                await ReplyAsync("There are no logs in this strife.");
+                return;
+            }
             string path = strf.ClearLogs();
 
             await Context.Channel.SendFileAsync(path, "Logs cleared.");
             File.Delete(path);
+            strf.Save();
         }
     }
 }
