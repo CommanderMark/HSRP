@@ -265,3 +265,4 @@ __pycache__/
 
 ### HSRP
 *token.txt
+*.DS_Store

@@ -79,6 +79,22 @@ namespace HSRP
         /// </summary>
         private IEntity CurrentTurner;
 
+        /// <summary>
+        /// Gets the entity being targeted based on the inputted values.
+        /// </summary>
+        /// <param name="targetNum">The index of the user being targeted.</param>
+        /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
+        /// <returns>The target entity.</returns>
+        public IEntity GetTarget(int targetNum, bool targetingAttackers)
+        {
+            if (targetingAttackers)
+            {
+                return targetNum >= Attackers.Count ? null : Attackers[targetNum];
+            }
+
+            return targetNum >= Targets.Count ? null : Targets[targetNum];
+        }
+
         public bool Errored;
 
         public Strife()
@@ -578,22 +594,6 @@ namespace HSRP
                         break;
                 }
             }
-        }
-
-        /// <summary>
-        /// Gets the entity being targeted based on the inputted values.
-        /// </summary>
-        /// <param name="targetNum">The index of the user being targeted.</param>
-        /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
-        /// <returns>The target entity.</returns>
-        public IEntity GetTarget(int targetNum, bool targetingAttackers)
-        {
-            if (targetingAttackers)
-            {
-                return targetNum >= Attackers.Count ? null : Attackers[targetNum];
-            }
-
-            return targetNum >= Targets.Count ? null : Targets[targetNum];
         }
 
         private void LeaveStrife(IEntity ent)
