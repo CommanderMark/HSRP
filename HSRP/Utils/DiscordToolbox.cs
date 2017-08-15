@@ -82,7 +82,6 @@ namespace HSRP
             if (plyr == null) { return null; }
 
             Strife strf = new Strife(plyr.StrifeID.ToString());
-
             return strf.Errored ? null : strf;
         }
     }

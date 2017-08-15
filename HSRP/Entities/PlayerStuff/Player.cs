@@ -104,13 +104,13 @@ namespace HSRP
             Specibus = "";
         }
 
-        public Player(Discord.IUser user) : this(user.Id.ToString() + ".xml") { }
-        public Player(ulong ID) : this(ID.ToString() + ".xml") { }
-        public Player(string filePath) : this()
+        public Player(Discord.IUser user) : this(user.Id.ToString()) { }
+        public Player(ulong ID) : this(ID.ToString()) { }
+        public Player(string filePath, bool idOnly = true) : this()
         {
-            string path = filePath.Contains(Dirs.Players)
-                ? filePath
-                : Path.Combine(Dirs.Players, filePath);
+            string path = idOnly
+                ? Path.Combine(Dirs.Players, filePath) + ".xml"
+                : filePath;
 
             XDocument doc = XmlToolbox.TryLoadXml(path);
             if (doc == null || doc.Root == null) { Errored = true; return; }

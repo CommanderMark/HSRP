@@ -23,7 +23,7 @@ namespace HSRP.Commands
                 {
                     if (file.Contains("DS_Store")) { continue; }
                     
-                    Player plyr = new Player(file);
+                    Player plyr = new Player(file, false);
                     if (plyr.Errored)
                     {
                         err = err.AddLine(file);
@@ -53,7 +53,7 @@ namespace HSRP.Commands
 
             foreach (string file in dirs)
             {
-                Strife strf = new Strife(file);
+                Strife strf = new Strife(file, false);
                 if (strf.Active)
                 {
                     txt = txt.AddLine(strf.ID.ToString());

@@ -9,7 +9,6 @@ using Discord;
 
 namespace HSRP
 {
-    // TODO: XP?
     public class Strife
     {
         public int ID;
@@ -96,11 +95,11 @@ namespace HSRP
             Targets = new List<IEntity>();
         }
 
-        public Strife(string filePath) : this()
+        public Strife(string filePath, bool idOnly = true) : this()
         {
-            string path = filePath.Contains(Dirs.Strifes)
-                ? filePath + ".xml"
-                : Path.Combine(Dirs.Strifes, filePath) + ".xml";
+            string path = idOnly
+                ? Path.Combine(Dirs.Strifes, filePath) + ".xml"
+                : filePath;
 
             XDocument doc = XmlToolbox.TryLoadXml(path);
             if (doc == null || doc.Root == null)
