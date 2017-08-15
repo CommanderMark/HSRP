@@ -12,16 +12,8 @@ namespace HSRP
     // TODO: XP?
     public class Strife
     {
-        public static List<int> ActiveStrifes = new List<int>();
-
         public int ID;
-        public bool Active
-        {
-            get
-            {
-                return ActiveStrifes.Contains(ID);
-            }
-        }
+        public bool Active;
 
         /// <summary>
         /// Whether the Attackers team is taking their turn or not.
@@ -119,6 +111,7 @@ namespace HSRP
             }
 
             ID = XmlToolbox.GetAttributeInt(doc.Root, "id", 0);
+            Active = XmlToolbox.GetAttributeBool(doc.Root, "active", false);
 
             foreach (XElement ele in doc.Root.Elements())
             {
@@ -208,6 +201,7 @@ namespace HSRP
             XDocument doc = new XDocument();
             XElement strife = new XElement("strife",
                 new XAttribute("id", ID),
+                new XAttribute("active", Active),
                 new XAttribute("currentTurn", CurrentTurner.ID)
                 );
 
@@ -257,7 +251,6 @@ namespace HSRP
         }
 
         public string ToXmlPath() => Path.Combine(Dirs.Strifes, ID.ToString() + ".xml");
-        public static string ToConfigActiveStrifes() => Path.Combine(Dirs.Config, "active_strifes.xml");
 
         /// <summary>
         /// Returns a string detailing the status of each entity on each team of the strife.
@@ -288,17 +281,7 @@ namespace HSRP
         /// <returns>A string detailing the entities on each team of the strife.</returns>
         public async Task ActivateStrife()
         {
-            ActiveStrifes.Add(ID);
-
-            // Update the ActiveStrifes config file.
-            XDocument config = new XDocument();
-            XElement strifes = new XElement("strifes");
-            foreach(int i in ActiveStrifes)
-            {
-                strifes.Add(new XElement("strife", new XAttribute("id", i)));
-            }
-            config.Add(strifes);
-            XmlToolbox.WriteXml(ToConfigActiveStrifes(), config);
+            Active = true;
 
             turn = 0;
             attackTurn = true;
@@ -600,6 +583,11 @@ namespace HSRP
         {
             ent.Dead = true;
             log = log.AddLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
+        }
+
+        private void EndStrife()
+        {
+
         }
 
         // Physical: XDSTR --> XDCON.

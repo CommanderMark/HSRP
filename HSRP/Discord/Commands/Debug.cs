@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Discord.Commands;
 using Discord;
+using System.Xml.Linq;
 
 namespace HSRP.Commands
 {
@@ -46,13 +47,22 @@ namespace HSRP.Commands
         [Command("strifelist"), RequireGM]
         public async Task Strifes()
         {
+
             string txt = "";
-            foreach (int i in Strife.ActiveStrifes)
+            string[] dirs = Directory.GetFiles(Dirs.Strifes);
+
+            foreach (string file in dirs)
             {
-                txt = txt.AddLine(i.ToString());
+                Strife strf = new Strife(file);
+                if (strf.Active)
+                {
+                    txt = txt.AddLine(strf.ID.ToString());
+                }
             }
 
-            await ReplyAsync(txt);
+            await ReplyAsync(string.IsNullOrWhiteSpace(txt)
+                ? "There are currently no active strifes."
+                : txt);
         }
 
         private string ToQuirk(string str)

@@ -81,19 +81,9 @@ namespace HSRP
             Player plyr = context.GetPlayerEntity();
             if (plyr == null) { return null; }
 
-            foreach (int id in Strife.ActiveStrifes)
-            {
-                if (id == plyr.StrifeID)
-                {
-                    Strife strf = new Strife(id.ToString());
-                    if (!strf.Errored)
-                    {
-                        return new Strife(id.ToString());
-                    }
-                }
-            }
+            Strife strf = new Strife(plyr.StrifeID.ToString());
 
-            return null;
+            return strf.Errored ? null : strf;
         }
     }
 
