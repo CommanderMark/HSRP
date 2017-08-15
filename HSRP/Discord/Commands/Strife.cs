@@ -34,6 +34,15 @@ namespace HSRP.Commands
             {
                 await ReplyStrifeAsync(strf.TakeTurn(sa, index, attackAtks));
                 await ReplyStrifeSegmentAsync(strf.UpdateStrife(out Player next));
+                // If the strife is no longer active then it was completed this turn. So post logs.
+                if (!strf.Active)
+                {
+                     string path = strf.LogLogs();
+
+                    await Context.Channel.SendFileAsync(path, "The log of the strife is now being posted.");
+                    File.Delete(path);
+                }
+
                 strf.Save();
             }
             else
@@ -133,7 +142,6 @@ namespace HSRP.Commands
                 await ReplyAsync("There are no logs in this strife.");
                 return;
             }
-            string txt = string.Join("\n", strf.Logs);
             string path = strf.LogLogs();
 
             await Context.Channel.SendFileAsync(path);

@@ -16,7 +16,7 @@ namespace HSRP.Commands
             return await Task.Run<PreconditionResult>(() =>
             {
                 Strife strf = context.GetStrife();
-                if (strf != null)
+                if (strf != null && strf.Active)
                 {
                     return PreconditionResult.FromSuccess();
                 }

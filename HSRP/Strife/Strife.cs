@@ -314,6 +314,31 @@ namespace HSRP
             IEntity turner = CurrentEntity;
             CurrentTurner = turner;
 
+            // Is the strife still going on?
+            if (!Active)
+            {
+                ntty = null;
+                return returnEmp ? string.Empty : GetLogs();
+            }
+
+            // Are all the members of one team dead?
+            if (Attackers.All(x => (x.Dead || x.Controller > 0)))
+            {
+                log = log.AddLine("The attacking team has been defeated.");
+                EndStrife();
+
+                ntty = null;
+                return returnEmp ? string.Empty : GetLogs();
+            }
+            if (Targets.All(x => (x.Dead || x.Controller > 0)))
+            {
+                log = log.AddLine("The targets team has been defeated.");
+                EndStrife();
+
+                ntty = null;
+                return returnEmp ? string.Empty : GetLogs();
+            }
+
             // Are they being mind-controlled?
             if (turner.Controller > 0)
             {
@@ -399,21 +424,21 @@ namespace HSRP
             // Are they targeting someone who is dead?
             if (target.Dead)
             {
-                reason = $"Invalid target. The targeted user is no longer in the strife.";
+                reason = "Invalid target. The targeted user is no longer in the strife.";
                 return false;
             }
 
             // Are they targeting themselves?
             if (attacker.ID == target.ID)
             {
-                reason = $"Invalid target. You cannot target yourself.";
+                reason = "Invalid target. You cannot target yourself.";
                 return false;
             }
 
             // Are they trying to mind-control while mind-controlling?
             if (attacker.Controller > 0 && action == StrifeAction.MindControl)
             {
-                reason = $"Invalid attack. Cannot mind-control while controlling someone else.";
+                reason = "Invalid attack. Cannot mind-control while controlling someone else.";
                 return false;
             }
 
@@ -422,7 +447,7 @@ namespace HSRP
                 && (action == StrifeAction.MindControl || action == StrifeAction.OpticBlast)
                 )
             {
-                reason = $"Invalid attack. A lusus cannot perform psionic attacks.";
+                reason = "Invalid attack. A lusus cannot perform psionic attacks.";
                 return false;
             }
 
@@ -586,7 +611,28 @@ namespace HSRP
 
         private void EndStrife()
         {
+            Active = false;
+            AddLog();
+            log = log.AddLine("The strife is now over. XP will be awarded at the discretion of the GM.");
+            AddLog();
+            log = Display();
+            AddLog();
 
+            foreach (IEntity ent in Entities)
+            {
+                ent.Controller = 0;
+                // If an entity is dead reset their HP to 1. 
+                if (ent.Dead)
+                {
+                    ent.Dead = false;
+                    ent.Health = 1;
+                }
+
+                if (ent is Player plyr)
+                {
+                    plyr.StrifeID = 0;
+                }
+            }
         }
 
         // Physical: XDSTR --> XDCON.
