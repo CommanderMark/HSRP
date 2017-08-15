@@ -345,7 +345,7 @@ namespace HSRP
                 bool match = false;
                 foreach (IEntity ent in Entities)
                 {
-                    if (turner.Controller == ent.ID)
+                    if (turner.Controller == ent.ID && !ent.Dead && ent.Controller <= 0) 
                     {
                         log = log.AddLine($"{Syntax.ToCodeLine(turner.Name)}, controlled by {Syntax.ToCodeLine(ent.Name)}, is taking their turn!");
                         CurrentTurner = ent;
@@ -353,7 +353,7 @@ namespace HSRP
                         break;
                     }
                 }
-                // Their controller isn't in the strife anymore (hopefully).
+                // Their controller is either dead or being mind-controlled themselves.
                 if (!match)
                 {
                     log = log.AddLine($"{Syntax.ToCodeLine(turner.Name)} is no longer mind-controlled!");
