@@ -23,7 +23,4 @@
     <item value="Ultimate Hatchet from Hell" quantity="1" />
     <item value="Assassin Hatchet" quantity="1" />
   </inventory>
-  <strife id="48">
-    <abilities />
-  </strife>
 </player>
