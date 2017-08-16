@@ -128,7 +128,7 @@ namespace HSRP
                         Abilities = new AbilitySet(ele);
                         break;
                     
-                    case "strife":
+                    case "modifiers":
                         foreach (XElement strifeEle in ele.Elements())
                         {
                             int? turns = XmlToolbox.GetAttributeNullableInt(strifeEle, "turns", null);
@@ -170,18 +170,18 @@ namespace HSRP
 
             XElement abilities = Abilities.ToXmlElement();
                 
-            XElement strife = new XElement("strife");
+            XElement modifiers = new XElement("modifiers");
 
-            strife.Add(Modifiers.ToXmlWithoutEmpties());
+            modifiers.Add(Modifiers.ToXmlWithoutEmpties());
             foreach (KeyValuePair<int, AbilitySet> mod in TempMods)
             {
                 XElement modEle = mod.Value.ToXmlWithoutEmpties();
                 modEle.Add(new XAttribute("turns", mod.Key));
 
-                strife.Add(modEle);
+                modifiers.Add(modEle);
             }
 
-            npc.Add(info, status, abilities, strife);
+            npc.Add(info, status, abilities, modifiers);
             return npc;
         }
 

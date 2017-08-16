@@ -402,13 +402,13 @@ namespace HSRP
         /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
         /// <param name="reason">The reason for a turn being rejected if done so.</param>
         /// <returns>Whether or not the action is valid.</returns>
-        public bool ValidateTurn(StrifeAction action, int targetNum, bool targetingAttackers, out string reason)
+        public bool ValidateTurn(StrifeAction action, int targetNum, bool targetingAttackers, Player plyr, out string reason)
         {
             IEntity attacker = CurrentEntity;
             IEntity target = GetTarget(targetNum, targetingAttackers);
 
             // Is it their turn?
-            if (CurrentTurner.ID != attacker.ID)
+            if (CurrentTurner.ID != plyr.ID)
             {
                 reason = $"It is {Syntax.ToCodeLine(CurrentTurner.Name.ToApostrophe())} turn.";
                 return false;
@@ -606,6 +606,7 @@ namespace HSRP
         private void LeaveStrife(IEntity ent)
         {
             ent.Dead = true;
+            ent.Health = 0;
             log = log.AddLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
         }
 

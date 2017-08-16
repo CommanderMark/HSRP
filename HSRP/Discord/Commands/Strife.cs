@@ -30,7 +30,7 @@ namespace HSRP.Commands
                 return;
             }
 
-            if (strf.ValidateTurn(sa, index, attackAtks, out string reason))
+            if (strf.ValidateTurn(sa, index, attackAtks, plyr, out string reason))
             {
                 await ReplyStrifeAsync(strf.TakeTurn(sa, index, attackAtks));
                 await ReplyStrifeSegmentAsync(strf.UpdateStrife(out Player next));

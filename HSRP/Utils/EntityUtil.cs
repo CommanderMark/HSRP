@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace HSRP
 {
@@ -44,12 +45,17 @@ namespace HSRP
             }
 
             // De-increment the rest.
-            foreach (KeyValuePair<int, AbilitySet> mod in ent.TempMods)
+            foreach (KeyValuePair<int, AbilitySet> mod in ent.TempMods.ToArray())
             {
                 if (mod.Key > 0)
                 {
                     ent.TempMods[mod.Key - 1] = mod.Value;
                 }
+            }
+
+            if (ent.TempMods.Any(x => x.Key > 0))
+            {
+                ent.TempMods.Remove(ent.TempMods.Keys.Max());
             }
         }
     }
