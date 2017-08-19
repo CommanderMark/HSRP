@@ -330,7 +330,7 @@ namespace HSRP
             // Are all the members of one team dead?
             if (Attackers.All(x => (x.Dead || x.Controller > 0)))
             {
-                log = log.AddLine("The attacking team has been defeated.");
+                log = log.AddLine("Attackers have been defeated.");
                 EndStrife();
 
                 ntty = null;
@@ -338,7 +338,7 @@ namespace HSRP
             }
             if (Targets.All(x => (x.Dead || x.Controller > 0)))
             {
-                log = log.AddLine("The targets team has been defeated.");
+                log = log.AddLine("Targets have been defeated.");
                 EndStrife();
 
                 ntty = null;
