@@ -140,7 +140,7 @@ namespace HSRP.Commands
         [Command("log"), InStrife]
         public async Task Log() => await Log(Context.GetPlayerEntity().StrifeID);
 
-        [Command("log"), RequireGM]
+        [Command("log")]
         public async Task Log(int id)
         {
             Strife strf = new Strife(id.ToString());
