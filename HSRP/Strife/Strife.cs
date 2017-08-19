@@ -303,6 +303,12 @@ namespace HSRP
             }
         }
 
+        public string DeactivateStrife()
+        {
+            EndStrife();
+            return GetLogs();
+        }
+
         /// <summary>
         /// Updates the strife by checking if any AI-controlled characters need to take their turn.
         /// </summary>
@@ -444,10 +450,10 @@ namespace HSRP
 
             // Are they trying to use a lusus to perform psionic attacks?
             if (attacker is NPC npc && npc.Type == NPCType.Lusus
-                && (action == StrifeAction.MindControl || action == StrifeAction.OpticBlast)
+                && !(action == StrifeAction.PhysicalAttack || action == StrifeAction.Guard)
                 )
             {
-                reason = "Invalid attack. A lusus cannot perform psionic attacks.";
+                reason = "Invalid attack. A lusus cannot perform psionic or speech attacks.";
                 return false;
             }
 
@@ -489,10 +495,6 @@ namespace HSRP
 
                 case StrifeAction.Guard:
                     Guard(attacker);
-                    break;
-                
-                // TODO: Whoops.
-                case StrifeAction.Abscond:
                     break;
             }
 

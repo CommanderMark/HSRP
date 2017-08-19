@@ -7,7 +7,6 @@ namespace HSRP
         MindControl,
         OpticBlast,
         SpeechAttack,
-        Guard,
-        Abscond
+        Guard
     }
 }
