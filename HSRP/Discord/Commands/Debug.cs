@@ -10,8 +10,7 @@ namespace HSRP.Commands
 {
     public class DebugCommands : JModuleBase
     {
-        [RequireJorge]
-        [Command("filter")]
+        [Command("filter"), RequireJorge]
         public async Task FilterXml(string type)
         {
             if (type == "users")
@@ -65,13 +64,29 @@ namespace HSRP.Commands
                 : txt);
         }
 
+        [Command("togglestrife"), RequireGM]
+        public async Task ToggleStrifeChannel()
+        {
+            if (Constants.STRIFE_CHANNEL == Constants.RP_STRIFE_CHANNEL)
+            {
+                Constants.STRIFE_CHANNEL = Constants.TEST_STRIFE_CHANNEL;
+                await ReplyAsync("Strife channel is set to the TEST one.");
+            }
+            else
+            {
+                Constants.STRIFE_CHANNEL = Constants.RP_STRIFE_CHANNEL;
+                await ReplyAsync("Strife channel is set to the RP one.");
+            }
+        }
+
+        // OMV Quirk Stuff
         private string ToQuirk(string str)
         {
             str = Regex.Replace(str, @"\b(\w)", m => m.ToString().ToUpper());
             str = Regex.Replace(str, @"(\w)\b", m => m.ToString().ToUpper());
             return str;
         }
-
+        
         [Command("quirk")]
         public async Task Quirk([Remainder] string text)
         {

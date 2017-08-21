@@ -23,7 +23,11 @@
         // Channel IDs
         public const ulong RPOOC_CHANNEL = 325511222000615424;
         public const ulong GEN_CHANNEL = 325511181634895872;
-        public const ulong STRIFE_CHANNEL = 343972292730028042;
+
+        public static ulong STRIFE_CHANNEL = 349060932405690369;
+
+        public const ulong TEST_STRIFE_CHANNEL = 343972292730028042;
+        public const ulong RP_STRIFE_CHANNEL = 349060932405690369;
     }
 
     public static class Dirs
