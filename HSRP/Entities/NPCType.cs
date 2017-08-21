@@ -4,6 +4,7 @@ namespace HSRP
     {
         Normal,
         Lusus,
-        Psionic
+        Psionic,
+        Talker
     }
 }

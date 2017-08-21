@@ -585,11 +585,12 @@ namespace HSRP
             int targetID = attackTurn
                 ? Toolbox.RandInt(Targets.Count)
                 : Toolbox.RandInt(Attackers.Count);
+            
+            IEntity target = GetTarget(targetID, !attackTurn);
 
             // TODO: More AI-y stuff.
             if (ai is NPC npc)
             {
-                // TODO: Guard when some arbitrary event occurs?
                 switch (npc.Type)
                 {
                     case NPCType.Lusus:
@@ -597,9 +598,26 @@ namespace HSRP
                         TakeTurn(StrifeAction.PhysicalAttack, targetID, !attackTurn);
                         break;
 
-                    // TODO: Add case for mind-controlled players if that's ever a thing.
                     case NPCType.Psionic:
-                        TakeTurn(StrifeAction.OpticBlast, targetID, !attackTurn);
+                        if (Toolbox.RandInt(2) == 1 && target.Controller != ai.ID)
+                        {
+                            TakeTurn(StrifeAction.MindControl, targetID, !attackTurn);
+                        }
+                        else
+                        {
+                            TakeTurn(StrifeAction.OpticBlast, targetID, !attackTurn);
+                        }
+                        break;
+                    
+                    case NPCType.Talker:
+                        if (Toolbox.RandInt(4) == 1)
+                        {
+                            TakeTurn(StrifeAction.SpeechAttack, targetID, !attackTurn);
+                        }
+                        else
+                        {
+                            TakeTurn(StrifeAction.Guard, targetID, !attackTurn);
+                        }
                         break;
                 }
             }
@@ -644,7 +662,8 @@ namespace HSRP
         // XDSTR <-- XDPER: Debuff of the difference between both roles is applied to the attacker's strength.
         private void PhysicalAttack(IEntity attacker, IEntity target)
         {
-            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} attacks {Syntax.ToCodeLine(target.Name)}.\n");
+            log = log.AddLine(Toolbox.GetMessage("phyStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
+            log = log.AddLine("");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -668,18 +687,20 @@ namespace HSRP
                 log = log.AddLine($"\n{Syntax.ToCodeLine(target.Name)} took {dmg} hitpoints of damage.");
             }
             // If target rolled higher begin counter attack.
+            // TODO: Make counter attack guaranteed?
+            // TODO: 50% to counter unless your per is higher than their str?
             else if (atk < tar)
             {
-                log = log.AddLine($"\n{Syntax.ToCodeLine(target.Name)} is counter attacking.");
+                log = log.AddLine("");
+                log = log.AddLine(Toolbox.GetMessage("phyCounterStart", Syntax.ToCodeLine(target.Name)));
                 // 50% chance to counter.
                 if (Toolbox.RandInt(2) == 1)
                 {
                     tarY = target.Abilities.Persuasion;
-                    // If the strength modifier is already debuffed by a number equal to or greater
-                    // than the target's persuasion then don't debuff.
-                    if (attacker.Modifiers.Strength <= (-tarY))
+                    // If the strength modifier is already debuffed below 1 then don't debuff.
+                    if (attacker.TotalAbilities.Strength < 1)
                     {
-                        log = log.AddLine($"Maximum amount of counter attacks reached.");
+                        log = log.AddLine(Toolbox.GetMessage("phyCounterMax", Syntax.ToCodeLine(attacker.Name)));
                         return;
                     }
 
@@ -691,7 +712,8 @@ namespace HSRP
                     // Counter failed.
                     if (atk >= tar)
                     {
-                        log = log.AddLine("\nCounter attack blocked.");
+                        log = log.AddLine("");
+                        log = log.AddLine(Toolbox.GetMessage("phyCounterBlock"));
                     }
                     // Counter suceeded, debuff strength.
                     else if (!attacker.TempMods.ContainsKey(1) || attacker.TempMods[1].Strength > -tarY)
@@ -706,14 +728,15 @@ namespace HSRP
                 }
                 else
                 {
-                    log = log.AddLine($"...");
-                    log = log.AddLine(Toolbox.GetRandomMessage("failedNPCCounter"));
+                    log = log.AddLine("");
+                    log = log.AddLine(Toolbox.GetMessage("phyCounterFail", Syntax.ToCodeLine(target.Name)));
                 }
             }
             // Equal rolls, do nothing.
             else
             {
-                log = log.AddLine("\nNothing happened.");
+                log = log.AddLine("");
+                log = log.AddLine("Nothing happened.");
             }
         }
 
@@ -735,10 +758,12 @@ namespace HSRP
             int[] atk = new int[3];
             int[] tar = new int[3];
 
+            bool success = true;
             for (int i = 0; i < 3; i++)
             {
                 atk[i] = Toolbox.DiceRoll(atkX, atkY);
                 tar[i] = Toolbox.DiceRoll(tarX, tarY);
+                if (tar[i] >= atk[i]) { success = false; }
             }
 
             log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
@@ -747,7 +772,7 @@ namespace HSRP
             int atkTotal = atk[0] + atk[1] + atk[2];
             int tarTotal = tar[0] + tar[1] + tar[2];
             // Mind control wooo.
-            if (atkTotal > tarTotal)
+            if (success)
             {
                 target.Controller = attacker.ID;
                 log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} has successfully mind controlled {Syntax.ToCodeLine(target.Name)}.");
@@ -805,7 +830,7 @@ namespace HSRP
         // If STR or FOR reach 0 they leave the strife.
         private void SpeechAttack(IEntity attacker, IEntity target)
         {
-            log = log.AddLine(Toolbox.GetRandomMessage("speechAttackStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)) + "\n");
+            log = log.AddLine(Toolbox.GetMessage("speStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)) + "\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -840,7 +865,7 @@ namespace HSRP
                         {
                             int y = attacker.Abilities.Persuasion;
                             int debuff = -Toolbox.DiceRoll(1, y);
-                            ApplyTempMod(target, "fortitude", debuff, 0);
+                            ApplyTempMod(target, "fortitude", debuff, -1);
                         } break;
                     
                     // Roll 1DINT to debuff INT for 1 turn.
@@ -848,7 +873,7 @@ namespace HSRP
                         {
                             int y = attacker.Abilities.Intimidation;
                             int debuff = -Toolbox.DiceRoll(1, y);
-                            ApplyTempMod(target, "intimidation", debuff, 0);
+                            ApplyTempMod(target, "intimidation", debuff, 2);
                         } break;
                 }
 
@@ -856,21 +881,22 @@ namespace HSRP
                 if (target.TotalAbilities.Strength < 1 && rng == 0)
                 {
                     log = log.AddLine($"{target.Name.ToApostrophe()} strength has fallen below 1.");
-                    log = log.AddLine(Toolbox.GetRandomMessage("speechKill", target.Name));
+                    log = log.AddLine(Toolbox.GetMessage("speKill", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
 
                     LeaveStrife(target);
                 }
                 else if (target.TotalAbilities.Fortitude < 1 && rng == 1)
                 {
                     log = log.AddLine($"{target.Name.ToApostrophe()} fortitude has fallen below 1.");
-                    log = log.AddLine(Toolbox.GetRandomMessage("speechKill", target.Name));
+                    log = log.AddLine(Toolbox.GetMessage("speKill", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
 
                     LeaveStrife(target);
                 }
             }
             else
             {
-
+                log = log.AddLine("");
+                log = log.AddLine(Toolbox.GetMessage("speFail"));
             }
         }
 
@@ -937,12 +963,22 @@ namespace HSRP
                 if (prop.Name.Contains(stat, StringComparison.OrdinalIgnoreCase))
                 {
                     prop.SetValue(set, value);
-                    ent.AddTempMod(set, turns);
+                    // Temporary modifier.
+                    if (turns >= 0)
+                    {
+                        ent.AddTempMod(set, turns);
 
-                    string plural = turns == 0
-                        ? "1 turn"
-                        : (turns + 1).ToString() + " turns";
-                    log = log.AddLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for {Syntax.ToCodeLine(plural)}.");
+                        string plural = turns == 0
+                            ? "1 turn"
+                            : (turns + 1).ToString() + " turns";
+                        log = log.AddLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for {Syntax.ToCodeLine(plural)}.");
+                    }
+                    // Permanent modifier.
+                    else
+                    {
+                        ent.Modifiers += set;
+                        log = log.AddLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for the remainder of the strife.");
+                    }
 
                     return;
                 }

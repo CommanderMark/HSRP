@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
@@ -10,7 +11,6 @@ namespace HSRP
     public static class Toolbox
     {
         public static Dictionary<string, string[]> Messages;
-        public static Dictionary<string, string> SingleMsg;
 
         public static int DiceRoll(int rolls, int dieType = 6)
         {
@@ -45,7 +45,6 @@ namespace HSRP
         public static void UpdateMessages()
         {
             Messages = new Dictionary<string, string[]>();
-            SingleMsg = new Dictionary<string, string>();
 
             XDocument doc = XmlToolbox.TryLoadXml(Path.Combine(Dirs.Config, "messages.xml"));
             if (doc == null || doc.Root == null) { return; }
@@ -57,29 +56,31 @@ namespace HSRP
                     case "messages":
                         string key = XmlToolbox.GetAttributeString(ele, "trigger", string.Empty);
                         if (string.IsNullOrEmpty(key)) { continue; }
-
                         List<string> value = new List<string>();
-                        foreach (XElement msg in ele.Elements())
+
+                        if (ele.Elements("msg").Any())
                         {
-                            value.Add(XmlToolbox.ElementInnerText(msg));
+                            foreach (XElement msg in ele.Elements())
+                            {
+                                value.Add(XmlToolbox.ElementInnerText(msg));
+                            }
+                        }
+                        else
+                        {
+                            string singleValue = XmlToolbox.ElementInnerText(ele);
+                            value.Add(singleValue);
                         }
 
                         Messages.Add(key, value.ToArray());
-                        break;
-                    
-                    case "msg":
-                        string singleKey = XmlToolbox.GetAttributeString(ele, "trigger", string.Empty);
-                        string singleValue = XmlToolbox.ElementInnerText(ele);
-                        SingleMsg.Add(singleKey, singleValue);
                         break;
                 }
                 
             }
         }
         /// <summary>
-        /// Generates a random message from a specific category.
+        /// Generates a message from a specific category.
         /// </summary>
-        public static string GetRandomMessage(string key, params string[] args)
+        public static string GetMessage(string key, params string[] args)
         {
             if (Messages.TryGetValue(key, out string[] value))
             {
@@ -96,27 +97,7 @@ namespace HSRP
                 return msg;
             }
 
-            return string.Empty;
-        }
-        /// <summary>
-        /// Gets a message from a specific category.
-        /// </summary>
-        public static string GetSingleMessage(string key, params string[] args)
-        {
-            if (SingleMsg.TryGetValue(key, out string value))
-            {
-                if (args == null)
-                {
-                    return value;
-                }
-                
-                for (int i = 0; i < args.Length; i++)
-                {
-                    value = value.Replace("{" + i + "}", args[i]);
-                }
-                return value;
-            }
-
+            Console.WriteLine("Failed to get config message " + key + "!");
             return string.Empty;
         }
 

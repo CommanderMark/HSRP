@@ -3,7 +3,7 @@
   <status attackTurn="true" turn="0" />
   <attackers>
     <player id="164204195069689857" />
-	<npc id="5">
+    <npc id="2">
       <info name="Dendar" type="Lusus" pineappleOnPizza="false">Dendar, your lusus.</info>
       <status hp="150" maxhp="150" dead="false" specibus="lususkind" diceRolls="1" controller="164204195069689857" />
       <abilities>
