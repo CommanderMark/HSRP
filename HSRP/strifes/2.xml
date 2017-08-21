@@ -3,18 +3,33 @@
   <status attackTurn="true" turn="0" />
   <attackers>
     <player id="164204195069689857" />
+	<npc id="5">
+      <info name="Dendar" type="Lusus" pineappleOnPizza="false">Dendar, your lusus.</info>
+      <status hp="150" maxhp="150" dead="false" specibus="lususkind" diceRolls="1" controller="164204195069689857" />
+      <abilities>
+        <strength value="15" />
+        <constitution value="17" />
+        <psion value="0" />
+        <fortitude value="0" />
+        <intimidation value="8" />
+        <persuasion value="0" />
+      </abilities>
+      <modifiers>
+        <abilities />
+      </modifiers>
+    </npc>
   </attackers>
   <targets>
     <npc id="1">
-      <info name="Messenger" type="Normal" pineappleOnPizza="false">TODO: Write this.</info>
-      <status hp="75" maxhp="75" dead="false" specibus="SPECIBUS" diceRolls="2" controller="0" />
+      <info name="Juggalo Messenger" type="Normal" pineappleOnPizza="false">A messenger for the Grand Highblood. Looks rather stocky for one though.</info>
+      <status hp="75" maxhp="75" dead="false" specibus="bladekind" diceRolls="1" controller="0" />
       <abilities>
-        <strength value="20" />
-        <constitution value="30" />
-        <psion value="10" />
-        <fortitude value="10" />
-        <intimidation value="10" />
-        <persuasion value="10" />
+        <strength value="5" />
+        <constitution value="6" />
+        <psion value="0" />
+        <fortitude value="8" />
+        <intimidation value="11" />
+        <persuasion value="3" />
       </abilities>
       <modifiers>
         <abilities />

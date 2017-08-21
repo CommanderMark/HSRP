@@ -853,14 +853,14 @@ namespace HSRP
                 }
 
                 // If STR or FOR reach 0 they leave the strife.
-                if (target.Abilities.Strength < 1 && rng == 0)
+                if (target.TotalAbilities.Strength < 1 && rng == 0)
                 {
                     log = log.AddLine($"{target.Name.ToApostrophe()} strength has fallen below 1.");
                     log = log.AddLine(Toolbox.GetRandomMessage("speechKill", target.Name));
 
                     LeaveStrife(target);
                 }
-                else if (target.Abilities.Fortitude < 1 && rng == 1)
+                else if (target.TotalAbilities.Fortitude < 1 && rng == 1)
                 {
                     log = log.AddLine($"{target.Name.ToApostrophe()} fortitude has fallen below 1.");
                     log = log.AddLine(Toolbox.GetRandomMessage("speechKill", target.Name));
@@ -877,7 +877,7 @@ namespace HSRP
         // Guard CON += XDCON
         private void Guard(IEntity plyr)
         {
-            log = log.AddLine($"{plyr.Name} is guarding.");
+            log = log.AddLine($"{Syntax.ToCodeLine(plyr.Name)} is guarding.");
 
             AbilitySet mod = new AbilitySet();
             ApplyTempMod(plyr, "constitution", Toolbox.DiceRoll(1, plyr.Abilities.Constitution), 0);
@@ -942,7 +942,7 @@ namespace HSRP
                     string plural = turns == 0
                         ? "1 turn"
                         : (turns + 1).ToString() + " turns";
-                    log = log.AddLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString())} {prop.Name} for {Syntax.ToCodeLine(plural)}.");
+                    log = log.AddLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for {Syntax.ToCodeLine(plural)}.");
 
                     return;
                 }
