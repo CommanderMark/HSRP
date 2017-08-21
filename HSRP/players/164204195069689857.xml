@@ -3,14 +3,14 @@
   <info name="Rezkas Kabsen" id="164204195069689857" owner="&quot;Not&quot; Satan" blood="Teal" pineappleOnPizza="false" />
   <lusus>large snake</lusus>
   <status hp="100" maxhp="100" dead="false" specibus="Bladekind" />
-  <levels echeladder="0" pendingSkillPoints="24" xp="0" nextLevel="0" />
+  <levels echeladder="0" pendingSkillPoints="0" xp="0" nextLevel="0" />
   <abilities>
-    <strength value="0" />
-    <constitution value="0" />
+    <strength value="4" />
+    <constitution value="4" />
     <psion value="0" />
-    <fortitude value="0" />
-    <intimidation value="0" />
-    <persuasion value="0" />
+    <fortitude value="4" />
+    <intimidation value="6" />
+    <persuasion value="6" />
   </abilities>
   <inventory />
 </player>

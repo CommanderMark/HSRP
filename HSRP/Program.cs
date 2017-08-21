@@ -78,7 +78,7 @@ namespace HSRP
 
         public async Task OnConnect()
         {
-            await Client.SetGameAsync("Beta Test");
+            await Client.SetGameAsync("RP Bot");
         }
 
         public async Task OnReady()
