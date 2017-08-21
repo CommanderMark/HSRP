@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strife id="2" active="false" currentTurn="0">
+  <status attackTurn="true" turn="0" />
+  <attackers>
+    <player id="164204195069689857" />
+  </attackers>
+  <targets>
+    <npc id="1">
+      <info name="Messenger" type="Normal" pineappleOnPizza="false">TODO: Write this.</info>
+      <status hp="75" maxhp="75" dead="false" specibus="SPECIBUS" diceRolls="2" controller="0" />
+      <abilities>
+        <strength value="20" />
+        <constitution value="30" />
+        <psion value="10" />
+        <fortitude value="10" />
+        <intimidation value="10" />
+        <persuasion value="10" />
+      </abilities>
+      <modifiers>
+        <abilities />
+      </modifiers>
+    </npc>
+  </targets>
+</strife>
