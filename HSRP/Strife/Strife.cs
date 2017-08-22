@@ -692,7 +692,7 @@ namespace HSRP
             else if (atk < tar)
             {
                 log = log.AddLine("");
-                log = log.AddLine(Toolbox.GetMessage("phyCounterStart", Syntax.ToCodeLine(target.Name)));
+                log = log.AddLine(Toolbox.GetMessage("phyCounterStart", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
                 // 50% chance to counter.
                 if (Toolbox.RandInt(2) == 1)
                 {
@@ -896,7 +896,7 @@ namespace HSRP
             else
             {
                 log = log.AddLine("");
-                log = log.AddLine(Toolbox.GetMessage("speFail"));
+                log = log.AddLine(Toolbox.GetMessage("speFail", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
             }
         }
 
