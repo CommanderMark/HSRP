@@ -169,19 +169,23 @@ namespace HSRP
                 );
 
             XElement abilities = Abilities.ToXmlElement();
-                
-            XElement modifiers = new XElement("modifiers");
 
-            modifiers.Add(Modifiers.ToXmlWithoutEmpties());
-            foreach (KeyValuePair<int, AbilitySet> mod in TempMods)
+            npc.Add(info, status, abilities);
+
+            if (TotalAbilities.Equals(Abilities))
             {
-                XElement modEle = mod.Value.ToXmlWithoutEmpties();
-                modEle.Add(new XAttribute("turns", mod.Key));
+                XElement modifiers = new XElement("modifiers");
+                modifiers.Add(Modifiers.ToXmlWithoutEmpties());
+                foreach (KeyValuePair<int, AbilitySet> mod in TempMods)
+                {
+                    XElement modEle = mod.Value.ToXmlWithoutEmpties();
+                    modEle.Add(new XAttribute("turns", mod.Key));
 
-                modifiers.Add(modEle);
+                    modifiers.Add(modEle);
+                }
+                npc.Add(modifiers);
             }
-
-            npc.Add(info, status, abilities, modifiers);
+            
             return npc;
         }
 

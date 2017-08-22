@@ -87,6 +87,38 @@ namespace HSRP
             return newSet;
         }
 
+        public override bool Equals(Object obj)
+        {
+            // If parameter is null return false.
+            if (obj == null)
+            {
+                return false;
+            }
+
+            // If parameter cannot be cast to Point return false.
+            AbilitySet set = obj as AbilitySet;
+            if (set == null)
+            {
+                return false;
+            }
+
+            foreach (PropertyInfo property in GetType().GetProperties())
+            {
+                if (property.CanWrite && property.CanRead)
+                {
+                    Object val1 = property.GetValue(this);
+                    Object val2 = property.GetValue(set);
+
+                    if (val1 != val2)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
         public AbilitySet() { }
         public AbilitySet(XElement ele)
         {

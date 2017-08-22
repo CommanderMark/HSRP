@@ -8,10 +8,9 @@ using Discord;
 
 namespace HSRP.Commands
 {
-    [RequireRegistration]
     public class LevelUp : JModuleBase
     {
-        [Command("allocate"), Alias("spend")]
+        [Command("allocate"), Alias("spend"), RequireRegistration]
         public async Task SpendSkill(PropertyInfo ability, int amount)
         {
             Player plyr = new Player(Context.User);
@@ -43,9 +42,8 @@ namespace HSRP.Commands
             plyr.Save();
             await ReplyAsync(msg);
         }
-
-        [RequireGM]
-        [Command("givexp"), Alias("xp", "award")]
+        
+        [Command("givexp"), Alias("xp", "award"), RequireGM]
         public async Task GrantXP(Player plyr, int amount)
         {
             if (amount <= 0)
