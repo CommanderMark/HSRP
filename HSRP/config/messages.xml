@@ -7,7 +7,6 @@
 
   <messages trigger="phyCounterStart">
     <msg>{0} is counter attacking.</msg>
-    <msg>{0} tries to persuade {1} to stop strifing</msg>
   </messages>
 
   <messages trigger="phyCounterMax">

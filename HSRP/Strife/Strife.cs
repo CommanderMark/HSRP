@@ -473,7 +473,7 @@ namespace HSRP
             IEntity attacker = CurrentEntity;
             IEntity target = GetTarget(targetNum, targetingAttackers);
             // If it's an NPC then don't update the logs. Unless they're mind-controlled.
-            bool returnEmp = (attacker is NPC && attacker.Controller <= 0) || (attacker is Player && attacker.Controller > 0) ? true : false;
+            bool returnEmp = CurrentTurner is NPC ? true : false;
 
             switch (action)
             {
@@ -626,7 +626,10 @@ namespace HSRP
         private void LeaveStrife(IEntity ent)
         {
             ent.Dead = true;
-            ent.Health = 0;
+            if (ent.Health < 0)
+            {
+                ent.Health = 0;
+            }
             log = log.AddLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
         }
 
@@ -684,7 +687,7 @@ namespace HSRP
             {
                 int dmg = atk - tar;
                 target.Health -= dmg;
-                log = log.AddLine($"\n{Syntax.ToCodeLine(target.Name)} took {dmg} hitpoints of damage.");
+                log = log.AddLine($"\n{Syntax.ToCodeLine(target.Name)} took {dmg} hitpoint(s) of damage.");
             }
             // If target rolled higher begin counter attack.
             // TODO: Make counter attack guaranteed?

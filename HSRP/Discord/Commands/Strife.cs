@@ -58,7 +58,7 @@ namespace HSRP.Commands
             await ReplyAsync(strf.UpdateStrife(out Player next));
         }
 
-        [Command("activate"), RequireGM]
+        [Command("activate"), Alias("active"), RequireGM]
         public async Task Activate(int id)
         {
             Strife strf = new Strife(id.ToString());
@@ -92,10 +92,10 @@ namespace HSRP.Commands
             strf.Save();
         }
 
-        [Command("check"), InStrife]
+        [Command("check"), Alias("status"), InStrife]
         public async Task Check() => await Check(Context.GetPlayerEntity().StrifeID);
 
-        [Command("check"), RequireGM]
+        [Command("check"), Alias("status"), RequireGM]
         public async Task Check(int id)
         {
             Strife strf = new Strife(id.ToString());
