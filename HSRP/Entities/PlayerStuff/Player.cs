@@ -267,7 +267,7 @@ namespace HSRP
             result = result.AddLine("");
 
             result = result.AddLine("Health Vial: " + Health + "/" + MaxHealth);
-            result = result.AddLine("Strife Specibus " + Specibus);
+            result = result.AddLine("Strife Specibus: " + Specibus);
             result = result.AddLine("");
 
             result = result.AddLine("Echeladder Rung: " + Echeladder);
