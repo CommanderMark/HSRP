@@ -172,6 +172,44 @@ namespace HSRP.Commands
         [Group("quantity"), Alias("amount")]
         public class QuantityCommands : JModuleBase
         {
+            [Command("set"), Priority(1)]
+            public async Task QuantitySet(Player plyr, int index, int amount)
+            {
+                Item item = plyr.Inventory.ElementAtOrDefault(index);
+                if (item == null)
+                {
+                    await ReplyAsync("Invalid item index.");
+                    return;
+                }
+
+                if (amount <= 0 || amount > item.Quantity)
+                {
+                    await ReplyAsync("Invalid amount.");
+                    return;
+                }
+
+                item.Quantity = (uint)amount;
+                plyr.Inventory[index] = item;
+
+                plyr.Save();
+                string log = $"{amount} {Syntax.ToCodeLine(item.Name)} removed from the inventory of {Syntax.ToCodeLine(plyr.Name)}.";
+                await ReplyAsync(log);
+            }
+
+            [Command("set"), Priority(0)]
+            public async Task QuantitySet(Player plyr, string name, int amount)
+            {
+                Item item = plyr.Inventory.FirstOrDefault(x => x.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
+                if (item == null)
+                {
+                    await ReplyAsync("Invalid item name.");
+                    return;
+                }
+
+                int index = plyr.Inventory.IndexOf(item);
+                await QuantitySet(plyr, index, amount);
+            }
+
             [Command("add"), Priority(1)]
             public async Task QuantityAdd(Player plyr, int index, int amount)
             {

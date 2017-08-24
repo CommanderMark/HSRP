@@ -32,6 +32,21 @@ namespace HSRP.Commands
         [Command("skills")]
         public async Task HelpSkills()
         {
+            await ReplyAsync(Skills());
+        }
+
+        [Command("skills")]
+        public async Task HelpSkills(PropertyInfo prop)
+        {
+            AbilityAttribute attrib = (AbilityAttribute)prop.GetCustomAttribute(typeof(AbilityAttribute), false)
+                ?? new AbilityAttribute(AbilityType.None, false, "Errored");
+            string ab = Syntax.ToCodeLine($"{prop.Name} ({attrib.ToString()})") + "\n";
+            ab = ab.AddLine(attrib.Desc);
+            await DiscordToolbox.DMUser(Context.User, ab);
+        }
+
+        public static string Skills()
+        {
             string msg = "List of Base Abilities:";
             foreach (PropertyInfo prop in typeof(AbilitySet).GetProperties())
             {
@@ -44,17 +59,7 @@ namespace HSRP.Commands
             msg += $"\nType `{Constants.BotPrefix}spend [ability name] [amount]` to invest pending skill points "
             + "you may have into a specific stat. Remember that spent skill points can not be refunded.";
 
-            await ReplyAsync(msg);
-        }
-
-        [Command("skills")]
-        public async Task HelpSkills(PropertyInfo prop)
-        {
-            AbilityAttribute attrib = (AbilityAttribute)prop.GetCustomAttribute(typeof(AbilityAttribute), false)
-                ?? new AbilityAttribute(AbilityType.None, false, "Errored");
-            string ab = Syntax.ToCodeLine($"{prop.Name} ({attrib.ToString()})") + "\n";
-            ab = ab.AddLine(attrib.Desc);
-            await DiscordToolbox.DMUser(Context.User, ab);
+            return msg;
         }
     }
 }
