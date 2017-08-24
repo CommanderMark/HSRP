@@ -343,7 +343,7 @@ namespace HSRP
                         {
                             return false;
                         }
-                        Specibus = input;
+                        Specibus = input.ToLower();
                         break;
 
                     // Lusus description.

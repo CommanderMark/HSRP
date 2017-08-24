@@ -123,8 +123,9 @@ namespace HSRP.Commands
             if (Program.Instance.Registers[Context.User.Id] >= 6)
             {
                 Program.Instance.Registers.Remove(Context.User.Id);
-                plyr.PendingSkillPointAllocations = 24;
+                plyr.PendingSkillPointAllocations = Constants.StartingSkillPoints;
                 plyr.Health = 100;
+                plyr.MaxHealth = 100;
                 await Info();
             }
             plyr.Save();
