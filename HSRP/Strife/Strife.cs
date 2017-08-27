@@ -649,7 +649,6 @@ namespace HSRP
                 if (ent.Dead)
                 {
                     ent.Dead = false;
-                    ent.Health = 1;
                 }
 
                 if (ent is Player plyr)

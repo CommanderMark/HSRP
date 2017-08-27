@@ -15,15 +15,17 @@
   <inventory>
     <item value="DUAL CORVOS" quantity="1" equipped="true" />
     <item value="Un-Stolen Computer" quantity="1" />
-    <item value="1/2 Boomerangx2" quantity="0" />
     <item value="Powdered Uranium" quantity="0" />
-    <item value="Cash" quantity="80" />
+    <item value="Cash" quantity="246" />
     <item value="Snake Toxin 2L" quantity="1" />
     <item value="Pathetic Fiduspawn collection" quantity="1" />
     <item value="Signless Shirt" quantity="1" />
     <item value="Venom Recipes" quantity="1" />
-    <item value="Shurikens" quantity="4" />
+    <item value="Shurikens" quantity="2" />
     <item value="Good Phone" quantity="1" />
     <item value="Mask" quantity="1" />
+    <item value="Boomerang" quantity="1" />
+    <item value="Dull Daggersx2" quantity="1" />
+    <item value="Smoke Bombs" quantity="8" />
   </inventory>
 </player>

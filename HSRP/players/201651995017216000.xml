@@ -2,15 +2,15 @@
 <player>
   <info name="Strana Kandros" id="201651995017216000" owner="Moonfang" blood="Burgundy" pineappleOnPizza="false" />
   <lusus>A rather harmless Chameleon-like creature.</lusus>
-  <status hp="100" maxhp="100" dead="false" specibus="staffkind" />
-  <levels echeladder="0" pendingSkillPoints="0" xp="0" nextLevel="0" />
+  <status hp="108" maxhp="108" dead="false" specibus="staffkind" />
+  <levels echeladder="1" pendingSkillPoints="0" xp="3" nextLevel="20" />
   <abilities>
-    <strength value="2" />
-    <constitution value="4" />
+    <strength value="4" />
+    <constitution value="6" />
     <psion value="8" />
     <fortitude value="5" />
     <intimidation value="0" />
-    <persuasion value="5" />
+    <persuasion value="7" />
   </abilities>
   <inventory>
     <item value="Grubtop" quantity="1" />

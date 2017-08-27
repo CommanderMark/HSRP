@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strife id="6" active="false" currentTurn="201651995017216000">
+  <status attackTurn="true" turn="0" />
+  <attackers>
+    <player id="201651995017216000" />
+  </attackers>
+  <targets>
+    <player id="103547713932529664" />
+  </targets>
+  <logs posted="46">
+    <log>Team A:
+0 - Strana Kandros - 100/100
+
+Team T: 
+0 - Sidewind Langston - 106/106
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 2, 5, 6!
+`Sidewind Langston` rolls 4, 1, 1!
+`Strana Kandros` struck `Sidewind Langston` for 7 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `Strana Kandros`.
+
+`Sidewind Langston` rolls 2!
+`Strana Kandros` rolls 4!
+
+`Strana Kandros` is counter attacking.
+`Sidewind Langston` rolls 2!
+`Strana Kandros` rolls 2!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 1, 5, 8!
+`Sidewind Langston` rolls 1, 3, 2!
+`Strana Kandros` struck `Sidewind Langston` for 8 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `Strana Kandros`.
+
+`Sidewind Langston` rolls 2!
+`Strana Kandros` rolls 1!
+
+`Strana Kandros` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` attacks `Sidewind Langston`.
+
+`Strana Kandros` rolls 2!
+`Sidewind Langston` rolls 1!
+
+`Sidewind Langston` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `Strana Kandros`.
+
+`Sidewind Langston` rolls 1!
+`Strana Kandros` rolls 3!
+
+`Strana Kandros` is counter attacking.
+`Sidewind Langston` rolls 2!
+`Strana Kandros` rolls 3!
+
+`Sidewind Langston` was inflicted with `-1` Strength for `2 turns`.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` lunges for a strike towards `Sidewind Langston`.
+
+`Strana Kandros` rolls 2!
+`Sidewind Langston` rolls 2!
+
+Nothing happened.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `Strana Kandros`.
+
+`Sidewind Langston` rolls 2!
+`Strana Kandros` rolls 1!
+
+`Strana Kandros` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 6, 1, 4!
+`Sidewind Langston` rolls 2, 1, 4!
+`Strana Kandros` struck `Sidewind Langston` for 4 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `Strana Kandros`.
+
+`Sidewind Langston` rolls 1!
+`Strana Kandros` rolls 4!
+
+`Strana Kandros` is counter attacking.
+
+`Strana Kandros` appears to have forgotten what they were doing.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` lunges for a strike towards `Sidewind Langston`.
+
+`Strana Kandros` rolls 1!
+`Sidewind Langston` rolls 3!
+
+`Sidewind Langston` is counter attacking.
+`Strana Kandros` rolls 2!
+`Sidewind Langston` rolls 6!
+
+`Strana Kandros` was inflicted with `-4` Strength for `2 turns`.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `Strana Kandros`.
+
+`Sidewind Langston` rolls 2!
+`Strana Kandros` rolls 4!
+
+`Strana Kandros` is counter attacking.
+`Sidewind Langston` rolls 2!
+`Strana Kandros` rolls 3!
+
+`Sidewind Langston` was inflicted with `-1` Strength for `2 turns`.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 1, 7, 7!
+`Sidewind Langston` rolls 2, 1, 1!
+`Strana Kandros` struck `Sidewind Langston` for 11 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` tries to talk their way out of the strife.
+
+`Sidewind Langston` rolls 7!
+`Strana Kandros` rolls 3!
+
+`Strana Kandros` was inflicted with `-8` Strength for `3 turns`.
+Strana Kandros' strength has fallen below 1.
+`Strana Kandros` was unable to resist `Sidewind Langston`'s charm.
+`Strana Kandros` is no longer participating in the strife.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>Attackers have been defeated.
+
+------------
+</log>
+    <log>The strife is now over. XP will be awarded at the discretion of the GM.
+
+------------
+</log>
+    <log>Team A:
+0 - Strana Kandros - 98/100
+
+Team T: 
+0 - Sidewind Langston - 75/106
+
+------------
+</log>
+  </logs>
+</strife>

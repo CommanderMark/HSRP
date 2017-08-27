@@ -3,7 +3,7 @@
   <info name="Sidewind Langston" id="103547713932529664" owner="CommanderMark" blood="Violet" pineappleOnPizza="false" />
   <lusus>Amaryllis. A goat-like creature...yeah that about covers it.</lusus>
   <status hp="106" maxhp="106" dead="false" specibus="Hatchetkind" />
-  <levels echeladder="1" pendingSkillPoints="0" xp="5" nextLevel="15" />
+  <levels echeladder="1" pendingSkillPoints="0" xp="8" nextLevel="15" />
   <abilities>
     <strength value="2" />
     <constitution value="4" />
@@ -18,7 +18,7 @@
     <item value="MOODY BLUE CAPE" quantity="1" equipped="true" />
     <item value="MOODY BLUE RUSTY HATCHET" quantity="1" equipped="true" />
     <item value="Stolen Dagger" quantity="1" />
-    <item value="Cash" quantity="1550" />
+    <item value="Cash" quantity="1050" />
     <item value="Phones" quantity="2" />
     <item value="Ultimate Hatchet from Hell" quantity="1" />
     <item value="Assassin Hatchet" quantity="1" />
