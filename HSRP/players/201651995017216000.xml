@@ -13,7 +13,7 @@
     <persuasion value="5" />
   </abilities>
   <inventory>
-    <item value="Recuperacoon" quantity="1" />
     <item value="Grubtop" quantity="1" />
+    <item value="Repaired Staff" quantity="1" />
   </inventory>
 </player>

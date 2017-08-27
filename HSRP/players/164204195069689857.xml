@@ -3,7 +3,7 @@
   <info name="Rezkas Kabsen" id="164204195069689857" owner="&quot;Not&quot; Satan" blood="Teal" pineappleOnPizza="false" />
   <lusus>large snake</lusus>
   <status hp="114" maxhp="114" dead="false" specibus="Bladekind" />
-  <levels echeladder="3" pendingSkillPoints="0" xp="70" nextLevel="90" />
+  <levels echeladder="3" pendingSkillPoints="0" xp="80" nextLevel="90" />
   <abilities>
     <strength value="6" />
     <constitution value="6" />
@@ -15,7 +15,9 @@
   <inventory>
     <item value="Bastard Sword" quantity="1" equipped="true" />
     <item value="Shortsword" quantity="1" equipped="true" />
-    <item value="Cash" quantity="1200" />
+    <item value="Cash" quantity="700" />
     <item value="GHM Tablet" quantity="1" />
+    <item value="Leinah's Computer" quantity="1" />
+    <item value="Russian Books" quantity="1" />
   </inventory>
 </player>
