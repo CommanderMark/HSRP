@@ -172,7 +172,7 @@ namespace HSRP
 
             npc.Add(info, status, abilities);
 
-            if (TotalAbilities.Equals(Abilities))
+            if (!TotalAbilities.Equals(Abilities))
             {
                 XElement modifiers = new XElement("modifiers");
                 modifiers.Add(Modifiers.ToXmlWithoutEmpties());

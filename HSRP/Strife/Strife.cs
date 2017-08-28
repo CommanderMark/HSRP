@@ -62,7 +62,7 @@ namespace HSRP
                     return Targets[turn];
                 }
 
-                throw new NullReferenceException($"Current entity is null. (TURN: {turn}, ATTACKTURN: {attackTurn.ToString()})");
+                return null;
             }
         }
         /// <summary>
@@ -297,6 +297,7 @@ namespace HSRP
             CurrentTurner = CurrentEntity;
 
             // Add list of users to log but skip it when posting the logs as that's posted separately.
+            Logs.Clear();
             log = Display();
             AddLog();
             postedLogs = 1;
@@ -556,7 +557,7 @@ namespace HSRP
 
                         log = log.AddLine("Targets are now taking their turns.");
                     }
-                } while ((Attackers[turn].Dead && attackTurn) || (Targets[turn].Dead && !attackTurn));
+                } while ((Attackers[turn].Dead && attackTurn));
             }
             else
             {
@@ -584,7 +585,7 @@ namespace HSRP
 
                         log = log.AddLine("Attackers are now taking their turns.");
                     }
-                } while ((Targets[turn].Dead && !attackTurn) || (Attackers[turn].Dead && attackTurn));
+                } while ((Targets[turn].Dead && !attackTurn));
             }
 
             AddLog();
@@ -915,7 +916,7 @@ namespace HSRP
                         } break;
                 }
 
-                ApplyTempMod(target, stat, -debuff, 2);
+                ApplyTempMod(target, stat, -debuff, -1);
 
                 // If STR or FOR reach 0 they leave the strife.
                 if ((target.TotalAbilities.Strength < 1 && rng == 0) || (target.TotalAbilities.Fortitude < 1 && rng == 1))
@@ -934,7 +935,7 @@ namespace HSRP
                     {
                         log = log.AddLine(Toolbox.GetMessage("speKillFail", Syntax.ToCodeLine(target.Name)));
                         log = log.AddLine(Syntax.ToCodeLine(target.Name.ToApostrophe()) + " debuffs were removed.");
-                        target.TempMods = new Dictionary<int, AbilitySet>();
+                        target.Modifiers = new AbilitySet();
                     }
                 }
             }

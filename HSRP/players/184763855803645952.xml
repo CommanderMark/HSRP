@@ -2,8 +2,8 @@
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
   <lusus>Veneficus is a giant Scorpion with spikes on his back.</lusus>
-  <status hp="103" maxhp="137" dead="false" specibus="Bladekindx2" />
-  <levels echeladder="4" pendingSkillPoints="0" xp="115" nextLevel="150" />
+  <status hp="84" maxhp="137" dead="false" specibus="Bladekindx2" />
+  <levels echeladder="4" pendingSkillPoints="0" xp="125" nextLevel="150" />
   <abilities>
     <strength value="12" />
     <constitution value="10" />
@@ -18,7 +18,6 @@
     <item value="Powdered Uranium" quantity="0" />
     <item value="Cash" quantity="246" />
     <item value="Snake Toxin 2L" quantity="1" />
-    <item value="Pathetic Fiduspawn collection" quantity="1" />
     <item value="Signless Shirt" quantity="1" />
     <item value="Venom Recipes" quantity="1" />
     <item value="Shurikens" quantity="2" />

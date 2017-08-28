@@ -2,18 +2,20 @@
 <player>
   <info name="Strana Kandros" id="201651995017216000" owner="Moonfang" blood="Burgundy" pineappleOnPizza="false" />
   <lusus>A rather harmless Chameleon-like creature.</lusus>
-  <status hp="108" maxhp="108" dead="false" specibus="staffkind" />
-  <levels echeladder="1" pendingSkillPoints="0" xp="3" nextLevel="20" />
+  <status hp="93" maxhp="122" dead="false" specibus="staffkind" />
+  <levels echeladder="3" pendingSkillPoints="0" xp="53" nextLevel="90" />
   <abilities>
-    <strength value="4" />
-    <constitution value="6" />
-    <psion value="8" />
-    <fortitude value="5" />
-    <intimidation value="0" />
-    <persuasion value="7" />
+    <strength value="5" />
+    <constitution value="8" />
+    <psion value="10" />
+    <fortitude value="7" />
+    <intimidation value="2" />
+    <persuasion value="10" />
   </abilities>
   <inventory>
     <item value="Grubtop" quantity="1" />
     <item value="Repaired Staff" quantity="1" />
+    <item value="Pathetic Fiduspawn Collection" quantity="1" />
+    <item value="Fiduspawn Rulebook" quantity="1" />
   </inventory>
 </player>
