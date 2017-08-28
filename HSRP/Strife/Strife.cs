@@ -702,11 +702,11 @@ namespace HSRP
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
-            int atkY = attacker.Abilities.Strength;
+            int atkY = attacker.TotalAbilities.Strength;
 
             // Target XDY roll.
             int tarX = target.DiceRolls;
-            int tarY = target.Abilities.Constitution;
+            int tarY = target.TotalAbilities.Constitution;
 
             // Dice rolls.
             int atk = Toolbox.DiceRoll(atkX, atkY);
@@ -731,7 +731,7 @@ namespace HSRP
                 // 50% chance to counter.
                 if (Toolbox.RandInt(2) == 1)
                 {
-                    tarY = target.Abilities.Persuasion;
+                    tarY = target.TotalAbilities.Persuasion;
                     // If the strength modifier is already debuffed below 1 then don't debuff.
                     if (attacker.TotalAbilities.Strength < 1)
                     {
@@ -783,11 +783,11 @@ namespace HSRP
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
-            int atkY = attacker.Abilities.Psion;
+            int atkY = attacker.TotalAbilities.Psion;
 
             // Target XDY roll.
             int tarX = target.DiceRolls;
-            int tarY = target.Abilities.Fortitude;
+            int tarY = target.TotalAbilities.Fortitude;
 
             // Dice rolls.
             int[] atk = new int[3];
@@ -823,11 +823,11 @@ namespace HSRP
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
-            int atkY = attacker.Abilities.Psion;
+            int atkY = attacker.TotalAbilities.Psion;
 
             // Target XDY roll.
             int tarX = target.DiceRolls;
-            int tarY = target.Abilities.Fortitude;
+            int tarY = target.TotalAbilities.Fortitude;
 
             // Dice rolls.
             int[] atk = new int[3];
@@ -869,11 +869,11 @@ namespace HSRP
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
-            int atkY = attacker.Abilities.Intimidation + attacker.Abilities.Strength;
+            int atkY = attacker.TotalAbilities.Intimidation + attacker.TotalAbilities.Strength;
 
             // Target XDY roll.
             int tarX = target.DiceRolls;
-            int tarY = target.Abilities.Persuasion + target.Abilities.Fortitude;
+            int tarY = target.TotalAbilities.Persuasion + target.TotalAbilities.Fortitude;
 
             // Dice rolls.
             int atk = Toolbox.DiceRoll(atkX, atkY);
@@ -892,7 +892,7 @@ namespace HSRP
                     // Roll 1DINT to debuff STR for 3 turns.
                     case 0:
                         {
-                            int y = attacker.Abilities.Intimidation;
+                            int y = attacker.TotalAbilities.Intimidation;
                             debuff = Toolbox.DiceRoll(1, y);
                             debuff = Math.Min(target.Abilities.Strength / 3, debuff);
                             stat = "strength";
@@ -901,7 +901,7 @@ namespace HSRP
                     // Roll 1DPER to debuff FOR for 1 turn.
                     case 1:
                         {
-                            int y = attacker.Abilities.Persuasion;
+                            int y = attacker.TotalAbilities.Persuasion;
                             debuff = Toolbox.DiceRoll(1, y);
                             debuff = Math.Min(target.Abilities.Fortitude / 3, debuff);
                             stat = "fortitude";
@@ -910,7 +910,7 @@ namespace HSRP
                     // Roll 1DINT to debuff INT for 1 turn.
                     case 2:
                         {
-                            int y = attacker.Abilities.Intimidation;
+                            int y = attacker.TotalAbilities.Intimidation;
                             debuff = Toolbox.DiceRoll(1, y);
                             stat = "intimidation";
                         } break;
