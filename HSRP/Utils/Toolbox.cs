@@ -42,6 +42,11 @@ namespace HSRP
 
         public static int RandInt(int max, bool inclusive = false) => RandInt(0, max, inclusive);
 
+        /// <summary>
+        /// Returns true or false randomly.
+        /// </summary>
+        public static bool TrueOrFalse() => RandInt(2) == 1;
+
         public static void UpdateMessages()
         {
             Messages = new Dictionary<string, string[]>();

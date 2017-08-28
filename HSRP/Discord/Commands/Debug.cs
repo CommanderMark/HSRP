@@ -8,6 +8,7 @@ using System.Xml.Linq;
 
 namespace HSRP.Commands
 {
+    [Group("debug")]
     public class DebugCommands : JModuleBase
     {
         [Command("filter"), RequireJorge]

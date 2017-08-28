@@ -119,6 +119,11 @@ namespace HSRP
             return true;
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public AbilitySet() { }
         public AbilitySet(XElement ele)
         {

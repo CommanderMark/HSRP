@@ -21,9 +21,8 @@
 
   <!-- Fails to counter attack. -->
   <messages trigger="phyCounterFail">
-    <msg>Nothing happened.</msg>
-    <msg>{0} appears to have forgotten what they were doing.</msg>
-    <msg>{0} appears to have forgotten how they were suppose to do that.</msg>
+    <msg>Counter attack failed.</msg>
+    <msg>{0} missed their counter attack.</msg>
   </messages>
 
 
@@ -37,6 +36,9 @@
     <msg>{0} was unable to influence {1}.</msg>
   </messages>
   <!-- Attack kills someone. -->
+  <messages trigger="speKillFail">
+    <msg>{0} still appears to be holding on.</msg>
+  </messages>
   <messages trigger="speKill">
     <msg>{0} was unable to resist {1}'s charm.</msg>
     <msg>{0} was influenced to stop strifing.</msg>

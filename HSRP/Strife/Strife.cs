@@ -261,14 +261,24 @@ namespace HSRP
             for (int i = 0; i < Attackers.Count; i++)
             {
                 IEntity ent = Attackers[i];
-                txt = txt.AddLine($"{i} - {ent.Name} - {ent.Health}/{ent.MaxHealth}");
+                string usr = $"{i} - {ent.Name} - {ent.Health}/{ent.MaxHealth}";
+                if (ent.Dead)
+                {
+                    usr += " (DEAD)";
+                }
+                txt = txt.AddLine(usr);
             }
 
             txt = txt.AddLine("\nTeam T: ");
             for (int i = 0; i < Targets.Count; i++)
             {
                 IEntity ent = Targets[i];
-                txt = txt.AddLine($"{i} - {ent.Name} - {ent.Health}/{ent.MaxHealth}");
+                string usr = $"{i} - {ent.Name} - {ent.Health}/{ent.MaxHealth}";
+                if (ent.Dead)
+                {
+                    usr += " (DEAD)";
+                }
+                txt = txt.AddLine(usr);
             }
 
             return txt;
@@ -413,6 +423,9 @@ namespace HSRP
             IEntity attacker = CurrentEntity;
             IEntity target = GetTarget(targetNum, targetingAttackers);
 
+            NPC npcAtk = attacker as NPC;
+            NPC npcTar = target as NPC;
+
             // Is it their turn?
             if (CurrentTurner.ID != plyr.ID)
             {
@@ -449,11 +462,18 @@ namespace HSRP
             }
 
             // Are they trying to use a lusus to perform psionic attacks?
-            if (attacker is NPC npc && npc.Type == NPCType.Lusus
+            if (npcAtk != null && npcAtk.Type == NPCType.Lusus
                 && !(action == StrifeAction.PhysicalAttack || action == StrifeAction.Guard)
                 )
             {
                 reason = "Invalid attack. A lusus cannot perform psionic or speech attacks.";
+                return false;
+            }
+
+            // Are they trying to intimidate a lusus?
+            if (npcTar != null && npcTar.Type == NPCType.Lusus && action == StrifeAction.SpeechAttack)
+            {
+                reason = "Invalid attack. Cannot indimidate lusus.";
                 return false;
             }
 
@@ -536,7 +556,7 @@ namespace HSRP
 
                         log = log.AddLine("Targets are now taking their turns.");
                     }
-                } while (Attackers[turn].Dead && attackTurn);
+                } while ((Attackers[turn].Dead && attackTurn) || (Targets[turn].Dead && !attackTurn));
             }
             else
             {
@@ -564,7 +584,7 @@ namespace HSRP
 
                         log = log.AddLine("Attackers are now taking their turns.");
                     }
-                } while (Targets[turn].Dead && !attackTurn);
+                } while ((Targets[turn].Dead && !attackTurn) || (Attackers[turn].Dead && attackTurn));
             }
 
             AddLog();
@@ -582,11 +602,18 @@ namespace HSRP
             {
                 throw new NullReferenceException($"Current entity is null. (TURN: {turn}, ATTACKTURN: {attackTurn.ToString()})");
             }
-            int targetID = attackTurn
-                ? Toolbox.RandInt(Targets.Count)
-                : Toolbox.RandInt(Attackers.Count);
-            
-            IEntity target = GetTarget(targetID, !attackTurn);
+            int targetID = 0;
+
+            IEntity target = null;
+
+            while (target == null || target.Dead)
+            {
+                targetID = attackTurn
+                    ? Toolbox.RandInt(Targets.Count)
+                    : Toolbox.RandInt(Attackers.Count);
+
+                target = GetTarget(targetID, !attackTurn);
+            }
 
             // TODO: More AI-y stuff.
             if (ai is NPC npc)
@@ -644,11 +671,16 @@ namespace HSRP
 
             foreach (IEntity ent in Entities)
             {
-                ent.Controller = 0;
+                if (!(ent is NPC npc && npc.Type == NPCType.Lusus))
+                {
+                    ent.Controller = 0;
+                }
+
                 // If an entity is dead reset their HP to 1. 
                 if (ent.Dead)
                 {
                     ent.Dead = false;
+                    if (ent.Health < 1) { ent.Health = 1; }
                 }
 
                 if (ent is Player plyr)
@@ -852,47 +884,58 @@ namespace HSRP
             if (atk > tar)
             {
                 int rng = Toolbox.RandInt(2, true);
+                int debuff = 0;
+                string stat = "";
                 switch (rng)
                 {
                     // Roll 1DINT to debuff STR for 3 turns.
                     case 0:
                         {
                             int y = attacker.Abilities.Intimidation;
-                            int debuff = -Toolbox.DiceRoll(1, y);
-                            ApplyTempMod(target, "strength", debuff, 2);
+                            debuff = Toolbox.DiceRoll(1, y);
+                            debuff = Math.Min(target.Abilities.Strength / 3, debuff);
+                            stat = "strength";
                         } break;
 
                     // Roll 1DPER to debuff FOR for 1 turn.
                     case 1:
                         {
                             int y = attacker.Abilities.Persuasion;
-                            int debuff = -Toolbox.DiceRoll(1, y);
-                            ApplyTempMod(target, "fortitude", debuff, -1);
+                            debuff = Toolbox.DiceRoll(1, y);
+                            debuff = Math.Min(target.Abilities.Fortitude / 3, debuff);
+                            stat = "fortitude";
                         } break;
                     
                     // Roll 1DINT to debuff INT for 1 turn.
                     case 2:
                         {
                             int y = attacker.Abilities.Intimidation;
-                            int debuff = -Toolbox.DiceRoll(1, y);
-                            ApplyTempMod(target, "intimidation", debuff, 2);
+                            debuff = Toolbox.DiceRoll(1, y);
+                            stat = "intimidation";
                         } break;
                 }
 
+                ApplyTempMod(target, stat, -debuff, 2);
+
                 // If STR or FOR reach 0 they leave the strife.
-                if (target.TotalAbilities.Strength < 1 && rng == 0)
+                if ((target.TotalAbilities.Strength < 1 && rng == 0) || (target.TotalAbilities.Fortitude < 1 && rng == 1))
                 {
-                    log = log.AddLine($"{target.Name.ToApostrophe()} strength has fallen below 1.");
-                    log = log.AddLine(Toolbox.GetMessage("speKill", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
+                    log = log.AddLine($"{target.Name.ToApostrophe()} {stat} has fallen below 1.");
 
-                    LeaveStrife(target);
-                }
-                else if (target.TotalAbilities.Fortitude < 1 && rng == 1)
-                {
-                    log = log.AddLine($"{target.Name.ToApostrophe()} fortitude has fallen below 1.");
-                    log = log.AddLine(Toolbox.GetMessage("speKill", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
+                    // 50% chance for them to leave the strife.
+                    if (Toolbox.TrueOrFalse())
+                    {
+                        log = log.AddLine(Toolbox.GetMessage("speKill", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
 
-                    LeaveStrife(target);
+                        LeaveStrife(target);
+                    }
+                    // Otherwise their debuffs are removed.
+                    else
+                    {
+                        log = log.AddLine(Toolbox.GetMessage("speKillFail", Syntax.ToCodeLine(target.Name)));
+                        log = log.AddLine(Syntax.ToCodeLine(target.Name.ToApostrophe()) + " debuffs were removed.");
+                        target.TempMods = new Dictionary<int, AbilitySet>();
+                    }
                 }
             }
             else

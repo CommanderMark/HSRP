@@ -26,7 +26,7 @@ namespace HSRP
             }
             catch (Exception e)
             {
-                Console.WriteLine("[XML] " + "Couldn't load xml document \"" + filePath + "\"!\n" + e);
+                Console.WriteLine("[XML] " + "Couldn't load xml document \"" + filePath + "\"!");
                 return null;
             }
         }

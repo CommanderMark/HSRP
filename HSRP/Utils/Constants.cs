@@ -28,7 +28,7 @@
         public static ulong STRIFE_CHANNEL = RP_STRIFE_CHANNEL;
 
         public const ulong TEST_STRIFE_CHANNEL = 343972292730028042;
-        public const ulong RP_STRIFE_CHANNEL = 349060932405690369;
+        public const ulong RP_STRIFE_CHANNEL = 351522810008436736;
     }
 
     public static class Dirs

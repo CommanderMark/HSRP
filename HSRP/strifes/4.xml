@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<strife id="4" active="false" currentTurn="0">
+<strife id="4" active="false" currentTurn="3">
   <status attackTurn="false" turn="0" />
   <attackers>
     <player id="184763855803645952" />
     <player id="164204195069689857" />
     <npc id="2">
       <info name="Dendar" type="Lusus" pineappleOnPizza="false">Dendar, your lusus.</info>
-      <status hp="150" maxhp="150" dead="false" specibus="lususkind" diceRolls="1" controller="164204195069689857" />
+      <status hp="118" maxhp="150" dead="false" specibus="lususkind" diceRolls="1" controller="164204195069689857" />
       <abilities>
         <strength value="15" />
         <constitution value="17" />
@@ -15,15 +15,12 @@
         <intimidation value="8" />
         <persuasion value="0" />
       </abilities>
-      <modifiers>
-        <abilities />
-      </modifiers>
     </npc>
   </attackers>
   <targets>
     <npc id="3">
       <info name="Subjugglator" type="Normal" pineappleOnPizza="false">A subjugglator, they seem eager to kill you.</info>
-      <status hp="140" maxhp="140" dead="false" specibus="Clubkind" diceRolls="1" controller="0" />
+      <status hp="1" maxhp="140" dead="false" specibus="Clubkind" diceRolls="1" controller="0" />
       <abilities>
         <strength value="9" />
         <constitution value="5" />
@@ -31,11 +28,11 @@
         <fortitude value="5" />
         <intimidation value="5" />
         <persuasion value="5" />
-        </abilities>
+      </abilities>
     </npc>
     <npc id="4">
       <info name="Laughassassin" type="Normal" pineappleOnPizza="false">Same Laughassassin that almost killed you, time for some sweet revenge..</info>
-      <status hp="120" maxhp="120" dead="false" specibus="Bladekind" diceRolls="1" controller="0" />
+      <status hp="1" maxhp="120" dead="false" specibus="Bladekind" diceRolls="1" controller="0" />
       <abilities>
         <strength value="7" />
         <constitution value="5" />
@@ -45,6 +42,3253 @@
         <persuasion value="6" />
       </abilities>
     </npc>
-
+    <npc id="5">
+      <info name="Derideo" type="Lusus" pineappleOnPizza="false">The Juggalo's Lusus, they are a Giant Crab.</info>
+      <status hp="1" maxhp="140" dead="false" specibus="Lususkind" diceRolls="1" controller="0" />
+      <abilities>
+        <strength value="10" />
+        <constitution value="8" />
+        <psion value="0" />
+        <fortitude value="7" />
+        <intimidation value="0" />
+        <persuasion value="0" />
+      </abilities>
+    </npc>
   </targets>
+  <logs posted="451">
+    <log>Team A:
+0 - Sicarius Anathera - 45/123
+1 - Rezkas Kabsen - 93/114
+2 - Dendar (Lusus) - 150/150
+
+Team T: 
+0 - Subjugglator - 140/140
+1 - Laughassassin - 120/120
+2 - Derideo (Lusus) - 110/140
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 9!
+`Laughassassin` rolls 4!
+
+`Laughassassin` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` tries to talk their way out of the strife.
+
+`Rezkas Kabsen` rolls 3!
+`Subjugglator` rolls 5!
+
+`Rezkas Kabsen` was unable to influence `Subjugglator`.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 14!
+`Derideo (Lusus)` rolls 2!
+
+`Derideo (Lusus)` took 12 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Dendar (Lusus)`.
+
+`Subjugglator` rolls 2!
+`Dendar (Lusus)` rolls 15!
+
+`Dendar (Lusus)` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Dendar (Lusus)`.
+
+`Laughassassin` rolls 6!
+`Dendar (Lusus)` rolls 8!
+
+`Dendar (Lusus)` is counter attacking.
+`Laughassassin` rolls 3!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 7!
+`Rezkas Kabsen` rolls 4!
+
+`Rezkas Kabsen` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 4!
+`Laughassassin` rolls 4!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` tries to talk their way out of the strife.
+
+`Rezkas Kabsen` rolls 12!
+`Subjugglator` rolls 4!
+
+`Subjugglator` was inflicted with `-1` Fortitude for `3 turns`.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Subjugglator`.
+
+`Dendar (Lusus)` rolls 3!
+`Subjugglator` rolls 3!
+
+Nothing happened.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Sicarius Anathera`.
+
+`Subjugglator` rolls 6!
+`Sicarius Anathera` rolls 6!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Dendar (Lusus)`.
+
+`Laughassassin` rolls 7!
+`Dendar (Lusus)` rolls 2!
+
+`Dendar (Lusus)` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 6!
+`Rezkas Kabsen` rolls 4!
+
+`Rezkas Kabsen` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 7!
+`Laughassassin` rolls 3!
+
+`Laughassassin` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Subjugglator`.
+
+`Rezkas Kabsen` rolls 2!
+`Subjugglator` rolls 2!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 10!
+`Derideo (Lusus)` rolls 6!
+
+`Derideo (Lusus)` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Sicarius Anathera`.
+
+`Subjugglator` rolls 5!
+`Sicarius Anathera` rolls 8!
+
+`Sicarius Anathera` is counter attacking.
+`Subjugglator` rolls 6!
+`Sicarius Anathera` rolls 5!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Sicarius Anathera`.
+
+`Laughassassin` rolls 6!
+`Sicarius Anathera` rolls 4!
+
+`Sicarius Anathera` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 8!
+`Dendar (Lusus)` rolls 17!
+
+`Dendar (Lusus)` is counter attacking.
+`Derideo (Lusus)` rolls 7!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 6!
+`Laughassassin` rolls 4!
+
+`Laughassassin` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Derideo (Lusus)`.
+
+`Rezkas Kabsen` rolls 6!
+`Derideo (Lusus)` rolls 3!
+
+`Derideo (Lusus)` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 4!
+`Derideo (Lusus)` rolls 4!
+
+Nothing happened.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Dendar (Lusus)`.
+
+`Subjugglator` rolls 6!
+`Dendar (Lusus)` rolls 13!
+
+`Dendar (Lusus)` is counter attacking.
+`Subjugglator` rolls 1!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Rezkas Kabsen`.
+
+`Laughassassin` rolls 2!
+`Rezkas Kabsen` rolls 4!
+
+`Rezkas Kabsen` is counter attacking.
+
+`Rezkas Kabsen` missed thier counter attack.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 9!
+`Dendar (Lusus)` rolls 15!
+
+`Dendar (Lusus)` is counter attacking.
+
+`Dendar (Lusus)` missed thier counter attack.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 11!
+`Laughassassin` rolls 1!
+
+`Laughassassin` took 10 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Subjugglator`.
+
+`Rezkas Kabsen` rolls 1!
+`Subjugglator` rolls 3!
+
+`Subjugglator` is counter attacking.
+
+`Subjugglator` missed their counter attack.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 8!
+`Derideo (Lusus)` rolls 4!
+
+`Derideo (Lusus)` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Sicarius Anathera`.
+
+`Subjugglator` rolls 6!
+`Sicarius Anathera` rolls 3!
+
+`Sicarius Anathera` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Rezkas Kabsen`.
+
+`Laughassassin` rolls 2!
+`Rezkas Kabsen` rolls 6!
+
+`Rezkas Kabsen` is counter attacking.
+`Laughassassin` rolls 7!
+`Rezkas Kabsen` rolls 11!
+
+`Laughassassin` was inflicted with `-4` Strength for `2 turns`.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Sicarius Anathera`.
+
+`Derideo (Lusus)` rolls 2!
+`Sicarius Anathera` rolls 6!
+
+`Sicarius Anathera` is counter attacking.
+`Derideo (Lusus)` rolls 3!
+`Sicarius Anathera` rolls 6!
+
+`Derideo (Lusus)` was inflicted with `-3` Strength for `2 turns`.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 2!
+`Laughassassin` rolls 5!
+
+`Laughassassin` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Laughassassin`.
+
+`Rezkas Kabsen` rolls 5!
+`Laughassassin` rolls 2!
+
+`Laughassassin` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Subjugglator`.
+
+`Dendar (Lusus)` rolls 12!
+`Subjugglator` rolls 5!
+
+`Subjugglator` took 7 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Dendar (Lusus)`.
+
+`Subjugglator` rolls 2!
+`Dendar (Lusus)` rolls 5!
+
+`Dendar (Lusus)` is counter attacking.
+`Subjugglator` rolls 4!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Sicarius Anathera`.
+
+`Laughassassin` rolls 2!
+`Sicarius Anathera` rolls 5!
+
+`Sicarius Anathera` is counter attacking.
+`Laughassassin` rolls 7!
+`Sicarius Anathera` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 7!
+`Rezkas Kabsen` rolls 2!
+
+`Rezkas Kabsen` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 8!
+`Laughassassin` rolls 1!
+
+`Laughassassin` took 7 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` tries to talk their way out of the strife.
+
+`Rezkas Kabsen` rolls 10!
+`Subjugglator` rolls 2!
+
+`Subjugglator` was inflicted with `-3` Strength for `3 turns`.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Subjugglator`.
+
+`Dendar (Lusus)` rolls 10!
+`Subjugglator` rolls 4!
+
+`Subjugglator` took 6 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Sicarius Anathera`.
+
+`Subjugglator` rolls 9!
+`Sicarius Anathera` rolls 7!
+
+`Sicarius Anathera` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Dendar (Lusus)`.
+
+`Laughassassin` rolls 7!
+`Dendar (Lusus)` rolls 4!
+
+`Dendar (Lusus)` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 5!
+`Rezkas Kabsen` rolls 3!
+
+`Rezkas Kabsen` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 6!
+`Laughassassin` rolls 4!
+
+`Laughassassin` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Subjugglator`.
+
+`Rezkas Kabsen` rolls 4!
+`Subjugglator` rolls 3!
+
+`Subjugglator` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Subjugglator`.
+
+`Dendar (Lusus)` rolls 11!
+`Subjugglator` rolls 4!
+
+`Subjugglator` took 7 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Sicarius Anathera`.
+
+`Subjugglator` rolls 2!
+`Sicarius Anathera` rolls 6!
+
+`Sicarius Anathera` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Rezkas Kabsen`.
+
+`Laughassassin` rolls 1!
+`Rezkas Kabsen` rolls 6!
+
+`Rezkas Kabsen` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Sicarius Anathera`.
+
+`Derideo (Lusus)` rolls 2!
+`Sicarius Anathera` rolls 2!
+
+Nothing happened.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 6!
+`Laughassassin` rolls 5!
+
+`Laughassassin` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Subjugglator`.
+
+`Rezkas Kabsen` rolls 2!
+`Subjugglator` rolls 2!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Subjugglator`.
+
+`Dendar (Lusus)` rolls 2!
+`Subjugglator` rolls 3!
+
+`Subjugglator` is counter attacking.
+`Dendar (Lusus)` rolls 9!
+`Subjugglator` rolls 4!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Dendar (Lusus)`.
+
+`Subjugglator` rolls 9!
+`Dendar (Lusus)` rolls 9!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Dendar (Lusus)`.
+
+`Laughassassin` rolls 6!
+`Dendar (Lusus)` rolls 9!
+
+`Dendar (Lusus)` is counter attacking.
+`Laughassassin` rolls 2!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 6!
+`Rezkas Kabsen` rolls 1!
+
+`Rezkas Kabsen` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 7!
+`Laughassassin` rolls 3!
+
+`Laughassassin` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Subjugglator`.
+
+`Rezkas Kabsen` rolls 6!
+`Subjugglator` rolls 2!
+
+`Subjugglator` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Subjugglator`.
+
+`Dendar (Lusus)` rolls 14!
+`Subjugglator` rolls 2!
+
+`Subjugglator` took 12 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Dendar (Lusus)`.
+
+`Subjugglator` rolls 9!
+`Dendar (Lusus)` rolls 15!
+
+`Dendar (Lusus)` is counter attacking.
+`Subjugglator` rolls 7!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Dendar (Lusus)`.
+
+`Laughassassin` rolls 4!
+`Dendar (Lusus)` rolls 9!
+
+`Dendar (Lusus)` is counter attacking.
+
+`Dendar (Lusus)` missed their counter attack.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 7!
+`Rezkas Kabsen` rolls 2!
+
+`Rezkas Kabsen` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 5!
+`Laughassassin` rolls 4!
+
+`Laughassassin` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attempts to intimidate `Subjugglator`.
+
+`Rezkas Kabsen` rolls 11!
+`Subjugglator` rolls 5!
+
+`Subjugglator` was inflicted with `-1` Fortitude for `3 turns`.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Subjugglator`.
+
+`Dendar (Lusus)` rolls 8!
+`Subjugglator` rolls 1!
+
+`Subjugglator` took 7 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Dendar (Lusus)`.
+
+`Subjugglator` rolls 1!
+`Dendar (Lusus)` rolls 4!
+
+`Dendar (Lusus)` is counter attacking.
+`Subjugglator` rolls 9!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Rezkas Kabsen`.
+
+`Laughassassin` rolls 4!
+`Rezkas Kabsen` rolls 5!
+
+`Rezkas Kabsen` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 4!
+`Rezkas Kabsen` rolls 3!
+
+`Rezkas Kabsen` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 9!
+`Laughassassin` rolls 3!
+
+`Laughassassin` took 6 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Subjugglator`.
+
+`Rezkas Kabsen` rolls 6!
+`Subjugglator` rolls 5!
+
+`Subjugglator` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 2!
+`Derideo (Lusus)` rolls 3!
+
+`Derideo (Lusus)` is counter attacking.
+`Dendar (Lusus)` rolls 13!
+`Derideo (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Dendar (Lusus)`.
+
+`Subjugglator` rolls 9!
+`Dendar (Lusus)` rolls 1!
+
+`Dendar (Lusus)` took 8 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Rezkas Kabsen`.
+
+`Laughassassin` rolls 4!
+`Rezkas Kabsen` rolls 2!
+
+`Rezkas Kabsen` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 1!
+`Rezkas Kabsen` rolls 4!
+
+`Rezkas Kabsen` is counter attacking.
+`Derideo (Lusus)` rolls 2!
+`Rezkas Kabsen` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 10!
+`Laughassassin` rolls 4!
+
+`Laughassassin` took 6 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Subjugglator`.
+
+`Rezkas Kabsen` rolls 4!
+`Subjugglator` rolls 2!
+
+`Subjugglator` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 2!
+`Derideo (Lusus)` rolls 2!
+
+Nothing happened.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Sicarius Anathera`.
+
+`Subjugglator` rolls 6!
+`Sicarius Anathera` rolls 5!
+
+`Sicarius Anathera` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Sicarius Anathera`.
+
+`Laughassassin` rolls 7!
+`Sicarius Anathera` rolls 8!
+
+`Sicarius Anathera` is counter attacking.
+`Laughassassin` rolls 3!
+`Sicarius Anathera` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Sicarius Anathera`.
+
+`Derideo (Lusus)` rolls 3!
+`Sicarius Anathera` rolls 4!
+
+`Sicarius Anathera` is counter attacking.
+`Derideo (Lusus)` rolls 8!
+`Sicarius Anathera` rolls 3!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 1!
+`Laughassassin` rolls 5!
+
+`Laughassassin` is counter attacking.
+`Sicarius Anathera` rolls 1!
+`Laughassassin` rolls 5!
+
+`Sicarius Anathera` was inflicted with `-4` Strength for `2 turns`.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attempts to intimidate `Subjugglator`.
+
+`Rezkas Kabsen` rolls 11!
+`Subjugglator` rolls 9!
+
+`Subjugglator` was inflicted with `-4` Intimidation for `3 turns`.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 13!
+`Derideo (Lusus)` rolls 6!
+
+`Derideo (Lusus)` took 7 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Dendar (Lusus)`.
+
+`Subjugglator` rolls 3!
+`Dendar (Lusus)` rolls 11!
+
+`Dendar (Lusus)` is counter attacking.
+`Subjugglator` rolls 4!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Rezkas Kabsen`.
+
+`Laughassassin` rolls 6!
+`Rezkas Kabsen` rolls 5!
+
+`Rezkas Kabsen` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 10!
+`Rezkas Kabsen` rolls 4!
+
+`Rezkas Kabsen` took 6 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 9!
+`Laughassassin` rolls 1!
+
+`Laughassassin` took 8 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Subjugglator`.
+
+`Rezkas Kabsen` rolls 4!
+`Subjugglator` rolls 4!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 13!
+`Derideo (Lusus)` rolls 7!
+
+`Derideo (Lusus)` took 6 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Sicarius Anathera`.
+
+`Subjugglator` rolls 2!
+`Sicarius Anathera` rolls 4!
+
+`Sicarius Anathera` is counter attacking.
+`Subjugglator` rolls 7!
+`Sicarius Anathera` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Rezkas Kabsen`.
+
+`Laughassassin` rolls 3!
+`Rezkas Kabsen` rolls 1!
+
+`Rezkas Kabsen` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 7!
+`Dendar (Lusus)` rolls 6!
+
+`Dendar (Lusus)` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 6!
+`Laughassassin` rolls 2!
+
+`Laughassassin` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Subjugglator`.
+
+`Rezkas Kabsen` rolls 2!
+`Subjugglator` rolls 1!
+
+`Subjugglator` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 5!
+`Derideo (Lusus)` rolls 5!
+
+Nothing happened.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Rezkas Kabsen`.
+
+`Subjugglator` rolls 3!
+`Rezkas Kabsen` rolls 1!
+
+`Rezkas Kabsen` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Sicarius Anathera`.
+
+`Laughassassin` rolls 3!
+`Sicarius Anathera` rolls 6!
+
+`Sicarius Anathera` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Sicarius Anathera`.
+
+`Derideo (Lusus)` rolls 2!
+`Sicarius Anathera` rolls 8!
+
+`Sicarius Anathera` is counter attacking.
+`Derideo (Lusus)` rolls 7!
+`Sicarius Anathera` rolls 5!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 10!
+`Laughassassin` rolls 4!
+
+`Laughassassin` took 6 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Subjugglator`.
+
+`Rezkas Kabsen` rolls 2!
+`Subjugglator` rolls 1!
+
+`Subjugglator` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Subjugglator`.
+
+`Dendar (Lusus)` rolls 10!
+`Subjugglator` rolls 4!
+
+`Subjugglator` took 6 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Dendar (Lusus)`.
+
+`Subjugglator` rolls 5!
+`Dendar (Lusus)` rolls 4!
+
+`Dendar (Lusus)` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Rezkas Kabsen`.
+
+`Laughassassin` rolls 4!
+`Rezkas Kabsen` rolls 5!
+
+`Rezkas Kabsen` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 6!
+`Dendar (Lusus)` rolls 6!
+
+Nothing happened.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 1!
+`Laughassassin` rolls 2!
+
+`Laughassassin` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Subjugglator`.
+
+`Rezkas Kabsen` rolls 3!
+`Subjugglator` rolls 5!
+
+`Subjugglator` is counter attacking.
+
+`Subjugglator` missed their counter attack.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Subjugglator`.
+
+`Dendar (Lusus)` rolls 6!
+`Subjugglator` rolls 5!
+
+`Subjugglator` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Sicarius Anathera`.
+
+`Subjugglator` rolls 8!
+`Sicarius Anathera` rolls 1!
+
+`Sicarius Anathera` took 7 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Rezkas Kabsen`.
+
+`Laughassassin` rolls 5!
+`Rezkas Kabsen` rolls 1!
+
+`Rezkas Kabsen` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 5!
+`Rezkas Kabsen` rolls 6!
+
+`Rezkas Kabsen` is counter attacking.
+`Derideo (Lusus)` rolls 7!
+`Rezkas Kabsen` rolls 5!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 4!
+`Laughassassin` rolls 3!
+
+`Laughassassin` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Subjugglator`.
+
+`Rezkas Kabsen` rolls 6!
+`Subjugglator` rolls 1!
+
+`Subjugglator` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Subjugglator`.
+
+`Dendar (Lusus)` rolls 2!
+`Subjugglator` rolls 3!
+
+`Subjugglator` is counter attacking.
+`Dendar (Lusus)` rolls 3!
+`Subjugglator` rolls 2!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Dendar (Lusus)`.
+
+`Subjugglator` rolls 6!
+`Dendar (Lusus)` rolls 1!
+
+`Dendar (Lusus)` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Sicarius Anathera`.
+
+`Laughassassin` rolls 3!
+`Sicarius Anathera` rolls 2!
+
+`Sicarius Anathera` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 10!
+`Dendar (Lusus)` rolls 11!
+
+`Dendar (Lusus)` is counter attacking.
+`Derideo (Lusus)` rolls 5!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 4!
+`Laughassassin` rolls 4!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Subjugglator`.
+
+`Rezkas Kabsen` rolls 2!
+`Subjugglator` rolls 2!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 11!
+`Derideo (Lusus)` rolls 2!
+
+`Derideo (Lusus)` took 9 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Dendar (Lusus)`.
+
+`Subjugglator` rolls 9!
+`Dendar (Lusus)` rolls 15!
+
+`Dendar (Lusus)` is counter attacking.
+
+`Dendar (Lusus)` missed their counter attack.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Rezkas Kabsen`.
+
+`Laughassassin` rolls 5!
+`Rezkas Kabsen` rolls 4!
+
+`Rezkas Kabsen` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 5!
+`Dendar (Lusus)` rolls 5!
+
+Nothing happened.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 3!
+`Laughassassin` rolls 2!
+
+`Laughassassin` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` tries to talk their way out of the strife.
+
+`Rezkas Kabsen` rolls 6!
+`Subjugglator` rolls 4!
+
+`Subjugglator` was inflicted with `-1` Fortitude for `3 turns`.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Subjugglator`.
+
+`Dendar (Lusus)` rolls 10!
+`Subjugglator` rolls 3!
+
+`Subjugglator` took 7 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Sicarius Anathera`.
+
+`Subjugglator` rolls 6!
+`Sicarius Anathera` rolls 3!
+
+`Sicarius Anathera` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Rezkas Kabsen`.
+
+`Laughassassin` rolls 7!
+`Rezkas Kabsen` rolls 5!
+
+`Rezkas Kabsen` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 3!
+`Rezkas Kabsen` rolls 3!
+
+Nothing happened.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 7!
+`Laughassassin` rolls 5!
+
+`Laughassassin` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attempts to intimidate `Subjugglator`.
+
+`Rezkas Kabsen` rolls 4!
+`Subjugglator` rolls 2!
+
+`Subjugglator` was inflicted with `-2` Intimidation for `3 turns`.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Subjugglator`.
+
+`Dendar (Lusus)` rolls 14!
+`Subjugglator` rolls 2!
+
+`Subjugglator` took 12 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Sicarius Anathera`.
+
+`Subjugglator` rolls 1!
+`Sicarius Anathera` rolls 1!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Rezkas Kabsen`.
+
+`Laughassassin` rolls 2!
+`Rezkas Kabsen` rolls 5!
+
+`Rezkas Kabsen` is counter attacking.
+
+`Rezkas Kabsen` missed their counter attack.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 8!
+`Dendar (Lusus)` rolls 16!
+
+`Dendar (Lusus)` is counter attacking.
+
+`Dendar (Lusus)` missed their counter attack.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 11!
+`Laughassassin` rolls 3!
+
+`Laughassassin` took 8 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attempts to intimidate `Subjugglator`.
+
+`Rezkas Kabsen` rolls 16!
+`Subjugglator` rolls 5!
+
+`Subjugglator` was inflicted with `-3` Strength for `3 turns`.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Subjugglator`.
+
+`Dendar (Lusus)` rolls 6!
+`Subjugglator` rolls 3!
+
+`Subjugglator` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Dendar (Lusus)`.
+
+`Subjugglator` rolls 2!
+`Dendar (Lusus)` rolls 6!
+
+`Dendar (Lusus)` is counter attacking.
+`Subjugglator` rolls 3!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Rezkas Kabsen`.
+
+`Laughassassin` rolls 7!
+`Rezkas Kabsen` rolls 2!
+
+`Rezkas Kabsen` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 2!
+`Dendar (Lusus)` rolls 5!
+
+`Dendar (Lusus)` is counter attacking.
+`Derideo (Lusus)` rolls 6!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 9!
+`Laughassassin` rolls 2!
+
+`Laughassassin` took 7 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` tries to talk their way out of the strife.
+
+`Rezkas Kabsen` rolls 17!
+`Subjugglator` rolls 8!
+
+`Subjugglator` was inflicted with `-3` Intimidation for `3 turns`.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Subjugglator`.
+
+`Dendar (Lusus)` rolls 14!
+`Subjugglator` rolls 1!
+
+`Subjugglator` took 13 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Dendar (Lusus)`.
+
+`Subjugglator` rolls 4!
+`Dendar (Lusus)` rolls 11!
+
+`Dendar (Lusus)` is counter attacking.
+
+`Dendar (Lusus)` missed their counter attack.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Sicarius Anathera`.
+
+`Laughassassin` rolls 5!
+`Sicarius Anathera` rolls 6!
+
+`Sicarius Anathera` is counter attacking.
+
+`Sicarius Anathera` missed their counter attack.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 3!
+`Dendar (Lusus)` rolls 13!
+
+`Dendar (Lusus)` is counter attacking.
+`Derideo (Lusus)` rolls 7!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 8!
+`Laughassassin` rolls 4!
+
+`Laughassassin` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` tries to talk their way out of the strife.
+
+`Rezkas Kabsen` rolls 9!
+`Subjugglator` rolls 7!
+
+`Subjugglator` was inflicted with `-2` Strength for `3 turns`.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Subjugglator`.
+
+`Dendar (Lusus)` rolls 2!
+`Subjugglator` rolls 4!
+
+`Subjugglator` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Rezkas Kabsen`.
+
+`Subjugglator` rolls 1!
+`Rezkas Kabsen` rolls 2!
+
+`Rezkas Kabsen` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Rezkas Kabsen`.
+
+`Laughassassin` rolls 4!
+`Rezkas Kabsen` rolls 1!
+
+`Rezkas Kabsen` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Sicarius Anathera`.
+
+`Derideo (Lusus)` rolls 7!
+`Sicarius Anathera` rolls 5!
+
+`Sicarius Anathera` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 9!
+`Laughassassin` rolls 1!
+
+`Laughassassin` took 8 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Subjugglator`.
+
+`Rezkas Kabsen` rolls 6!
+`Subjugglator` rolls 3!
+
+`Subjugglator` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Subjugglator`.
+
+`Dendar (Lusus)` rolls 13!
+`Subjugglator` rolls 2!
+
+`Subjugglator` took 11 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Dendar (Lusus)`.
+
+`Subjugglator` rolls 5!
+`Dendar (Lusus)` rolls 17!
+
+`Dendar (Lusus)` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Dendar (Lusus)`.
+
+`Laughassassin` rolls 4!
+`Dendar (Lusus)` rolls 7!
+
+`Dendar (Lusus)` is counter attacking.
+`Laughassassin` rolls 3!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Sicarius Anathera`.
+
+`Derideo (Lusus)` rolls 4!
+`Sicarius Anathera` rolls 4!
+
+Nothing happened.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 9!
+`Laughassassin` rolls 2!
+
+`Laughassassin` took 7 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Subjugglator`.
+
+`Rezkas Kabsen` rolls 4!
+`Subjugglator` rolls 3!
+
+`Subjugglator` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Subjugglator`.
+
+`Dendar (Lusus)` rolls 5!
+`Subjugglator` rolls 4!
+
+`Subjugglator` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Sicarius Anathera`.
+
+`Subjugglator` rolls 7!
+`Sicarius Anathera` rolls 4!
+
+`Sicarius Anathera` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Dendar (Lusus)`.
+
+`Laughassassin` rolls 3!
+`Dendar (Lusus)` rolls 12!
+
+`Dendar (Lusus)` is counter attacking.
+
+`Dendar (Lusus)` missed their counter attack.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Sicarius Anathera`.
+
+`Derideo (Lusus)` rolls 3!
+`Sicarius Anathera` rolls 8!
+
+`Sicarius Anathera` is counter attacking.
+
+`Sicarius Anathera` missed their counter attack.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 6!
+`Laughassassin` rolls 1!
+
+`Laughassassin` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Subjugglator`.
+
+`Rezkas Kabsen` rolls 5!
+`Subjugglator` rolls 2!
+
+`Subjugglator` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Subjugglator`.
+
+`Dendar (Lusus)` rolls 11!
+`Subjugglator` rolls 3!
+
+`Subjugglator` took 8 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Rezkas Kabsen`.
+
+`Subjugglator` rolls 9!
+`Rezkas Kabsen` rolls 3!
+
+`Rezkas Kabsen` took 6 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Sicarius Anathera`.
+
+`Laughassassin` rolls 3!
+`Sicarius Anathera` rolls 7!
+
+`Sicarius Anathera` is counter attacking.
+`Laughassassin` rolls 7!
+`Sicarius Anathera` rolls 2!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 4!
+`Dendar (Lusus)` rolls 3!
+
+`Dendar (Lusus)` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 2!
+`Laughassassin` rolls 4!
+
+`Laughassassin` is counter attacking.
+
+`Laughassassin` missed their counter attack.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Subjugglator`.
+
+`Rezkas Kabsen` rolls 6!
+`Subjugglator` rolls 3!
+
+`Subjugglator` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Subjugglator`.
+
+`Dendar (Lusus)` rolls 10!
+`Subjugglator` rolls 3!
+
+`Subjugglator` took 7 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Dendar (Lusus)`.
+
+`Subjugglator` rolls 8!
+`Dendar (Lusus)` rolls 3!
+
+`Dendar (Lusus)` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` lunges for a strike towards `Sicarius Anathera`.
+
+`Laughassassin` rolls 3!
+`Sicarius Anathera` rolls 8!
+
+`Sicarius Anathera` is counter attacking.
+`Laughassassin` rolls 4!
+`Sicarius Anathera` rolls 7!
+
+`Laughassassin` was inflicted with `-3` Strength for `2 turns`.
+
+------------
+</log>
+    <log>`Derideo (Lusus)`, controlled by `Subjugglator`, is taking their turn!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` attacks `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 5!
+`Rezkas Kabsen` rolls 3!
+
+`Rezkas Kabsen` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Laughassassin`.
+
+`Sicarius Anathera` rolls 6!
+`Laughassassin` rolls 3!
+
+`Laughassassin` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Subjugglator`.
+
+`Rezkas Kabsen` rolls 2!
+`Subjugglator` rolls 3!
+
+`Subjugglator` is counter attacking.
+`Rezkas Kabsen` rolls 6!
+`Subjugglator` rolls 5!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Subjugglator`.
+
+`Dendar (Lusus)` rolls 11!
+`Subjugglator` rolls 3!
+
+`Subjugglator` took 8 hitpoint(s) of damage.
+`Subjugglator` is no longer participating in the strife.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Rezkas Kabsen`.
+
+`Subjugglator` rolls 8!
+`Rezkas Kabsen` rolls 3!
+
+`Rezkas Kabsen` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Laughassassin` is taking their turn!
+`Laughassassin` attacks `Dendar (Lusus)`.
+
+`Laughassassin` rolls 1!
+`Dendar (Lusus)` rolls 2!
+
+`Dendar (Lusus)` is counter attacking.
+
+`Dendar (Lusus)` missed their counter attack.
+
+------------
+</log>
+    <log>`Derideo (Lusus)` is no longer mind-controlled!
+
+------------
+</log>
+    <log>`Derideo (Lusus)` lunges for a strike towards `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 1!
+`Rezkas Kabsen` rolls 5!
+
+`Rezkas Kabsen` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Laughassassin`.
+
+`Sicarius Anathera` rolls 10!
+`Laughassassin` rolls 4!
+
+`Laughassassin` took 6 hitpoint(s) of damage.
+`Laughassassin` is no longer participating in the strife.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Derideo (Lusus)`.
+
+`Rezkas Kabsen` rolls 2!
+`Derideo (Lusus)` rolls 7!
+
+`Derideo (Lusus)` is counter attacking.
+
+`Derideo (Lusus)` missed their counter attack.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 3!
+`Derideo (Lusus)` rolls 3!
+
+Nothing happened.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Rezkas Kabsen`.
+
+`Subjugglator` rolls 2!
+`Rezkas Kabsen` rolls 2!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Derideo (Lusus)` is taking their turn!
+`Derideo (Lusus)` attacks `Sicarius Anathera`.
+
+`Derideo (Lusus)` rolls 2!
+`Sicarius Anathera` rolls 8!
+
+`Sicarius Anathera` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Derideo (Lusus)`.
+
+`Sicarius Anathera` rolls 1!
+`Derideo (Lusus)` rolls 4!
+
+`Derideo (Lusus)` is counter attacking.
+`Sicarius Anathera` rolls 1!
+`Derideo (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Derideo (Lusus)`.
+
+`Rezkas Kabsen` rolls 1!
+`Derideo (Lusus)` rolls 8!
+
+`Derideo (Lusus)` is counter attacking.
+`Rezkas Kabsen` rolls 5!
+`Derideo (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 12!
+`Derideo (Lusus)` rolls 8!
+
+`Derideo (Lusus)` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Sicarius Anathera`.
+
+`Subjugglator` rolls 3!
+`Sicarius Anathera` rolls 7!
+
+`Sicarius Anathera` is counter attacking.
+
+`Sicarius Anathera` missed their counter attack.
+
+------------
+</log>
+    <log>`Derideo (Lusus)` is taking their turn!
+`Derideo (Lusus)` attacks `Sicarius Anathera`.
+
+`Derideo (Lusus)` rolls 4!
+`Sicarius Anathera` rolls 8!
+
+`Sicarius Anathera` is counter attacking.
+`Derideo (Lusus)` rolls 2!
+`Sicarius Anathera` rolls 7!
+
+`Derideo (Lusus)` was inflicted with `-5` Strength for `2 turns`.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Derideo (Lusus)`.
+
+`Sicarius Anathera` rolls 8!
+`Derideo (Lusus)` rolls 5!
+
+`Derideo (Lusus)` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Derideo (Lusus)`.
+
+`Rezkas Kabsen` rolls 5!
+`Derideo (Lusus)` rolls 1!
+
+`Derideo (Lusus)` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 4!
+`Derideo (Lusus)` rolls 3!
+
+`Derideo (Lusus)` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Rezkas Kabsen`.
+
+`Subjugglator` rolls 5!
+`Rezkas Kabsen` rolls 3!
+
+`Rezkas Kabsen` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)` is taking their turn!
+`Derideo (Lusus)` attacks `Sicarius Anathera`.
+
+`Derideo (Lusus)` rolls 5!
+`Sicarius Anathera` rolls 3!
+
+`Sicarius Anathera` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Derideo (Lusus)`.
+
+`Sicarius Anathera` rolls 3!
+`Derideo (Lusus)` rolls 6!
+
+`Derideo (Lusus)` is counter attacking.
+`Sicarius Anathera` rolls 5!
+`Derideo (Lusus)` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Derideo (Lusus)`.
+
+`Rezkas Kabsen` rolls 5!
+`Derideo (Lusus)` rolls 7!
+
+`Derideo (Lusus)` is counter attacking.
+`Rezkas Kabsen` rolls 4!
+`Derideo (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 12!
+`Derideo (Lusus)` rolls 2!
+
+`Derideo (Lusus)` took 10 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Rezkas Kabsen`.
+
+`Subjugglator` rolls 2!
+`Rezkas Kabsen` rolls 5!
+
+`Rezkas Kabsen` is counter attacking.
+`Subjugglator` rolls 8!
+`Rezkas Kabsen` rolls 4!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>`Derideo (Lusus)` is taking their turn!
+`Derideo (Lusus)` lunges for a strike towards `Rezkas Kabsen`.
+
+`Derideo (Lusus)` rolls 7!
+`Rezkas Kabsen` rolls 2!
+
+`Rezkas Kabsen` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Derideo (Lusus)`.
+
+`Sicarius Anathera` rolls 11!
+`Derideo (Lusus)` rolls 8!
+
+`Derideo (Lusus)` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Derideo (Lusus)`.
+
+`Rezkas Kabsen` rolls 4!
+`Derideo (Lusus)` rolls 3!
+
+`Derideo (Lusus)` took 1 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 2!
+`Derideo (Lusus)` rolls 4!
+
+`Derideo (Lusus)` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Sicarius Anathera`.
+
+`Subjugglator` rolls 9!
+`Sicarius Anathera` rolls 5!
+
+`Sicarius Anathera` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)` is taking their turn!
+`Derideo (Lusus)` lunges for a strike towards `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 6!
+`Dendar (Lusus)` rolls 12!
+
+`Dendar (Lusus)` is counter attacking.
+`Derideo (Lusus)` rolls 2!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Derideo (Lusus)`.
+
+`Sicarius Anathera` rolls 8!
+`Derideo (Lusus)` rolls 3!
+
+`Derideo (Lusus)` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Derideo (Lusus)`.
+
+`Rezkas Kabsen` rolls 3!
+`Derideo (Lusus)` rolls 1!
+
+`Derideo (Lusus)` took 2 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 7!
+`Derideo (Lusus)` rolls 2!
+
+`Derideo (Lusus)` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Rezkas Kabsen`.
+
+`Subjugglator` rolls 5!
+`Rezkas Kabsen` rolls 5!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Derideo (Lusus)` is taking their turn!
+`Derideo (Lusus)` lunges for a strike towards `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 2!
+`Dendar (Lusus)` rolls 7!
+
+`Dendar (Lusus)` is counter attacking.
+`Derideo (Lusus)` rolls 9!
+`Dendar (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Derideo (Lusus)`.
+
+`Sicarius Anathera` rolls 11!
+`Derideo (Lusus)` rolls 7!
+
+`Derideo (Lusus)` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` lunges for a strike towards `Derideo (Lusus)`.
+
+`Rezkas Kabsen` rolls 5!
+`Derideo (Lusus)` rolls 2!
+
+`Derideo (Lusus)` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 6!
+`Derideo (Lusus)` rolls 8!
+
+`Derideo (Lusus)` is counter attacking.
+`Dendar (Lusus)` rolls 13!
+`Derideo (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` lunges for a strike towards `Dendar (Lusus)`.
+
+`Subjugglator` rolls 1!
+`Dendar (Lusus)` rolls 9!
+
+`Dendar (Lusus)` is counter attacking.
+
+Counter attack failed.
+
+------------
+</log>
+    <log>`Derideo (Lusus)` is taking their turn!
+`Derideo (Lusus)` lunges for a strike towards `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 6!
+`Dendar (Lusus)` rolls 3!
+
+`Dendar (Lusus)` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Derideo (Lusus)`.
+
+`Sicarius Anathera` rolls 9!
+`Derideo (Lusus)` rolls 6!
+
+`Derideo (Lusus)` took 3 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Derideo (Lusus)`.
+
+`Rezkas Kabsen` rolls 3!
+`Derideo (Lusus)` rolls 3!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` attacks `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 14!
+`Derideo (Lusus)` rolls 3!
+
+`Derideo (Lusus)` took 11 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Subjugglator` is taking their turn!
+`Subjugglator` attacks `Sicarius Anathera`.
+
+`Subjugglator` rolls 8!
+`Sicarius Anathera` rolls 4!
+
+`Sicarius Anathera` took 4 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Derideo (Lusus)` is taking their turn!
+`Derideo (Lusus)` lunges for a strike towards `Dendar (Lusus)`.
+
+`Derideo (Lusus)` rolls 9!
+`Dendar (Lusus)` rolls 12!
+
+`Dendar (Lusus)` is counter attacking.
+
+`Dendar (Lusus)` missed their counter attack.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Derideo (Lusus)`.
+
+`Sicarius Anathera` rolls 7!
+`Derideo (Lusus)` rolls 2!
+
+`Derideo (Lusus)` took 5 hitpoint(s) of damage.
+
+------------
+</log>
+    <log>`Rezkas Kabsen` is taking their turn!
+
+------------
+</log>
+    <log>`Rezkas Kabsen` attacks `Derideo (Lusus)`.
+
+`Rezkas Kabsen` rolls 1!
+`Derideo (Lusus)` rolls 1!
+
+Nothing happened.
+
+------------
+</log>
+    <log>`Dendar (Lusus)`, controlled by `Rezkas Kabsen`, is taking their turn!
+
+------------
+</log>
+    <log>`Dendar (Lusus)` lunges for a strike towards `Derideo (Lusus)`.
+
+`Dendar (Lusus)` rolls 6!
+`Derideo (Lusus)` rolls 5!
+
+`Derideo (Lusus)` took 1 hitpoint(s) of damage.
+`Derideo (Lusus)` is no longer participating in the strife.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>Targets have been defeated.
+
+------------
+</log>
+    <log>The strife is now over. XP will be awarded at the discretion of the GM.
+
+------------
+</log>
+    <log>Team A:
+0 - Sicarius Anathera - 89/123
+1 - Rezkas Kabsen - 43/114
+2 - Dendar (Lusus) - 118/150
+
+Team T: 
+0 - Subjugglator - 0/140 (DEAD)
+1 - Laughassassin - 0/120 (DEAD)
+2 - Derideo (Lusus) - 0/140 (DEAD)
+
+------------
+</log>
+  </logs>
 </strife>

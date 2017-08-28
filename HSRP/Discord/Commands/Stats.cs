@@ -62,7 +62,7 @@ namespace HSRP.Commands
                 if (plyr.PendingSkillPointAllocations >= 1)
                 {
                     msg += "\n\nYou have " + plyr.PendingSkillPointAllocations
-                        + " skill points left to allocate.";
+                        + " skill point(s) left to allocate.";
                 }
 
                 plyr.Save();
