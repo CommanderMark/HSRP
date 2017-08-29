@@ -42,6 +42,20 @@ namespace HSRP.Commands
                     await ReplyAsync("Done, these files failed: " + err);
                 }
             }
+            else if (type == "heal")
+            {
+                string[] dirs = Directory.GetFiles(Dirs.Players);
+                foreach (string file in dirs)
+                {
+                    if (file.Contains("DS_Store")) { continue; }
+                    
+                    Player plyr = new Player(file, false);
+                    if (plyr.Errored) { continue; }
+
+                    plyr.Health = plyr.MaxHealth;
+                    plyr.Save();
+                }
+            }
         }
 
         [Command("strifelist"), RequireGM]
