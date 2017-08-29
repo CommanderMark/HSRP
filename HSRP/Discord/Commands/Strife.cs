@@ -58,6 +58,14 @@ namespace HSRP.Commands
             await ReplyAsync(strf.UpdateStrife(out Player next));
         }
 
+        [Command("forfeit"), InStrife]
+        public async Task Forfeit()
+        {
+            Strife strf = Context.GetStrife();
+            await ReplyAsync(strf.Forfeit(Context.User.Id));
+            await ReplyAsync(strf.UpdateStrife(out Player next));
+        }
+
         [Command("activate"), Alias("active"), RequireGM]
         public async Task Activate(int id)
         {

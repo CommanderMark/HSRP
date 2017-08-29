@@ -661,6 +661,21 @@ namespace HSRP
             log = log.AddLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
         }
 
+        public string Forfeit(ulong id)
+        {
+            IEntity ent = Entities.FirstOrDefault(x => x.ID == id);
+            if (ent == null) { return null; }
+
+            bool attacker = Attackers.Contains(ent);
+            int index = attacker
+                ? Attackers.IndexOf(ent)
+                : Targets.IndexOf(ent);
+
+            // Kill 'em.
+            LeaveStrife(ent);
+            return GetLogs();
+        }
+
         private void EndStrife()
         {
             Active = false;
