@@ -178,5 +178,32 @@ namespace HSRP.Commands
             File.Delete(path);
             strf.Save();
         }
+
+        [Command("1v1"), RequireGM]
+        public async Task OneVeeOne(params Player[] plyrs)
+        {
+            if (plyrs == null || plyrs.Length < 2) { return; }
+
+            Strife strf = new Strife();
+            do
+            {
+                strf.ID = Toolbox.RandInt(byte.MaxValue);
+            } while (File.Exists(Path.Combine(Dirs.Strifes, strf.ID + ".xml")));
+
+            for (int i = 0; i < plyrs.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    strf.Attackers.Add(plyrs[i]);
+                }
+                else
+                {
+                    strf.Targets.Add(plyrs[i]);
+                }
+            }
+
+            strf.Save();
+            await ReplyAsync("Strife " + strf.ID + " has been created.");
+        }
     }
 }
