@@ -627,7 +627,7 @@ namespace HSRP
                         break;
 
                     case NPCType.Psionic:
-                        if (Toolbox.RandInt(2) == 1 && target.Controller != ai.ID)
+                        if (Toolbox.TrueOrFalse() && target.Controller != ai.ID)
                         {
                             TakeTurn(StrifeAction.MindControl, targetID, !attackTurn);
                         }
@@ -638,7 +638,7 @@ namespace HSRP
                         break;
                     
                     case NPCType.Talker:
-                        if (Toolbox.RandInt(4) == 1)
+                        if (Toolbox.TrueOrFalse(4))
                         {
                             TakeTurn(StrifeAction.SpeechAttack, targetID, !attackTurn);
                         }
@@ -693,8 +693,8 @@ namespace HSRP
 
         // Physical: XDSTR --> XDCON.
         // If XDSTR rolls higher than difference between both is the damage on the target.
-        // Assuming they're not equal, then the target has a chance to counter attack if they rolls higher.
-        // XDSTR <-- XDPER: Debuff of the difference between both roles is applied to the attacker's strength.
+        // Then the target has a chance to counter attack if they roll higher.
+        // XDSTR <-- XDPER: Debuff of the difference between both rolls is applied to the attacker's strength.
         private void PhysicalAttack(IEntity attacker, IEntity target)
         {
             log = log.AddLine(Toolbox.GetMessage("phyStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
@@ -719,25 +719,35 @@ namespace HSRP
             {
                 int dmg = atk - tar;
                 target.Health -= dmg;
-                log = log.AddLine($"\n{Syntax.ToCodeLine(target.Name)} took {dmg} hitpoint(s) of damage.");
+
+                log = log.AddLine("");
+                log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} took {dmg} hitpoint(s) of damage.");
             }
-            // If target rolled higher begin counter attack.
-            // TODO: Make counter attack guaranteed?
-            // TODO: 50% to counter unless your per is higher than their str?
-            else if (atk < tar)
+            // Equal rolls, do nothing.
+            else
             {
                 log = log.AddLine("");
-                log = log.AddLine(Toolbox.GetMessage("phyCounterStart", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
-                // 50% chance to counter.
-                if (Toolbox.RandInt(2) == 1)
+                log = log.AddLine("Nothing happened.");
+            }
+
+            // Counter attack.
+            // If the strength modifier of the attacker is already debuffed below 1 then don't debuff.
+            if (attacker.TotalAbilities.Strength < 1)
+            {
+                log = log.AddLine("");
+                log = log.AddLine(Toolbox.GetMessage("phyCounterMax", Syntax.ToCodeLine(attacker.Name)));
+                return;
+            }
+            else
+            {
+                tarY = target.TotalAbilities.Persuasion;
+
+                // 25% chance to counter. Increased by an addition 25 if the target's persuasion
+                // is higher than the attacker's strength.
+                if (Toolbox.TrueOrFalse(4 - (2 * Convert.ToInt32(tarY > atkY))))
                 {
-                    tarY = target.TotalAbilities.Persuasion;
-                    // If the strength modifier is already debuffed below 1 then don't debuff.
-                    if (attacker.TotalAbilities.Strength < 1)
-                    {
-                        log = log.AddLine(Toolbox.GetMessage("phyCounterMax", Syntax.ToCodeLine(attacker.Name)));
-                        return;
-                    }
+                    log = log.AddLine("");
+                    log = log.AddLine(Toolbox.GetMessage("phyCounterStart", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
 
                     atk = Toolbox.DiceRoll(atkX, atkY);
                     tar = Toolbox.DiceRoll(tarX, tarY);
@@ -751,7 +761,7 @@ namespace HSRP
                         log = log.AddLine(Toolbox.GetMessage("phyCounterBlock"));
                     }
                     // Counter suceeded, debuff strength.
-                    else if (!attacker.TempMods.ContainsKey(1) || attacker.TempMods[1].Strength > -tarY)
+                    else
                     {
                         int nonBuff = attacker.TempMods.ContainsKey(1)
                             ? attacker.TempMods[1].Strength
@@ -761,17 +771,6 @@ namespace HSRP
                         ApplyTempMod(attacker, "strength", debuff, 1);
                     }
                 }
-                else
-                {
-                    log = log.AddLine("");
-                    log = log.AddLine(Toolbox.GetMessage("phyCounterFail", Syntax.ToCodeLine(target.Name)));
-                }
-            }
-            // Equal rolls, do nothing.
-            else
-            {
-                log = log.AddLine("");
-                log = log.AddLine("Nothing happened.");
             }
         }
 

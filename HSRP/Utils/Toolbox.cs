@@ -45,7 +45,9 @@ namespace HSRP
         /// <summary>
         /// Returns true or false randomly.
         /// </summary>
-        public static bool TrueOrFalse() => RandInt(2) == 1;
+        public static bool TrueOrFalse() => RandInt(2) == 0;
+
+        public static bool TrueOrFalse(int denominator) => RandInt(denominator) == 0;
 
         public static void UpdateMessages()
         {

@@ -19,12 +19,6 @@
     <msg>Counter attack successfully blocked.</msg>
   </messages>
 
-  <!-- Fails to counter attack. -->
-  <messages trigger="phyCounterFail">
-    <msg>Counter attack failed.</msg>
-    <msg>{0} missed their counter attack.</msg>
-  </messages>
-
 
 
   <!-- SpeechAttack -->
