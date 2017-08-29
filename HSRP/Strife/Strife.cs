@@ -356,6 +356,12 @@ namespace HSRP
                 return returnEmp ? string.Empty : GetLogs();
             }
 
+            // Update turns. Sorry you have to see this.
+            if (attackTurn ? Attackers[turn].Dead : Targets[turn].Dead)
+            {
+                UpdateTurn();
+            }
+
             // Are they being mind-controlled?
             if (turner.Controller > 0)
             {
@@ -409,6 +415,54 @@ namespace HSRP
             ntty = (Player)CurrentTurner;
 
             return returnEmp ? string.Empty : GetLogs();
+        }
+
+        private void UpdateTurn()
+        {
+            bool notValidTurner = false;
+            do
+            {
+                // Rotate turn.
+                ++turn;
+                if (attackTurn)
+                {
+                    if (turn >= Attackers.Count)
+                    {
+                        // Reached the end of the attackers list.
+                        attackTurn = false;
+                        turn = 0;
+                        AddLog();
+
+                        log = log.AddLine("Targets are now taking their turns.");
+                        notValidTurner = Targets[turn].Dead;
+                    }
+                    else
+                    {
+                        notValidTurner = Attackers[turn].Dead;
+                    }
+                }
+                else
+                {
+                    if (turn >= Targets.Count)
+                    {
+                        // Reached the end of the attackers list.
+                        attackTurn = true;
+                        turn = 0;
+                        AddLog();
+
+                        log = log.AddLine("Attackers are now taking their turns.");
+                        notValidTurner = Attackers[turn].Dead;
+                    }
+                    else
+                    {
+                        notValidTurner = Targets[turn].Dead;
+                    }
+                }
+
+                // If the current index lands on a user that is no longer in the strife continue incrementing.
+            } while (notValidTurner);
+
+            AddLog();
         }
 
         /// <summary>
@@ -530,7 +584,7 @@ namespace HSRP
                 LeaveStrife(target);
             }
 
-            // Update turn.
+            // Update lists.
             if (attackTurn)
             {
                 Attackers[turn] = attacker;
@@ -542,22 +596,6 @@ namespace HSRP
                 {
                     Targets[targetNum] = target;
                 }
-
-                // If the current index lands on a user that is no longer in the strife continue incrementing.
-                do
-                {
-                    // Rotate turn.
-                    ++turn;
-                    if (turn >= Attackers.Count)
-                    {
-                        // Reached the end of the attackers list.
-                        attackTurn = false;
-                        turn = 0;
-                        AddLog();
-
-                        log = log.AddLine("Targets are now taking their turns.");
-                    }
-                } while ((Attackers[turn].Dead && attackTurn));
             }
             else
             {
@@ -570,25 +608,9 @@ namespace HSRP
                 {
                     Targets[targetNum] = target;
                 }
-
-                // If the current index lands on a user that is no longer in the strife continue incrementing.
-                do
-                {
-                    // Rotate turn.
-                    ++turn;
-                    if (turn >= Targets.Count)
-                    {
-                        // Reached the end of the attackers list.
-                        attackTurn = true;
-                        turn = 0;
-                        AddLog();
-
-                        log = log.AddLine("Attackers are now taking their turns.");
-                    }
-                } while ((Targets[turn].Dead && !attackTurn));
             }
 
-            AddLog();
+            UpdateTurn();
             return returnEmp ? string.Empty : GetLogs();
         }
 
