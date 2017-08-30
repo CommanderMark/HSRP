@@ -962,7 +962,7 @@ namespace HSRP
                 // If STR or FOR reach 0 they leave the strife.
                 if ((target.TotalAbilities.Strength < 1 && rng == 0) || (target.TotalAbilities.Fortitude < 1 && rng == 1))
                 {
-                    log = log.AddLine($"{target.Name.ToApostrophe()} {stat} has fallen below 1.");
+                    log = log.AddLine($"{Syntax.ToCodeLine(target.Name.ToApostrophe())} {stat} has fallen below 1.");
 
                     // 50% chance for them to leave the strife.
                     if (Toolbox.TrueOrFalse())
