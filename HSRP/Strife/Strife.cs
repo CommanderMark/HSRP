@@ -104,7 +104,6 @@ namespace HSRP
             XDocument doc = XmlToolbox.TryLoadXml(path);
             if (doc == null || doc.Root == null)
             {
-                Console.WriteLine("[WHITE LINE] Strife " + path + " did not load!");
                 Errored = true;
                 return;
             }
@@ -201,7 +200,7 @@ namespace HSRP
             XElement strife = new XElement("strife",
                 new XAttribute("id", ID),
                 new XAttribute("active", Active),
-                new XAttribute("currentTurn", CurrentTurner.ID)
+                new XAttribute("currentTurn", CurrentTurner == null ? 0 : CurrentTurner.ID)
                 );
 
             XElement status = new XElement("status",
@@ -264,7 +263,7 @@ namespace HSRP
                 string usr = $"{i} - {ent.Name} - {ent.Health}/{ent.MaxHealth}";
                 if (ent.Dead)
                 {
-                    usr += " (DEAD)";
+                    usr += " (DEFEATED)";
                 }
                 txt = txt.AddLine(usr);
             }
@@ -276,7 +275,7 @@ namespace HSRP
                 string usr = $"{i} - {ent.Name} - {ent.Health}/{ent.MaxHealth}";
                 if (ent.Dead)
                 {
-                    usr += " (DEAD)";
+                    usr += " (DEFEATED)";
                 }
                 txt = txt.AddLine(usr);
             }
@@ -695,6 +694,7 @@ namespace HSRP
 
             // Kill 'em.
             LeaveStrife(ent);
+            AddLog();
             return GetLogs();
         }
 
@@ -759,6 +759,11 @@ namespace HSRP
 
                 log = log.AddLine("");
                 log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} took {dmg} hitpoint(s) of damage.");
+            }
+            else if (atk < tar)
+            {
+                log = log.AddLine("");
+                log = log.AddLine("Attack missed.");
             }
             // Equal rolls, do nothing.
             else

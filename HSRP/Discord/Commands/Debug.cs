@@ -79,7 +79,7 @@ namespace HSRP.Commands
                 : txt);
         }
 
-        [Command("togglestrife"), RequireGM]
+        [Command("togglestrife"), Alias("strifetoggle"), RequireGM]
         public async Task ToggleStrifeChannel()
         {
             if (Constants.STRIFE_CHANNEL == Constants.RP_STRIFE_CHANNEL)

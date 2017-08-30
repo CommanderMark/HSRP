@@ -2,7 +2,7 @@
 <player>
   <info name="Rezkas Kabsen" id="164204195069689857" owner="&quot;Not&quot; Satan" blood="Teal" pineappleOnPizza="false" />
   <lusus>large snake</lusus>
-  <status hp="122" maxhp="122" dead="false" specibus="Bladekind" />
+  <status hp="1" maxhp="122" dead="false" specibus="Bladekind" />
   <levels echeladder="4" pendingSkillPoints="0" xp="130" nextLevel="150" />
   <abilities>
     <strength value="12" />
@@ -20,7 +20,4 @@
     <item value="Leinah's Computer" quantity="1" />
     <item value="Russian Books" quantity="1" />
   </inventory>
-  <strife id="5">
-    <abilities />
-  </strife>
 </player>
