@@ -3,10 +3,12 @@
   <messages trigger="phyStart">
     <msg>{0} attacks {1}.</msg>
     <msg>{0} lunges for a strike towards {1}.</msg>
+    <msg>{0} assaults {1}.</msg>
   </messages>
 
   <messages trigger="phyCounterStart">
     <msg>{0} is counter attacking.</msg>
+    <msg>{0} is trying to retaliate against that attack.</msg>
   </messages>
 
   <messages trigger="phyCounterMax">
@@ -17,6 +19,7 @@
   <messages trigger="phyCounterBlock">
     <msg>Counter attack blocked.</msg>
     <msg>Counter attack successfully blocked.</msg>
+    <msg>Counter attack dodged.</msg>
   </messages>
 
 
@@ -24,10 +27,12 @@
   <!-- SpeechAttack -->
   <messages trigger="speStart">
     <msg>{0} attempts to intimidate {1}.</msg>
-    <msg>{0} tries to talk their way out of the strife.</msg>
+    <msg>{0} tries to influence {1}.</msg>
+    <msg>{0} tries their hand at using a silver tongue.</msg>
   </messages>
   <messages trigger="speFail">
     <msg>{0} was unable to influence {1}.</msg>
+    <msg>Intimidation failed.</msg>
   </messages>
   <!-- Attack kills someone. -->
   <messages trigger="speKillFail">
