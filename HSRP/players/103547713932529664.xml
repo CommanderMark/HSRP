@@ -2,11 +2,11 @@
 <player>
   <info name="Sidewind Langston" id="103547713932529664" owner="CommanderMark" blood="Violet" pineappleOnPizza="false" />
   <lusus>Amaryllis. A goat-like creature...yeah that about covers it.</lusus>
-  <status hp="114" maxhp="114" dead="false" specibus="Hatchetkind" />
-  <levels echeladder="3" pendingSkillPoints="0" xp="88" nextLevel="90" />
+  <status hp="120" maxhp="125" dead="false" specibus="Hatchetkind" />
+  <levels echeladder="4" pendingSkillPoints="0" xp="103" nextLevel="150" />
   <abilities>
-    <strength value="4" />
-    <constitution value="10" />
+    <strength value="8" />
+    <constitution value="12" />
     <psion value="0" />
     <fortitude value="4" />
     <intimidation value="14" />

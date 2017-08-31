@@ -3,7 +3,7 @@
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
   <lusus>Veneficus is a giant Scorpion with spikes on his back.</lusus>
   <status hp="145" maxhp="145" dead="false" specibus="Bladekindx2" />
-  <levels echeladder="5" pendingSkillPoints="0" xp="185" nextLevel="250" />
+  <levels echeladder="5" pendingSkillPoints="0" xp="200" nextLevel="250" />
   <abilities>
     <strength value="15" />
     <constitution value="14" />
