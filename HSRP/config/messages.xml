@@ -8,7 +8,7 @@
 
   <messages trigger="phyCounterStart">
     <msg>{0} is counter attacking.</msg>
-    <msg>{0} is trying to retaliate against that attack.</msg>
+    <msg>{0} tries to retaliate.</msg>
   </messages>
 
   <messages trigger="phyCounterMax">
@@ -32,11 +32,14 @@
   </messages>
   <messages trigger="speFail">
     <msg>{0} was unable to influence {1}.</msg>
+    <msg>{1} was not influenced.</msg>
+    <msg>{1} was not intimidated.</msg>
     <msg>Intimidation failed.</msg>
   </messages>
   <!-- Attack kills someone. -->
   <messages trigger="speKillFail">
     <msg>{0} still appears to be holding on.</msg>
+    <msg>{0} managed to resist {1}'s charm.</msg>
   </messages>
   <messages trigger="speKill">
     <msg>{0} was unable to resist {1}'s charm.</msg>

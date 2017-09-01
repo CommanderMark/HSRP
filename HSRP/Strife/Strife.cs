@@ -974,7 +974,7 @@ namespace HSRP
                     // Otherwise their debuffs are removed.
                     else
                     {
-                        log = log.AddLine(Toolbox.GetMessage("speKillFail", Syntax.ToCodeLine(target.Name)));
+                        log = log.AddLine(Toolbox.GetMessage("speKillFail", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
                         log = log.AddLine(Syntax.ToCodeLine(target.Name.ToApostrophe()) + " debuffs were removed.");
                         target.Modifiers = new AbilitySet();
                     }

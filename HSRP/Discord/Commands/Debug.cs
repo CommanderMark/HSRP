@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Discord.Commands;
 using Discord;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
 namespace HSRP.Commands
 {
@@ -94,10 +95,10 @@ namespace HSRP.Commands
             }
         }
 
-        [Command("npcs")]
+        [Command("npcs"), Alias("npc")]
         public async Task ListNPCs()
         {
-            string msg = "";
+            SortedDictionary<ulong, string> ents = new SortedDictionary<ulong, string>();
             string[] dirs = Directory.GetFiles(Dirs.NPCs);
 
             foreach (string file in dirs)
@@ -106,11 +107,30 @@ namespace HSRP.Commands
                 
                 if (NPC.TryParse(file, out NPC npc, false))
                 {
-                    msg = msg.AddLine($"{npc.ID} - {npc.Name}");
+                    ents.Add(npc.ID, npc.Name);
                 }
             }
 
+            string msg = "";
+            foreach (KeyValuePair<ulong, string> npc in ents)
+            {
+                msg = msg.AddLine($"{npc.Key} - {npc.Value}");
+            }
+
             await ReplyAsync(Syntax.ToCodeBlock(msg));
+        }
+
+        [Command("npcs"), Alias("npc")]
+        public async Task GetNPC(int id)
+        {
+            if (NPC.TryParse(id.ToString(), out NPC npc))
+            {
+                await ReplyAsync(Syntax.ToCodeBlock(npc.Display()));
+            }
+            else
+            {
+                await ReplyAsync("NPC not found.");
+            }
         }
 
         // OMV Quirk Stuff

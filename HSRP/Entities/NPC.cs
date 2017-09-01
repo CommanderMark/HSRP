@@ -199,7 +199,8 @@ namespace HSRP
             result = result.AddLine("");
 
             result = result.AddLine("Health Vial: " + Health + "/" + MaxHealth);
-            result = result.AddLine("Strife Specibus " + Specibus);
+            result = result.AddLine("Strife Specibus: " + Specibus);
+            result = result.AddLine("Dice Rolls: " + DiceRolls);
             result = result.AddLine("");
 
             result = result.AddLine("Base Statistics");
