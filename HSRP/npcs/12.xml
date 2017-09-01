@@ -1,0 +1,12 @@
+<npc id="12">
+  <info name="Corrupted Ragriper" type="Normal" pineappleOnPizza="false">The corrupted Ragriper, her jealousy led her to this end. You cannot help her from her own mistakes, not anymore. End the wraith.</info>
+  <status hp="110" maxhp="110" dead="false" specibus="Bow&amp;Arrowkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="7"/>
+    <constitution value="5"/>
+    <psion value="14"/>
+    <fortitude value="5"/>
+    <intimidation value="6"/>
+    <persuasion value="6"/>
+  </abilities>
+</npc>

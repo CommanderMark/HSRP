@@ -219,8 +219,11 @@ namespace HSRP
             if (File.Exists(filePath))
             {
                 XDocument doc = XmlToolbox.TryLoadXml(filePath);
-                npc = new NPC(doc.Root);
-                return true;
+                if (doc != null)
+                { 
+                    npc = new NPC(doc.Root);
+                    return true; 
+                }
             }
 
             npc = null;
