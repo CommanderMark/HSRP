@@ -1,0 +1,12 @@
+<npc id="2">
+  <info name="Dendar" type="Lusus" pineappleOnPizza="false">Dendar, your lusus.</info>
+  <status hp="150" maxhp="150" dead="false" specibus="lususkind" diceRolls="1" controller="164204195069689857" />
+  <abilities>
+    <strength value="15" />
+    <constitution value="17" />
+    <psion value="0" />
+    <fortitude value="0" />
+    <intimidation value="8" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

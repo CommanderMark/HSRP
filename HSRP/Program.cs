@@ -68,6 +68,7 @@ namespace HSRP
 
             // Discover all of the commands in this assembly and load them.
             commands.AddTypeReader<Player>(new Commands.PlayerTypeReader());
+            commands.AddTypeReader<IEntity>(new Commands.EntityTypeReader());
             commands.AddTypeReader<PropertyInfo>(new Commands.AbilityTypeReader());
             commands.AddTypeReader<StrifeAction>(new Commands.StrifeActionTypeReader());
             await commands.AddModulesAsync(Assembly.GetEntryAssembly());

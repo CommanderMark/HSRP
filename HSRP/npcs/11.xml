@@ -1,0 +1,12 @@
+<npc id="11">
+  <info name="Archeradicator" type="Normal" pineappleOnPizza="false">A random Highblood you've found while looking for someone to strife with. He will have to do..</info>
+  <status hp="150" maxhp="150" dead="false" specibus="Bow&Arrowkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="8"/>
+    <constitution value="7"/>
+    <psion value="0"/>
+    <fortitude value="7"/>
+    <intimidation value="8"/>
+    <persuasion value="8"/>
+  </abilities>
+</npc>

@@ -1,0 +1,12 @@
+<npc id="6">
+  <info name="Shadow Creature" type="Normal" pineappleOnPizza="false">A giant shadow that is most likely not real. It hurts you anyway.</info>
+  <status hp="90" maxhp="90" dead="false" specibus="Shadowkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="6"/>
+    <constitution value="5"/>
+    <psion value="0"/>
+    <fortitude value="10"/>
+    <intimidation value="8"/>
+    <persuasion value="8"/>
+  </abilities>
+</npc>

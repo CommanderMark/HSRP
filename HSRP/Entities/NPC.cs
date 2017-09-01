@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
@@ -207,6 +208,23 @@ namespace HSRP
                 : Abilities.Display());
 
             return result;
+        }
+
+        public static bool TryParse(string input, out NPC npc, bool idOnly = true)
+        {
+            string filePath = idOnly
+                ? Path.Combine(Dirs.NPCs, input) + ".xml"
+                : input;
+            
+            if (File.Exists(filePath))
+            {
+                XDocument doc = XmlToolbox.TryLoadXml(filePath);
+                npc = new NPC(doc.Root);
+                return true;
+            }
+
+            npc = null;
+            return false;
         }
     }
 }

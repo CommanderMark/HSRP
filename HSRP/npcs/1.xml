@@ -1,0 +1,12 @@
+<npc id="1">
+  <info name="Juggalo Messenger" type="Normal" pineappleOnPizza="false">A messenger for the Grand Highblood. Looks rather stocky for one though.</info>
+  <status hp="75" maxhp="75" dead="false" specibus="Bladekind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="5" />
+    <constitution value="6" />
+    <psion value="0" />
+    <fortitude value="8" />
+    <intimidation value="11" />
+    <persuasion value="3" />
+  </abilities>
+</npc>

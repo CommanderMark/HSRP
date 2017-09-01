@@ -1,0 +1,12 @@
+<npc id="9">
+  <info name="Ruffiannihilator" type="Normal" pineappleOnPizza="false">A Ruffiannihilator, the strongest of the STRONG Trolls, this guy is probably tough, so watch out..</info>
+  <status hp="150" maxhp="150" dead="false" specibus="Scythekind" diceRolls="2" controller="0"/>
+  <abilities>
+    <strength value="15"/>
+    <constitution value="8"/>
+    <psion value="0"/>
+    <fortitude value="4"/>
+    <intimidation value="7"/>
+    <persuasion value="10"/>
+  </abilities>
+</npc>

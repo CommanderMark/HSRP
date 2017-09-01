@@ -24,7 +24,7 @@ namespace HSRP
                 if (doc.Root == null) return null;
                 return doc;
             }
-            catch (Exception e)
+            catch
             {
                 Console.WriteLine("[XML] " + "Couldn't load xml document \"" + filePath + "\"!");
                 return null;

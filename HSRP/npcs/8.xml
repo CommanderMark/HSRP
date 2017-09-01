@@ -1,0 +1,12 @@
+<npc id="8">
+  <info name="Bronze-Blood" type="Normal" pineappleOnPizza="false">Formerly Strana's friend, now only a shadow of his former self.</info>
+  <status hp="95" maxhp="95" dead="false" specibus="Shadowkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="5"/>
+    <constitution value="5"/>
+    <psion value="10"/>
+    <fortitude value="10"/>
+    <intimidation value="6"/>
+    <persuasion value="6"/>
+  </abilities>
+</npc>

@@ -88,7 +88,7 @@ namespace HSRP
 
         public bool Errored;
 
-        public Strife()
+        private Strife()
         {
             Logs = new List<string>();
             Attackers = new List<IEntity>();
@@ -457,9 +457,9 @@ namespace HSRP
                         notValidTurner = Targets[turn].Dead;
                     }
                 }
-
-                // If the current index lands on a user that is no longer in the strife continue incrementing.
-            } while (notValidTurner);
+            }
+            // If the current index lands on a user that is no longer in the strife continue incrementing.
+            while (notValidTurner);
 
             AddLog();
         }
@@ -1023,6 +1023,10 @@ namespace HSRP
             return wha;
         }
 
+        /// <summary>
+        /// Writes every log into a file, the path of which is "strifes/{id}.txt".
+        /// </summary>
+        /// <returns>The path to the log file.</returns>
         public string LogLogs()
         {
             string txt = string.Join("\n", Logs);
@@ -1032,7 +1036,12 @@ namespace HSRP
             return path;
         }
 
-        public string ClearLogs()
+        /// <summary>
+        /// Writes every log into a file, the path of which is "strifes/{id}.txt".
+        /// Clears all of the current logs at the same time.
+        /// </summary>
+        /// <returns>The path to the log file.</returns>
+        public string ClearAndLogLogs()
         {
             string path = LogLogs();
 
@@ -1070,6 +1079,34 @@ namespace HSRP
                     return;
                 }
             }
+        }
+
+        public static bool TryCreateStrife(int id, out Strife strife)
+        {
+            Strife strf = new Strife();
+
+            if (id < 1)
+            {
+                // Generate ID.
+                do
+                {
+                    strf.ID = Toolbox.RandInt(Int16.MaxValue);
+                }
+                while (File.Exists(Path.Combine(Dirs.Strifes, strf.ID + ".xml")));
+            }
+            else
+            {
+                if (File.Exists(Path.Combine(Dirs.Strifes, id + ".xml")))
+                {
+                    strife = null;
+                    return false;
+                }
+
+                strf.ID = id;
+            }
+
+            strife = strf;
+            return true;
         }
     }
 }

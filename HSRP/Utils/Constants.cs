@@ -35,6 +35,7 @@
     {
         public const string Config = "config";
         public const string Players = "players";
+        public const string NPCs = "npcs";
         public const string Strifes = "strifes";
         public const string StrifeLogs = "STRIFE_LOG_";
     }

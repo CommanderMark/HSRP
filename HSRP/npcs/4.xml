@@ -1,0 +1,12 @@
+<npc id="4">
+  <info name="Laughassassin" type="Normal" pineappleOnPizza="false">Same Laughassassin that almost killed you, time for some sweet revenge..</info>
+  <status hp="120" maxhp="120" dead="false" specibus="Bladekind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="7"/>
+    <constitution value="5"/>
+    <psion value="0"/>
+    <fortitude value="7"/>
+    <intimidation value="8"/>
+    <persuasion value="6"/>
+  </abilities>
+</npc>

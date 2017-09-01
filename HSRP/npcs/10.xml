@@ -1,0 +1,12 @@
+<npc id="10">
+  <info name="Corrupted Treetrimmer" type="Normal" pineappleOnPizza="false">His axe was once used for cutting frond nubs, now however, they are only used for cutting your head off.</info>
+  <status hp="100" maxhp="100" dead="false" specibus="Shadowkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="5"/>
+    <constitution value="7"/>
+    <psion value="4"/>
+    <fortitude value="7"/>
+    <intimidation value="7"/>
+    <persuasion value="7"/>
+  </abilities>
+</npc>

@@ -76,6 +76,50 @@ namespace HSRP.Commands
             strf.Save();
         }
 
+        [Command("generate"), Alias("create"), RequireGM]
+        public async Task Generate(int id = 0)
+        {
+            if (Strife.TryCreateStrife(id, out Strife strf))
+            {
+                strf.Save();
+                await ReplyAsync("Strife " + strf.ID + " has been created.");
+            }
+            else
+            {
+                await ReplyAsync("A strife with that ID already exists.");
+            }
+        }
+
+        [Group("edit"), RequireGM]
+        public class EditStrife : JModuleBase
+        {
+            [Command("atk"), Alias("attack", "at")]
+            public async Task Attack(int id, params IEntity[] entities)
+            {
+                Strife strf = new Strife(id.ToString());
+                foreach (IEntity ent in entities)
+                {
+                    strf.Attackers.Add(ent);
+                }
+
+                strf.Save();
+                await ReplyAsync(Syntax.ToCodeBlock(strf.Display()));
+            }
+
+            [Command("target"), Alias("tar", "targets")]
+            public async Task Target(int id, params IEntity[] entities)
+            {
+                Strife strf = new Strife(id.ToString());
+                foreach (IEntity ent in entities)
+                {
+                    strf.Targets.Add(ent);
+                }
+
+                strf.Save();
+                await ReplyAsync(Syntax.ToCodeBlock(strf.Display()));
+            }
+        }
+
         [Command("activate"), Alias("active"), RequireGM]
         public async Task Activate(int id)
         {
@@ -100,6 +144,21 @@ namespace HSRP.Commands
             {
                 await ReplyAsync("Strife not found.");
             }
+        }
+
+        [Command("Deactivate"), Alias("deactive"), RequireGM]
+        public async Task Deactivate(int id)
+        {
+            Strife strf = new Strife(id.ToString());
+            await ReplyStrifeAsync(strf.DeactivateStrife());
+
+            // Post logs.
+            string path = strf.LogLogs();
+
+            await Context.Channel.SendFileAsync(path, "The log of the strife is now being posted.");
+            File.Delete(path);
+
+            strf.Save();
         }
 
         [Command("end"), RequireGM]
@@ -182,7 +241,7 @@ namespace HSRP.Commands
                 await ReplyAsync("There are no logs in this strife.");
                 return;
             }
-            string path = strf.ClearLogs();
+            string path = strf.ClearAndLogLogs();
 
             await Context.Channel.SendFileAsync(path, "Logs cleared.");
             File.Delete(path);
@@ -194,11 +253,8 @@ namespace HSRP.Commands
         {
             if (plyrs == null || plyrs.Length < 2) { return; }
 
-            Strife strf = new Strife();
-            do
-            {
-                strf.ID = Toolbox.RandInt(byte.MaxValue);
-            } while (File.Exists(Path.Combine(Dirs.Strifes, strf.ID + ".xml")));
+            Strife strf;
+            Strife.TryCreateStrife(-1, out strf);
 
             for (int i = 0; i < plyrs.Length; i++)
             {

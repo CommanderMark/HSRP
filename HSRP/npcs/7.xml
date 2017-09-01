@@ -1,0 +1,12 @@
+<npc id="7">
+  <info name="Legislacerator" type="Normal" pineappleOnPizza="false">A Legiscerator whose mission is to kill you.</info>
+  <status hp="130" maxhp="130" dead="false" specibus="Scythekind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="8"/>
+    <constitution value="5"/>
+    <psion value="0"/>
+    <fortitude value="7"/>
+    <intimidation value="8"/>
+    <persuasion value="8"/>
+  </abilities>
+</npc>

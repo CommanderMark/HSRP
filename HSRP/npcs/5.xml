@@ -1,0 +1,12 @@
+<npc id="5">
+  <info name="Derideo" type="Lusus" pineappleOnPizza="false">The Juggalo's Lusus, they are a Giant Crab.</info>
+  <status hp="140" maxhp="140" dead="false" specibus="Lususkind" diceRolls="1" controller="3"/>
+  <abilities>
+    <strength value="10"/>
+    <constitution value="8"/>
+    <psion value="0"/>
+    <fortitude value="7"/>
+    <intimidation value="0"/>
+    <persuasion value="0"/>
+  </abilities>
+</npc>

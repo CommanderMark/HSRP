@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Discord;
 
 namespace HSRP
 {
@@ -423,6 +425,105 @@ namespace HSRP
             string filePath = Path.Combine(Dirs.Players, plyer.ToString() + ".xml");
             return File.Exists(filePath)
                 && !Program.Instance.Registers.ContainsKey(plyer);
+        }
+
+        public static async Task<Tuple<bool, Player>> TryParse(string input)
+        {
+            ulong id;
+
+            // By Mention
+            if (MentionUtils.TryParseUser(input, out id))
+            {
+                goto Finish;
+            }
+
+            // By Id
+            else if (ulong.TryParse(input, NumberStyles.None, CultureInfo.InvariantCulture, out id))
+            {
+                goto Finish;
+            }
+            else
+            {
+                var guildUsers = await Program.Instance.RpGuild.GetUsersAsync();
+
+                // By Username + Discriminator
+                int index = input.LastIndexOf('#');
+                if (index >= 0)
+                {
+                    string username = input.Substring(0, index);
+                    ushort discriminator;
+                    if (ushort.TryParse(input.Substring(index + 1), out discriminator))
+                    {
+                        IGuildUser user = guildUsers.FirstOrDefault(x => x.DiscriminatorValue == discriminator &&
+                            string.Equals(username, x.Username, StringComparison.OrdinalIgnoreCase));
+                        if (user != null)
+                        {
+                            id = user.Id;
+                            goto Finish;
+                        }
+                    }
+                }
+
+
+                // By Username
+                // If there's more then one user with that username respond with a warning.
+                var matchedUsers = guildUsers.Where(x => x.Username.Contains(input, StringComparison.OrdinalIgnoreCase));
+                if (matchedUsers.Count() == 1)
+                {
+                    IGuildUser user = matchedUsers.FirstOrDefault();
+                    if (user != null)
+                    {
+                        id = user.Id;
+                        goto Finish;
+                    }
+                }
+                // Multiple people with that username exist on the server.
+                else if (matchedUsers.Count() > 1)
+                {
+                    foreach (IGuildUser resident in matchedUsers)
+                    {
+                        if (Registered(resident.Id))
+                        {
+                            id = resident.Id;
+                            goto Finish;
+                        }
+                    }
+                }
+
+                // By Nickname
+                matchedUsers = guildUsers.Where(x => !string.IsNullOrWhiteSpace(x.Nickname) && x.Nickname.Contains(input, StringComparison.OrdinalIgnoreCase));
+                if (matchedUsers.Count() == 1)
+                {
+                    IGuildUser user = matchedUsers.FirstOrDefault();
+                    if (user != null)
+                    {
+                        id = user.Id;
+                        goto Finish;
+                    }
+                }
+                // Multiple people with that username exist on the server.
+                else if (matchedUsers.Count() > 1)
+                {
+                    foreach (IGuildUser resident in matchedUsers)
+                    {
+                        if (Registered(resident.Id))
+                        {
+                            id = resident.Id;
+                            goto Finish;
+                        }
+                    }
+                }
+            }
+
+        Finish:
+            {
+                if (id != 0 && Player.Registered(id))
+                {
+                    return Tuple.Create(true, new Player(id));
+                }
+                
+                return Tuple.Create<bool, Player>(false, null);
+            }
         }
     }
 }

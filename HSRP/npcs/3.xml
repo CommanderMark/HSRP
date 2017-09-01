@@ -1,0 +1,12 @@
+<npc id="3">
+  <info name="Subjugglator" type="Normal" pineappleOnPizza="false">A subjugglator, they seem eager to kill you.</info>
+  <status hp="140" maxhp="140" dead="false" specibus="Clubkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="9"/>
+    <constitution value="5"/>
+    <psion value="0"/>
+    <fortitude value="5"/>
+    <intimidation value="5"/>
+    <persuasion value="5"/>
+  </abilities>
+</npc>
