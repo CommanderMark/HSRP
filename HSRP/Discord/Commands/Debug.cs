@@ -94,6 +94,25 @@ namespace HSRP.Commands
             }
         }
 
+        [Command("npcs")]
+        public async Task ListNPCs()
+        {
+            string msg = "";
+            string[] dirs = Directory.GetFiles(Dirs.NPCs);
+
+            foreach (string file in dirs)
+            {
+                if (file.Contains("DS_Store")) { continue; }
+                
+                if (NPC.TryParse(file, out NPC npc, false))
+                {
+                    msg = msg.AddLine($"{npc.ID} - {npc.Name}");
+                }
+            }
+
+            await ReplyAsync(Syntax.ToCodeBlock(msg));
+        }
+
         // OMV Quirk Stuff
         private string ToQuirk(string str)
         {
