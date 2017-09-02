@@ -338,7 +338,7 @@ namespace HSRP
             }
 
             // Are all the members of one team dead?
-            if (Attackers.All(x => (x.Dead || x.Controller > 0)))
+            if (Attackers.All(x => x.Dead || (x.Controller > 0 && Targets.Any(y => y.ID == x.Controller))))
             {
                 log = log.AddLine("Attackers have been defeated.");
                 EndStrife();
@@ -346,7 +346,7 @@ namespace HSRP
                 ntty = null;
                 return returnEmp ? string.Empty : GetLogs();
             }
-            if (Targets.All(x => (x.Dead || x.Controller > 0)))
+            if (Targets.All(x => x.Dead || (x.Controller > 0 && Attackers.Any(y => y.ID == x.Controller))))
             {
                 log = log.AddLine("Targets have been defeated.");
                 EndStrife();

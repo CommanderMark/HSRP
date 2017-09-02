@@ -90,6 +90,21 @@ namespace HSRP.Commands
             }
         }
 
+        [Command("delete"), RequireGM]
+        public async Task Delete(int id)
+        {
+            string filePath = Path.Combine(Dirs.Strifes, id + ".xml");
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                await ReplyAsync("Strife " + id + " deleted.");
+            }
+            else
+            {
+                await ReplyAsync("Strife not found.");
+            }
+        }
+
         [Group("edit"), RequireGM]
         public class EditStrife : JModuleBase
         {
@@ -117,6 +132,24 @@ namespace HSRP.Commands
 
                 strf.Save();
                 await ReplyAsync(Syntax.ToCodeBlock(strf.Display()));
+            }
+
+            [Command("clear")]
+            public async Task Clear(int id)
+            {
+                Strife strf = new Strife(id.ToString());
+                if (!strf.Errored)
+                {
+                    strf.Attackers.Clear();
+                    strf.Targets.Clear();
+
+                    strf.Save();
+                    await ReplyAsync("Strife's entities cleared.");
+                }
+                else
+                {
+                    await ReplyAsync("Strife not found.");
+                }
             }
         }
 
