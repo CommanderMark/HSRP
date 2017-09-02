@@ -1,0 +1,12 @@
+<npc id="14">
+  <info name="Disguised Legislacerator" type="Normal" pineappleOnPizza="false">Sadly, it seems this is just a legislacerator pretending to be the cloaked stalker.</info>
+  <status hp="120" maxhp="120" dead="false" specibus="Staffkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="12"/>
+    <constitution value="5"/>
+    <psion value="0"/>
+    <fortitude value="5"/>
+    <intimidation value="18"/>
+    <persuasion value="18"/>
+  </abilities>
+</npc>

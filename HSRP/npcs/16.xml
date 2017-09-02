@@ -1,0 +1,12 @@
+<npc id="16">
+  <info name="Possessed Spear" type="Normal" pineappleOnPizza="false">Now even inanimate objects want you dea- Wait, no, someone is probably controlling it.</info>
+  <status hp="30" maxhp="30" dead="false" specibus="Spearkind" diceRolls="2" controller="0"/>
+  <abilities>
+    <strength value="20"/>
+    <constitution value="5"/>
+    <psion value="0"/>
+    <fortitude value="5"/>
+    <intimidation value="0"/>
+    <persuasion value="30"/>
+  </abilities>
+</npc>
