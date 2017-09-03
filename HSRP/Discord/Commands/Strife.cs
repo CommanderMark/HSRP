@@ -109,9 +109,8 @@ namespace HSRP.Commands
         public class EditStrife : JModuleBase
         {
             [Command("atk"), Alias("attack", "at")]
-            public async Task Attack(int id, params IEntity[] entities)
+            public async Task Attack(Strife strf, params IEntity[] entities)
             {
-                Strife strf = new Strife(id.ToString());
                 foreach (IEntity ent in entities)
                 {
                     strf.Attackers.Add(ent);
@@ -122,9 +121,8 @@ namespace HSRP.Commands
             }
 
             [Command("target"), Alias("tar", "targets")]
-            public async Task Target(int id, params IEntity[] entities)
+            public async Task Target(Strife strf, params IEntity[] entities)
             {
-                Strife strf = new Strife(id.ToString());
                 foreach (IEntity ent in entities)
                 {
                     strf.Targets.Add(ent);
@@ -135,152 +133,103 @@ namespace HSRP.Commands
             }
 
             [Command("clear")]
-            public async Task Clear(int id)
+            public async Task Clear(Strife strf)
             {
-                Strife strf = new Strife(id.ToString());
-                if (!strf.Errored)
-                {
-                    strf.Attackers.Clear();
-                    strf.Targets.Clear();
+                strf.Attackers.Clear();
+                strf.Targets.Clear();
 
-                    strf.Save();
-                    await ReplyAsync("Strife's entities cleared.");
-                }
-                else
-                {
-                    await ReplyAsync("Strife not found.");
-                }
+                strf.Save();
+                await ReplyAsync("Strife's entities cleared.");
             }
         }
 
         [Command("activate"), Alias("active"), RequireGM]
-        public async Task Activate(int id)
+        public async Task Activate(Strife strf)
         {
-            Strife strf = new Strife(id.ToString());
-            if (!strf.Errored)
+            if (strf.Active)
             {
-                if (strf.Active)
-                {
-                    await ReplyAsync("Strife is already activated.");
-                    return;
-                }
-
-                await strf.ActivateStrife();
-                await ReplyAsync("Strife activated!");
-
-                await ReplyStrifeAsync("A strife has begun.");
-                await ReplyStrifeAsync(Syntax.ToCodeBlock(strf.Display()));
-                await ReplyStrifeAsync(strf.UpdateStrife(out Player next));
-                strf.Save();
+                await ReplyAsync("Strife is already activated.");
+                return;
             }
-            else
-            {
-                await ReplyAsync("Strife not found.");
-            }
+
+            await strf.ActivateStrife();
+            await ReplyAsync("Strife activated!");
+
+            await ReplyStrifeAsync("A strife has begun.");
+            await ReplyStrifeAsync(Syntax.ToCodeBlock(strf.Display()));
+            await ReplyStrifeAsync(strf.UpdateStrife(out Player next));
+            strf.Save();
         }
 
         [Command("Deactivate"), Alias("deactive"), RequireGM]
-        public async Task Deactivate(int id)
+        public async Task Deactivate(Strife strf)
         {
-            Strife strf = new Strife(id.ToString());
-            if (!strf.Errored)
-            {
-                await ReplyStrifeAsync(strf.DeactivateStrife());
+            await ReplyStrifeAsync(strf.DeactivateStrife());
 
-                // Post logs.
-                string path = strf.LogLogs();
+            // Post logs.
+            string path = strf.LogLogs();
 
-                await Context.Channel.SendFileAsync(path, "The log of the strife is now being posted.");
-                File.Delete(path);
+            await Context.Channel.SendFileAsync(path, "The log of the strife is now being posted.");
+            File.Delete(path);
 
-                strf.Save();
-            }
-            else
-            {
-                await ReplyAsync("Strife not found.");
-            }
+            strf.Save();
         }
 
         [Command("end"), RequireGM]
-        public async Task End(int id)
+        public async Task End(Strife strf)
         {
-            Strife strf = new Strife(id.ToString());
-            if (!strf.Errored)
-            {
-                await ReplyAsync(strf.DeactivateStrife());
-                strf.Save();
-            }
-            else
-            {
-                await ReplyAsync("Strife not found.");
-            }
+            await ReplyAsync(strf.DeactivateStrife());
+            strf.Save();
         }
 
         [Command("check"), Alias("status"), InStrife]
-        public async Task Check() => await Check(Context.GetPlayerEntity().StrifeID);
+        public async Task Check() => await Check(Context.GetStrife());
 
         [Command("check"), Alias("status"), RequireGM]
-        public async Task Check(int id)
+        public async Task Check(Strife strf)
         {
-            Strife strf = new Strife(id.ToString());
-            if (!strf.Errored)
-            {
-                await ReplyAsync(Syntax.ToCodeBlock(strf.Display()));
-            }
-            else
-            {
-                await ReplyAsync("Strife not found.");
-            }
+            await ReplyAsync(Syntax.ToCodeBlock(strf.Display()));
         }
 
         [Command("identify"), Alias("identity"), InStrife]
-        public async Task Identify(string who, int index) => await Identify(Context.GetPlayerEntity().StrifeID, who, index);
+        public async Task Identify(string who, int index) => await Identify(Context.GetStrife(), who, index);
 
         [Command("identify"), Alias("identity"), RequireGM]
-        public async Task Identify(int id, string who, int index)
+        public async Task Identify(Strife strf, string who, int index)
         {
-            Strife strf = new Strife(id.ToString());
-            if (!strf.Errored)
+            bool attackAtks = false;
+            if ("attackers".StartsWith(who, StringComparison.OrdinalIgnoreCase)
+                || who.Equals("atk", StringComparison.OrdinalIgnoreCase))
             {
-                bool attackAtks = false;
-                if ("attackers".StartsWith(who, StringComparison.OrdinalIgnoreCase)
-                    || who.Equals("atk", StringComparison.OrdinalIgnoreCase))
-                {
-                    attackAtks = true;
-                }
-                else if ("targets".StartsWith(who, StringComparison.OrdinalIgnoreCase))
-                {
-                    attackAtks = false;
-                }
-                else
-                {
-                    await ReplyAsync("Invalid input.");
-                    return;
-                }
-
-                IEntity ent = strf.GetTarget(index, attackAtks);
-                if (ent == null)
-                {
-                    await ReplyAsync("Invalid strifer.");
-                }
-                else
-                {
-                    await ReplyAsync(Syntax.ToCodeBlock(ent.Display(true)));
-                }
+                attackAtks = true;
+            }
+            else if ("targets".StartsWith(who, StringComparison.OrdinalIgnoreCase))
+            {
+                attackAtks = false;
             }
             else
             {
-                await ReplyAsync("Strife not found.");
+                await ReplyAsync("Invalid input.");
+                return;
+            }
+
+            IEntity ent = strf.GetTarget(index, attackAtks);
+            if (ent == null)
+            {
+                await ReplyAsync("Invalid strifer.");
+            }
+            else
+            {
+                await ReplyAsync(Syntax.ToCodeBlock(ent.Display(true)));
             }
         }
 
         [Command("log"), InStrife]
-        public async Task Log() => await Log(Context.GetPlayerEntity().StrifeID);
+        public async Task Log() => await Log(Context.GetStrife());
 
         [Command("log")]
-        public async Task Log(int id)
+        public async Task Log(Strife strf)
         {
-            Strife strf = new Strife(id.ToString());
             if (strf.Logs.Count < 1)
             {
                 await ReplyAsync("There are no logs in this strife.");
@@ -293,9 +242,8 @@ namespace HSRP.Commands
         }
 
         [Command("clear"), RequireGM]
-        public async Task ClearLogs(int id)
+        public async Task ClearLogs(Strife strf)
         {
-            Strife strf = new Strife(id.ToString());
             if (strf.Logs.Count < 1)
             {
                 await ReplyAsync("There are no logs in this strife.");
