@@ -648,10 +648,18 @@ namespace HSRP
                         break;
 
                     case NPCType.Psionic:
-                        if (Toolbox.TrueOrFalse(4) && target.Controller != ai.ID)
+                        int rng = Toolbox.RandInt(4);
+                        // 25% chance to mind-control.
+                        if (rng == 3 && target.Controller != ai.ID)
                         {
                             TakeTurn(StrifeAction.MindControl, targetID, !attackTurn);
                         }
+                        // 25% chance to attack.
+                        else if (rng == 2)
+                        {
+                            TakeTurn(StrifeAction.PhysicalAttack, targetID, !attackTurn);
+                        }
+                        // 25% chance to optic blast.
                         else
                         {
                             TakeTurn(StrifeAction.OpticBlast, targetID, !attackTurn);
