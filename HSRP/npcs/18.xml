@@ -1,0 +1,12 @@
+<npc id="18">
+  <info name="Octoblood Illusionist" type="Normal" pineappleOnPizza="false">A masked Octoblood.</info>
+  <status hp="110" maxhp="110" dead="false" specibus="Whipkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="5"/>
+    <constitution value="5"/>
+    <psion value="9"/>
+    <fortitude value="6"/>
+    <intimidation value="20"/>
+    <persuasion value="5"/>
+  </abilities>
+</npc>

@@ -2,13 +2,13 @@
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
   <lusus>Veneficus is a giant Scorpion with spikes on his back.</lusus>
-  <status hp="153" maxhp="165" dead="false" specibus="Bladekindx2" />
-  <levels echeladder="6" pendingSkillPoints="0" xp="300" nextLevel="400" />
+  <status hp="1" maxhp="176" dead="false" specibus="Bladekindx2" />
+  <levels echeladder="7" pendingSkillPoints="0" xp="530" nextLevel="620" />
   <abilities>
-    <strength value="17" />
-    <constitution value="14" />
+    <strength value="20" />
+    <constitution value="16" />
     <psion value="0" />
-    <fortitude value="14" />
+    <fortitude value="15" />
     <intimidation value="11" />
     <persuasion value="10" />
   </abilities>
@@ -20,16 +20,16 @@
     <item value="Snake Toxin 2L" quantity="1" />
     <item value="Signless Shirt" quantity="1" />
     <item value="Venom Recipes" quantity="1" />
-    <item value="Shurikens" quantity="2" />
     <item value="Good Phone" quantity="1" />
     <item value="Mask" quantity="1" />
     <item value="Boomerang" quantity="1" />
-    <item value="Dull Daggersx2" quantity="1" />
     <item value="Smoke Bombs" quantity="8" />
     <item value="Bear Trap" quantity="1" />
     <item value="Spearx2" quantity="1" />
     <item value="Crystal" quantity="1" />
     <item value="Strange Vials" quantity="2" />
-    <item value="Bombs" quantity="3" />
+    <item value="Bows" quantity="1" />
+    <item value="Multiple Kinds of Poison" quantity="1" />
+    <item value="Crystal Shards" quantity="1" />
   </inventory>
 </player>

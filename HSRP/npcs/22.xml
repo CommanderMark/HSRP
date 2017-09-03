@@ -1,0 +1,12 @@
+<npc id="22">
+  <info name="elegantProtector" type="Normal" pineappleOnPizza="false">An Indigoblood that is strong even for an Archeradicator.</info>
+  <status hp="250" maxhp="250" dead="false" specibus="Bow&amp;Arrowkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="45"/>
+    <constitution value="9"/>
+    <psion value="0"/>
+    <fortitude value="9"/>
+    <intimidation value="10"/>
+    <persuasion value="20"/>
+  </abilities>
+</npc>

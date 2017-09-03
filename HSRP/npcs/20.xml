@@ -1,0 +1,12 @@
+<npc id="20">
+  <info name="Master Illusionist" type="Normal" pineappleOnPizza="false">Must be the one making all of those weird Illusions.</info>
+  <status hp="140" maxhp="140" dead="false" specibus="Whipkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="10"/>
+    <constitution value="5"/>
+    <psion value="15"/>
+    <fortitude value="10"/>
+    <intimidation value="20"/>
+    <persuasion value="10"/>
+  </abilities>
+</npc>

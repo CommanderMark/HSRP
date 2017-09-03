@@ -1,0 +1,12 @@
+<npc id="21">
+  <info name="Small Mildly Irritating Robot" type="Normal" pineappleOnPizza="false">Looks like someone just threw a bunch of parts together and hoped it would somehow function.</info>
+  <status hp="40" maxhp="40" dead="false" specibus="Fistkind" diceRolls="2" controller="0"/>
+  <abilities>
+    <strength value="7"/>
+    <constitution value="3"/>
+    <psion value="0"/>
+    <fortitude value="5"/>
+    <intimidation value="0"/>
+    <persuasion value="30"/>
+  </abilities>
+</npc>

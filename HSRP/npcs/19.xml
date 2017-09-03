@@ -1,0 +1,12 @@
+<npc id="19">
+  <info name="Massive Featherbeast" type="Lusus" pineappleOnPizza="false">Probably the lusus of the stalker guy.</info>
+  <status hp="200" maxhp="200" dead="false" specibus="Feralkind" diceRolls="1" controller="18"/>
+  <abilities>
+    <strength value="30"/>
+    <constitution value="8"/>
+    <psion value="0"/>
+    <fortitude value="8"/>
+    <intimidation value="0"/>
+    <persuasion value="0"/>
+  </abilities>
+</npc>
