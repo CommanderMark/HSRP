@@ -378,7 +378,7 @@ namespace HSRP
                 // Their controller is either dead or being mind-controlled themselves.
                 if (!match)
                 {
-                    log = log.AddLine($"{Syntax.ToCodeLine(turner.Name)} is no longer mind-controlled!");
+                    log = log.AddLine($"{Syntax.ToCodeLine(turner.Name)} is no longer controlled!");
                     turner.Controller = 0;
                 }
 

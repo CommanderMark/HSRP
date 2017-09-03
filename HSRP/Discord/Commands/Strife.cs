@@ -183,23 +183,37 @@ namespace HSRP.Commands
         public async Task Deactivate(int id)
         {
             Strife strf = new Strife(id.ToString());
-            await ReplyStrifeAsync(strf.DeactivateStrife());
+            if (!strf.Errored)
+            {
+                await ReplyStrifeAsync(strf.DeactivateStrife());
 
-            // Post logs.
-            string path = strf.LogLogs();
+                // Post logs.
+                string path = strf.LogLogs();
 
-            await Context.Channel.SendFileAsync(path, "The log of the strife is now being posted.");
-            File.Delete(path);
+                await Context.Channel.SendFileAsync(path, "The log of the strife is now being posted.");
+                File.Delete(path);
 
-            strf.Save();
+                strf.Save();
+            }
+            else
+            {
+                await ReplyAsync("Strife not found.");
+            }
         }
 
         [Command("end"), RequireGM]
         public async Task End(int id)
         {
             Strife strf = new Strife(id.ToString());
-            await ReplyAsync(strf.DeactivateStrife());
-            strf.Save();
+            if (!strf.Errored)
+            {
+                await ReplyAsync(strf.DeactivateStrife());
+                strf.Save();
+            }
+            else
+            {
+                await ReplyAsync("Strife not found.");
+            }
         }
 
         [Command("check"), Alias("status"), InStrife]
@@ -209,41 +223,54 @@ namespace HSRP.Commands
         public async Task Check(int id)
         {
             Strife strf = new Strife(id.ToString());
-            await ReplyAsync(Syntax.ToCodeBlock(strf.Display()));
+            if (!strf.Errored)
+            {
+                await ReplyAsync(Syntax.ToCodeBlock(strf.Display()));
+            }
+            else
+            {
+                await ReplyAsync("Strife not found.");
+            }
         }
 
-        [Command("identify"), InStrife]
+        [Command("identify"), Alias("identity"), InStrife]
         public async Task Identify(string who, int index) => await Identify(Context.GetPlayerEntity().StrifeID, who, index);
 
-        [Command("identify"), RequireGM]
+        [Command("identify"), Alias("identity"), RequireGM]
         public async Task Identify(int id, string who, int index)
         {
             Strife strf = new Strife(id.ToString());
+            if (!strf.Errored)
+            {
+                bool attackAtks = false;
+                if ("attackers".StartsWith(who, StringComparison.OrdinalIgnoreCase)
+                    || who.Equals("atk", StringComparison.OrdinalIgnoreCase))
+                {
+                    attackAtks = true;
+                }
+                else if ("targets".StartsWith(who, StringComparison.OrdinalIgnoreCase))
+                {
+                    attackAtks = false;
+                }
+                else
+                {
+                    await ReplyAsync("Invalid input.");
+                    return;
+                }
 
-            bool attackAtks = false;
-            if ("attackers".StartsWith(who, StringComparison.OrdinalIgnoreCase)
-                || who.Equals("atk", StringComparison.OrdinalIgnoreCase))
-            {
-                attackAtks = true;
-            }
-            else if ("targets".StartsWith(who, StringComparison.OrdinalIgnoreCase))
-            {
-                attackAtks = false;
+                IEntity ent = strf.GetTarget(index, attackAtks);
+                if (ent == null)
+                {
+                    await ReplyAsync("Invalid strifer.");
+                }
+                else
+                {
+                    await ReplyAsync(Syntax.ToCodeBlock(ent.Display(true)));
+                }
             }
             else
             {
-                await ReplyAsync("Invalid input.");
-                return;
-            }
-
-            IEntity ent = strf.GetTarget(index, attackAtks);
-            if (ent == null)
-            {
-                await ReplyAsync("Invalid strifer.");
-            }
-            else
-            {
-                await ReplyAsync(Syntax.ToCodeBlock(ent.Display(true)));
+                await ReplyAsync("Strife not found.");
             }
         }
 
