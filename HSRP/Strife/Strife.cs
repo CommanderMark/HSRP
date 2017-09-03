@@ -648,7 +648,7 @@ namespace HSRP
                         break;
 
                     case NPCType.Psionic:
-                        if (Toolbox.TrueOrFalse() && target.Controller != ai.ID)
+                        if (Toolbox.TrueOrFalse(4) && target.Controller != ai.ID)
                         {
                             TakeTurn(StrifeAction.MindControl, targetID, !attackTurn);
                         }

@@ -9,10 +9,10 @@ using System.Collections.Generic;
 
 namespace HSRP.Commands
 {
-    [Group("debug")]
+    [Group("debug"), RequireGM]
     public class DebugCommands : JModuleBase
     {
-        [Command("filter"), RequireJorge]
+        [Command("filter")]
         public async Task FilterXml(string type)
         {
             if (type == "users")
@@ -56,10 +56,12 @@ namespace HSRP.Commands
                     plyr.Health = plyr.MaxHealth;
                     plyr.Save();
                 }
+
+                await ReplyAsync("All players healed.");
             }
         }
 
-        [Command("strifelist"), RequireGM]
+        [Command("strifelist")]
         public async Task Strifes()
         {
 
@@ -80,7 +82,7 @@ namespace HSRP.Commands
                 : txt);
         }
 
-        [Command("togglestrife"), Alias("strifetoggle"), RequireGM]
+        [Command("togglestrife"), Alias("strifetoggle")]
         public async Task ToggleStrifeChannel()
         {
             if (Constants.STRIFE_CHANNEL == Constants.RP_STRIFE_CHANNEL)

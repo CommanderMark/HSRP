@@ -195,6 +195,9 @@ namespace HSRP
             string result = "";
 
             result = result.AddLine("Name: " + Name);
+            result = result.AddLine("Type: " + Type.ToString());
+            result = result.AddLine("");
+            
             result = result.AddLine("Description: " + Description);
             result = result.AddLine("");
 
