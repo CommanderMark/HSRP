@@ -766,7 +766,10 @@ namespace HSRP
                 target.Health -= dmg;
 
                 log = log.AddLine("");
-                log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} took {dmg} hitpoint(s) of damage.");
+                log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} took {Syntax.ToCodeLine(dmg.ToString())} hitpoint(s) of damage.");
+
+                // If the target died due to this attack end the attack right away.
+                if (target.Health < 1) { return; }
             }
             else if (atk < tar)
             {
@@ -777,7 +780,7 @@ namespace HSRP
             else
             {
                 log = log.AddLine("");
-                log = log.AddLine("Nothing happened.");
+                log = log.AddLine("Attack blocked.");
             }
 
             // Counter attack.

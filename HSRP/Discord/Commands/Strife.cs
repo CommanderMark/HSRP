@@ -276,7 +276,8 @@ namespace HSRP.Commands
                 }
             }
             strf.Save();
-            await ReplyAsync("Strife " + strf.ID + " has been created.");
+            await ReplyAsync("Strife " + strf.ID + " has been created."
+                + "\n" + strf.Display());
         }
     }
 }

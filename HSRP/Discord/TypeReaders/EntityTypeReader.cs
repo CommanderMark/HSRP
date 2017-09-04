@@ -24,6 +24,7 @@ namespace HSRP.Commands
                 return await Task.FromResult(TypeReaderResult.FromSuccess(npc));
             }
             
+            await context.Channel.SendMessageAsync("Entity " + input + " not found.");
             return TypeReaderResult.FromError(CommandError.ParseFailed, "No such entity was found.");
         }
     }
