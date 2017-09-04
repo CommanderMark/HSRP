@@ -1,0 +1,12 @@
+<npc id="24">
+  <info name="Rag Doll" type="Normal" pineappleOnPizza="false">It's a rag doll, nothing new there. Except this one can move and try to kill you, nice.</info>
+  <status hp="50" maxhp="50" dead="false" specibus="Shadowkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="7"/>
+    <constitution value="5"/>
+    <psion value="0"/>
+    <fortitude value="9"/>
+    <intimidation value="15"/>
+    <persuasion value="0"/>
+  </abilities>
+</npc>
