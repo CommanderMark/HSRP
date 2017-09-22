@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Xml.Linq;
 
 namespace HSRP
@@ -192,26 +193,26 @@ namespace HSRP
 
         public string Display(bool showMods = false)
         {
-            string result = "";
+            StringBuilder result = new StringBuilder();
 
-            result = result.AddLine("Name: " + Name);
-            result = result.AddLine("Type: " + Type.ToString());
-            result = result.AddLine("");
+            result.AppendLine("Name: " + Name);
+            result.AppendLine("Type: " + Type.ToString());
+            result.AppendLine("");
             
-            result = result.AddLine("Description: " + Description);
-            result = result.AddLine("");
+            result.AppendLine("Description: " + Description);
+            result.AppendLine("");
 
-            result = result.AddLine("Health Vial: " + Health + "/" + MaxHealth);
-            result = result.AddLine("Strife Specibus: " + Specibus);
-            result = result.AddLine("Dice Rolls: " + DiceRolls);
-            result = result.AddLine("");
+            result.AppendLine("Health Vial: " + Health + "/" + MaxHealth);
+            result.AppendLine("Strife Specibus: " + Specibus);
+            result.AppendLine("Dice Rolls: " + DiceRolls);
+            result.AppendLine("");
 
-            result = result.AddLine("Base Statistics");
-            result = result.AddLine(showMods
+            result.AppendLine("Base Statistics");
+            result.AppendLine(showMods
                 ? Abilities.Display(TotalMods)
                 : Abilities.Display());
 
-            return result;
+            return result.ToString();
         }
 
         public static bool TryParse(string input, out NPC npc, bool idOnly = true)
