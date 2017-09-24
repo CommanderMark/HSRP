@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Discord;
@@ -260,30 +261,30 @@ namespace HSRP
 
         public string Display(bool showMods = false)
         {
-            string result = "";
+            StringBuilder result = new StringBuilder();
 
-            result = result.AddLine("Name: " + Name);
-            result = result.AddLine($"Owned by: {OwnerUsername} ({ID})");
-            result = result.AddLine("Blood Color: " + BloodColor);
-            result = result.AddLine("Lusus Desc: " + LususDescription);
-            result = result.AddLine("");
+            result.AppendLine("Name: " + Name);
+            result.AppendLine($"Owned by: {OwnerUsername} ({ID})");
+            result.AppendLine("Blood Color: " + BloodColor);
+            result.AppendLine("Lusus Desc: " + LususDescription);
+            result.AppendLine("");
 
-            result = result.AddLine("Health Vial: " + Health + "/" + MaxHealth);
-            result = result.AddLine("Strife Specibus: " + Specibus);
-            result = result.AddLine("");
+            result.AppendLine("Health Vial: " + Health + "/" + MaxHealth);
+            result.AppendLine("Strife Specibus: " + Specibus);
+            result.AppendLine("");
 
-            result = result.AddLine("Echeladder Rung: " + Echeladder);
-            result = result.AddLine("Total XP: " + XP);
-            result = result.AddLine("Next Level In: " + (NextLevelXP - XP));
-            result = result.AddLine("Pending Skill Points: " + PendingSkillPointAllocations);
-            result = result.AddLine("");
+            result.AppendLine("Echeladder Rung: " + Echeladder);
+            result.AppendLine("Total XP: " + XP);
+            result.AppendLine("Next Level In: " + (NextLevelXP - XP));
+            result.AppendLine("Pending Skill Points: " + PendingSkillPointAllocations);
+            result.AppendLine("");
 
-            result = result.AddLine("Base Statistics");
-            result = result.AddLine(showMods
+            result.AppendLine("Base Statistics");
+            result.AppendLine(showMods
                 ? Abilities.Display(TotalMods)
                 : Abilities.Display());
 
-            return result;
+            return result.ToString();
         }
 
         public string DisplayInventory()
@@ -299,7 +300,7 @@ namespace HSRP
                 {
                     result += " (Equipped)";
                 }
-                result = result.AddLine("");
+                result += "\n";
             }
 
             return result;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Discord;
@@ -30,7 +31,7 @@ namespace HSRP
         /// <summary>
         /// Log of current event.
         /// </summary>
-        private string log;
+        private StringBuilder log = new StringBuilder();
         private int postedLogs;
 
         /// <summary>
@@ -256,7 +257,7 @@ namespace HSRP
         /// <returns>A string detailing the status of each entity on each team of the strife.</returns>
         public string Display()
         {
-            string txt = "Team A:\n";
+            StringBuilder txt = new StringBuilder("Team A:\n");
             for (int i = 0; i < Attackers.Count; i++)
             {
                 IEntity ent = Attackers[i];
@@ -265,10 +266,10 @@ namespace HSRP
                 {
                     usr += " (DEFEATED)";
                 }
-                txt = txt.AddLine(usr);
+                txt.AppendLine(usr);
             }
 
-            txt = txt.AddLine("\nTeam T: ");
+            txt.AppendLine("\nTeam T: ");
             for (int i = 0; i < Targets.Count; i++)
             {
                 IEntity ent = Targets[i];
@@ -277,10 +278,10 @@ namespace HSRP
                 {
                     usr += " (DEFEATED)";
                 }
-                txt = txt.AddLine(usr);
+                txt.AppendLine(usr);
             }
 
-            return txt;
+            return txt.ToString();
         }
 
         /// <summary>
@@ -297,7 +298,7 @@ namespace HSRP
 
             // Add list of users to log but skip it when posting the logs as that's posted separately.
             Logs.Clear();
-            log = Display();
+            log.Append(Display());
             AddLog();
             postedLogs = 1;
 
@@ -340,7 +341,7 @@ namespace HSRP
             // Are all the members of one team dead?
             if (Attackers.All(x => x.Dead || (x.Controller > 0 && Targets.Any(y => y.ID == x.Controller))))
             {
-                log = log.AddLine("Attackers have been defeated.");
+                log.AppendLine("Attackers have been defeated.");
                 EndStrife();
 
                 ntty = null;
@@ -348,7 +349,7 @@ namespace HSRP
             }
             if (Targets.All(x => x.Dead || (x.Controller > 0 && Attackers.Any(y => y.ID == x.Controller))))
             {
-                log = log.AddLine("Targets have been defeated.");
+                log.AppendLine("Targets have been defeated.");
                 EndStrife();
 
                 ntty = null;
@@ -369,7 +370,7 @@ namespace HSRP
                 {
                     if (turner.Controller == ent.ID && !ent.Dead && ent.Controller <= 0) 
                     {
-                        log = log.AddLine($"{Syntax.ToCodeLine(turner.Name)}, controlled by {Syntax.ToCodeLine(ent.Name)}, is taking their turn!");
+                        log.AppendLine($"{Syntax.ToCodeLine(turner.Name)}, controlled by {Syntax.ToCodeLine(ent.Name)}, is taking their turn!");
                         CurrentTurner = ent;
                         match = true;
                         break;
@@ -378,7 +379,7 @@ namespace HSRP
                 // Their controller is either dead or being mind-controlled themselves.
                 if (!match)
                 {
-                    log = log.AddLine($"{Syntax.ToCodeLine(turner.Name)} is no longer controlled!");
+                    log.AppendLine($"{Syntax.ToCodeLine(turner.Name)} is no longer controlled!");
                     turner.Controller = 0;
                 }
 
@@ -399,7 +400,7 @@ namespace HSRP
             {
                 AddLog();
 
-                log = log.AddLine($"{Syntax.ToCodeLine(turner.Name)} is taking their turn!");
+                log.AppendLine($"{Syntax.ToCodeLine(turner.Name)} is taking their turn!");
                 // AI is taking a turn, do that until a human is found.
                 if (turner is NPC)
                 {
@@ -432,7 +433,7 @@ namespace HSRP
                         turn = 0;
                         AddLog();
 
-                        log = log.AddLine("Targets are now taking their turns.");
+                        log.AppendLine("Targets are now taking their turns.");
                         notValidTurner = Targets[turn].Dead;
                     }
                     else
@@ -449,7 +450,7 @@ namespace HSRP
                         turn = 0;
                         AddLog();
 
-                        log = log.AddLine("Attackers are now taking their turns.");
+                        log.AppendLine("Attackers are now taking their turns.");
                         notValidTurner = Attackers[turn].Dead;
                     }
                     else
@@ -687,7 +688,7 @@ namespace HSRP
             {
                 ent.Health = 0;
             }
-            log = log.AddLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
+            log.AppendLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
         }
 
         public string Forfeit(ulong id)
@@ -710,9 +711,9 @@ namespace HSRP
         {
             Active = false;
             AddLog();
-            log = log.AddLine("The strife is now over. XP will be awarded at the discretion of the GM.");
+            log.AppendLine("The strife is now over. XP will be awarded at the discretion of the GM.");
             AddLog();
-            log = Display();
+            log.Append(Display());
             AddLog();
 
             foreach (IEntity ent in Entities)
@@ -742,8 +743,8 @@ namespace HSRP
         // XDSTR <-- XDPER: Debuff of the difference between both rolls is applied to the attacker's strength.
         private void PhysicalAttack(IEntity attacker, IEntity target)
         {
-            log = log.AddLine(Toolbox.GetMessage("phyStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
-            log = log.AddLine("");
+            log.AppendLine(Toolbox.GetMessage("phyStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
+            log.AppendLine("");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -756,8 +757,8 @@ namespace HSRP
             // Dice rolls.
             int atk = Toolbox.DiceRoll(atkX, atkY);
             int tar = Toolbox.DiceRoll(tarX, tarY);
-            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
-            log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
+            log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
+            log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
 
             // If attacker rolled higher inflict damage.
             if (atk > tar)
@@ -765,30 +766,30 @@ namespace HSRP
                 int dmg = atk - tar;
                 target.Health -= dmg;
 
-                log = log.AddLine("");
-                log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} took {Syntax.ToCodeLine(dmg.ToString())} hitpoint(s) of damage.");
+                log.AppendLine("");
+                log.AppendLine($"{Syntax.ToCodeLine(target.Name)} took {Syntax.ToCodeLine(dmg.ToString())} hitpoint(s) of damage.");
 
                 // If the target died due to this attack end the attack right away.
                 if (target.Health < 1) { return; }
             }
             else if (atk < tar)
             {
-                log = log.AddLine("");
-                log = log.AddLine("Attack missed.");
+                log.AppendLine("");
+                log.AppendLine("Attack missed.");
             }
             // Equal rolls, do nothing.
             else
             {
-                log = log.AddLine("");
-                log = log.AddLine("Attack blocked.");
+                log.AppendLine("");
+                log.AppendLine("Attack blocked.");
             }
 
             // Counter attack.
             // If the strength modifier of the attacker is already debuffed below 1 then don't debuff.
             if (attacker.TotalAbilities.Strength < 1)
             {
-                log = log.AddLine("");
-                log = log.AddLine(Toolbox.GetMessage("phyCounterMax", Syntax.ToCodeLine(attacker.Name)));
+                log.AppendLine("");
+                log.AppendLine(Toolbox.GetMessage("phyCounterMax", Syntax.ToCodeLine(attacker.Name)));
                 return;
             }
             else
@@ -799,19 +800,19 @@ namespace HSRP
                 // is higher than the attacker's strength.
                 if (Toolbox.TrueOrFalse(4 - (2 * Convert.ToInt32(tarY > atkY))))
                 {
-                    log = log.AddLine("");
-                    log = log.AddLine(Toolbox.GetMessage("phyCounterStart", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
+                    log.AppendLine("");
+                    log.AppendLine(Toolbox.GetMessage("phyCounterStart", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
 
                     atk = Toolbox.DiceRoll(atkX, atkY);
                     tar = Toolbox.DiceRoll(tarX, tarY);
-                    log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
-                    log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
+                    log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
+                    log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
 
                     // Counter failed.
                     if (atk >= tar)
                     {
-                        log = log.AddLine("");
-                        log = log.AddLine(Toolbox.GetMessage("phyCounterBlock"));
+                        log.AppendLine("");
+                        log.AppendLine(Toolbox.GetMessage("phyCounterBlock"));
                     }
                     // Counter suceeded, debuff strength.
                     else
@@ -831,7 +832,7 @@ namespace HSRP
         // TODO: Mind control can break somehow?
         private void MindControl(IEntity attacker, IEntity target)
         {
-            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} attempts to mind control {Syntax.ToCodeLine(target.Name)}.\n");
+            log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} attempts to mind control {Syntax.ToCodeLine(target.Name)}.\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -853,8 +854,8 @@ namespace HSRP
                 if (tar[i] >= atk[i]) { success = false; }
             }
 
-            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
-            log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar[0]}, {tar[1]}, {tar[2]}!");
+            log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
+            log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar[0]}, {tar[1]}, {tar[2]}!");
 
             int atkTotal = atk[0] + atk[1] + atk[2];
             int tarTotal = tar[0] + tar[1] + tar[2];
@@ -862,16 +863,16 @@ namespace HSRP
             if (success)
             {
                 target.Controller = attacker.ID;
-                log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} has successfully mind controlled {Syntax.ToCodeLine(target.Name)}.");
+                log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} has successfully mind controlled {Syntax.ToCodeLine(target.Name)}.");
             }
             else
             {
-                log = log.AddLine("Mind control failed.");
+                log.AppendLine("Mind control failed.");
             }
         }
         private void OpticBlast(IEntity attacker, IEntity target)
         {
-            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} is preparing an Optic Blast.\n");
+            log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} is preparing an Optic Blast.\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -891,8 +892,8 @@ namespace HSRP
                 tar[i] = Toolbox.DiceRoll(tarX, tarY);
             }
 
-            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
-            log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar[0]}, {tar[1]}, {tar[2]}!");
+            log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
+            log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar[0]}, {tar[1]}, {tar[2]}!");
 
             int atkTotal = atk[0] + atk[1] + atk[2];
             int tarTotal = tar[0] + tar[1] + tar[2];
@@ -901,11 +902,11 @@ namespace HSRP
             {
                 int dmg = atkTotal - tarTotal;
                 target.Health -= dmg;
-                log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} struck {Syntax.ToCodeLine(target.Name)} for {dmg} hitpoints.");
+                log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} struck {Syntax.ToCodeLine(target.Name)} for {dmg} hitpoints.");
             }
             else
             {
-                log = log.AddLine("Optic Blast missed.");
+                log.AppendLine("Optic Blast missed.");
             }
         }
 
@@ -917,7 +918,7 @@ namespace HSRP
         // If STR or FOR reach 0 they leave the strife.
         private void SpeechAttack(IEntity attacker, IEntity target)
         {
-            log = log.AddLine(Toolbox.GetMessage("speStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)) + "\n");
+            log.AppendLine(Toolbox.GetMessage("speStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)) + "\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -930,8 +931,8 @@ namespace HSRP
             // Dice rolls.
             int atk = Toolbox.DiceRoll(atkX, atkY);
             int tar = Toolbox.DiceRoll(tarX, tarY);
-            log = log.AddLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
-            log = log.AddLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
+            log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
+            log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
             
             // Attack rolls higher, random chance begins.
             if (atk > tar)
@@ -973,35 +974,35 @@ namespace HSRP
                 // If STR or FOR reach 0 they leave the strife.
                 if ((target.TotalAbilities.Strength < 1 && rng == 0) || (target.TotalAbilities.Fortitude < 1 && rng == 1))
                 {
-                    log = log.AddLine($"{Syntax.ToCodeLine(target.Name.ToApostrophe())} {stat} has fallen below 1.");
+                    log.AppendLine($"{Syntax.ToCodeLine(target.Name.ToApostrophe())} {stat} has fallen below 1.");
 
                     // 50% chance for them to leave the strife.
                     if (Toolbox.TrueOrFalse())
                     {
-                        log = log.AddLine(Toolbox.GetMessage("speKill", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
+                        log.AppendLine(Toolbox.GetMessage("speKill", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
 
                         LeaveStrife(target);
                     }
                     // Otherwise their debuffs are removed.
                     else
                     {
-                        log = log.AddLine(Toolbox.GetMessage("speKillFail", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
-                        log = log.AddLine(Syntax.ToCodeLine(target.Name.ToApostrophe()) + " debuffs were removed.");
+                        log.AppendLine(Toolbox.GetMessage("speKillFail", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
+                        log.AppendLine(Syntax.ToCodeLine(target.Name.ToApostrophe()) + " debuffs were removed.");
                         target.Modifiers = new AbilitySet();
                     }
                 }
             }
             else
             {
-                log = log.AddLine("");
-                log = log.AddLine(Toolbox.GetMessage("speFail", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
+                log.AppendLine("");
+                log.AppendLine(Toolbox.GetMessage("speFail", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
             }
         }
 
         // Guard CON += XDCON
         private void Guard(IEntity plyr)
         {
-            log = log.AddLine($"{Syntax.ToCodeLine(plyr.Name)} is guarding.");
+            log.AppendLine($"{Syntax.ToCodeLine(plyr.Name)} is guarding.");
 
             AbilitySet mod = new AbilitySet();
             ApplyTempMod(plyr, "constitution", Toolbox.DiceRoll(1, plyr.Abilities.Constitution), 0);
@@ -1009,13 +1010,12 @@ namespace HSRP
 
         private void AddLog()
         {
-            if (string.IsNullOrWhiteSpace(log)) { return; }
+            if (string.IsNullOrWhiteSpace(log.ToString())) { return; }
 
-            log = log.AddLine("\n------------");
-            string str = log;
+            log.AppendLine("\n------------");
 
-            Logs.Add(log);
-            log = "";
+            Logs.Add(log.ToString());
+            log.Clear();
         }
 
         /// <summary>
@@ -1078,13 +1078,13 @@ namespace HSRP
                         string plural = turns == 0
                             ? "1 turn"
                             : (turns + 1).ToString() + " turns";
-                        log = log.AddLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for {Syntax.ToCodeLine(plural)}.");
+                        log.AppendLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for {Syntax.ToCodeLine(plural)}.");
                     }
                     // Permanent modifier.
                     else
                     {
                         ent.Modifiers += set;
-                        log = log.AddLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for the remainder of the strife.");
+                        log.AppendLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for the remainder of the strife.");
                     }
 
                     return;
