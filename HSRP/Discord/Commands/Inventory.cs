@@ -14,7 +14,6 @@ namespace HSRP.Commands
         [Command]
         public async Task Inv() => await Inv(new Player(Context.User));
 
-        [RequireGM]
         [Command]
         public async Task Inv(Player plyr)
         {
