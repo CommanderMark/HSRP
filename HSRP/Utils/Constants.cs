@@ -7,7 +7,6 @@
 
         public const int StartingSkillPoints = 24;
         public const int SkillPointsPerLevel = 6;
-        public const int LususDescCharLimit = 80;
 
         public static readonly int[] XPMilestones = { 0, 20, 50, 90, 150, 250, 400, 620, 950, 1450,
             2200, 3300, 5000, 7600, 11500, 17000, 25500, 38500, 58000, 87000, 130000, 200000,

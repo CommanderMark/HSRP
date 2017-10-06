@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<player>
+  <info name="Caligo Kertha" id="164204195069689857" owner="&quot;Not&quot; Satan" blood="Bronze" pineappleOnPizza="false" />
+  <status hp="100" maxhp="100" dead="false" specibus="axekind" />
+  <levels echeladder="4" pendingSkillPoints="48" xp="130" nextLevel="150" />
+  <abilities>
+    <strength value="0" />
+    <constitution value="0" />
+    <psion value="0" />
+    <fortitude value="0" />
+    <intimidation value="0" />
+    <persuasion value="0" />
+  </abilities>
+  <inventory />
+</player>

@@ -80,28 +80,12 @@ namespace HSRP.Commands
                     }
                     break;
 
-                // Lusus description.
+                // Pineapple.
                 case 4:
                     if (result)
                     {
                         msg = $"Your character's strife specibus is {plyr.Specibus}."
-                            + "\n\nNext, enter a brief description of your lusus."
-                            + "\nTheir name, physical appearance, ect. Describe it in"
-                            + $" {Constants.LususDescCharLimit} characters or less."
-                            + $"\nType `{Constants.BotPrefix}register [lusus description]`.";
-                    }
-                    else
-                    {
-                        msg = $"Your description was {input.Length} characters long. "
-                            + $"The limit is {Constants.LususDescCharLimit} characters.";
-                    }
-                    break;
-
-                // Pineapple.
-                case 5:
-                    if (result)
-                    {
-                        msg = "\n\nFinal question. You do you like pineapple on pizza?"
+                            + "\n\nFinal question. You do you like pineapple on pizza?"
                             + $"\nType `{Constants.BotPrefix}register [yes/no]`.";
                     }
                     else

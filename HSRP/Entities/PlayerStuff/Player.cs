@@ -27,7 +27,6 @@ namespace HSRP
         public string OwnerUsername;
 
         public BloodType BloodColor { get; set; }
-        public string LususDescription { get; set; }
         public bool LikesPineappleOnPizza { get; set; }
 
         public AbilitySet Abilities { get; set; }
@@ -103,7 +102,6 @@ namespace HSRP
             Inventory = new List<Item>();
 
             Name = "";
-            LususDescription = "";
             Specibus = "";
         }
 
@@ -128,10 +126,6 @@ namespace HSRP
                         OwnerUsername = XmlToolbox.GetAttributeString(ele, "owner", string.Empty);
                         BloodColor = XmlToolbox.GetAttributeEnum(ele, "blood", BloodType.None);
                         LikesPineappleOnPizza = XmlToolbox.GetAttributeBool(ele, "pineappleOnPizza", false);
-                        break;
-
-                    case "lusus":
-                        LususDescription = ele.ElementInnerText();
                         break;
 
                     case "status":
@@ -201,8 +195,6 @@ namespace HSRP
                 new XAttribute("pineappleOnPizza", LikesPineappleOnPizza)
                 );
 
-            XElement lusus = new XElement("lusus", new XText(LususDescription));
-
             XElement status = new XElement("status",
                 new XAttribute("hp", Health),
                 new XAttribute("maxhp", MaxHealth),
@@ -236,7 +228,7 @@ namespace HSRP
                 inventory.Add(ele);
             }
 
-            player.Add(info, lusus, status, levels, abilities, inventory);
+            player.Add(info, status, levels, abilities, inventory);
 
             if (StrifeID > 0)
             {
@@ -266,7 +258,6 @@ namespace HSRP
             result.AppendLine("Name: " + Name);
             result.AppendLine($"Owned by: {OwnerUsername} ({ID})");
             result.AppendLine("Blood Color: " + BloodColor);
-            result.AppendLine("Lusus Desc: " + LususDescription);
             result.AppendLine("");
 
             result.AppendLine("Health Vial: " + Health + "/" + MaxHealth);
@@ -349,17 +340,8 @@ namespace HSRP
                         Specibus = input.ToLower();
                         break;
 
-                    // Lusus description.
-                    case 4:
-                        if (input.Length > 1 && input.Length <= Constants.LususDescCharLimit)
-                        {
-                            LususDescription = input;
-                            break;
-                        }
-                        return false;
-
                     // Pineapple.
-                    case 5:
+                    case 4:
                         if (input == "yes"
                             || input == "y")
                         {

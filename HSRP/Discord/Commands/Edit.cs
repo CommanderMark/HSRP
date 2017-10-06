@@ -49,31 +49,6 @@ namespace HSRP.Commands
             await ReplyAsync($"{Syntax.ToCodeLine(plyr.Name)} changed their specibus. ({Syntax.ToCodeLine(prev)} -> {Syntax.ToCodeLine(plyr.Specibus)})");
         }
 
-        [RequireRegistration]
-        [Command("lusus"), Priority(0)]
-        public async Task Lusus([Remainder] string desc) => await Lusus(new Player(Context.User), desc);
-
-        [RequireGM]
-        [Command("lusus"), Priority(1)]
-        public async Task Lusus(Player plyr, [Remainder] string desc)
-        {
-            if (string.IsNullOrWhiteSpace(desc))
-            {
-                await ReplyAsync("Invalid description.");
-                return;
-            }
-            if (desc.Length > 1 && desc.Length <= Constants.LususDescCharLimit)
-            {
-                await ReplyAsync($"Your description was {desc.Length} characters long. "
-                    + $"The limit is {Constants.LususDescCharLimit} characters.");
-            }
-
-            plyr.LususDescription = desc;
-            plyr.Save();
-
-            await ReplyAsync(Syntax.ToCodeLine(plyr.Name) + " lusus description to updated.");
-        }
-
         [RequireGM(Group = "selection"), RequireRegistration(Group = "selection")]
         [Command("pineapple"), Alias("pineappleonpizza")]
         public async Task Pineapple([Remainder] string any)
