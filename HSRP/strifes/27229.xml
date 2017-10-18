@@ -1,0 +1,668 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strife id="27229" active="false" currentTurn="0">
+  <status attackTurn="false" turn="0" />
+  <attackers>
+    <player id="201651995017216000" />
+  </attackers>
+  <targets>
+    <npc id="23">
+      <info name="tricksterPhantasm's Phantom" type="Normal" pineappleOnPizza="false">It's a shadow, most likely controlled by someone else. It can still hurt you even though it's just an illusion.</info>
+      <status hp="106" maxhp="180" dead="false" specibus="Shadowkind" diceRolls="1" controller="0" />
+      <abilities>
+        <strength value="27" />
+        <constitution value="9" />
+        <psion value="5" />
+        <fortitude value="9" />
+        <intimidation value="15" />
+        <persuasion value="10" />
+      </abilities>
+      <modifiers>
+        <abilities />
+      </modifiers>
+    </npc>
+  </targets>
+  <logs posted="100">
+    <log>Team A:
+0 - Strana Kandros - 133/133
+
+Team T: 
+0 - tricksterPhantasm's Phantom - 180/180
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 6, 1, 10!
+`tricksterPhantasm's Phantom` rolls 4, 2, 1!
+`Strana Kandros` struck `tricksterPhantasm's Phantom` for 10 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` lunges for a strike towards `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 10!
+`Strana Kandros` rolls 1!
+
+`Strana Kandros` took `9` hitpoint(s) of damage.
+
+`Strana Kandros` is counter attacking.
+`tricksterPhantasm's Phantom` rolls 23!
+`Strana Kandros` rolls 9!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 8, 9, 3!
+`tricksterPhantasm's Phantom` rolls 2, 9, 8!
+`Strana Kandros` struck `tricksterPhantasm's Phantom` for 1 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` assaults `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 10!
+`Strana Kandros` rolls 1!
+
+`Strana Kandros` took `9` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` assaults `tricksterPhantasm's Phantom`.
+
+`Strana Kandros` rolls 3!
+`tricksterPhantasm's Phantom` rolls 7!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` attacks `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 9!
+`Strana Kandros` rolls 9!
+
+Attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` attempts to mind control `tricksterPhantasm's Phantom`.
+
+`Strana Kandros` rolls 10, 2, 2!
+`tricksterPhantasm's Phantom` rolls 2, 2, 3!
+Mind control failed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` assaults `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 3!
+`Strana Kandros` rolls 1!
+
+`Strana Kandros` took `2` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 6, 3, 8!
+`tricksterPhantasm's Phantom` rolls 7, 9, 7!
+Optic Blast missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` assaults `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 27!
+`Strana Kandros` rolls 3!
+
+`Strana Kandros` took `24` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 8, 4, 3!
+`tricksterPhantasm's Phantom` rolls 1, 4, 9!
+`Strana Kandros` struck `tricksterPhantasm's Phantom` for 1 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` attacks `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 1!
+`Strana Kandros` rolls 2!
+
+Attack missed.
+
+`Strana Kandros` tries to retaliate.
+`tricksterPhantasm's Phantom` rolls 7!
+`Strana Kandros` rolls 5!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 7, 11, 5!
+`tricksterPhantasm's Phantom` rolls 8, 8, 6!
+`Strana Kandros` struck `tricksterPhantasm's Phantom` for 1 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` assaults `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 2!
+`Strana Kandros` rolls 1!
+
+`Strana Kandros` took `1` hitpoint(s) of damage.
+
+`Strana Kandros` tries to retaliate.
+`tricksterPhantasm's Phantom` rolls 26!
+`Strana Kandros` rolls 2!
+
+Counter attack dodged.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 7, 11, 6!
+`tricksterPhantasm's Phantom` rolls 8, 2, 1!
+`Strana Kandros` struck `tricksterPhantasm's Phantom` for 13 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` assaults `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 4!
+`Strana Kandros` rolls 2!
+
+`Strana Kandros` took `2` hitpoint(s) of damage.
+
+`Strana Kandros` is counter attacking.
+`tricksterPhantasm's Phantom` rolls 2!
+`Strana Kandros` rolls 3!
+
+`tricksterPhantasm's Phantom` was inflicted with `-1` Strength for `2 turns`.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 6, 11, 8!
+`tricksterPhantasm's Phantom` rolls 2, 5, 2!
+`Strana Kandros` struck `tricksterPhantasm's Phantom` for 16 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` assaults `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 5!
+`Strana Kandros` rolls 10!
+
+Attack missed.
+
+`Strana Kandros` is counter attacking.
+`tricksterPhantasm's Phantom` rolls 10!
+`Strana Kandros` rolls 3!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 11, 9, 4!
+`tricksterPhantasm's Phantom` rolls 2, 8, 5!
+`Strana Kandros` struck `tricksterPhantasm's Phantom` for 9 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` lunges for a strike towards `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 2!
+`Strana Kandros` rolls 10!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 9, 9, 3!
+`tricksterPhantasm's Phantom` rolls 1, 7, 5!
+`Strana Kandros` struck `tricksterPhantasm's Phantom` for 8 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` lunges for a strike towards `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 16!
+`Strana Kandros` rolls 9!
+
+`Strana Kandros` took `7` hitpoint(s) of damage.
+
+`Strana Kandros` is counter attacking.
+`tricksterPhantasm's Phantom` rolls 7!
+`Strana Kandros` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 9, 1, 2!
+`tricksterPhantasm's Phantom` rolls 7, 1, 7!
+Optic Blast missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` lunges for a strike towards `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 4!
+`Strana Kandros` rolls 10!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 3, 9, 7!
+`tricksterPhantasm's Phantom` rolls 8, 4, 9!
+Optic Blast missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` assaults `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 11!
+`Strana Kandros` rolls 7!
+
+`Strana Kandros` took `4` hitpoint(s) of damage.
+
+`Strana Kandros` is counter attacking.
+`tricksterPhantasm's Phantom` rolls 19!
+`Strana Kandros` rolls 6!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 11, 6, 11!
+`tricksterPhantasm's Phantom` rolls 7, 8, 5!
+`Strana Kandros` struck `tricksterPhantasm's Phantom` for 8 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` attacks `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 20!
+`Strana Kandros` rolls 5!
+
+`Strana Kandros` took `15` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 1, 3, 7!
+`tricksterPhantasm's Phantom` rolls 8, 3, 7!
+Optic Blast missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` assaults `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 10!
+`Strana Kandros` rolls 5!
+
+`Strana Kandros` took `5` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 3, 4, 6!
+`tricksterPhantasm's Phantom` rolls 3, 7, 6!
+Optic Blast missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` assaults `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 6!
+`Strana Kandros` rolls 4!
+
+`Strana Kandros` took `2` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 11, 10, 4!
+`tricksterPhantasm's Phantom` rolls 7, 9, 9!
+Optic Blast missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` lunges for a strike towards `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 15!
+`Strana Kandros` rolls 1!
+
+`Strana Kandros` took `14` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 11, 8, 2!
+`tricksterPhantasm's Phantom` rolls 8, 5, 1!
+`Strana Kandros` struck `tricksterPhantasm's Phantom` for 7 hitpoints.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` assaults `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 24!
+`Strana Kandros` rolls 3!
+
+`Strana Kandros` took `21` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Strana Kandros` is taking their turn!
+
+------------
+</log>
+    <log>`Strana Kandros` is preparing an Optic Blast.
+
+`Strana Kandros` rolls 3, 3, 3!
+`tricksterPhantasm's Phantom` rolls 4, 5, 1!
+Optic Blast missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`tricksterPhantasm's Phantom` is taking their turn!
+`tricksterPhantasm's Phantom` assaults `Strana Kandros`.
+
+`tricksterPhantasm's Phantom` rolls 26!
+`Strana Kandros` rolls 3!
+
+`Strana Kandros` took `23` hitpoint(s) of damage.
+`Strana Kandros` is no longer participating in the strife.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>Attackers have been defeated.
+
+------------
+</log>
+    <log>The strife is now over. XP will be awarded at the discretion of the GM.
+
+------------
+</log>
+    <log>Team A:
+0 - Strana Kandros - 0/133 (DEFEATED)
+
+Team T: 
+0 - tricksterPhantasm's Phantom - 106/180
+
+------------
+</log>
+  </logs>
+</strife>

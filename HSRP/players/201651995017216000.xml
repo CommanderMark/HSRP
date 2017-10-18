@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Strana Kandros" id="201651995017216000" owner="Moonfang" blood="Burgundy" pineappleOnPizza="false" />
-  <status hp="133" maxhp="133" dead="false" specibus="staffkind" />
-  <levels echeladder="6" pendingSkillPoints="18" xp="373" nextLevel="400" />
+  <status hp="1" maxhp="133" dead="false" specibus="staffkind" />
+  <levels echeladder="6" pendingSkillPoints="18" xp="378" nextLevel="400" />
   <abilities>
     <strength value="6" />
     <constitution value="10" />
@@ -17,5 +17,6 @@
     <item value="Pathetic Fiduspawn Collection" quantity="1" />
     <item value="Fiduspawn Rulebook" quantity="1" />
     <item value="Backup Clothes" quantity="1" />
+    <item value="Cash" quantity="280" />
   </inventory>
 </player>

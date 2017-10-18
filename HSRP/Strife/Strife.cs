@@ -902,7 +902,7 @@ namespace HSRP
             {
                 int dmg = atkTotal - tarTotal;
                 target.Health -= dmg;
-                log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} struck {Syntax.ToCodeLine(target.Name)} for {dmg} hitpoints.");
+                log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} struck {Syntax.ToCodeLine(target.Name)} for {Syntax.ToCodeLine(dmg.ToString())} hitpoints.");
             }
             else
             {
