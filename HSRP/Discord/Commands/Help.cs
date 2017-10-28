@@ -56,7 +56,7 @@ namespace HSRP.Commands
             }
 
             msg += $"\n\nType `{Constants.BotPrefix}help skills [ability name]` for information on each skill.";
-            msg += $"\nType `{Constants.BotPrefix}spend [ability name] [amount]` to invest pending skill points "
+            msg += $"\nType `{Constants.BotPrefix}skills spend [ability name] [amount]` to invest pending skill points "
             + "you may have into a specific stat. Remember that spent skill points can not be refunded.";
 
             return msg;
