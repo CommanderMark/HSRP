@@ -1,0 +1,12 @@
+<npc id="25">
+  <info name="Random Seadweller" type="Normal" pineappleOnPizza="false">Seadweller. They seem kinda fishy.</info>
+  <status hp="200" maxhp="200" dead="false" specibus="crossbowkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="17"/>
+    <constitution value="15"/>
+    <psion value="0"/>
+    <fortitude value="3"/>
+    <intimidation value="25"/>
+    <persuasion value="5"/>
+  </abilities>
+</npc>

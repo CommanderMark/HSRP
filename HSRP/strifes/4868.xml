@@ -1,0 +1,1173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strife id="4868" active="false" currentTurn="184763855803645952">
+  <status attackTurn="true" turn="0" />
+  <attackers>
+    <player id="184763855803645952" />
+  </attackers>
+  <targets>
+    <npc id="25">
+      <info name="Random Seadweller" type="Normal" pineappleOnPizza="false">Seadweller. They seem kinda fishy.</info>
+      <status hp="1" maxhp="200" dead="false" specibus="crossbowkind" diceRolls="1" controller="0" />
+      <abilities>
+        <strength value="17" />
+        <constitution value="15" />
+        <psion value="0" />
+        <fortitude value="3" />
+        <intimidation value="25" />
+        <persuasion value="5" />
+      </abilities>
+      <modifiers>
+        <abilities />
+      </modifiers>
+    </npc>
+  </targets>
+  <logs posted="173">
+    <log>Team A:
+0 - Sicarius Anathera - 176/176
+
+Team T: 
+0 - Random Seadweller - 200/200
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Random Seadweller`.
+
+`Sicarius Anathera` rolls 11!
+`Random Seadweller` rolls 2!
+
+`Random Seadweller` took `9` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` lunges for a strike towards `Sicarius Anathera`.
+
+`Random Seadweller` rolls 3!
+`Sicarius Anathera` rolls 10!
+
+Attack missed.
+
+`Sicarius Anathera` tries to retaliate.
+`Random Seadweller` rolls 10!
+`Sicarius Anathera` rolls 9!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Random Seadweller`.
+
+`Sicarius Anathera` rolls 16!
+`Random Seadweller` rolls 4!
+
+`Random Seadweller` took `12` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 5!
+`Sicarius Anathera` rolls 12!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 14!
+`Random Seadweller` rolls 3!
+
+`Random Seadweller` took `11` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` lunges for a strike towards `Sicarius Anathera`.
+
+`Random Seadweller` rolls 6!
+`Sicarius Anathera` rolls 3!
+
+`Sicarius Anathera` took `3` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Random Seadweller`.
+
+`Sicarius Anathera` rolls 7!
+`Random Seadweller` rolls 6!
+
+`Random Seadweller` took `1` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` lunges for a strike towards `Sicarius Anathera`.
+
+`Random Seadweller` rolls 3!
+`Sicarius Anathera` rolls 10!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Random Seadweller`.
+
+`Sicarius Anathera` rolls 8!
+`Random Seadweller` rolls 11!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` attacks `Sicarius Anathera`.
+
+`Random Seadweller` rolls 4!
+`Sicarius Anathera` rolls 1!
+
+`Sicarius Anathera` took `3` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Random Seadweller`.
+
+`Sicarius Anathera` rolls 20!
+`Random Seadweller` rolls 5!
+
+`Random Seadweller` took `15` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` attacks `Sicarius Anathera`.
+
+`Random Seadweller` rolls 13!
+`Sicarius Anathera` rolls 13!
+
+Attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Random Seadweller`.
+
+`Sicarius Anathera` rolls 19!
+`Random Seadweller` rolls 2!
+
+`Random Seadweller` took `17` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` attacks `Sicarius Anathera`.
+
+`Random Seadweller` rolls 9!
+`Sicarius Anathera` rolls 15!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Random Seadweller`.
+
+`Sicarius Anathera` rolls 20!
+`Random Seadweller` rolls 9!
+
+`Random Seadweller` took `11` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` attacks `Sicarius Anathera`.
+
+`Random Seadweller` rolls 7!
+`Sicarius Anathera` rolls 2!
+
+`Sicarius Anathera` took `5` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Random Seadweller`.
+
+`Sicarius Anathera` rolls 7!
+`Random Seadweller` rolls 5!
+
+`Random Seadweller` took `2` hitpoint(s) of damage.
+
+`Random Seadweller` tries to retaliate.
+`Sicarius Anathera` rolls 9!
+`Random Seadweller` rolls 2!
+
+Counter attack dodged.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 15!
+`Sicarius Anathera` rolls 11!
+
+`Sicarius Anathera` took `4` hitpoint(s) of damage.
+
+`Sicarius Anathera` tries to retaliate.
+`Random Seadweller` rolls 8!
+`Sicarius Anathera` rolls 10!
+
+`Random Seadweller` was inflicted with `-2` Strength for `2 turns`.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 14!
+`Random Seadweller` rolls 6!
+
+`Random Seadweller` took `8` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` lunges for a strike towards `Sicarius Anathera`.
+
+`Random Seadweller` rolls 14!
+`Sicarius Anathera` rolls 9!
+
+`Sicarius Anathera` took `5` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 2!
+`Random Seadweller` rolls 12!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` attacks `Sicarius Anathera`.
+
+`Random Seadweller` rolls 7!
+`Sicarius Anathera` rolls 9!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Random Seadweller`.
+
+`Sicarius Anathera` rolls 10!
+`Random Seadweller` rolls 2!
+
+`Random Seadweller` took `8` hitpoint(s) of damage.
+
+`Random Seadweller` is counter attacking.
+`Sicarius Anathera` rolls 15!
+`Random Seadweller` rolls 2!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` lunges for a strike towards `Sicarius Anathera`.
+
+`Random Seadweller` rolls 1!
+`Sicarius Anathera` rolls 14!
+
+Attack missed.
+
+`Sicarius Anathera` is counter attacking.
+`Random Seadweller` rolls 3!
+`Sicarius Anathera` rolls 9!
+
+`Random Seadweller` was inflicted with `-6` Strength for `2 turns`.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 8!
+`Random Seadweller` rolls 1!
+
+`Random Seadweller` took `7` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 5!
+`Sicarius Anathera` rolls 13!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 7!
+`Random Seadweller` rolls 9!
+
+Attack missed.
+
+`Random Seadweller` tries to retaliate.
+`Sicarius Anathera` rolls 16!
+`Random Seadweller` rolls 3!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 17!
+`Sicarius Anathera` rolls 14!
+
+`Sicarius Anathera` took `3` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Random Seadweller`.
+
+`Sicarius Anathera` rolls 13!
+`Random Seadweller` rolls 8!
+
+`Random Seadweller` took `5` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` lunges for a strike towards `Sicarius Anathera`.
+
+`Random Seadweller` rolls 9!
+`Sicarius Anathera` rolls 12!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 12!
+`Random Seadweller` rolls 12!
+
+Attack blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` lunges for a strike towards `Sicarius Anathera`.
+
+`Random Seadweller` rolls 4!
+`Sicarius Anathera` rolls 9!
+
+Attack missed.
+
+`Sicarius Anathera` is counter attacking.
+`Random Seadweller` rolls 7!
+`Sicarius Anathera` rolls 7!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Random Seadweller`.
+
+`Sicarius Anathera` rolls 13!
+`Random Seadweller` rolls 5!
+
+`Random Seadweller` took `8` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` lunges for a strike towards `Sicarius Anathera`.
+
+`Random Seadweller` rolls 13!
+`Sicarius Anathera` rolls 10!
+
+`Sicarius Anathera` took `3` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Random Seadweller`.
+
+`Sicarius Anathera` rolls 2!
+`Random Seadweller` rolls 1!
+
+`Random Seadweller` took `1` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 11!
+`Sicarius Anathera` rolls 5!
+
+`Sicarius Anathera` took `6` hitpoint(s) of damage.
+
+`Sicarius Anathera` is counter attacking.
+`Random Seadweller` rolls 13!
+`Sicarius Anathera` rolls 9!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 9!
+`Random Seadweller` rolls 8!
+
+`Random Seadweller` took `1` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 15!
+`Sicarius Anathera` rolls 10!
+
+`Sicarius Anathera` took `5` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Random Seadweller`.
+
+`Sicarius Anathera` rolls 2!
+`Random Seadweller` rolls 3!
+
+Attack missed.
+
+`Random Seadweller` tries to retaliate.
+`Sicarius Anathera` rolls 7!
+`Random Seadweller` rolls 4!
+
+Counter attack dodged.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 6!
+`Sicarius Anathera` rolls 10!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 9!
+`Random Seadweller` rolls 15!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 16!
+`Sicarius Anathera` rolls 16!
+
+Attack blocked.
+
+`Sicarius Anathera` tries to retaliate.
+`Random Seadweller` rolls 9!
+`Sicarius Anathera` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 9!
+`Random Seadweller` rolls 12!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 14!
+`Sicarius Anathera` rolls 5!
+
+`Sicarius Anathera` took `9` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 14!
+`Random Seadweller` rolls 3!
+
+`Random Seadweller` took `11` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` lunges for a strike towards `Sicarius Anathera`.
+
+`Random Seadweller` rolls 7!
+`Sicarius Anathera` rolls 6!
+
+`Sicarius Anathera` took `1` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Random Seadweller`.
+
+`Sicarius Anathera` rolls 16!
+`Random Seadweller` rolls 9!
+
+`Random Seadweller` took `7` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` attacks `Sicarius Anathera`.
+
+`Random Seadweller` rolls 3!
+`Sicarius Anathera` rolls 10!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 20!
+`Random Seadweller` rolls 6!
+
+`Random Seadweller` took `14` hitpoint(s) of damage.
+
+`Random Seadweller` tries to retaliate.
+`Sicarius Anathera` rolls 5!
+`Random Seadweller` rolls 2!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 9!
+`Sicarius Anathera` rolls 3!
+
+`Sicarius Anathera` took `6` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 3!
+`Random Seadweller` rolls 2!
+
+`Random Seadweller` took `1` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 6!
+`Sicarius Anathera` rolls 11!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Random Seadweller`.
+
+`Sicarius Anathera` rolls 16!
+`Random Seadweller` rolls 2!
+
+`Random Seadweller` took `14` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` attacks `Sicarius Anathera`.
+
+`Random Seadweller` rolls 3!
+`Sicarius Anathera` rolls 6!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Random Seadweller`.
+
+`Sicarius Anathera` rolls 5!
+`Random Seadweller` rolls 14!
+
+Attack missed.
+
+`Random Seadweller` is counter attacking.
+`Sicarius Anathera` rolls 6!
+`Random Seadweller` rolls 4!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 15!
+`Sicarius Anathera` rolls 3!
+
+`Sicarius Anathera` took `12` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 13!
+`Random Seadweller` rolls 1!
+
+`Random Seadweller` took `12` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 10!
+`Sicarius Anathera` rolls 12!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Random Seadweller`.
+
+`Sicarius Anathera` rolls 6!
+`Random Seadweller` rolls 5!
+
+`Random Seadweller` took `1` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` attacks `Sicarius Anathera`.
+
+`Random Seadweller` rolls 13!
+`Sicarius Anathera` rolls 16!
+
+Attack missed.
+
+`Sicarius Anathera` is counter attacking.
+`Random Seadweller` rolls 17!
+`Sicarius Anathera` rolls 3!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 14!
+`Random Seadweller` rolls 10!
+
+`Random Seadweller` took `4` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 5!
+`Sicarius Anathera` rolls 14!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 5!
+`Random Seadweller` rolls 2!
+
+`Random Seadweller` took `3` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 5!
+`Sicarius Anathera` rolls 9!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` assaults `Random Seadweller`.
+
+`Sicarius Anathera` rolls 20!
+`Random Seadweller` rolls 13!
+
+`Random Seadweller` took `7` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Random Seadweller` is taking their turn!
+`Random Seadweller` assaults `Sicarius Anathera`.
+
+`Random Seadweller` rolls 15!
+`Sicarius Anathera` rolls 11!
+
+`Sicarius Anathera` took `4` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attacks `Random Seadweller`.
+
+`Sicarius Anathera` rolls 20!
+`Random Seadweller` rolls 9!
+
+`Random Seadweller` took `11` hitpoint(s) of damage.
+`Random Seadweller` is no longer participating in the strife.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>Targets have been defeated.
+
+------------
+</log>
+    <log>The strife is now over. XP will be awarded at the discretion of the GM.
+
+------------
+</log>
+    <log>Team A:
+0 - Sicarius Anathera - 107/176
+
+Team T: 
+0 - Random Seadweller - 0/200 (DEFEATED)
+
+------------
+</log>
+  </logs>
+</strife>

@@ -241,7 +241,7 @@ namespace HSRP.Commands
             File.Delete(path);
         }
 
-        [Command("clear"), RequireGM]
+        [Command("clearlogs"), RequireGM]
         public async Task ClearLogs(Strife strf)
         {
             if (strf.Logs.Count < 1)
