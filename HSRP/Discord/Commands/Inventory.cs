@@ -17,7 +17,7 @@ namespace HSRP.Commands
         [Command]
         public async Task Inv(Player plyr)
         {
-            string output = "Inventory for " + plyr.Name + ":\n";
+            string output = "Inventory for " + Syntax.ToCodeLine(plyr.Name) + ":\n";
             if (plyr.Inventory.Any())
             {
                 output += Syntax.ToCodeBlock(plyr.DisplayInventory());
