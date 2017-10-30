@@ -1,0 +1,12 @@
+<npc id="26">
+  <info name="Defenseless Lowblood" type="Normal" pineappleOnPizza="false">She isn't going to hurt you and yet here you are killing her, you monster.</info>
+  <status hp="25" maxhp="100" dead="false" specibus="Feralkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="5"/>
+    <constitution value="7"/>
+    <psion value="0"/>
+    <fortitude value="4"/>
+    <intimidation value="3"/>
+    <persuasion value="3"/>
+  </abilities>
+</npc>

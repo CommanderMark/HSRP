@@ -16,7 +16,7 @@
     <item value="DUAL CORVOS" quantity="1" />
     <item value="Un-Stolen Computer" quantity="1" />
     <item value="Powdered Uranium" quantity="0" />
-    <item value="Cash" quantity="1496" />
+    <item value="Cash" quantity="7496" />
     <item value="Snake Toxin 2L" quantity="1" />
     <item value="Signless Shirt" quantity="1" />
     <item value="Venom Recipes" quantity="1" />
@@ -24,10 +24,11 @@
     <item value="Boomerang" quantity="1" />
     <item value="Smoke Bombs" quantity="5" />
     <item value="Bear Trap" quantity="1" />
-    <item value="Crystal" quantity="1" />
     <item value="Strange Vials" quantity="2" />
     <item value="Multiple Kinds of Poison" quantity="1" />
     <item value="Mysterious Phone" quantity="1" />
     <item value="Spear" quantity="1" />
+    <item value="Crystal" quantity="1" />
+    <item value="Expensive Glass Crystal" quantity="8" />
   </inventory>
 </player>

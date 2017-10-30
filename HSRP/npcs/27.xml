@@ -1,0 +1,12 @@
+<npc id="27">
+  <info name="Lowblood Lusus" type="Lusus" pineappleOnPizza="false">It's a cow.</info>
+  <status hp="100" maxhp="100" dead="false" specibus="Feralkind" diceRolls="1" controller="26" />
+  <abilities>
+    <strength value="10"/>
+    <constitution value="7"/>
+    <psion value="0"/>
+    <fortitude value="10"/>
+    <intimidation value="0"/>
+    <persuasion value="0"/>
+  </abilities>
+</npc>
