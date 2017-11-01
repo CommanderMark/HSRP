@@ -17,10 +17,11 @@
     <item value="MOODY BLUE CAPE" quantity="1" equipped="true" />
     <item value="MOODY BLUE RUSTY HATCHET" quantity="1" equipped="true" />
     <item value="Stolen Dagger" quantity="1" />
-    <item value="Cash" quantity="450" />
+    <item value="Cash" quantity="1450" />
     <item value="Phones" quantity="2" />
     <item value="Ultimate Hatchet from Hell" quantity="1" />
     <item value="Assassin Hatchet" quantity="1" />
     <item value="Pail" quantity="1" />
+    <item value="Expensive Cider" quantity="300" />
   </inventory>
 </player>
