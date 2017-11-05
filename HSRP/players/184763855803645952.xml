@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
-  <status hp="176" maxhp="176" dead="false" specibus="Bladekindx2" />
+  <status hp="1" maxhp="176" dead="false" specibus="Bladekindx2" />
   <levels echeladder="7" pendingSkillPoints="0" xp="549" nextLevel="620" />
   <abilities>
     <strength value="20" />
@@ -16,7 +16,7 @@
     <item value="DUAL CORVOS" quantity="1" />
     <item value="Un-Stolen Computer" quantity="1" />
     <item value="Powdered Uranium" quantity="0" />
-    <item value="Cash" quantity="3496" />
+    <item value="Cash" quantity="3466" />
     <item value="Snake Toxin 2L" quantity="1" />
     <item value="Signless Shirt" quantity="1" />
     <item value="Venom Recipes" quantity="1" />

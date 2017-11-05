@@ -1,0 +1,12 @@
+<npc id="28">
+  <info name="Vengeful Subjugglator" type="Normal" pineappleOnPizza="false">YOU BETTER BELIEVE IN THOSE MOTHERFUCKING MIRACLES, BITCH.</info>
+  <status hp="180" maxhp="180" dead="false" specibus="Clubkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="18"/>
+    <constitution value="15"/>
+    <psion value="0"/>
+    <fortitude value="14"/>
+    <intimidation value="16"/>
+    <persuasion value="8"/>
+  </abilities>
+</npc>
