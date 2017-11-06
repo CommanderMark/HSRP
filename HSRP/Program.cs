@@ -81,6 +81,7 @@ namespace HSRP
         public async Task OnConnect()
         {
             await Client.SetGameAsync("RP Bot");
+            // await Client.GetGuild(Constants.RP_GUILD).LeaveAsync();
         }
 
         public async Task OnReady()
@@ -104,7 +105,7 @@ namespace HSRP
             if (guild.Id != Constants.RP_GUILD)
             {
                 await guild.DefaultChannel.SendMessageAsync("This bot only works on its original server."
-                    + "\nIf you see this message then either you're doing something wrong or Mark fucked up.");
+                    + "\nIf you see this message then either you're doing something wrong or the bot owner fucked up.");
                 await guild.LeaveAsync();
             }
         }

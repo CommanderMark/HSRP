@@ -1,0 +1,12 @@
+<npc id="29">
+  <info name="Midblood fighter" type="Normal" pineappleOnPizza="false">Your opponent.</info>
+  <status hp="110" maxhp="110" dead="false" specibus="Whipkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="10"/>
+    <constitution value="4"/>
+    <psion value="0"/>
+    <fortitude value="3"/>
+    <intimidation value="5"/>
+    <persuasion value="5"/>
+  </abilities>
+</npc>

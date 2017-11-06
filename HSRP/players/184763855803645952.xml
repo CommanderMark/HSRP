@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
-  <status hp="1" maxhp="176" dead="false" specibus="Bladekindx2" />
-  <levels echeladder="7" pendingSkillPoints="0" xp="549" nextLevel="620" />
+  <status hp="45" maxhp="188" dead="false" specibus="Bladekindx2" />
+  <levels echeladder="8" pendingSkillPoints="0" xp="689" nextLevel="950" />
   <abilities>
-    <strength value="20" />
+    <strength value="21" />
     <constitution value="16" />
     <psion value="0" />
-    <fortitude value="15" />
+    <fortitude value="20" />
     <intimidation value="11" />
     <persuasion value="10" />
   </abilities>
   <inventory>
     <item value="CINQUEDEA DAGGER" quantity="1" equipped="true" />
-    <item value="DUAL CORVOS" quantity="1" />
+    <item value="DUAL CORVOS" quantity="1" equipped="true" />
     <item value="Un-Stolen Computer" quantity="1" />
     <item value="Powdered Uranium" quantity="0" />
-    <item value="Cash" quantity="3466" />
+    <item value="Cash" quantity="4166" />
     <item value="Snake Toxin 2L" quantity="1" />
     <item value="Signless Shirt" quantity="1" />
     <item value="Venom Recipes" quantity="1" />
@@ -30,5 +30,7 @@
     <item value="Spear" quantity="1" />
     <item value="Crystal" quantity="1" />
     <item value="Expensive Glass Crystal" quantity="8" />
+    <item value="Subjugglator's Map" quantity="1" />
+    <item value="Subjugglator's Note" quantity="1" />
   </inventory>
 </player>

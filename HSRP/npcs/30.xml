@@ -1,0 +1,12 @@
+<npc id="30">
+  <info name="Kornla" type="Lusus" pineappleOnPizza="false">Neyrah's Lusus.</info>
+  <status hp="180" maxhp="180" dead="false" specibus="Feralkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="30"/>
+    <constitution value="10"/>
+    <psion value="0"/>
+    <fortitude value="8"/>
+    <intimidation value="5"/>
+    <persuasion value="5"/>
+  </abilities>
+</npc>

@@ -1,0 +1,12 @@
+<npc id="31">
+  <info name="Vengeful Laughassassin" type="Normal" pineappleOnPizza="false">It's a Juggalo? It's a ninja? It's both m8.</info>
+  <status hp="170" maxhp="170" dead="false" specibus="Daggerkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="17"/>
+    <constitution value="15"/>
+    <psion value="0"/>
+    <fortitude value="20"/>
+    <intimidation value="10"/>
+    <persuasion value="12"/>
+  </abilities>
+</npc>

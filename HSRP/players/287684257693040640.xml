@@ -1,18 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Neyrah Wrathe" id="287684257693040640" owner="Ikoma" blood="Jade" pineappleOnPizza="false" />
-  <status hp="100" maxhp="100" dead="false" specibus="polearmkind" />
-  <levels echeladder="0" pendingSkillPoints="0" xp="0" nextLevel="0" />
+  <status hp="51" maxhp="135" dead="true" specibus="polearmkind" />
+  <levels echeladder="4" pendingSkillPoints="0" xp="94" nextLevel="150" />
   <abilities>
-    <strength value="14" />
-    <constitution value="6" />
+    <strength value="24" />
+    <constitution value="18" />
     <psion value="0" />
-    <fortitude value="4" />
+    <fortitude value="6" />
     <intimidation value="0" />
     <persuasion value="0" />
   </abilities>
   <inventory>
-    <item value="Edged Demise" quantity="1" />
     <item value="Battle Armor" quantity="1" />
   </inventory>
+  <strife id="31617">
+    <abilities />
+  </strife>
 </player>

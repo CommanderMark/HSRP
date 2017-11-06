@@ -1,0 +1,12 @@
+<npc id="33">
+  <info name="Olive Trickster" type="Psionic" pineappleOnPizza="false">Their grin alone would be enough to unsettle someone lesser than you.</info>
+  <status hp="140" maxhp="140" dead="false" specibus="Daggerkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="5"/>
+    <constitution value="14"/>
+    <psion value="15"/>
+    <fortitude value="7"/>
+    <intimidation value="10"/>
+    <persuasion value="15"/>
+  </abilities>
+</npc>

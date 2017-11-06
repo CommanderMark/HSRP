@@ -1,0 +1,12 @@
+<npc id="32">
+  <info name="exhilaratedRagriper" type="Psionic" pineappleOnPizza="false">You once considered her a friend.</info>
+  <status hp="130" maxhp="130" dead="false" specibus="Needlekind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="9"/>
+    <constitution value="10"/>
+    <psion value="20"/>
+    <fortitude value="15"/>
+    <intimidation value="8"/>
+    <persuasion value="8"/>
+  </abilities>
+</npc>
