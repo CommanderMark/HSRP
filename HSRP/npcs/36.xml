@@ -1,0 +1,12 @@
+<npc id="36">
+  <info name="Alpha Wolf" type="Lusus" pineappleOnPizza="false">It's the leader of the pack.</info>
+  <status hp="150" maxhp="150" dead="false" specibus="Feralkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="25"/>
+    <constitution value="25"/>
+    <psion value="0"/>
+    <fortitude value="15"/>
+    <intimidation value="0"/>
+    <persuasion value="0"/>
+  </abilities>
+</npc>

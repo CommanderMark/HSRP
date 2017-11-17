@@ -1,0 +1,12 @@
+<npc id="35">
+  <info name="Mirthful Customer" type="Normal" pineappleOnPizza="false">This guy doesn't really care, he's just protecting his precious Faygo.</info>
+  <status hp="170" maxhp="170" dead="false" specibus="Clubkindx2" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="29"/>
+    <constitution value="19"/>
+    <psion value="0"/>
+    <fortitude value="15"/>
+    <intimidation value="14"/>
+    <persuasion value="0"/>
+  </abilities>
+</npc>

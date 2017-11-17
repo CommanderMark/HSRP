@@ -1,0 +1,12 @@
+<npc id="37">
+  <info name="Wolf" type="Lusus" pineappleOnPizza="false">It's a TROLL WOLF.</info>
+  <status hp="130" maxhp="130" dead="false" specibus="Feralkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="23"/>
+    <constitution value="20"/>
+    <psion value="0"/>
+    <fortitude value="15"/>
+    <intimidation value="0"/>
+    <persuasion value="0"/>
+  </abilities>
+</npc>

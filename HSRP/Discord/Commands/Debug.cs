@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Discord.Commands;
@@ -132,6 +133,80 @@ namespace HSRP.Commands
             else
             {
                 await ReplyAsync("NPC not found.");
+            }
+        }
+
+        [Command("npc add")]
+        public async Task AddNPC() => await AddNPC(string.Empty);
+
+        [Command("npc add")]
+        public async Task AddNPC([Remainder] string str)
+        {
+            const string PARSER_CHARCTERS = "```";
+
+            int start = str.IndexOf(PARSER_CHARCTERS);
+            int end = str.LastIndexOf(PARSER_CHARCTERS);
+
+            if (start < 0)
+            {
+                await ReplyAsync("Parse characters not found in message. "
+                    + "Remember to put \\`\\`\\` before the npc's xml data.");
+
+                return;
+            }
+
+            string xml = string.Empty;
+            start += 3;
+
+            /// Message is "```..." somehow.
+            if (start == end)
+            {
+                xml = str.Substring(start, str.Length - 1 - start);
+                await ReplyAsync(xml);
+            }
+            /// Message is "```...```"
+            else
+            {
+                xml = str.Substring(start, end - start);
+                await ReplyAsync(xml);
+            }
+
+            // Parse it to xml.
+            try
+            {
+                XDocument doc = XDocument.Parse(xml, LoadOptions.PreserveWhitespace);
+                
+                foreach (XElement ele in doc.Root.Elements())
+                {
+                    if (ele.Name.LocalName == "info")
+                    {
+                        ulong id = XmlToolbox.GetAttributeUnsignedLong(doc.Root, "id", 0);
+                        string npcDir = Dirs.NPCs + "/" + id + ".xml";
+
+                        if (File.Exists(npcDir))
+                        {
+                            await ReplyAsync("NPC " + id + "already exists.");
+                        }
+                        else
+                        {
+                            XmlToolbox.WriteXml(npcDir, doc);
+                            
+                            // Display NPC
+                            if (NPC.TryParse(id.ToString(), out NPC npc))
+                            {
+                                await ReplyAsync(Syntax.ToCodeBlock(npc.Display()));
+                            }
+                            else
+                            {
+                                await ReplyAsync("NPC was saved but appears to be corrupted.");
+                            }
+                        }
+                    }
+                }
+            } 
+            catch
+            {
+                await ReplyAsync("NPC could not be parsed.");
             }
         }
 

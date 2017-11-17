@@ -1,0 +1,12 @@
+<npc id="34">
+  <info name="Cashier" type="Normal" pineappleOnPizza="false">A shady cashier....you remember this guy.</info>
+  <status hp="140" maxhp="140" dead="false" specibus="Jokerkind" diceRolls="1" controller="0"/>
+  <abilities>
+    <strength value="25"/>
+    <constitution value="19"/>
+    <psion value="0"/>
+    <fortitude value="10"/>
+    <intimidation value="14"/>
+    <persuasion value="0"/>
+  </abilities>
+</npc>
