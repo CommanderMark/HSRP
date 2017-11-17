@@ -162,13 +162,11 @@ namespace HSRP.Commands
             if (start == end)
             {
                 xml = str.Substring(start, str.Length - 1 - start);
-                await ReplyAsync(xml);
             }
             /// Message is "```...```"
             else
             {
                 xml = str.Substring(start, end - start);
-                await ReplyAsync(xml);
             }
 
             // Parse it to xml.
@@ -176,31 +174,31 @@ namespace HSRP.Commands
             {
                 XDocument doc = XDocument.Parse(xml, LoadOptions.PreserveWhitespace);
                 
-                foreach (XElement ele in doc.Root.Elements())
+                ulong id = XmlToolbox.GetAttributeUnsignedLong(doc.Root, "id", 0);
+                if (id <= 0)
                 {
-                    if (ele.Name.LocalName == "info")
-                    {
-                        ulong id = XmlToolbox.GetAttributeUnsignedLong(doc.Root, "id", 0);
-                        string npcDir = Dirs.NPCs + "/" + id + ".xml";
+                    await ReplyAsync("NPC did not have a valid ID.");
+                    return;
+                }
 
-                        if (File.Exists(npcDir))
-                        {
-                            await ReplyAsync("NPC " + id + "already exists.");
-                        }
-                        else
-                        {
-                            XmlToolbox.WriteXml(npcDir, doc);
-                            
-                            // Display NPC
-                            if (NPC.TryParse(id.ToString(), out NPC npc))
-                            {
-                                await ReplyAsync(Syntax.ToCodeBlock(npc.Display()));
-                            }
-                            else
-                            {
-                                await ReplyAsync("NPC was saved but appears to be corrupted.");
-                            }
-                        }
+                string npcDir = Dirs.NPCs + "/" + id + ".xml";
+
+                if (File.Exists(npcDir))
+                {
+                    await ReplyAsync("NPC " + id + " already exists.");
+                }
+                else
+                {
+                    XmlToolbox.WriteXml(npcDir, doc);
+                    
+                    // Display NPC
+                    if (NPC.TryParse(id.ToString(), out NPC npc))
+                    {
+                        await ReplyAsync(Syntax.ToCodeBlock(npc.Display()));
+                    }
+                    else
+                    {
+                        await ReplyAsync("NPC was saved but appears to be corrupted.");
                     }
                 }
             } 
