@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="42">
+  <info name="BasE 3 Laughassassin" type="Normal" pineappleOnPizza="false">A Laughassassin, watch out, he looks like he's planning on something.</info>
+  <status hp="140" maxhp="140" dead="false" specibus="bladekind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="23" />
+    <constitution value="20" />
+    <psion value="0" />
+    <fortitude value="10" />
+    <intimidation value="35" />
+    <persuasion value="20" />
+  </abilities>
+</npc>

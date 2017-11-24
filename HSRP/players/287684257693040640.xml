@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Neyrah Wrathe" id="287684257693040640" owner="Ikoma" blood="Jade" pineappleOnPizza="false" />
-  <status hp="21" maxhp="181" dead="false" specibus="polearmkind" />
-  <levels echeladder="7" pendingSkillPoints="0" xp="494" nextLevel="620" />
+  <status hp="183" maxhp="204" dead="false" specibus="polearmkind" />
+  <levels echeladder="9" pendingSkillPoints="6" xp="1394" nextLevel="1450" />
   <abilities>
-    <strength value="36" />
-    <constitution value="30" />
+    <strength value="39" />
+    <constitution value="33" />
     <psion value="0" />
     <fortitude value="6" />
     <intimidation value="0" />
@@ -13,7 +13,7 @@
   </abilities>
   <inventory>
     <item value="Battle Armor" quantity="1" />
-    <item value="Cash" quantity="2410" />
+    <item value="Cash" quantity="5260" />
     <item value="Sicarius' Mask" quantity="1" />
     <item value="Recuperacoon" quantity="1" />
     <item value="Mysterious Key" quantity="1" />
@@ -23,5 +23,7 @@
     <item value="Clubs" quantity="3" />
     <item value="Multiple Vials of Blood" quantity="1" />
     <item value="Snake Toxin 2L" quantity="1" />
+    <item value="Spears" quantity="5" />
+    <item value="Guard's Phone" quantity="1" />
   </inventory>
 </player>

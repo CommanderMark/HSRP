@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="39">
+  <info name="The Handmaid" type="Psionic" pineappleOnPizza="false">Damara Megido.</info>
+  <status hp="600" maxhp="600" dead="false" specibus="Needlekind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="30" />
+    <constitution value="50" />
+    <psion value="80" />
+    <fortitude value="40" />
+    <intimidation value="75" />
+    <persuasion value="3" />
+  </abilities>
+</npc>

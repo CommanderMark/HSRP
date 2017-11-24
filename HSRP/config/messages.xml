@@ -13,7 +13,6 @@
 
   <messages trigger="phyCounterMax">
     <msg>Maximum amount of counter attacks reached.</msg>
-    <msg>{0} is already too weak to counter attack.</msg>
   </messages>
 
   <messages trigger="phyCounterBlock">
