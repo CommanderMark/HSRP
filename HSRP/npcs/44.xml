@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="44">
+  <info name="Imperial Drone" type="Normal" pineappleOnPizza="false">It's an Imperial Drone.</info>
+  <status hp="200" maxhp="200" dead="false" specibus="Fistkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="40" />
+    <constitution value="40" />
+    <psion value="0" />
+    <fortitude value="90" />
+    <intimidation value="45" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

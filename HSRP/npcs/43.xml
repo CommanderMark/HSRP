@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="43">
+  <info name="Wounded Featherbeast" type="Lusus" pineappleOnPizza="false">The Featherbeast Neyrah damaged with her spears on BasE 3.</info>
+  <status hp="120" maxhp="190" dead="false" specibus="Feralkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="30" />
+    <constitution value="20" />
+    <psion value="0" />
+    <fortitude value="20" />
+    <intimidation value="35" />
+    <persuasion value="0" />
+  </abilities>
+</npc>
