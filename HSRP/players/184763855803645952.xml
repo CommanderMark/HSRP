@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
-  <status hp="210" maxhp="210" dead="false" specibus="Bladekindx2" />
-  <levels echeladder="10" pendingSkillPoints="0" xp="1889" nextLevel="2200" />
+  <status hp="226" maxhp="226" dead="false" specibus="Bladekindx2" />
+  <levels echeladder="11" pendingSkillPoints="0" xp="2339" nextLevel="3300" />
   <abilities>
-    <strength value="30" />
+    <strength value="32" />
     <constitution value="20" />
     <psion value="0" />
     <fortitude value="20" />
-    <intimidation value="16" />
+    <intimidation value="20" />
     <persuasion value="10" />
   </abilities>
   <inventory>
     <item value="CINQUEDEA DAGGER" quantity="1" equipped="true" />
     <item value="DUAL CORVOS" quantity="1" equipped="true" />
     <item value="Un-Stolen Computer" quantity="1" />
-    <item value="Cash" quantity="11381" />
+    <item value="Cash" quantity="10681" />
     <item value="Venom Recipes" quantity="1" />
     <item value="Boomerang" quantity="1" />
     <item value="Strange Vials" quantity="2" />
@@ -26,5 +26,11 @@
     <item value="Strana's Mask" quantity="1" />
     <item value="Repaired Staff" quantity="1" />
     <item value="Signless Hoodie" quantity="1" />
+    <item value="Anime Shades" quantity="1" />
+    <item value="Adrenaline Shots" quantity="3" />
+    <item value="Painkiller" quantity="1" />
   </inventory>
+  <strife id="4934">
+    <abilities />
+  </strife>
 </player>
