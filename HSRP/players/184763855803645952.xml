@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
-  <status hp="226" maxhp="226" dead="false" specibus="Bladekindx2" />
-  <levels echeladder="11" pendingSkillPoints="0" xp="2339" nextLevel="3300" />
+  <status hp="205" maxhp="226" dead="false" specibus="Bladekindx2" />
+  <levels echeladder="11" pendingSkillPoints="0" xp="2674" nextLevel="3300" />
   <abilities>
     <strength value="32" />
     <constitution value="20" />
@@ -15,10 +15,10 @@
     <item value="CINQUEDEA DAGGER" quantity="1" equipped="true" />
     <item value="DUAL CORVOS" quantity="1" equipped="true" />
     <item value="Un-Stolen Computer" quantity="1" />
-    <item value="Cash" quantity="10681" />
+    <item value="Cash" quantity="10751" />
     <item value="Venom Recipes" quantity="1" />
     <item value="Boomerang" quantity="1" />
-    <item value="Strange Vials" quantity="2" />
+    <item value="Strange Vials" quantity="1" />
     <item value="Multiple Kinds of Poison" quantity="1" />
     <item value="Mysterious Phone" quantity="1" />
     <item value="Subjugglator's Map" quantity="1" />
@@ -30,7 +30,4 @@
     <item value="Adrenaline Shots" quantity="3" />
     <item value="Painkiller" quantity="1" />
   </inventory>
-  <strife id="4934">
-    <abilities />
-  </strife>
 </player>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
-  <info name="Neyrah Wrathe" id="287684257693040640" owner="Ikoma" blood="Jade" pineappleOnPizza="false" />
+  <info name="Neyrah Wrathe" id="287684257693040640" owner="Cardinal" blood="Jade" pineappleOnPizza="false" />
   <status hp="205" maxhp="205" dead="false" specibus="polearmkind" />
   <levels echeladder="10" pendingSkillPoints="0" xp="1869" nextLevel="2200" />
   <abilities>
@@ -14,7 +14,6 @@
   <inventory>
     <item value="Battle Armor" quantity="1" />
     <item value="Cash" quantity="5195" />
-    <item value="Sicarius' Mask" quantity="1" />
     <item value="Recuperacoon" quantity="1" />
     <item value="Mysterious Key" quantity="1" />
     <item value="Cashier Phone" quantity="1" />
@@ -27,7 +26,4 @@
     <item value="Guard's Phone" quantity="1" />
     <item value="iPhone Shades" quantity="1" />
   </inventory>
-  <strife id="4934">
-    <abilities />
-  </strife>
 </player>

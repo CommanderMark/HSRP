@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="46">
+  <info name="Subjugglator Apprentice" type="Normal" pineappleOnPizza="false">They are still training.</info>
+  <status hp="120" maxhp="120" dead="false" specibus="Clubkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="23" />
+    <constitution value="30" />
+    <psion value="0" />
+    <fortitude value="5" />
+    <intimidation value="10" />
+    <persuasion value="0" />
+  </abilities>
+</npc>
+ 
