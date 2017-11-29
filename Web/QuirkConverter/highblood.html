@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grand Highblood Quirk</title>
+    <script type="text/javascript" src="highblood.js"></script>
+    <link rel="stylesheet" type="text/css" href="highblood.css">
+</head>
+<body>
+
+<div id="headerTitle">Enter stuff:</div>
+<table>
+    <tr>
+        <td><label for="anagram">Anagram for Trollian (optional):</label></td>
+        <td><input type="text" id="anagram"></td>
+    </tr>
+
+    <tr>
+        <td><label for="parsedText">Text to parse:</label></td>
+        <td><textarea id="parsedText"></textarea></td>
+    </tr>
+
+    <tr>
+        <td><label for="parseType">Format of Output:</label></td>
+        <td>
+            <select id="parseType" onchange="updateTextType()">
+                <option>Quote</option>
+                <option>Trollian</option>
+                <option>Raw</option>
+            </select>
+        </td>
+    </tr>
+
+    <tr><td><input type="submit" value="OMV Quirk" onclick="omvQuirk()" /></td></tr>
+    <tr><td><input type="submit" value="Sicarius" onclick="sicariusQuirk()" /></td></tr>
+    <tr><td><input type="submit" value="Hector" onclick="hectorQuirk()" /></td></tr>
+    <tr><td><input type="submit" value="Vander" onclick="vanderQuirk()" /></td></tr>
+    <tr><td><input type="submit" value="Sidewind" onclick="sideQuirk()" /></td></tr>
+
+    <tr><td>Result:</td>            <td><div id="outputText"></div></td></tr>
+</table>
+
+</body>
+</html>
