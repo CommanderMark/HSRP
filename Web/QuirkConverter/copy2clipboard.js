@@ -3,20 +3,6 @@ Version 1.1
 Written by Jeff Baker on March 18, 2016
 Copyright 2016 by Jeff Baker -
 http://www.seabreezecomputers.com/tips/copy2clipboard.htm
-Paste the following javascript call in your HTML web page:
-
-<script type="text/javascript" src="copy2clipboard.js">
-</script>
-
-Then use this javascript code to make a button for an element:
-
-make_copy_button(document.getElementById("textbox"));
-
-Or the following html:
-
-<div onclick="select_all_and_copy(this)">This div will copy when clicked on</div>
-
-
 */
 
 function tooltip(el, message)

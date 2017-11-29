@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function()
 {
     document.getElementById("outputText").disabled = true;
     updateTextType();
+    make_copy_button(document.getElementById("outputText"));
 });
 
 // Grand Highblood.
