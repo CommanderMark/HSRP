@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Grand Highblood Quirk</title>
     <script type="text/javascript" src="highblood.js"></script>
+    <script type="text/javascript" src="copy2clipboard.js"></script>
     <link rel="stylesheet" type="text/css" href="highblood.css">
 </head>
 <body>
@@ -39,11 +40,7 @@
 
     <tr>
         <td><label for="outputText">Result:</label></td>
-        <td><input type="text" id="outputText" /></td>
-    </tr>
-
-    <tr>
-        <td><input type="submit" value="Copy to Clipboard" onclick="copyToClipboard()" /></td>
+        <td><div onclick="select_all_and_copy(this)" id="outputText"></div></td>
     </tr>
 </table>
 

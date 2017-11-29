@@ -134,20 +134,20 @@ function output(str)
 // Just the text.
 function outputTextRaw(str)
 {
-    document.getElementById("outputText").value = str;
+    document.getElementById("outputText").innerHTML = str;
 }
 
 // With quotation marks around it.
 function outputTextQuote(str)
 {
-    document.getElementById("outputText").value = "\"" + str + "\"";
+    document.getElementById("outputText").innerHTML = "\"" + str + "\"";
 }
 
 // With a code-lined (`foo`) anagram in front of it.
 function outputTextTrollian(str)
 {
     var ana = document.getElementById("anagram").value;
-    document.getElementById("outputText").value = "`" + ana + "`: " + str;
+    document.getElementById("outputText").innerHTML = "`" + ana + "`: " + str;
 }
 
 // Updates whether or not the output is to be a quote, a Trollian message, or just raw.
@@ -156,19 +156,4 @@ function updateTextType()
     outputTextType = document.getElementById("parseType").selectedIndex;
 
     document.getElementById("anagram").disabled = (outputTextType !== 1);
-}
-
-function copyToClipboard()
-{
-    if (navigator.userAgent.match(/ipad|ipod|iphone/i))
-    {
-
-    }
-    else
-    {
-        var copyTextArea = document.querySelector("#outputText");
-        copyTextArea.select();
-
-        var successful = document.execCommand('copy');
-    }
 }
