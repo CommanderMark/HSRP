@@ -3,7 +3,8 @@ var outputTextType = 0;
 
 document.addEventListener('DOMContentLoaded', function()
 {
-   updateTextType();
+    document.getElementById("outputText").disabled = true;
+    updateTextType();
 });
 
 // Grand Highblood.
@@ -14,7 +15,7 @@ function omvQuirk()
     str = str.replace(/\b(\w)/g, function(match) { return match.toUpperCase(); });
     str = str.replace(/(\w)\b/g, function(match) { return match.toUpperCase(); });
 
-    return str;
+    output(str);
 }
 
 // Sicarius
@@ -28,11 +29,11 @@ function sicariusQuirk()
     var quirk = str.split("");
     for (var i = 0; i < quirk.length; i++)
     {
-        if (quirk[i] == "m")
+        if (quirk[i] === "m")
         {
             indexes.push(i);
         }
-        else if (quirk[i] == "M")
+        else if (quirk[i] === "M")
         {
             capitalIndexes.push(i);
         }
@@ -69,15 +70,15 @@ function hectorQuirk()
     var quirk = getInputText().split("");
     for (var i = 0; i < quirk.length; i++)
     {
-        if (quirk[i] == "i")
+        if (quirk[i] === "i")
         {
             quirk[i] = "iii";
         }
-        else if (quirk[i] == "I")
+        else if (quirk[i] === "I")
         {
             quirk[i] = "III";
         }
-        else if (quirk[i] == "!")
+        else if (quirk[i] === "!")
         {
             quirk[i] = "!!!";
         }
@@ -133,20 +134,20 @@ function output(str)
 // Just the text.
 function outputTextRaw(str)
 {
-    document.getElementById("outputText").innerHTML = str;
+    document.getElementById("outputText").value = str;
 }
 
 // With quotation marks around it.
 function outputTextQuote(str)
 {
-    document.getElementById("outputText").innerHTML = "\"" + str + "\"";
+    document.getElementById("outputText").value = "\"" + str + "\"";
 }
 
 // With a code-lined (`foo`) anagram in front of it.
 function outputTextTrollian(str)
 {
     var ana = document.getElementById("anagram").value;
-    document.getElementById("outputText").innerHTML = "`" + ana + "`: " + str;
+    document.getElementById("outputText").value = "`" + ana + "`: " + str;
 }
 
 // Updates whether or not the output is to be a quote, a Trollian message, or just raw.
@@ -154,5 +155,20 @@ function updateTextType()
 {
     outputTextType = document.getElementById("parseType").selectedIndex;
 
-    document.getElementById("anagram").disabled = (outputTextType != 1);
+    document.getElementById("anagram").disabled = (outputTextType !== 1);
+}
+
+function copyToClipboard()
+{
+    if (navigator.userAgent.match(/ipad|ipod|iphone/i))
+    {
+
+    }
+    else
+    {
+        var copyTextArea = document.querySelector("#outputText");
+        copyTextArea.select();
+
+        var successful = document.execCommand('copy');
+    }
 }
