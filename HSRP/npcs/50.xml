@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="50">
+  <info name="Bear Lusus" type="Lusus" pineappleOnPizza="false">Aggressive Wildlife.</info>
+  <status hp="180" maxhp="180" dead="false" specibus="Sicklekind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="43" />
+    <constitution value="30" />
+    <psion value="0" />
+    <fortitude value="80" />
+    <intimidation value="0" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
-  <status hp="205" maxhp="226" dead="false" specibus="Bladekindx2" />
-  <levels echeladder="11" pendingSkillPoints="0" xp="2674" nextLevel="3300" />
+  <status hp="97" maxhp="232" dead="false" specibus="Bladekindx2" />
+  <levels echeladder="12" pendingSkillPoints="0" xp="3384" nextLevel="5000" />
   <abilities>
-    <strength value="32" />
-    <constitution value="20" />
+    <strength value="36" />
+    <constitution value="22" />
     <psion value="0" />
     <fortitude value="20" />
     <intimidation value="20" />
@@ -19,7 +19,6 @@
     <item value="Venom Recipes" quantity="1" />
     <item value="Boomerang" quantity="1" />
     <item value="Strange Vials" quantity="1" />
-    <item value="Multiple Kinds of Poison" quantity="1" />
     <item value="Mysterious Phone" quantity="1" />
     <item value="Subjugglator's Map" quantity="1" />
     <item value="Subjugglator's Note" quantity="1" />
@@ -29,5 +28,6 @@
     <item value="Anime Shades" quantity="1" />
     <item value="Adrenaline Shots" quantity="3" />
     <item value="Painkiller" quantity="1" />
+    <item value="Kornla's Poison" quantity="1" />
   </inventory>
 </player>

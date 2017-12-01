@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="53">
+  <info name="Animalus" type="Lusus" pineappleOnPizza="false">resourcefulSurvivor's Hoofbeast lusus .</info>
+  <status hp="140" maxhp="140" dead="false" specibus="Feralkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="40" />
+    <constitution value="39" />
+    <psion value="0" />
+    <fortitude value="80" />
+    <intimidation value="0" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

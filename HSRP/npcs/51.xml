@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="51">
+  <info name="Midblood Fighter" type="Normal" pineappleOnPizza="false">A good fighter.</info>
+  <status hp="140" maxhp="140" dead="false" specibus="Fistkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="43" />
+    <constitution value="40" />
+    <psion value="0" />
+    <fortitude value="80" />
+    <intimidation value="20" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

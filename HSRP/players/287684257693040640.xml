@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Neyrah Wrathe" id="287684257693040640" owner="Cardinal" blood="Jade" pineappleOnPizza="false" />
-  <status hp="205" maxhp="205" dead="false" specibus="polearmkind" />
-  <levels echeladder="10" pendingSkillPoints="0" xp="1869" nextLevel="2200" />
+  <status hp="219" maxhp="219" dead="false" specibus="polearmkind" />
+  <levels echeladder="11" pendingSkillPoints="0" xp="2269" nextLevel="3300" />
   <abilities>
     <strength value="40" />
     <constitution value="33" />
     <psion value="15" />
-    <fortitude value="8" />
+    <fortitude value="14" />
     <intimidation value="0" />
     <persuasion value="0" />
   </abilities>
@@ -25,5 +25,7 @@
     <item value="Spears" quantity="5" />
     <item value="Guard's Phone" quantity="1" />
     <item value="iPhone Shades" quantity="1" />
+    <item value="Chastiefol" quantity="1" />
+    <item value="Bags of Blood" quantity="1" />
   </inventory>
 </player>
