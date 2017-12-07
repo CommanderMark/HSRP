@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sidewind Langston" id="103547713932529664" owner="CommanderMark" blood="Violet" pineappleOnPizza="false" />
-  <status hp="1" maxhp="172" dead="false" specibus="Hatchetkind" />
+  <status hp="172" maxhp="172" dead="false" specibus="Hatchetkind" />
   <levels echeladder="10" pendingSkillPoints="0" xp="1940" nextLevel="2200" />
   <abilities>
     <strength value="24" />
