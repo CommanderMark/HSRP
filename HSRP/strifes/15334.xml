@@ -1,0 +1,899 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strife id="15334" active="false" currentTurn="103547713932529664">
+  <status attackTurn="true" turn="0" />
+  <attackers>
+    <player id="103547713932529664" />
+  </attackers>
+  <targets>
+    <npc id="59">
+      <info name="TROLL SHARK" type="Lusus" pineappleOnPizza="false">Looks hungry.</info>
+      <status hp="12" maxhp="120" dead="false" specibus="Feralkind" diceRolls="1" controller="0" />
+      <abilities>
+        <strength value="20" />
+        <constitution value="40" />
+        <psion value="0" />
+        <fortitude value="10" />
+        <intimidation value="50" />
+        <persuasion value="0" />
+      </abilities>
+      <modifiers>
+        <abilities />
+      </modifiers>
+    </npc>
+  </targets>
+  <logs posted="131">
+    <log>Team A:
+0 - Sidewind Langston - 172/172
+
+Team T: 
+0 - TROLL SHARK (Lusus) - 120/120
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 12!
+`TROLL SHARK (Lusus)` rolls 11!
+
+`TROLL SHARK (Lusus)` took `1` hitpoint(s) of damage.
+
+`TROLL SHARK (Lusus)` is counter attacking.
+`Sidewind Langston` rolls 9!
+`TROLL SHARK (Lusus)` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` lunges for a strike towards `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 14!
+`Sidewind Langston` rolls 19!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 19!
+`TROLL SHARK (Lusus)` rolls 24!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` lunges for a strike towards `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 6!
+`Sidewind Langston` rolls 19!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 21!
+`TROLL SHARK (Lusus)` rolls 4!
+
+`TROLL SHARK (Lusus)` took `17` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` lunges for a strike towards `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 19!
+`Sidewind Langston` rolls 15!
+
+`Sidewind Langston` took `4` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` assaults `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 3!
+`TROLL SHARK (Lusus)` rolls 26!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` lunges for a strike towards `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 11!
+`Sidewind Langston` rolls 13!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` assaults `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 13!
+`TROLL SHARK (Lusus)` rolls 9!
+
+`TROLL SHARK (Lusus)` took `4` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 12!
+`Sidewind Langston` rolls 12!
+
+Attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 16!
+`TROLL SHARK (Lusus)` rolls 22!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 4!
+`Sidewind Langston` rolls 16!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 16!
+`TROLL SHARK (Lusus)` rolls 4!
+
+`TROLL SHARK (Lusus)` took `12` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` lunges for a strike towards `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 1!
+`Sidewind Langston` rolls 16!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 17!
+`TROLL SHARK (Lusus)` rolls 29!
+
+Attack missed.
+
+`TROLL SHARK (Lusus)` is counter attacking.
+`Sidewind Langston` rolls 8!
+`TROLL SHARK (Lusus)` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 2!
+`Sidewind Langston` rolls 2!
+
+Attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` assaults `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 23!
+`TROLL SHARK (Lusus)` rolls 25!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 2!
+`Sidewind Langston` rolls 11!
+
+Attack missed.
+
+`Sidewind Langston` is counter attacking.
+`TROLL SHARK (Lusus)` rolls 9!
+`Sidewind Langston` rolls 4!
+
+Counter attack dodged.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 22!
+`TROLL SHARK (Lusus)` rolls 8!
+
+`TROLL SHARK (Lusus)` took `14` hitpoint(s) of damage.
+
+`TROLL SHARK (Lusus)` is counter attacking.
+`Sidewind Langston` rolls 18!
+`TROLL SHARK (Lusus)` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` lunges for a strike towards `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 8!
+`Sidewind Langston` rolls 19!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 7!
+`TROLL SHARK (Lusus)` rolls 10!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` assaults `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 3!
+`Sidewind Langston` rolls 15!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 18!
+`TROLL SHARK (Lusus)` rolls 20!
+
+Attack missed.
+
+`TROLL SHARK (Lusus)` is counter attacking.
+`Sidewind Langston` rolls 11!
+`TROLL SHARK (Lusus)` rolls 1!
+
+Counter attack dodged.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` lunges for a strike towards `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 16!
+`Sidewind Langston` rolls 6!
+
+`Sidewind Langston` took `10` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 1!
+`TROLL SHARK (Lusus)` rolls 16!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 7!
+`Sidewind Langston` rolls 15!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 13!
+`TROLL SHARK (Lusus)` rolls 31!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` assaults `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 17!
+`Sidewind Langston` rolls 2!
+
+`Sidewind Langston` took `15` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 8!
+`TROLL SHARK (Lusus)` rolls 27!
+
+Attack missed.
+
+`TROLL SHARK (Lusus)` is counter attacking.
+`Sidewind Langston` rolls 5!
+`TROLL SHARK (Lusus)` rolls 1!
+
+Counter attack dodged.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 7!
+`Sidewind Langston` rolls 9!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` assaults `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 16!
+`TROLL SHARK (Lusus)` rolls 24!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 18!
+`Sidewind Langston` rolls 12!
+
+`Sidewind Langston` took `6` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` assaults `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 19!
+`TROLL SHARK (Lusus)` rolls 1!
+
+`TROLL SHARK (Lusus)` took `18` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 15!
+`Sidewind Langston` rolls 4!
+
+`Sidewind Langston` took `11` hitpoint(s) of damage.
+
+`Sidewind Langston` tries to retaliate.
+`TROLL SHARK (Lusus)` rolls 4!
+`Sidewind Langston` rolls 2!
+
+Counter attack dodged.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 24!
+`TROLL SHARK (Lusus)` rolls 29!
+
+Attack missed.
+
+`TROLL SHARK (Lusus)` tries to retaliate.
+`Sidewind Langston` rolls 5!
+`TROLL SHARK (Lusus)` rolls 1!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 20!
+`Sidewind Langston` rolls 6!
+
+`Sidewind Langston` took `14` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 22!
+`TROLL SHARK (Lusus)` rolls 8!
+
+`TROLL SHARK (Lusus)` took `14` hitpoint(s) of damage.
+
+`TROLL SHARK (Lusus)` tries to retaliate.
+`Sidewind Langston` rolls 13!
+`TROLL SHARK (Lusus)` rolls 1!
+
+Counter attack dodged.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` lunges for a strike towards `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 15!
+`Sidewind Langston` rolls 12!
+
+`Sidewind Langston` took `3` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 11!
+`TROLL SHARK (Lusus)` rolls 1!
+
+`TROLL SHARK (Lusus)` took `10` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 14!
+`Sidewind Langston` rolls 5!
+
+`Sidewind Langston` took `9` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 9!
+`TROLL SHARK (Lusus)` rolls 25!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 14!
+`Sidewind Langston` rolls 8!
+
+`Sidewind Langston` took `6` hitpoint(s) of damage.
+
+`Sidewind Langston` tries to retaliate.
+`TROLL SHARK (Lusus)` rolls 16!
+`Sidewind Langston` rolls 8!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 8!
+`TROLL SHARK (Lusus)` rolls 22!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 5!
+`Sidewind Langston` rolls 13!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 12!
+`TROLL SHARK (Lusus)` rolls 3!
+
+`TROLL SHARK (Lusus)` took `9` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 5!
+`Sidewind Langston` rolls 7!
+
+Attack missed.
+
+`Sidewind Langston` is counter attacking.
+`TROLL SHARK (Lusus)` rolls 2!
+`Sidewind Langston` rolls 1!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 14!
+`TROLL SHARK (Lusus)` rolls 14!
+
+Attack blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` attacks `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 5!
+`Sidewind Langston` rolls 7!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` assaults `TROLL SHARK (Lusus)`.
+
+`Sidewind Langston` rolls 22!
+`TROLL SHARK (Lusus)` rolls 13!
+
+`TROLL SHARK (Lusus)` took `9` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`TROLL SHARK (Lusus)` is taking their turn!
+`TROLL SHARK (Lusus)` lunges for a strike towards `Sidewind Langston`.
+
+`TROLL SHARK (Lusus)` rolls 19!
+`Sidewind Langston` rolls 11!
+
+`Sidewind Langston` took `8` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` is no longer participating in the strife.
+
+------------
+</log>
+    <log>Attackers have been defeated.
+
+------------
+</log>
+    <log>The strife is now over. XP will be awarded at the discretion of the GM.
+
+------------
+</log>
+    <log>Team A:
+0 - Sidewind Langston - 86/172 (DEFEATED)
+
+Team T: 
+0 - TROLL SHARK (Lusus) - 12/120
+
+------------
+</log>
+  </logs>
+</strife>

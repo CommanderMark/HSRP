@@ -106,6 +106,12 @@ function sideQuirk()
     output(getInputText());
 }
 
+// Iratar
+function iratarQuirk()
+{
+    output(">:3 " + getInputText() + " Ɛ:<");
+}
+
 // Convert Array back to a String.
 function arrayToString(text) {
     var result = "";

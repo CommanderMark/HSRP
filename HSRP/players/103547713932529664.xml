@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sidewind Langston" id="103547713932529664" owner="CommanderMark" blood="Violet" pineappleOnPizza="false" />
-  <status hp="172" maxhp="172" dead="false" specibus="Hatchetkind" />
-  <levels echeladder="10" pendingSkillPoints="0" xp="1810" nextLevel="2200" />
+  <status hp="86" maxhp="172" dead="false" specibus="Hatchetkind" />
+  <levels echeladder="10" pendingSkillPoints="0" xp="1910" nextLevel="2200" />
   <abilities>
     <strength value="24" />
     <constitution value="22" />
@@ -23,5 +23,6 @@
     <item value="Assassin Hatchet" quantity="1" />
     <item value="Pail" quantity="1" />
     <item value="Expensive Cider" quantity="300" />
+    <item value="Gold Bars" quantity="3" />
   </inventory>
 </player>

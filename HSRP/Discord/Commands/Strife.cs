@@ -191,10 +191,10 @@ namespace HSRP.Commands
             await ReplyAsync(Syntax.ToCodeBlock(strf.Display()));
         }
 
-        [Command("identify"), Alias("identity"), InStrife]
+        [Command("identify"), Alias("identity"), InStrife, Priority(1)]
         public async Task Identify(string who, int index) => await Identify(Context.GetStrife(), who, index);
 
-        [Command("identify"), Alias("identity"), RequireGM]
+        [Command("identify"), Alias("identity"), RequireGM, Priority(0)]
         public async Task Identify(Strife strf, string who, int index)
         {
             bool attackAtks = false;

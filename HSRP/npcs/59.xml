@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="59">
+  <info name="TROLL SHARK" type="Lusus" pineappleOnPizza="false">Looks hungry.</info>
+  <status hp="120" maxhp="120" dead="false" specibus="Feralkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="20" />
+    <constitution value="40" />
+    <psion value="0" />
+    <fortitude value="10" />
+    <intimidation value="50" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

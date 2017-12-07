@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="61">
+  <info name="The Purifier" type="Normal" pineappleOnPizza="false">The Settlement's best agent/cultist so far.</info>
+  <status hp="380" maxhp="380" dead="false" specibus="Pyrokind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="90" />
+    <constitution value="70" />
+    <psion value="0" />
+    <fortitude value="90" />
+    <intimidation value="60" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

@@ -181,7 +181,7 @@ namespace HSRP.Commands
                     return;
                 }
 
-                if (amount <= 0 || amount > item.Quantity)
+                if (amount <= 0)
                 {
                     await ReplyAsync("Invalid amount.");
                     return;
@@ -191,7 +191,7 @@ namespace HSRP.Commands
                 plyr.Inventory[index] = item;
 
                 plyr.Save();
-                string log = $"{amount} {Syntax.ToCodeLine(item.Name)} removed from the inventory of {Syntax.ToCodeLine(plyr.Name)}.";
+                string log = $"{Syntax.ToCodeLine(item.Name)} amount was set to {Syntax.ToCodeLine(amount.ToString())} in the inventory of {Syntax.ToCodeLine(plyr.Name)}.";
                 await ReplyAsync(log);
             }
 
