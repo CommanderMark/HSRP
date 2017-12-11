@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="77">
+  <info name="Bronze-Blood Fighter" type="Psionic" pineappleOnPizza="false">Well this is surely interesting...</info>
+  <status hp="140" maxhp="140" dead="false" specibus="Psionickind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="20" />
+    <constitution value="20" />
+    <psion value="50" />
+    <fortitude value="20" />
+    <intimidation value="0" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

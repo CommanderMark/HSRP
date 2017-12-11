@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="76">
+  <info name="The Destroyer Phase 2" type="Normal" pineappleOnPizza="false">This is gonna be easy.</info>
+  <status hp="200" maxhp="200" dead="false" specibus="Clubkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="50" />
+    <constitution value="40" />
+    <psion value="0" />
+    <fortitude value="40" />
+    <intimidation value="30" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

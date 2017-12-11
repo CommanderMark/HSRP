@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<npc id="73">
+  <info name="Centaur" type="Lusus" pineappleOnPizza="false">A centaur lusus you found.</info>
+  <status hp="250" maxhp="250" dead="false" specibus="feralkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="65" />
+    <constitution value="40" />
+    <psion value="0" />
+    <fortitude value="400" />
+    <intimidation value="40" />
+    <persuasion value="0" />
+  </abilities>
+</npc>
