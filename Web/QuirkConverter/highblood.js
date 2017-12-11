@@ -19,6 +19,17 @@ function omvQuirk()
     output(str);
 }
 
+// Guild Master.
+function guildMasterQuirk()
+{
+    var str = getInputText().toUpperCase();
+
+    str = str.replace(/\b(\w)/g, function(match) { return match.toLowerCase(); });
+    str = str.replace(/(\w)\b/g, function(match) { return match.toLowerCase(); });
+
+    output(str);
+}
+
 // Sicarius
 function sicariusQuirk()
 {
@@ -92,10 +103,10 @@ function vanderQuirk()
 {
     var str = getInputText();
 
-    str = str.replace(/b/g, ":cancer:");
-    str = str.replace(/B/g, ":cancer:");
-    str = str.replace(/p/g, ":cancer:");
-    str = str.replace(/P/g, ":cancer:");
+    str = str.replace(/b/g, "♋");
+    str = str.replace(/B/g, "♋");
+    str = str.replace(/p/g, "♋");
+    str = str.replace(/P/g, "♋");
 
     output(":Cancer: " + str);
 }
@@ -110,6 +121,17 @@ function sideQuirk()
 function iratarQuirk()
 {
     output(">:3 " + getInputText() + " Ɛ:<");
+}
+
+// The Purifier
+function purifierQuirk()
+{
+    var str = getInputText();
+
+    str = str.replace(/t/g, "+");
+    str = str.replace(/T/g, "+");
+
+    output("♠️ " + str + " -_-");
 }
 
 // Convert Array back to a String.
