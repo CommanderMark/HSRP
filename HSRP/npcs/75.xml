@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="75">
+  <info name="The Destroyer" type="Normal" pineappleOnPizza="false">Edgy.</info>
+  <status hp="1000" maxhp="1000" dead="false" specibus="Mechakind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="120" />
+    <constitution value="100" />
+    <psion value="0" />
+    <fortitude value="100" />
+    <intimidation value="33" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

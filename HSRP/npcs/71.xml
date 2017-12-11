@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="71">
+  <info name="Venatar" type="Lusus" pineappleOnPizza="false">Strange humanoid wolf, also Iratar's lusus.</info>
+  <status hp="200" maxhp="200" dead="false" specibus="feralkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="30" />
+    <constitution value="30" />
+    <psion value="0" />
+    <fortitude value="0" />
+    <intimidation value="0" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

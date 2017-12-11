@@ -13,22 +13,19 @@
   </abilities>
   <inventory>
     <item value="CINQUEDEA DAGGER" quantity="1" equipped="true" />
-    <item value="DUAL CORVOS" quantity="1" equipped="true" />
     <item value="Un-Stolen Computer" quantity="1" />
-    <item value="Cash" quantity="10676" />
-    <item value="Venom Recipes" quantity="1" />
-    <item value="Boomerang" quantity="1" />
-    <item value="Strange Vials" quantity="1" />
-    <item value="Mysterious Phone" quantity="1" />
-    <item value="Subjugglator's Map" quantity="1" />
-    <item value="Subjugglator's Note" quantity="1" />
+    <item value="Cash" quantity="11906" />
     <item value="Strana's Mask" quantity="1" />
     <item value="Repaired Staff" quantity="1" />
     <item value="Signless Hoodie" quantity="1" />
-    <item value="Anime Shades" quantity="1" />
-    <item value="Adrenaline Shots" quantity="3" />
+    <item value="Adrenaline Shots" quantity="2" />
     <item value="Painkiller" quantity="1" />
     <item value="Kornla's Poison" quantity="1" />
     <item value="Smoke Bombs" quantity="4" />
+    <item value="New Fiduspawn Collection" quantity="1" />
+    <item value="Bombs" quantity="5" />
+    <item value="Anime Shades" quantity="1" equipped="true" />
+    <item value="Cool Jacket" quantity="1" equipped="true" />
+    <item value="DEADLY CORVOS" quantity="1" equipped="true" />
   </inventory>
 </player>

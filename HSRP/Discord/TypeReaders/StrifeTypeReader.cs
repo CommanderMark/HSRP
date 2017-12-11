@@ -20,7 +20,6 @@ namespace HSRP.Commands
                 }
             }
             
-            await context.Channel.SendMessageAsync("Strife not found.");
             return TypeReaderResult.FromError(CommandError.ParseFailed, "No such strife was found.");
         }
     }

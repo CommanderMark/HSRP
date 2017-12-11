@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<strife id="18341" active="false" currentTurn="0">
-  <status attackTurn="false" turn="0" />
-  <attackers>
-    <player id="201651995017216000" />
-  </attackers>
-  <targets />
-  <logs posted="0" />
-</strife>

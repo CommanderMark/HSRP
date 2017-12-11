@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Neyrah Wrathe" id="287684257693040640" owner="Cardinal" blood="Jade" pineappleOnPizza="false" />
-  <status hp="219" maxhp="219" dead="false" specibus="polearmkind" />
-  <levels echeladder="11" pendingSkillPoints="0" xp="3269" nextLevel="3300" />
+  <status hp="12" maxhp="259" dead="false" specibus="polearmkind" />
+  <levels echeladder="13" pendingSkillPoints="0" xp="5001" nextLevel="7600" />
   <abilities>
-    <strength value="40" />
-    <constitution value="33" />
+    <strength value="42" />
+    <constitution value="35" />
     <psion value="15" />
-    <fortitude value="14" />
+    <fortitude value="22" />
     <intimidation value="0" />
     <persuasion value="0" />
   </abilities>
   <inventory>
     <item value="Battle Armor" quantity="1" />
-    <item value="Cash" quantity="5195" />
+    <item value="Cash" quantity="515" />
     <item value="Recuperacoon" quantity="1" />
     <item value="Mysterious Key" quantity="1" />
     <item value="Cashier Phone" quantity="1" />
@@ -24,8 +24,16 @@
     <item value="Snake Toxin 2L" quantity="1" />
     <item value="Spears" quantity="5" />
     <item value="Guard's Phone" quantity="1" />
-    <item value="iPhone Shades" quantity="1" />
+    <item value="iPhone Shades" quantity="1" equipped="true" />
     <item value="Chastiefol" quantity="1" />
     <item value="Wrecked Drone" quantity="1" />
+    <item value="Tools" quantity="1" />
+    <item value="Fiduspawn Collection" quantity="1" />
+    <item value="SUPER IMPRACTICAL ANIME SWORD" quantity="1" equipped="true" />
+    <item value="Gamblignant Outfit" quantity="1" />
+    <item value="T-shirt" quantity="1" equipped="true" />
+    <item value="Jeans" quantity="1" equipped="true" />
+    <item value="Wrathful Destruction" quantity="1" />
+    <item value="Scalemate" quantity="1" />
   </inventory>
 </player>

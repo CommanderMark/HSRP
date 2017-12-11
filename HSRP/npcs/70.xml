@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="70">
+  <info name="The Purifier Phase 2" type="Normal" pineappleOnPizza="false">Not giving up that easily.</info>
+  <status hp="400" maxhp="400" dead="false" specibus="Pyrokind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="700" />
+    <constitution value="900" />
+    <psion value="0" />
+    <fortitude value="100" />
+    <intimidation value="50" />
+    <persuasion value="0" />
+  </abilities>
+</npc>
