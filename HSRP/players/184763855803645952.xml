@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
-  <status hp="232" maxhp="232" dead="false" specibus="Bladekindx2" />
-  <levels echeladder="12" pendingSkillPoints="0" xp="3384" nextLevel="5000" />
+  <status hp="142" maxhp="232" dead="false" specibus="Bladekindx2" />
+  <levels echeladder="12" pendingSkillPoints="0" xp="3784" nextLevel="5000" />
   <abilities>
     <strength value="36" />
     <constitution value="22" />

@@ -651,12 +651,12 @@ namespace HSRP
                     case NPCType.Psionic:
                         int rng = Toolbox.RandInt(4);
                         // 25% chance to mind-control.
-                        if (rng == 3 && target.Controller != ai.ID)
+                        /*if (rng == 3 && target.Controller != ai.ID)
                         {
                             TakeTurn(StrifeAction.MindControl, targetID, !attackTurn);
                         }
                         // 25% chance to attack.
-                        else if (rng == 2)
+                        else */if (rng == 2)
                         {
                             TakeTurn(StrifeAction.PhysicalAttack, targetID, !attackTurn);
                         }
