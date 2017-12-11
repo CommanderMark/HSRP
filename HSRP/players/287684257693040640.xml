@@ -13,7 +13,7 @@
   </abilities>
   <inventory>
     <item value="Battle Armor" quantity="1" />
-    <item value="Cash" quantity="515" />
+    <item value="Cash" quantity="635" />
     <item value="Recuperacoon" quantity="1" />
     <item value="Mysterious Key" quantity="1" />
     <item value="Cashier Phone" quantity="1" />
@@ -22,7 +22,6 @@
     <item value="Clubs" quantity="3" />
     <item value="Multiple Vials of Blood" quantity="1" />
     <item value="Snake Toxin 2L" quantity="1" />
-    <item value="Spears" quantity="5" />
     <item value="Guard's Phone" quantity="1" />
     <item value="iPhone Shades" quantity="1" equipped="true" />
     <item value="Chastiefol" quantity="1" />
@@ -35,5 +34,6 @@
     <item value="Jeans" quantity="1" equipped="true" />
     <item value="Wrathful Destruction" quantity="1" />
     <item value="Scalemate" quantity="1" />
+    <item value="The Grand Highblood's Club" quantity="1" />
   </inventory>
 </player>
