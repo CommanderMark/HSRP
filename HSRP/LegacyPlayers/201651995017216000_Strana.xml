@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Strana Kandros" id="201651995017216000" owner="Moonfang" blood="Burgundy" pineappleOnPizza="false" />
-  <status hp="62" maxhp="155" dead="false" specibus="staffkind" />
+  <status hp="155" maxhp="155" dead="false" specibus="staffkind" />
   <levels echeladder="7" pendingSkillPoints="6" xp="618" nextLevel="620" />
   <abilities>
     <strength value="7" />

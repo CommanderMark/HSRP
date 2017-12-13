@@ -703,6 +703,8 @@ namespace HSRP
 
             // Kill 'em.
             LeaveStrife(ent);
+            UpdateTurn();
+            
             AddLog();
             return GetLogs();
         }

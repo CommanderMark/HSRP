@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sayana Cantet" id="287684257693040640" owner="Ikoma" blood="Fuchsia" pineappleOnPizza="false" />
-  <status hp="100" maxhp="100" dead="false" specibus="2x3dent" />
-  <levels echeladder="0" pendingSkillPoints="24" xp="0" nextLevel="0" />
+  <status hp="259" maxhp="259" dead="false" specibus="2x3dent" />
+  <levels echeladder="13" pendingSkillPoints="0" xp="5001" nextLevel="7600" />
   <abilities>
-    <strength value="0" />
-    <constitution value="0" />
+    <strength value="25" />
+    <constitution value="25" />
     <psion value="0" />
-    <fortitude value="0" />
+    <fortitude value="30" />
     <intimidation value="0" />
-    <persuasion value="0" />
+    <persuasion value="34" />
   </abilities>
   <inventory />
 </player>

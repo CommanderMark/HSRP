@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Neyrah Wrathe" id="287684257693040640" owner="Cardinal" blood="Jade" pineappleOnPizza="false" />
-  <status hp="12" maxhp="259" dead="false" specibus="polearmkind" />
+  <status hp="259" maxhp="259" dead="false" specibus="polearmkind" />
   <levels echeladder="13" pendingSkillPoints="0" xp="5001" nextLevel="7600" />
   <abilities>
     <strength value="42" />

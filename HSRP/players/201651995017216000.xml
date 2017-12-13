@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<player>
+  <info name="Katras Serpes" id="201651995017216000" owner="Moonfang" blood="Teal" pineappleOnPizza="false" />
+  <status hp="155" maxhp="155" dead="false" specibus="chainsawkind" />
+  <levels echeladder="7" pendingSkillPoints="0" xp="618" nextLevel="620" />
+  <abilities>
+    <strength value="17" />
+    <constitution value="20" />
+    <psion value="0" />
+    <fortitude value="20" />
+    <intimidation value="0" />
+    <persuasion value="15" />
+  </abilities>
+  <inventory>
+    <item value="Jade Potion" quantity="1" />
+  </inventory>
+</player>

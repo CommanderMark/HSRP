@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="80">
+  <info name="Armorachnid" type="Normal" pineappleOnPizza="false">A mutant.</info>
+  <status hp="800" maxhp="800" dead="false" specibus="Feralkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="90" />
+    <constitution value="10" />
+    <psion value="0" />
+    <fortitude value="20" />
+    <intimidation value="0" />
+    <persuasion value="0" />
+  </abilities>
+</npc>
