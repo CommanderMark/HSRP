@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
-  <status hp="188" maxhp="232" dead="false" specibus="Bladekindx2" />
-  <levels echeladder="12" pendingSkillPoints="0" xp="4284" nextLevel="5000" />
+  <status hp="1" maxhp="232" dead="false" specibus="Bladekindx2" />
+  <levels echeladder="12" pendingSkillPoints="0" xp="4354" nextLevel="5000" />
   <abilities>
     <strength value="36" />
     <constitution value="22" />
@@ -21,12 +21,12 @@
     <item value="Adrenaline Shots" quantity="2" />
     <item value="Painkiller" quantity="1" />
     <item value="Kornla's Poison" quantity="1" />
-    <item value="Smoke Bombs" quantity="3" />
     <item value="New Fiduspawn Collection" quantity="1" />
     <item value="Bombs" quantity="1" />
     <item value="Anime Shades" quantity="1" equipped="true" />
     <item value="Cool Jacket" quantity="1" equipped="true" />
     <item value="DEADLY CORVOS" quantity="1" equipped="true" />
     <item value="Toxin Syringe" quantity="1" />
+    <item value="TROLL SHINOBI outfit" quantity="1" />
   </inventory>
 </player>

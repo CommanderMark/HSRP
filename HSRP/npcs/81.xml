@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="81">
+  <info name="Mirthful Messiah" type="Normal" pineappleOnPizza="false">One of the Mirthful Messiahs</info>
+  <status hp="800" maxhp="800" dead="false" specibus="Jokerkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="70" />
+    <constitution value="40" />
+    <psion value="0" />
+    <fortitude value="60" />
+    <intimidation value="100" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

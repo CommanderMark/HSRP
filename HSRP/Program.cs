@@ -81,7 +81,6 @@ namespace HSRP
         public async Task OnConnect()
         {
             await Client.SetGameAsync("RP Bot");
-            // await Client.GetGuild(Constants.RP_GUILD).LeaveAsync();
         }
 
         public async Task OnReady()

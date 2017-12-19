@@ -23,7 +23,7 @@ namespace HSRP.Commands
             {
                 for (int i = 0; i < msg.Length; i += Constants.DiscordCharLimit)
                 {
-                    string segment = msg.Substring(i, Math.Min(i + Constants.DiscordCharLimit, msg.Length - i));
+                    string segment = msg.Substring(i, Math.Min(Constants.DiscordCharLimit, msg.Length - i));
                     await ReplyStrifeAsync(segment);
                 }
             }
