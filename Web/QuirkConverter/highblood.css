@@ -1,8 +1,13 @@
-td#newSet {
+div.headerTitle
+{
+    font-size: 14pt;
     text-decoration: underline;
 }
 
-div#headerTitle {
-    font-size: 14pt;
-    text-decoration: underline;
+/* Tables */
+table.quirkCol
+{
+    table-layout: fixed;
+    border: 1px solid black;
+    float: left;
 }
