@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Discord.Commands;
 using Discord;
-using System.Xml.Linq;
 using System.Collections.Generic;
 
 namespace HSRP.Commands

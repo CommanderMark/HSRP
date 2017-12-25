@@ -187,7 +187,7 @@ namespace HSRP.Commands
                     return;
                 }
 
-                item.Quantity = (uint)amount;
+                item.Quantity = amount;
                 plyr.Inventory[index] = item;
 
                 plyr.Save();
@@ -225,7 +225,7 @@ namespace HSRP.Commands
                     return;
                 }
 
-                item.Quantity += (uint)amount;
+                item.Quantity += amount;
                 plyr.Inventory[index] = item;
 
                 plyr.Save();
@@ -263,7 +263,7 @@ namespace HSRP.Commands
                     return;
                 }
 
-                item.Quantity -= (uint)amount;
+                item.Quantity -= amount;
                 plyr.Inventory[index] = item;
 
                 plyr.Save();

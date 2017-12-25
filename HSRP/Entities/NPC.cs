@@ -40,7 +40,7 @@ namespace HSRP
         /// <summary>
         /// Buffs or debuffs applied to stats that remain until the end of the strife.
         /// </summary>
-        public AbilitySet Modifiers { get; set; }
+        public AbilitySet PermanentModifiers { get; set; }
 
         /// <summary>
         /// Buffs or debuffs applied to stats that remain for a specified number of turns.
@@ -52,7 +52,7 @@ namespace HSRP
         {
             get
             {
-                AbilitySet aSet = Modifiers;
+                AbilitySet aSet = PermanentModifiers;
                 if (TempMods.Any())
                 {
                     foreach (KeyValuePair<int, AbilitySet> set in TempMods)
@@ -94,7 +94,7 @@ namespace HSRP
         public NPC()
         {
             Abilities = new AbilitySet();
-            Modifiers = new AbilitySet();
+            PermanentModifiers = new AbilitySet();
             TempMods = new Dictionary<int, AbilitySet>();
 
             Name = "";
@@ -136,7 +136,7 @@ namespace HSRP
                             int? turns = XmlToolbox.GetAttributeNullableInt(strifeEle, "turns", null);
                             if (turns == null)
                             {
-                                Modifiers = new AbilitySet(strifeEle);
+                                PermanentModifiers = new AbilitySet(strifeEle);
                             }
                             else
                             {
@@ -177,7 +177,7 @@ namespace HSRP
             if (!TotalAbilities.Equals(Abilities))
             {
                 XElement modifiers = new XElement("modifiers");
-                modifiers.Add(Modifiers.ToXmlWithoutEmpties());
+                modifiers.Add(PermanentModifiers.ToXmlWithoutEmpties());
                 foreach (KeyValuePair<int, AbilitySet> mod in TempMods)
                 {
                     XElement modEle = mod.Value.ToXmlWithoutEmpties();

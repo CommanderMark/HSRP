@@ -9,19 +9,18 @@ namespace HSRP
 
         bool LikesPineappleOnPizza { get; set; }
 
-        AbilitySet Abilities { get; set; }
-        AbilitySet Modifiers { get; set; }
-        Dictionary<int, AbilitySet> TempMods { get; set; }
-        AbilitySet TotalMods { get; }
-        AbilitySet TotalAbilities { get; }
+        AbilitySet BaseAbilities { get; set; }
+        AbilitySet AbilitiesWithModifiers { get; }
+        List<StatusEffect> inflictedEffects { get; set; }
+        List<Move> Moves { get; set; }
 
         int Health { get; set; }
         int MaxHealth { get; set; }
         bool Dead { get; set; }
-        string Specibus { get; set; }
 
+        string Specibus { get; set; }
+        Item EquippedWeapon { get; }
         int DiceRolls { get; }
-        ulong Controller { get; set; }
 
         string Display(bool showMods);
     }

@@ -158,6 +158,10 @@ namespace HSRP
             return ele;
         }
 
+        /// <summary>
+        /// Outputs the abilities to an XML.
+        /// If an ability is set to 0 then it doesn't add it.
+        /// </summary>
         public XElement ToXmlWithoutEmpties()
         {
             XElement ele = new XElement("abilities");

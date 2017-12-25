@@ -29,38 +29,31 @@ namespace HSRP
         public BloodType BloodColor { get; set; }
         public bool LikesPineappleOnPizza { get; set; }
 
-        public AbilitySet Abilities { get; set; }
-        public AbilitySet Modifiers { get; set; }
-        public Dictionary<int, AbilitySet> TempMods { get; set; }
-        public AbilitySet TotalMods
+        public AbilitySet BaseAbilities { get; set; }
+        public AbilitySet AbilitiesWithModifiers
         {
             get
             {
-                AbilitySet aSet = Modifiers;
-                if (TempMods.Any())
-                {
-                    foreach (KeyValuePair<int, AbilitySet> set in TempMods)
-                    {
-                        aSet += set.Value;
-                    }
-                }
-
-                return aSet;
-            }
-        }
-
-        public AbilitySet TotalAbilities
-        {
-            get
-            {
-                return Abilities + TotalMods;
+                // TODO:
+                throw new NullReferenceException("idk what this is called but it's unimplemented.");
             }
         }
 
         public int Health { get; set; }
         public int MaxHealth { get; set; }
         public bool Dead { get; set; }
+
         public string Specibus { get; set; }
+        public Item EquippedWeapon
+        {
+            get
+            {
+                return equippedWeapon < 0
+                    ? null
+                    : Inventory[equippedWeapon];
+            }
+        }
+        private int equippedWeapon { get; set; }
         public int StrifeID { get; set; }
 
         /// <summary>
@@ -97,7 +90,7 @@ namespace HSRP
         public Player()
         {
             Abilities = new AbilitySet();
-            Modifiers = new AbilitySet();
+            PermanentModifiers = new AbilitySet();
             TempMods = new Dictionary<int, AbilitySet>();
             Inventory = new List<Item>();
 
@@ -168,7 +161,7 @@ namespace HSRP
                                 int? turns = XmlToolbox.GetAttributeNullableInt(strifeEle, "turns", null);
                                 if (turns == null)
                                 {
-                                    Modifiers = new AbilitySet(strifeEle);
+                                    PermanentModifiers = new AbilitySet(strifeEle);
                                 }
                                 else
                                 {
@@ -233,7 +226,7 @@ namespace HSRP
             if (StrifeID > 0)
             {
                 XElement strife = new XElement("strife", new XAttribute("id", StrifeID));
-                strife.Add(Modifiers.ToXmlWithoutEmpties());
+                strife.Add(PermanentModifiers.ToXmlWithoutEmpties());
                 foreach (KeyValuePair<int, AbilitySet> mod in TempMods)
                 {
                     XElement modEle = mod.Value.ToXmlWithoutEmpties();

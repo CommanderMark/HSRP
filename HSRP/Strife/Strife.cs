@@ -990,7 +990,7 @@ namespace HSRP
                     {
                         log.AppendLine(Toolbox.GetMessage("speKillFail", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
                         log.AppendLine(Syntax.ToCodeLine(target.Name.ToApostrophe()) + " debuffs were removed.");
-                        target.Modifiers = new AbilitySet();
+                        target.PermanentModifiers = new AbilitySet();
                     }
                 }
             }
@@ -1085,7 +1085,7 @@ namespace HSRP
                     // Permanent modifier.
                     else
                     {
-                        ent.Modifiers += set;
+                        ent.PermanentModifiers += set;
                         log.AppendLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for the remainder of the strife.");
                     }
 
