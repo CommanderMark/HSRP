@@ -1,0 +1,6 @@
+﻿namespace HSRP
+{
+    class Move
+    {
+    }
+}
