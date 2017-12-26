@@ -10,9 +10,11 @@ namespace HSRP
         bool LikesPineappleOnPizza { get; set; }
 
         AbilitySet BaseAbilities { get; set; }
-        AbilitySet AbilitiesWithModifiers { get; }
-        List<StatusEffect> inflictedEffects { get; set; }
+
+        List<StatusEffect> InflictedAilments { get; set; }
         List<Move> Moves { get; set; }
+
+        Events Events { get; set; }
 
         int Health { get; set; }
         int MaxHealth { get; set; }

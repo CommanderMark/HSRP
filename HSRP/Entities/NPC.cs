@@ -35,46 +35,10 @@ namespace HSRP
 
         public bool LikesPineappleOnPizza { get; set; }
 
-        public AbilitySet Abilities { get; set; }
+        public AbilitySet BaseAbilities { get; set; }
 
-        /// <summary>
-        /// Buffs or debuffs applied to stats that remain until the end of the strife.
-        /// </summary>
-        public AbilitySet PermanentModifiers { get; set; }
-
-        /// <summary>
-        /// Buffs or debuffs applied to stats that remain for a specified number of turns.
-        /// The key is the number of turns left until the modifier is removed.
-        /// </summary>
-        public Dictionary<int, AbilitySet> TempMods { get; set; }
-
-        public AbilitySet TotalMods
-        {
-            get
-            {
-                AbilitySet aSet = PermanentModifiers;
-                if (TempMods.Any())
-                {
-                    foreach (KeyValuePair<int, AbilitySet> set in TempMods)
-                    {
-                        aSet += set.Value;
-                    }
-                }
-
-                return aSet;
-            }
-        }
-
-        /// <summary>
-        /// An AbilitySet containing both the character's base ability stats and their modifiers.
-        /// </summary>
-        public AbilitySet TotalAbilities
-        {
-            get
-            {
-                return Abilities + TotalMods;
-            }
-        }
+        public List<StatusEffect> InflictedAilments { get; set; }
+        public List<Move> Moves { get; set; }
 
         public int Health { get; set; }
         public int MaxHealth { get; set; }
@@ -93,9 +57,10 @@ namespace HSRP
 
         public NPC()
         {
-            Abilities = new AbilitySet();
-            PermanentModifiers = new AbilitySet();
-            TempMods = new Dictionary<int, AbilitySet>();
+            BaseAbilities = new AbilitySet();
+
+            InflictedAilments = new List<StatusEffect>();
+            Moves = new List<Move>();
 
             Name = "";
             Description = "";
@@ -127,9 +92,9 @@ namespace HSRP
                         break;
                     
                     case "abilities":
-                        Abilities = new AbilitySet(ele);
+                        BaseAbilities = new AbilitySet(ele);
                         break;
-                    
+                    // TODO: Status effects
                     case "modifiers":
                         foreach (XElement strifeEle in ele.Elements())
                         {
@@ -170,10 +135,10 @@ namespace HSRP
                 new XAttribute("controller", Controller)
                 );
 
-            XElement abilities = Abilities.ToXmlElement();
+            XElement abilities = BaseAbilities.ToXmlElement();
 
             npc.Add(info, status, abilities);
-
+            // TODO: Status effects.
             if (!TotalAbilities.Equals(Abilities))
             {
                 XElement modifiers = new XElement("modifiers");

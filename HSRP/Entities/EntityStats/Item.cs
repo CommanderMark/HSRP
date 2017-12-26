@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Xml.Linq;
 
 namespace HSRP
 {
@@ -6,17 +6,32 @@ namespace HSRP
     {
         public string Name;
         public int Quantity;
-        public int BaseDamage;
 
-        private List<StatusEffect> statusEffects;
+        // TODO: XML events
+        public Events Events;
 
         public Item()
         {
             Name = string.Empty;
             Quantity = 1;
-            BaseDamage = 1;
 
-            statusEffects = new List<StatusEffect>();
+            Events = new Events();
+        }
+
+        public Item(XElement ele) : this()
+        {
+            Name = XmlToolbox.GetAttributeString(ele, "value", string.Empty);
+            Quantity = XmlToolbox.GetAttributeInt(ele, "quantity", 1);
+        }
+
+        public XElement Save(bool equipped)
+        {
+            XElement item = new XElement("item",
+                new XAttribute("value", Name),
+                new XAttribute("quantity", Quantity)
+                );
+
+            return item;
         }
     }
 }

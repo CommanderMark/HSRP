@@ -1,0 +1,21 @@
+﻿<root>
+  <!-- Turns are amount of turns that come after it. -->
+  <ailment name="Debug" canDamage="true" skipTurns="true" controller="23986342789634278964789458989789457894578907" turns="2">
+    <!-- Does between 5% and 15% of the entity's max health in damage. -->
+    <inflictDamage minAmount="5" maxAmount="15" />
+    
+    <!-- Buffs or debuffs. -->
+    <abilities>
+      <strength value="1" />
+      <constitution value="1" />
+      <psion value="1" />
+      <fortitude value="1" />
+      <intimidation value="1" />
+      <persuasion value="-1" />
+    </abilities>
+    
+    <inflictMsg>{0} was inflicted with debug!</inflictMsg>
+    <statusMsg>{0} received {1} damage from debugging!</statusMsg>
+    <endMsg>{0} is no longer debugged!</endMsg>
+  </ailment>
+</root>

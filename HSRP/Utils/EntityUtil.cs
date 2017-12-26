@@ -17,6 +17,38 @@ namespace HSRP
         }
 
         /// <summary>
+        /// Generates an entity-specific message.
+        /// </summary>
+        public static string GetEntityMessage(string msg, params string[] args)
+        {
+            if (args != null)
+            {
+                for (int i = 0; i < args.Length; i++)
+                {
+                    msg = msg.Replace("{" + i + "}", args[i]);
+                }
+            }
+            
+            return msg;
+        }
+
+        public static AbilitySet GetModifiers(this IEntity ent)
+        {
+            AbilitySet uh = new AbilitySet();
+            foreach (StatusEffect sa in ent.InflictedAilments)
+            {
+                uh += sa.Modifiers;
+            }
+
+            return uh;
+        }
+
+        public static AbilitySet GetTotalAbilities(this IEntity ent)
+        {
+            return ent.BaseAbilities + ent.GetModifiers();
+        }
+
+        /// <summary>
         /// Adds a temporary modifier to the entity. If a modifier with that number of turns already exists, add the new modifier to the existing one.
         /// </summary>
         /// <param name="mod">The modifier.</param>

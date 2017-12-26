@@ -1,8 +1,6 @@
 ﻿using Discord.Commands;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.Collections.Generic;
 using System;
 
 namespace HSRP.Commands

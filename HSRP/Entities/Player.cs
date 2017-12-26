@@ -30,14 +30,9 @@ namespace HSRP
         public bool LikesPineappleOnPizza { get; set; }
 
         public AbilitySet BaseAbilities { get; set; }
-        public AbilitySet AbilitiesWithModifiers
-        {
-            get
-            {
-                // TODO:
-                throw new NullReferenceException("idk what this is called but it's unimplemented.");
-            }
-        }
+
+        public List<StatusEffect> InflictedAilments { get; set; }
+        public List<Move> Moves { get; set; }
 
         public int Health { get; set; }
         public int MaxHealth { get; set; }
@@ -59,21 +54,12 @@ namespace HSRP
         /// <summary>
         /// Returns the total damage of the character's equipped items.
         /// </summary>
+        //TODO: this
         public int DiceRolls
         {
             get
             {
-                int dmg = 0;
-                foreach (Item i in Inventory)
-                {
-                    if (i.Equipped && i.Damage > 0)
-                    {
-                        dmg += i.Damage;
-                    }
-                }
-                if (dmg == 0) { dmg = 1; }
-                
-                return dmg;
+                return 1;
             }
         }
         public ulong Controller { get; set; }
@@ -89,16 +75,18 @@ namespace HSRP
 
         public Player()
         {
-            Abilities = new AbilitySet();
-            PermanentModifiers = new AbilitySet();
-            TempMods = new Dictionary<int, AbilitySet>();
+            BaseAbilities = new AbilitySet();
+
+            InflictedAilments = new List<StatusEffect>();
+            Moves = new List<Move>();
+
             Inventory = new List<Item>();
 
             Name = "";
             Specibus = "";
         }
 
-        public Player(Discord.IUser user) : this(user.Id.ToString()) { }
+        public Player(IUser user) : this(user.Id.ToString()) { }
         public Player(ulong ID) : this(ID.ToString()) { }
         public Player(string filePath, bool idOnly = true) : this()
         {
@@ -136,22 +124,19 @@ namespace HSRP
                         break;
 
                     case "abilities":
-                        Abilities = new AbilitySet(ele);
+                        BaseAbilities = new AbilitySet(ele);
                         break;
 
                     case "inventory":
+                        equippedWeapon = XmlToolbox.GetAttributeInt(ele, "equippedWeapon", -1);
                         foreach (XElement item in ele.Elements())
                         {
-                            Item i = new Item();
-                            i.Name = XmlToolbox.GetAttributeString(item, "value", string.Empty);
-                            i.Quantity = XmlToolbox.GetAttributeUnsignedInt(item, "quantity", 1);
-                            i.Damage = XmlToolbox.GetAttributeInt(item, "dmg", 0);
-                            i.Equipped = XmlToolbox.GetAttributeBool(item, "equipped", false);
-                            Inventory.Add(i);
+                            Inventory.Add(new Item(item));
                         }
                         break;
 
                     case "strife":
+                        //TODO: status effects
                         StrifeID = XmlToolbox.GetAttributeInt(ele, "id", 0);
 
                         if (StrifeID > 0)
@@ -202,22 +187,16 @@ namespace HSRP
                 new XAttribute("nextLevel", NextLevelXP)
                 );
 
-            XElement abilities = Abilities.ToXmlElement();
+            XElement abilities = BaseAbilities.ToXmlElement();
 
-            XElement inventory = new XElement("inventory");
+            XElement inventory = new XElement("inventory",
+                new XAttribute("equippedWeapon", equippedWeapon)
+                );
 
-            foreach (Item item in Inventory)
+            for (int i = 0; i < Inventory.Count; i++)
             {
-                XElement ele = new XElement("item", new XAttribute("value", item.Name),
-                    new XAttribute("quantity", item.Quantity));
-                if (item.Damage > 0)
-                {
-                    ele.Add(new XAttribute("dmg", item.Damage));
-                }
-                if (item.Equipped)
-                {
-                    ele.Add(new XAttribute("equipped", item.Equipped));
-                }
+                bool equipped = EquippedWeapon == Inventory[i];
+                XElement ele = Inventory[i].Save(equipped);
                 inventory.Add(ele);
             }
 
@@ -225,6 +204,7 @@ namespace HSRP
 
             if (StrifeID > 0)
             {
+                //TODO: status effects
                 XElement strife = new XElement("strife", new XAttribute("id", StrifeID));
                 strife.Add(PermanentModifiers.ToXmlWithoutEmpties());
                 foreach (KeyValuePair<int, AbilitySet> mod in TempMods)
@@ -265,8 +245,8 @@ namespace HSRP
 
             result.AppendLine("Base Statistics");
             result.AppendLine(showMods
-                ? Abilities.Display(TotalMods)
-                : Abilities.Display());
+                ? BaseAbilities.Display(this.GetModifiers())
+                : BaseAbilities.Display());
 
             return result.ToString();
         }
@@ -276,11 +256,11 @@ namespace HSRP
             string result = "";
             for (int i = 0; i < Inventory.Count; i++)
             {
-                result += Inventory.ElementAt(i).Quantity > 1
+                result += Inventory[i].Quantity > 1
                     ? $"{i} - {Inventory.ElementAt(i).Name} ({Inventory.ElementAt(i).Quantity})"
                     : $"{i} - {Inventory.ElementAt(i).Name}";
 
-                if (Inventory.ElementAt(i).Equipped)
+                if (i == equippedWeapon)
                 {
                     result += " (Equipped)";
                 }
@@ -384,7 +364,7 @@ namespace HSRP
         public void LevelUp()
         {
             Echeladder++;
-            int hp = Toolbox.DiceRoll(1, 6 + Abilities.Constitution);
+            int hp = Toolbox.DiceRoll(1, 6 + BaseAbilities.Constitution);
             MaxHealth += hp;
             Health += hp;
 
@@ -420,7 +400,7 @@ namespace HSRP
             }
             else
             {
-                var guildUsers = await Program.Instance.RpGuild.GetUsersAsync();
+                IReadOnlyCollection<IGuildUser> guildUsers = await Program.Instance.RpGuild.GetUsersAsync();
 
                 // By Username + Discriminator
                 int index = input.LastIndexOf('#');
@@ -443,7 +423,7 @@ namespace HSRP
 
                 // By Username
                 // If there's more then one user with that username respond with a warning.
-                var matchedUsers = guildUsers.Where(x => x.Username.Contains(input, StringComparison.OrdinalIgnoreCase));
+                IEnumerable<IGuildUser> matchedUsers = guildUsers.Where(x => x.Username.Contains(input, StringComparison.OrdinalIgnoreCase));
                 if (matchedUsers.Count() == 1)
                 {
                     IGuildUser user = matchedUsers.FirstOrDefault();

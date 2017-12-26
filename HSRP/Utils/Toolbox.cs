@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Xml.Linq;
 
 namespace HSRP
@@ -11,6 +9,7 @@ namespace HSRP
     public static class Toolbox
     {
         public static Dictionary<string, string[]> Messages;
+        public static Dictionary<string, StatusEffect> StatusEffects;
 
         public static int DiceRoll(int rolls, int dieType = 6)
         {
@@ -84,6 +83,22 @@ namespace HSRP
                 
             }
         }
+
+        public static void UpdateStatusEffects()
+        {
+            StatusEffects = new Dictionary<string, StatusEffect>();
+
+            XDocument doc = XmlToolbox.TryLoadXml(Path.Combine(Dirs.Config, "ailments.xml"));
+            if (doc == null || doc.Root == null)
+            { return; }
+
+            foreach (XElement ele in doc.Root.Elements())
+            {
+                StatusEffect sa = new StatusEffect(ele);
+                StatusEffects.Add(sa.Name, sa);
+            }
+        }
+
         /// <summary>
         /// Generates a message from a specific category.
         /// </summary>
