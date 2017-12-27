@@ -32,6 +32,7 @@ namespace HSRP
         public AbilitySet BaseAbilities { get; set; }
 
         public Dictionary<EventType, Event> Events { get; set; }
+        public string[] Immunities { get; set; }
         public List<StatusEffect> InflictedAilments { get; set; }
         public List<Move> Moves { get; set; }
 
@@ -78,6 +79,7 @@ namespace HSRP
             BaseAbilities = new AbilitySet();
 
             Events = new Dictionary<EventType, Event>();
+            Immunities = null;
             InflictedAilments = new List<StatusEffect>();
             Moves = new List<Move>();
 
@@ -115,6 +117,7 @@ namespace HSRP
                         MaxHealth = XmlToolbox.GetAttributeInt(ele, "maxhp", Health);
                         Dead = XmlToolbox.GetAttributeBool(ele, "dead", false);
                         Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
+                        Immunities = XmlToolbox.GetAttributeStringArray(ele, "immune", new string[0]);
                         break;
 
                     case "levels":
@@ -179,6 +182,10 @@ namespace HSRP
                 new XAttribute("dead", Dead),
                 new XAttribute("specibus", Specibus)
                 );
+            if (Immunities.Length > 0)
+            {
+                status.Add(new XAttribute("immune", string.Join(",", Immunities)));
+            }
 
             XElement levels = new XElement("levels",
                 new XAttribute("echeladder", Echeladder),

@@ -5,5 +5,6 @@ namespace HSRP
     public interface IEventable
     {
         Dictionary<EventType, Event> Events { set; get; }
+        string[] Immunities { get; set; }
     }
 }

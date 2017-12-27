@@ -82,6 +82,38 @@ namespace HSRP
             return value;
         }
 
+        public static string[] GetAttributeStringArray(XElement element, string name, string[] defaultValue)
+        {
+            if (element == null || element.Attribute(name) == null)
+            {
+                return defaultValue;
+            }
+
+            return GetAttributeStringArray(element.Attribute(name), defaultValue);
+        }
+
+        private static string[] GetAttributeStringArray(XAttribute attribute, string[] defaultValue)
+        {
+            if (attribute == null)
+            {
+                return defaultValue;
+            }
+
+            string[] val = defaultValue;
+            try
+            {
+                string[] content = attribute.Value.Split(',');
+                val = content;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("[XML] " + "Error in " + attribute + "! \n" + e);
+                val = defaultValue;
+            }
+
+            return val;
+        }
+
         public static float GetAttributeFloat(XElement element, string name, float defaultValue)
         {
             if (element == null || element.Attribute(name) == null)
@@ -139,27 +171,6 @@ namespace HSRP
             try
             {
                 val = int.Parse(element.Attribute(name).Value);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("[XML] " + "Error in " + element + "! \n" + e);
-            }
-
-            return val;
-        }
-
-        public static uint GetAttributeUnsignedInt(XElement element, string name, uint defaultValue)
-        {
-            if (element == null || element.Attribute(name) == null)
-            {
-                return defaultValue;
-            }
-
-            uint val = defaultValue;
-
-            try
-            {
-                val = uint.Parse(element.Attribute(name).Value);
             }
             catch (Exception e)
             {
@@ -401,23 +412,6 @@ namespace HSRP
         //     }
 
         //     return d[n, m];
-        // }
-
-        // public static string SecondsToReadableTime(float seconds)
-        // {
-        //     if (seconds < 60.0f)
-        //     {
-        //         return (int)seconds + " s";
-        //     }
-        //     else
-        //     {
-        //         int m = (int)(seconds / 60.0f);
-        //         int s = (int)(seconds % 60.0f);
-
-        //         return s == 0 ?
-        //             m + " m" :
-        //             m + " m " + s + " s";
-        //     }
         // }
     }
 }

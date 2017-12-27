@@ -117,6 +117,15 @@ namespace HSRP
         /// <returns>The log of the event.</returns>
         public string ApplyStatusEffect(IEntity ent, IEntity tar, Strife strife)
         {
+            // Are they immune?
+            foreach (string name in ent.Immunities)
+            {
+                if (this.Name.ToLowerInvariant() == name.ToLowerInvariant())
+                {
+                    return $"{Syntax.ToCodeLine(ent.Name)} is immune to \"{Syntax.ToCodeLine(name.ToString())}\"!";
+                }
+            }
+
             // Check that it is not an immediate explosion or invalid.
             if (turns < 0)
             {

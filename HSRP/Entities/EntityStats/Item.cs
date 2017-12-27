@@ -10,6 +10,7 @@ namespace HSRP
 
         // TODO: XML events
         public Dictionary<EventType, Event> Events { set; get; }
+        public string[] Immunities { get; set; }
 
         public Item()
         {
@@ -17,12 +18,14 @@ namespace HSRP
             Quantity = 1;
 
             Events = new Dictionary<EventType, Event>();
+            Immunities = null;
         }
 
         public Item(XElement ele) : this()
         {
             Name = XmlToolbox.GetAttributeString(ele, "value", string.Empty);
             Quantity = XmlToolbox.GetAttributeInt(ele, "quantity", 1);
+            Immunities = XmlToolbox.GetAttributeStringArray(ele, "immune", new string[0]);
         }
 
         public XElement Save(bool equipped)
@@ -31,6 +34,10 @@ namespace HSRP
                 new XAttribute("value", Name),
                 new XAttribute("quantity", Quantity)
                 );
+            if (Immunities.Length > 0)
+            {
+                item.Add(new XAttribute("immune", string.Join(",", Immunities)));
+            }
 
             return item;
         }

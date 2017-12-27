@@ -38,6 +38,7 @@ namespace HSRP
         public AbilitySet BaseAbilities { get; set; }
 
         public Dictionary<EventType, Event> Events { get; set; }
+        public string[] Immunities { get; set; }
         public List<StatusEffect> InflictedAilments { get; set; }
         public List<Move> Moves { get; set; }
 
@@ -59,6 +60,7 @@ namespace HSRP
             BaseAbilities = new AbilitySet();
 
             Events = new Dictionary<EventType, Event>();
+            Immunities = null;
             InflictedAilments = new List<StatusEffect>();
             Moves = new List<Move>();
 
@@ -88,6 +90,7 @@ namespace HSRP
                         Dead = XmlToolbox.GetAttributeBool(ele, "dead", false);
                         Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
                         DiceRolls = XmlToolbox.GetAttributeInt(ele, "diceRolls", 1);
+                        Immunities = XmlToolbox.GetAttributeStringArray(ele, "immune", new string[0]);
                         break;
                     
                     case "abilities":
@@ -123,7 +126,7 @@ namespace HSRP
                 new XAttribute("pineappleOnPizza", LikesPineappleOnPizza),
                 new XText(Description)
                 );
-            
+
             XElement status = new XElement("status",
                 new XAttribute("hp", Health),
                 new XAttribute("maxhp", MaxHealth),
@@ -131,6 +134,10 @@ namespace HSRP
                 new XAttribute("specibus", Specibus),
                 new XAttribute("diceRolls", DiceRolls)
                 );
+            if (Immunities.Length > 0)
+            {
+                status.Add(new XAttribute("immune", string.Join(",", Immunities)));
+            }
 
             XElement abilities = BaseAbilities.ToXmlElement();
             
