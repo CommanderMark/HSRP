@@ -31,6 +31,7 @@ namespace HSRP
 
         public AbilitySet BaseAbilities { get; set; }
 
+        public Dictionary<EventType, Event> Events { get; set; }
         public List<StatusEffect> InflictedAilments { get; set; }
         public List<Move> Moves { get; set; }
 
@@ -77,6 +78,7 @@ namespace HSRP
         {
             BaseAbilities = new AbilitySet();
 
+            Events = new Dictionary<EventType, Event>();
             InflictedAilments = new List<StatusEffect>();
             Moves = new List<Move>();
 

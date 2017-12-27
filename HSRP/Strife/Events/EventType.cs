@@ -1,39 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HSRP
+﻿namespace HSRP
 {
     /// <summary>
-    /// A class for handing event triggers in a strife.
+    /// A class for handing types of event triggers in a strife.
     /// </summary>
-    public class Events
+    public enum EventType
     {
+        NONE,
+
         /// <summary>
         /// Event triggers when the calling entity strikes a hit on another entity.
         /// </summary>
-        public Event OnHit;
+        OnHit,
 
         /// <summary>
         /// Event triggers when the calling entity is attacked by another entity.
         /// </summary>
-        public Event OnAttacked;
+        OnAttacked,
 
         /// <summary>
         /// Event triggers when the calling entity kills another.
         /// </summary>
-        public Event OnKill;
+        OnKill,
 
         /// <summary>
         /// Event triggers when the calling entity dies.
         /// </summary>
-        public Event OnDeath;
+        OnDeath,
 
         /// <summary>
-        /// Event triggers when the calling entity .
+        /// Event triggers when the calling entity is inflicted with a status effect.
         /// </summary>
-        public Dictionary<string, Event> OnStatusEffect;
-
-        public
+        OnStatusEffectInflict
     }
 }

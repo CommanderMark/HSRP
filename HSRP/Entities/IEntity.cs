@@ -2,7 +2,7 @@
 
 namespace HSRP
 {
-    public interface IEntity
+    public interface IEntity : IEventable
     {
         ulong ID { get; set; }
         string Name { get; set; }
@@ -13,8 +13,6 @@ namespace HSRP
 
         List<StatusEffect> InflictedAilments { get; set; }
         List<Move> Moves { get; set; }
-
-        Events Events { get; set; }
 
         int Health { get; set; }
         int MaxHealth { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -11,6 +12,12 @@ namespace HSRP
         public static Dictionary<string, string[]> Messages;
         public static Dictionary<string, StatusEffect> StatusEffects;
 
+        static Toolbox()
+        {
+            UpdateMessages();
+            UpdateStatusEffects();
+        }
+
         public static int DiceRoll(int rolls, int dieType = 6)
         {
             if (rolls < 1 || dieType < 1) { return 1; }
@@ -18,28 +25,39 @@ namespace HSRP
             int total = 0;
             for (int i = 0; i < rolls; i++)
             {
-                total += RandInt(1, dieType, true);
+                total += RandInt(1, dieType + 1);
             }
 
             return total;
         }
 
-        // Random int generator that can output different
-        // numbers in the same tick.
-        private static readonly Random rand = new Random();
-        private static readonly object randLock = new object();
-        public static int RandInt(int min, int max, bool inclusive = false)
+        private static readonly RandomNumberGenerator generator = RandomNumberGenerator.Create();
+        public static int RandInt(int minimumValue, int maximumValue)
         {
-            // Locking allows different numbers per tick.
-            lock (randLock)
-            {
-                return inclusive
-                    ? rand.Next(max - min + 1) + min
-                    : rand.Next(min, max);
-            }
-        }
+            byte[] randomNumber = new byte[1];
 
-        public static int RandInt(int max, bool inclusive = false) => RandInt(0, max, inclusive);
+            generator.GetBytes(randomNumber);
+
+            double asciiValueOfRandomCharacter = Convert.ToDouble(randomNumber[0]);
+
+            // We are using Math.Max, and substracting 0.00000000001, 
+            // to ensure "multiplier" will always be between 0.0 and .99999999999
+            // Otherwise, it's possible for it to be "1", which causes problems in our rounding.
+            double multiplier = Math.Max(0, (asciiValueOfRandomCharacter / 255d) - 0.00000000001d);
+
+            // We need to add one to the range, to allow for the rounding done with Math.Floor
+            float range = maximumValue - minimumValue + 1;
+
+            double randomValueInRange = Math.Floor(multiplier * range);
+
+            return (int) (minimumValue + randomValueInRange);
+        }
+        public static int RandInt(int max) => RandInt(0, max);
+
+        public static float RandFloat(float min, float max)
+        {
+            return RandInt((int) (min * 1000), (int) (max * 1000)) / 1000f;
+        }
 
         /// <summary>
         /// Returns true or false randomly.

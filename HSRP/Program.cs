@@ -90,8 +90,6 @@ namespace HSRP
                 try
                 {
                     Instance.RpGuild = Client.GetGuild(Constants.RP_GUILD) as IGuild;
-                    Toolbox.UpdateMessages();
-                    Toolbox.UpdateStatusEffects();
                 }
                 catch (Exception e)
                 {

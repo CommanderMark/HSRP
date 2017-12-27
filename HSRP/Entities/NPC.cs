@@ -37,14 +37,18 @@ namespace HSRP
 
         public AbilitySet BaseAbilities { get; set; }
 
+        public Dictionary<EventType, Event> Events { get; set; }
         public List<StatusEffect> InflictedAilments { get; set; }
         public List<Move> Moves { get; set; }
 
         public int Health { get; set; }
         public int MaxHealth { get; set; }
         public bool Dead { get; set; }
+
         public string Specibus { get; set; }
-        
+        //TODO: Is this actually needed?
+        public Item EquippedWeapon { get; }
+
         /// <summary>
         /// The amount of times the NPC gets to roll a die for their attack or defense turn.
         /// </summary>
@@ -59,6 +63,7 @@ namespace HSRP
         {
             BaseAbilities = new AbilitySet();
 
+            Events = new Dictionary<EventType, Event>();
             InflictedAilments = new List<StatusEffect>();
             Moves = new List<Move>();
 
