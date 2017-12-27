@@ -687,10 +687,15 @@ namespace HSRP
             log.AppendLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
         }
 
+        // TODO: Check that this works properply both when and when not it is their turn.
         public string Forfeit(ulong id)
         {
             IEntity ent = Entities.FirstOrDefault(x => x.ID == id);
-            if (ent == null) { return null; }
+            if (ent == null)
+            {
+                Console.WriteLine("STRIFE ERROR: ID + \"" + id + "\" wasn't able to forfeit!");
+                return null;
+            }
 
             bool attacker = Attackers.Contains(ent);
             int index = attacker
@@ -699,7 +704,6 @@ namespace HSRP
 
             // Kill 'em.
             LeaveStrife(ent);
-            UpdateTurn();
             
             AddLog();
             return GetLogs();

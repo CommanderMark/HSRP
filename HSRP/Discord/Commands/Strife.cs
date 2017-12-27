@@ -72,7 +72,7 @@ namespace HSRP.Commands
         public async Task Turn()
         {
             Strife strf = Context.GetStrife();
-            await ReplyAsync(strf.UpdateStrife(out Player next));
+            await ReplyAsync(strf.UpdateStrife().Item1);
         }
 
         [Command("forfeit"), InStrife]
@@ -80,7 +80,7 @@ namespace HSRP.Commands
         {
             Strife strf = Context.GetStrife();
             await ReplyStrifeAsync(strf.Forfeit(Context.User.Id));
-            await ReplyStrifeAsync(strf.UpdateStrife(out Player next));
+            await ReplyStrifeAsync(strf.UpdateStrife().Item1);
             // If the strife is no longer active then it was completed this turn. So post logs.
             if (!strf.Active)
             {

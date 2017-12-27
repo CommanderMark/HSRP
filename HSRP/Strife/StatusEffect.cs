@@ -164,7 +164,7 @@ namespace HSRP
             }
 
             ent.InflictedAilments.Add(this);
-            return inflictMsg;
+            return EntityUtil.GetEntityMessage(inflictMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(tar.Name), Syntax.ToCodeLine(this.Name));
         }
 
         /// <summary>
@@ -183,7 +183,12 @@ namespace HSRP
                 float per = Toolbox.RandFloat(minDamagePercentage, maxDamagePercentage);
                 int dmg = (int) Math.Round(ent.MaxHealth * per, MidpointRounding.AwayFromZero);
 
-                msg.AppendLine(EntityUtil.GetEntityMessage(statusMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(dmg.ToString())));
+                msg.AppendLine(EntityUtil.GetEntityMessage(statusMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(dmg.ToString()), Syntax.ToCodeLine(this.Name)));
+            }
+
+            if (skipsTurn)
+            {
+                msg.AppendLine(EntityUtil.GetEntityMessage(statusMsg, Syntax.ToCodeLine(ent.Name), "{1}", Syntax.ToCodeLine(this.Name)));
             }
 
             if (turns == 0 && explodes)
@@ -196,7 +201,7 @@ namespace HSRP
 
             return new Tuple<string, bool, bool>
                 (
-                msg.ToString() + (endEffect ? "\n" + endMsg : string.Empty),
+                msg.ToString() + (endEffect ? "\n" + EntityUtil.GetEntityMessage(endMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(this.Name)) : string.Empty),
                 endEffect,
                 skipsTurn
                 );

@@ -1,6 +1,6 @@
 ﻿<root>
   <!-- Turns are amount of turns that come after it. -->
-  <ailment name="Debug" canDamage="true" skipTurns="true" controller="23986342789634278964789458989789457894578907" turns="2" immune="Debug2,Debug3">
+  <ailment name="Debugging" canDamage="true" skipTurns="true" controller="23986342789634278964789458989789457894578907" turns="2" immune="Debugging2,Debugging3">
     <!-- Does between 5% and 15% of the entity's max health in damage. -->
     <inflictDamage minAmount="0.05" maxAmount="0.15" />
 
@@ -18,8 +18,22 @@
       <persuasion value="2" />
     </abilities>
     
-    <inflictMsg>{0} was inflicted with debug!</inflictMsg>
-    <statusMsg>{0} received {1} damage from debugging!</statusMsg>
-    <endMsg>{0} is no longer debugged!</endMsg>
+    <!-- 
+         {0} - inflicted strifer 
+         {1} - strifer who inflicted it
+         {2} - ailment name
+    -->
+    <inflictMsg>{0} was inflicted with "{2}" by {1}!</inflictMsg>
+    <!-- 
+         {0} - inflicted strifer 
+         {1} - damage
+         {2} - ailment name
+    -->
+    <statusMsg>{0} received {1} damage from "{2}"!</statusMsg>
+    <!-- 
+         {0} - inflicted strifer 
+         {1} - ailment name
+    -->
+    <endMsg>{0} is no longer "{1}"!</endMsg>
   </ailment>
 </root>
