@@ -5,6 +5,14 @@ using HSRP.Commands;
 
 namespace HSRP
 {
+    public enum AbilityOperatorType
+    {
+        Additive,
+        Subtractive,
+        Multiplicative,
+        Divisive
+    }
+
     public class AbilitySet
     {
         [Ability(AbilityType.Physical, true,
@@ -74,6 +82,8 @@ namespace HSRP
             + "for people to perceive you as non-threatening, regardless of your actual motive.")]
         public int Persuasion { get; set; }
 
+        public AbilityOperatorType Oper;
+
         public static AbilitySet operator +(AbilitySet set1, AbilitySet set2)
         {
             AbilitySet newSet = new AbilitySet();
@@ -81,7 +91,27 @@ namespace HSRP
             {
                 int val1 = (int)prop.GetValue(set1);
                 int val2 = (int)prop.GetValue(set2);
-                prop.SetValue(newSet, val1 + val2);
+                int newVal = val1;
+
+                switch (set2.Oper)
+                {
+                    case AbilityOperatorType.Additive:
+                        newVal += val2;
+                        break;
+
+                    case AbilityOperatorType.Subtractive:
+                        newVal -= val2;
+                        break;
+
+                    case AbilityOperatorType.Multiplicative:
+                        newVal *= val2;
+                        break;
+
+                    case AbilityOperatorType.Divisive:
+                        newVal /= val2;
+                        break;
+                }
+                prop.SetValue(newSet, newVal);
             }
 
             return newSet;
@@ -127,6 +157,8 @@ namespace HSRP
         public AbilitySet() { }
         public AbilitySet(XElement ele)
         {
+            Oper = XmlToolbox.GetAttributeEnum(ele, "type", AbilityOperatorType.Additive);
+
             Type type = this.GetType();
             foreach (PropertyInfo property in type.GetProperties())
             {
@@ -140,7 +172,8 @@ namespace HSRP
 
         public XElement ToXmlElement()
         {
-            XElement ele = new XElement("abilities");
+            XElement ele = new XElement("abilities", new XAttribute("type", Oper.ToString()));
+
             Type type = this.GetType();
             foreach (PropertyInfo property in type.GetProperties())
             {
@@ -164,7 +197,8 @@ namespace HSRP
         /// </summary>
         public XElement ToXmlWithoutEmpties()
         {
-            XElement ele = new XElement("abilities");
+            XElement ele = new XElement("abilities", new XAttribute("type", Oper.ToString()));
+
             Type type = this.GetType();
             foreach (PropertyInfo property in type.GetProperties())
             {

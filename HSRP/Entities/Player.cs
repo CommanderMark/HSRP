@@ -63,7 +63,6 @@ namespace HSRP
                 return 1;
             }
         }
-        public ulong Controller { get; set; }
 
         public int Echeladder{ get; private set; }
         public int PendingSkillPointAllocations { get; set; }
@@ -138,21 +137,20 @@ namespace HSRP
                         break;
 
                     case "strife":
-                        //TODO: status effects
+                        //TODO: events
                         StrifeID = XmlToolbox.GetAttributeInt(ele, "id", 0);
 
                         if (StrifeID > 0)
                         {
-                            foreach (XElement strifeEle in ele.Elements())
+                            foreach (XElement strifeEle in ele.Elements("ailment"))
                             {
-                                int? turns = XmlToolbox.GetAttributeNullableInt(strifeEle, "turns", null);
-                                if (turns == null)
+                                string ailName = XmlToolbox.GetAttributeString(strifeEle, "name", string.Empty);
+                                ulong ailController = XmlToolbox.GetAttributeUnsignedLong(strifeEle, "controller", 0);
+                                int ailTurns = XmlToolbox.GetAttributeInt(strifeEle, "turns", 0);
+
+                                if (StatusEffect.TryParse(ailName, out StatusEffect sa, ailController, ailTurns))
                                 {
-                                    PermanentModifiers = new AbilitySet(strifeEle);
-                                }
-                                else
-                                {
-                                    TempMods.Add((int)turns, new AbilitySet(strifeEle));
+                                    InflictedAilments.Add(sa);
                                 }
                             }
                         }
@@ -206,16 +204,15 @@ namespace HSRP
 
             if (StrifeID > 0)
             {
-                //TODO: status effects
+                //TODO: events
                 XElement strife = new XElement("strife", new XAttribute("id", StrifeID));
-                strife.Add(PermanentModifiers.ToXmlWithoutEmpties());
-                foreach (KeyValuePair<int, AbilitySet> mod in TempMods)
-                {
-                    XElement modEle = mod.Value.ToXmlWithoutEmpties();
-                    modEle.Add(new XAttribute("turns", mod.Key));
 
-                    strife.Add(modEle);
+                foreach (StatusEffect sa in InflictedAilments)
+                {
+                    XElement ailEle = sa.Save();
+                    strife.Add(ailEle);
                 }
+
                 player.Add(strife);
             }
 

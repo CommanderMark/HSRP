@@ -9,13 +9,13 @@
     <explosion target="all" damage="0.2" />
     
     <!-- Buffs or debuffs. -->
-    <abilities>
-      <strength value="1" />
-      <constitution value="1" />
-      <psion value="1" />
-      <fortitude value="1" />
-      <intimidation value="1" />
-      <persuasion value="-1" />
+    <abilities type="Multiplicative">
+      <strength value="2" />
+      <constitution value="2" />
+      <psion value="2" />
+      <fortitude value="2" />
+      <intimidation value="2" />
+      <persuasion value="2" />
     </abilities>
     
     <inflictMsg>{0} was inflicted with debug!</inflictMsg>

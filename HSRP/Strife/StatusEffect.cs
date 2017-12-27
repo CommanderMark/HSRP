@@ -45,6 +45,7 @@ namespace HSRP
 
         public StatusEffect(XElement element)
         {
+            Name = XmlToolbox.GetAttributeString(element, "name", string.Empty);
             inflictsDamage = XmlToolbox.GetAttributeBool(element, "canDamage", false);
             skipsTurn = XmlToolbox.GetAttributeBool(element, "skipTurns", false);
             Controller = XmlToolbox.GetAttributeUnsignedLong(element, "controller", 0);
@@ -99,37 +100,10 @@ namespace HSRP
         public XElement Save()
         {
             XElement ailment = new XElement("ailment",
-                new XAttribute("canDamage", inflictsDamage),
-                new XAttribute("skipTurns", skipsTurn),
+                new XAttribute("name", Name),
                 new XAttribute("controller", Controller),
                 new XAttribute("turns", turns)
                 );
-
-            XElement inflictDamage = new XElement("inflictDamage",
-                new XAttribute("minAmount", minDamagePercentage),
-                new XAttribute("maxAmount", maxDamagePercentage)
-                );
-
-            XElement abilities = Modifiers.ToXmlWithoutEmpties();
-
-            XElement inflictMsg = new XElement("inflictMsg",
-                new XText(this.inflictMsg)
-                );
-
-            XElement statusMsg = new XElement("statusMsg",
-                new XText(this.statusMsg)
-                );
-
-            XElement endMsg = new XElement("endMsg",
-                new XText(this.endMsg)
-                );
-
-            ailment.Add(inflictDamage, inflictMsg, statusMsg, endMsg);
-
-            if (!Modifiers.Equals(new AbilitySet()))
-            {
-                ailment.Add(Modifiers);
-            }
 
             return ailment;
         }
@@ -197,7 +171,21 @@ namespace HSRP
                 endEffect,
                 skipsTurn
                 );
+        }
 
+        public static bool TryParse(string name, out StatusEffect sa, ulong controller, int turns)
+        {
+            if (Toolbox.StatusEffects.TryGetValue(name, out StatusEffect ail))
+            {
+                sa = ail.Copy();
+                sa.Controller = controller;
+                sa.turns = turns;
+                return true;
+            }
+
+            Console.WriteLine("STRIFE ERROR: Ailment \"" + name + "\" not found!");
+            sa = null;
+            return false;
         }
     }
 }

@@ -21,7 +21,11 @@ namespace HSRP
                     doc = XDocument.Load(filePath);
                 }
 
-                if (doc.Root == null) return null;
+                if (doc.Root == null)
+                {
+                    return null;
+                }
+
                 return doc;
             }
             catch
@@ -59,20 +63,31 @@ namespace HSRP
 
         public static string GetAttributeString(XElement element, string name, string defaultValue)
         {
-            if (element == null || element.Attribute(name) == null) return defaultValue;
+            if (element == null || element.Attribute(name) == null)
+            {
+                return defaultValue;
+            }
+
             return GetAttributeString(element.Attribute(name), defaultValue);
         }
 
         private static string GetAttributeString(XAttribute attribute, string defaultValue)
         {
             string value = attribute.Value;
-            if (String.IsNullOrEmpty(value)) return defaultValue;
+            if (String.IsNullOrEmpty(value))
+            {
+                return defaultValue;
+            }
+
             return value;
         }
 
         public static float GetAttributeFloat(XElement element, string name, float defaultValue)
         {
-            if (element == null || element.Attribute(name) == null) return defaultValue;
+            if (element == null || element.Attribute(name) == null)
+            {
+                return defaultValue;
+            }
 
             float val = defaultValue;
 
@@ -93,7 +108,10 @@ namespace HSRP
 
         private static float GetAttributeFloat(XAttribute attribute, float defaultValue)
         {
-            if (attribute == null) return defaultValue;
+            if (attribute == null)
+            {
+                return defaultValue;
+            }
 
             float val = defaultValue;
 
@@ -111,7 +129,10 @@ namespace HSRP
 
         public static int GetAttributeInt(XElement element, string name, int defaultValue)
         {
-            if (element == null || element.Attribute(name) == null) return defaultValue;
+            if (element == null || element.Attribute(name) == null)
+            {
+                return defaultValue;
+            }
 
             int val = defaultValue;
 
@@ -127,27 +148,12 @@ namespace HSRP
             return val;
         }
 
-        public static int? GetAttributeNullableInt(XElement element, string name, int? defaultValue)
-        {
-            if (element == null || element.Attribute(name) == null) return defaultValue;
-
-            int? val = defaultValue;
-
-            try
-            {
-                val = int.Parse(element.Attribute(name).Value);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("[XML] " + "Error in " + element + "! \n" + e);
-            }
-
-            return val;
-        }
-
         public static uint GetAttributeUnsignedInt(XElement element, string name, uint defaultValue)
         {
-            if (element == null || element.Attribute(name) == null) return defaultValue;
+            if (element == null || element.Attribute(name) == null)
+            {
+                return defaultValue;
+            }
 
             uint val = defaultValue;
 
@@ -165,7 +171,10 @@ namespace HSRP
 
         public static byte GetAttributeByte(XElement element, string name, byte defaultValue)
         {
-            if (element == null || element.Attribute(name) == null) return defaultValue;
+            if (element == null || element.Attribute(name) == null)
+            {
+                return defaultValue;
+            }
 
             byte val = defaultValue;
 
@@ -183,7 +192,10 @@ namespace HSRP
 
         public static long GetAttributeLong(XElement element, string name, long defaultValue)
         {
-            if (element == null || element.Attribute(name) == null) return defaultValue;
+            if (element == null || element.Attribute(name) == null)
+            {
+                return defaultValue;
+            }
 
             long val = defaultValue;
 
@@ -201,7 +213,10 @@ namespace HSRP
 
         public static ulong GetAttributeUnsignedLong(XElement element, string name, ulong defaultValue)
         {
-            if (element == null || element.Attribute(name) == null) return defaultValue;
+            if (element == null || element.Attribute(name) == null)
+            {
+                return defaultValue;
+            }
 
             ulong val = defaultValue;
 
@@ -219,14 +234,20 @@ namespace HSRP
 
         public static int[] GetAttributeIntArray(XElement element, string name, int[] defaultValue)
         {
-            if (element == null || element.Attribute(name) == null) return defaultValue;
+            if (element == null || element.Attribute(name) == null)
+            {
+                return defaultValue;
+            }
 
             return GetAttributeIntArray(element.Attribute(name), defaultValue);
         }
 
         private static int[] GetAttributeIntArray(XAttribute attribute, int[] defaultValue)
         {
-            if (attribute == null) return defaultValue;
+            if (attribute == null)
+            {
+                return defaultValue;
+            }
 
             int[] val = defaultValue;
             try
@@ -248,14 +269,20 @@ namespace HSRP
 
         public static bool GetAttributeBool(XElement element, string name, bool defaultValue)
         {
-            if (element == null || element.Attribute(name) == null) return defaultValue;
+            if (element == null || element.Attribute(name) == null)
+            {
+                return defaultValue;
+            }
 
             return GetAttributeBool(element.Attribute(name), defaultValue);
         }
 
         private static bool GetAttributeBool(XAttribute attribute, bool defaultValue)
         {
-            if (attribute == null) return defaultValue;
+            if (attribute == null)
+            {
+                return defaultValue;
+            }
 
             string val = attribute.Value.ToLowerInvariant().Trim();
             if (val == "true")
@@ -280,7 +307,10 @@ namespace HSRP
                 throw new ArgumentException("T must be an enumerated type");
             }
 
-            if (element == null || element.Attribute(name) == null) return defaultValue;
+            if (element == null || element.Attribute(name) == null)
+            {
+                return defaultValue;
+            }
 
             T val = defaultValue;
 

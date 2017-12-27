@@ -1064,36 +1064,6 @@ namespace HSRP
             return path;
         }
 
-        private void ApplyTempMod(IEntity ent, string stat, int value, int turns)
-        {
-            AbilitySet set = new AbilitySet();
-            foreach (PropertyInfo prop in set.GetType().GetProperties())
-            {
-                if (prop.Name.Contains(stat, StringComparison.OrdinalIgnoreCase))
-                {
-                    prop.SetValue(set, value);
-                    // Temporary modifier.
-                    if (turns >= 0)
-                    {
-                        ent.AddTempMod(set, turns);
-
-                        string plural = turns == 0
-                            ? "1 turn"
-                            : (turns + 1).ToString() + " turns";
-                        log.AppendLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for {Syntax.ToCodeLine(plural)}.");
-                    }
-                    // Permanent modifier.
-                    else
-                    {
-                        ent.PermanentModifiers += set;
-                        log.AppendLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for the remainder of the strife.");
-                    }
-
-                    return;
-                }
-            }
-        }
-
         public static bool TryCreateStrife(int id, out Strife strife)
         {
             Strife strf = new Strife();

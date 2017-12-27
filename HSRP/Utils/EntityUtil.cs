@@ -47,5 +47,18 @@ namespace HSRP
         {
             return ent.BaseAbilities + ent.GetModifiers();
         }
+
+        public static ulong GetMindController(this IEntity ent)
+        {
+            foreach (StatusEffect sa in ent.InflictedAilments)
+            {
+                if (sa.Controller >= 0)
+                {
+                    return sa.Controller;
+                }
+            }
+
+            return 0;
+        }
     }
 }

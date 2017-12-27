@@ -26,7 +26,7 @@ namespace HSRP
 
             set
             {
-                Title = value;
+                Title = value; 
             }
         }
         
@@ -53,11 +53,6 @@ namespace HSRP
         /// The amount of times the NPC gets to roll a die for their attack or defense turn.
         /// </summary>
         public int DiceRolls { get; set; }
-
-        /// <summary>
-        /// ID of the character controlling this one, if any.
-        /// </summary>
-        public ulong Controller { get; set; }
 
         public NPC()
         {
@@ -93,24 +88,22 @@ namespace HSRP
                         Dead = XmlToolbox.GetAttributeBool(ele, "dead", false);
                         Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
                         DiceRolls = XmlToolbox.GetAttributeInt(ele, "diceRolls", 1);
-                        Controller = XmlToolbox.GetAttributeUnsignedLong(ele, "controller", 0);
                         break;
                     
                     case "abilities":
                         BaseAbilities = new AbilitySet(ele);
                         break;
-                    // TODO: Status effects
-                    case "modifiers":
-                        foreach (XElement strifeEle in ele.Elements())
+                    case "ailments":
+                        //TODO: events
+                        foreach (XElement strifeEle in ele.Elements("ailment"))
                         {
-                            int? turns = XmlToolbox.GetAttributeNullableInt(strifeEle, "turns", null);
-                            if (turns == null)
+                            string ailName = XmlToolbox.GetAttributeString(strifeEle, "name", string.Empty);
+                            ulong ailController = XmlToolbox.GetAttributeUnsignedLong(strifeEle, "controller", 0);
+                            int ailTurns = XmlToolbox.GetAttributeInt(strifeEle, "turns", 0);
+
+                            if (StatusEffect.TryParse(ailName, out StatusEffect sa, ailController, ailTurns))
                             {
-                                PermanentModifiers = new AbilitySet(strifeEle);
-                            }
-                            else
-                            {
-                                TempMods.Add((int)turns, new AbilitySet(strifeEle));
+                                InflictedAilments.Add(sa);
                             }
                         }
                         break;
@@ -136,28 +129,20 @@ namespace HSRP
                 new XAttribute("maxhp", MaxHealth),
                 new XAttribute("dead", Dead),
                 new XAttribute("specibus", Specibus),
-                new XAttribute("diceRolls", DiceRolls),
-                new XAttribute("controller", Controller)
+                new XAttribute("diceRolls", DiceRolls)
                 );
 
             XElement abilities = BaseAbilities.ToXmlElement();
-
-            npc.Add(info, status, abilities);
-            // TODO: Status effects.
-            if (!TotalAbilities.Equals(Abilities))
-            {
-                XElement modifiers = new XElement("modifiers");
-                modifiers.Add(PermanentModifiers.ToXmlWithoutEmpties());
-                foreach (KeyValuePair<int, AbilitySet> mod in TempMods)
-                {
-                    XElement modEle = mod.Value.ToXmlWithoutEmpties();
-                    modEle.Add(new XAttribute("turns", mod.Key));
-
-                    modifiers.Add(modEle);
-                }
-                npc.Add(modifiers);
-            }
             
+            // TODO: events.
+            XElement ailments = new XElement("ailments");
+            foreach (StatusEffect sa in InflictedAilments)
+            {
+                XElement ailEle = sa.Save();
+                ailments.Add(ailEle);
+            }
+
+            npc.Add(info, status, abilities, ailments);
             return npc;
         }
 
@@ -179,8 +164,8 @@ namespace HSRP
 
             result.AppendLine("Base Statistics");
             result.AppendLine(showMods
-                ? Abilities.Display(TotalMods)
-                : Abilities.Display());
+                ? BaseAbilities.Display(this.GetModifiers())
+                : BaseAbilities.Display());
 
             return result.ToString();
         }
