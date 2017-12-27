@@ -36,6 +36,7 @@ namespace HSRP
         // Misc. general status effect stuff.
         public string Name = string.Empty;
         private int turns = 0;
+        public string[] Immunities;
         private string inflictMsg = string.Empty;
         private string statusMsg = string.Empty;
         private string endMsg = string.Empty;
@@ -51,6 +52,7 @@ namespace HSRP
             Controller = XmlToolbox.GetAttributeUnsignedLong(element, "controller", 0);
             explodes = XmlToolbox.GetAttributeBool(element, "explodes", false);
             turns = XmlToolbox.GetAttributeInt(element, "turns", 0);
+            Immunities = XmlToolbox.GetAttributeStringArray(element, "immune", new string[0]);
 
             foreach (XElement ele in element.Elements())
             {
@@ -123,6 +125,22 @@ namespace HSRP
                 if (this.Name.ToLowerInvariant() == name.ToLowerInvariant())
                 {
                     return $"{Syntax.ToCodeLine(ent.Name)} is immune to \"{Syntax.ToCodeLine(name.ToString())}\"!";
+                }
+            }
+
+            // Do they already have this status effect or posses one which makes them immune?
+            foreach (StatusEffect sa in ent.InflictedAilments)
+            {
+                if (this.Name.ToLowerInvariant() == sa.Name.ToLowerInvariant())
+                {
+                    return $"{Syntax.ToCodeLine(ent.Name)} is already \"{Syntax.ToCodeLine(sa.Name.ToString())}\"!";
+                }
+                foreach (string name in sa.Immunities)
+                {
+                    if (this.Name.ToLowerInvariant() == name.ToLowerInvariant())
+                    {
+                        return $"{Syntax.ToCodeLine(ent.Name)} is immune to \"{Syntax.ToCodeLine(name.ToString())}\"!";
+                    }
                 }
             }
 

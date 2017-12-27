@@ -1,6 +1,6 @@
 ﻿<root>
   <!-- Turns are amount of turns that come after it. -->
-  <ailment name="Debug" canDamage="true" skipTurns="true" controller="23986342789634278964789458989789457894578907" turns="2">
+  <ailment name="Debug" canDamage="true" skipTurns="true" controller="23986342789634278964789458989789457894578907" turns="2" immune="Debug2,Debug3">
     <!-- Does between 5% and 15% of the entity's max health in damage. -->
     <inflictDamage minAmount="0.05" maxAmount="0.15" />
 
