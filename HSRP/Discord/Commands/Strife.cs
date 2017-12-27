@@ -33,7 +33,24 @@ namespace HSRP.Commands
             if (strf.ValidateTurn(sa, index, attackAtks, plyr, out string reason))
             {
                 await ReplyStrifeAsync(strf.TakeTurn(sa, index, attackAtks));
-                await ReplyStrifeSegmentAsync(strf.UpdateStrife(out Player next));
+
+                // Keep updating the strife until a human is next.
+                bool humanNext = false;
+                string msg = string.Empty;
+                while (!humanNext)
+                {
+                    // TODO: Add delay?
+                    if (msg.Length >= Constants.DiscordCharLimit)
+                    {
+                        await ReplyStrifeAsync(msg);
+                        msg = string.Empty;
+                    }
+                    
+                    Tuple<string, bool> tup = strf.UpdateStrife();
+                    msg += "\n" + tup.Item1;
+                    humanNext = tup.Item2;
+                }
+
                 // If the strife is no longer active then it was completed this turn. So post logs.
                 if (!strf.Active)
                 {
