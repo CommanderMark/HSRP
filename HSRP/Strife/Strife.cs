@@ -321,39 +321,39 @@ namespace HSRP
         }
 
         /// <summary>
-        /// Updates the strife by checking if any AI-controlled characters need to take their turn.
+        /// Checks who the next strifer is. If they're an AI then run through their turn. If the next one is dead then cycle through until the first non-dead strifer.
         /// </summary>
-        /// <param name="ntty">Returns the character whose turn is the next non-AI one.</param>
-        /// <returns>A string containing the log of events that transpired when updating the strife.</returns>
-        public string UpdateStrife(out Player ntty, bool returnEmp = false)
+        /// <returns>A tuple containing the log of events that transpired when updating the strife and a boolean stating whether or not a human strifer is next.</returns>
+        public Tuple<string, bool> UpdateStrife()
         {
             // Check who the next user is.
             IEntity turner = CurrentEntity;
+
+            // This disassociates the one doing the turn from the one who actually controls them.
             CurrentTurner = turner;
+
+            bool humanNext = true;
 
             // Is the strife still going on?
             if (!Active)
             {
-                ntty = null;
-                return returnEmp ? string.Empty : GetLogs();
+                return new Tuple<string, bool>(GetLogs(), true);
             }
 
             // Are all the members of one team dead?
-            if (Attackers.All(x => x.Dead || (x.Controller > 0 && Targets.Any(y => y.ID == x.Controller))))
+            if (Attackers.All(x => x.Dead))
             {
                 log.AppendLine("Attackers have been defeated.");
                 EndStrife();
-
-                ntty = null;
-                return returnEmp ? string.Empty : GetLogs();
+                
+                return new Tuple<string, bool>(GetLogs(), true);
             }
-            if (Targets.All(x => x.Dead || (x.Controller > 0 && Attackers.Any(y => y.ID == x.Controller))))
+            if (Targets.All(x => x.Dead))
             {
                 log.AppendLine("Targets have been defeated.");
                 EndStrife();
-
-                ntty = null;
-                return returnEmp ? string.Empty : GetLogs();
+                
+                return new Tuple<string, bool>(GetLogs(), true);
             }
 
             // Update turns. Sorry you have to see this.
@@ -363,12 +363,13 @@ namespace HSRP
             }
 
             // Are they being mind-controlled?
-            if (turner.Controller > 0)
+            ulong controller = turner.GetMindController();
+            if (controller > 0)
             {
                 bool match = false;
                 foreach (IEntity ent in Entities)
                 {
-                    if (turner.Controller == ent.ID && !ent.Dead && ent.Controller <= 0) 
+                    if (controller == ent.ID && !ent.Dead && ent.GetMindController() <= 0) 
                     {
                         log.AppendLine($"{Syntax.ToCodeLine(turner.Name)}, controlled by {Syntax.ToCodeLine(ent.Name)}, is taking their turn!");
                         CurrentTurner = ent;
@@ -380,7 +381,7 @@ namespace HSRP
                 if (!match)
                 {
                     log.AppendLine($"{Syntax.ToCodeLine(turner.Name)} is no longer controlled!");
-                    turner.Controller = 0;
+                    StatusEffect.RemoveStatusEffect(turner, Constants.MIND_CONTROL_AIL);
                 }
 
                 AddLog();
@@ -389,10 +390,8 @@ namespace HSRP
                 if (CurrentTurner is NPC)
                 {
                     TakeAITurn();
-                    UpdateStrife(out Player ent, true);
-                    CurrentTurner = ent;
-
                     AddLog();
+                    humanNext = false;
                 }
             }
             // Not mind-controlled.
@@ -405,16 +404,13 @@ namespace HSRP
                 if (turner is NPC)
                 {
                     TakeAITurn();
-                    UpdateStrife(out Player ent, true);
-                    CurrentTurner = ent;
+                    humanNext = false;
                 }
 
                 AddLog();
             }
 
-            ntty = (Player)CurrentTurner;
-
-            return returnEmp ? string.Empty : GetLogs();
+            return new Tuple<string, bool>(GetLogs(), humanNext);
         }
 
         private void UpdateTurn()
@@ -510,7 +506,7 @@ namespace HSRP
             }
 
             // Are they trying to mind-control while mind-controlling?
-            if (attacker.Controller > 0 && action == StrifeAction.MindControl)
+            if (attacker.GetMindController() > 0 && action == StrifeAction.MindControl)
             {
                 reason = "Invalid attack. Cannot mind-control while controlling someone else.";
                 return false;

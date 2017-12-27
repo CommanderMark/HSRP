@@ -28,6 +28,9 @@
 
         public const ulong TEST_STRIFE_CHANNEL = 343972292730028042;
         public const ulong RP_STRIFE_CHANNEL = 351522810008436736;
+
+        // Ailments.
+        public const string MIND_CONTROL_AIL = "MindControl";
     }
 
     public static class Dirs

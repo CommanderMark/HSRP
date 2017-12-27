@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
@@ -198,6 +200,22 @@ namespace HSRP
                 endEffect,
                 skipsTurn
                 );
+        }
+
+        public static string RemoveStatusEffect(IEntity ent, string name)
+        {
+            StatusEffect sa = ent.InflictedAilments.FirstOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
+
+            if (sa == null)
+            {
+                Console.WriteLine("STRIFE ERROR: Attemted to remove ailment \"" + name + "\" from user \"" + ent.Name + "\" who did not have it.");
+                return string.Empty;
+            }
+
+            string msg = sa.endMsg;
+            ent.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
+
+            return msg;
         }
 
         public static bool TryParse(string name, out StatusEffect sa, ulong controller, int turns)
