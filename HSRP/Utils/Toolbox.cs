@@ -164,7 +164,7 @@ namespace HSRP
 
         public static string FirstCharUpper(this string text)
         {
-            return text.Substring(0, 1).ToUpper() + text.Substring(1, text.Length - 1).ToLower();
+            return char.ToUpper(text[0]) + text.Substring(1).ToLower();
         }
 
         public static bool Contains(this string text, string value, StringComparison stringComparison)

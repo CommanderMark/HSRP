@@ -104,7 +104,7 @@ namespace HSRP
 
                     case "message":
                     {
-                        message = XmlToolbox.ElementInnerText(ele);
+                        message = ele.ElementInnerText();
                     }
                     break;
                 }
@@ -128,8 +128,8 @@ namespace HSRP
                 );
 
             eventEle.Add(inflictDamage, healDamage);
-            
-            foreach(Tuple<TargetType, string> tup in statusEffects)
+
+            foreach (Tuple<TargetType, string> tup in statusEffects)
             {
                 eventEle.Add(new XElement("ailment",
                                           new XAttribute("name", tup.Item2),

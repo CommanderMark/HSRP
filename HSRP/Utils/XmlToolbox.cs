@@ -61,7 +61,7 @@ namespace HSRP
             }
         }
 
-        public static string GetAttributeString(XElement element, string name, string defaultValue)
+        public static string GetAttributeString(this XElement element, string name, string defaultValue)
         {
             if (element == null || element.Attribute(name) == null)
             {
@@ -82,7 +82,7 @@ namespace HSRP
             return value;
         }
 
-        public static string[] GetAttributeStringArray(XElement element, string name, string[] defaultValue)
+        public static string[] GetAttributeStringArray(this XElement element, string name, string[] defaultValue)
         {
             if (element == null || element.Attribute(name) == null)
             {
@@ -114,7 +114,7 @@ namespace HSRP
             return val;
         }
 
-        public static float GetAttributeFloat(XElement element, string name, float defaultValue)
+        public static float GetAttributeFloat(this XElement element, string name, float defaultValue)
         {
             if (element == null || element.Attribute(name) == null)
             {
@@ -159,7 +159,7 @@ namespace HSRP
             return val;
         }
 
-        public static int GetAttributeInt(XElement element, string name, int defaultValue)
+        public static int GetAttributeInt(this XElement element, string name, int defaultValue)
         {
             if (element == null || element.Attribute(name) == null)
             {
@@ -180,7 +180,7 @@ namespace HSRP
             return val;
         }
 
-        public static byte GetAttributeByte(XElement element, string name, byte defaultValue)
+        public static byte GetAttributeByte(this XElement element, string name, byte defaultValue)
         {
             if (element == null || element.Attribute(name) == null)
             {
@@ -201,7 +201,7 @@ namespace HSRP
             return val;
         }
 
-        public static long GetAttributeLong(XElement element, string name, long defaultValue)
+        public static long GetAttributeLong(this XElement element, string name, long defaultValue)
         {
             if (element == null || element.Attribute(name) == null)
             {
@@ -222,7 +222,7 @@ namespace HSRP
             return val;
         }
 
-        public static ulong GetAttributeUnsignedLong(XElement element, string name, ulong defaultValue)
+        public static ulong GetAttributeUnsignedLong(this XElement element, string name, ulong defaultValue)
         {
             if (element == null || element.Attribute(name) == null)
             {
@@ -243,7 +243,7 @@ namespace HSRP
             return val;
         }
 
-        public static int[] GetAttributeIntArray(XElement element, string name, int[] defaultValue)
+        public static int[] GetAttributeIntArray(this XElement element, string name, int[] defaultValue)
         {
             if (element == null || element.Attribute(name) == null)
             {
@@ -278,7 +278,7 @@ namespace HSRP
             return val;
         }
 
-        public static bool GetAttributeBool(XElement element, string name, bool defaultValue)
+        public static bool GetAttributeBool(this XElement element, string name, bool defaultValue)
         {
             if (element == null || element.Attribute(name) == null)
             {
@@ -311,7 +311,7 @@ namespace HSRP
             }
         }
 
-        public static T GetAttributeEnum<T>(XElement element, string name, T defaultValue) where T : struct, IConvertible
+        public static T GetAttributeEnum<T>(this XElement element, string name, T defaultValue) where T : struct, IConvertible
         {
             if (!typeof(T).GetTypeInfo().IsEnum) 
             {
