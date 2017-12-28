@@ -25,11 +25,6 @@
         /// <summary>
         /// Event triggers when the calling entity dies.
         /// </summary>
-        OnDeath,
-
-        /// <summary>
-        /// Event triggers when the calling entity is inflicted with a status effect.
-        /// </summary>
-        OnStatusEffectInflict
+        OnDeath
     }
 }

@@ -1,11 +1,13 @@
 ﻿<events>
-  <event trigger="OnHit">
+  <event trigger="OnHit" probability="0.5">
     <!-- Damages the target for 5% of their max health. -->
     <inflictDamage amount="0.05" type="Target" />
     <!-- Heals self for 5% of their max health. -->
     <healDamage amount="0.05" type="Self" />
 
-    <ailment name="AIDS" />
+    <ailment name="AIDS" type="Target" />
+    <cure name="AIDS" type="Self" />
+    
     <!-- 
          {0} - strifer who had the event attached to them.
          {1} - strifer who is being targeted

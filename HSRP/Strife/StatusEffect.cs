@@ -6,14 +6,6 @@ using System.Xml.Linq;
 
 namespace HSRP
 {
-    public enum ExplosionType
-    {
-        NONE,
-        Oppose,
-        Same,
-        All
-    }
-    
     public class StatusEffect
     {
         // Inflict damage stuff.
@@ -29,16 +21,17 @@ namespace HSRP
 
         // Explosion
         private bool explodes = false;
-        private ExplosionType explosionTarget = ExplosionType.NONE;
+        private TargetType explosionTarget = TargetType.Self;
         private float explosionDamage = 0f;
 
         // Stat buffs/debuffs.
         public AbilitySet Modifiers = new AbilitySet();
 
+        public string[] Immunities;
+
         // Misc. general status effect stuff.
         public string Name = string.Empty;
         private int turns = 0;
-        public string[] Immunities;
         private string inflictMsg = string.Empty;
         private string statusMsg = string.Empty;
         private string endMsg = string.Empty;
@@ -69,7 +62,7 @@ namespace HSRP
 
                     case "explosion":
                     {
-                        explosionTarget = XmlToolbox.GetAttributeEnum(ele, "target", ExplosionType.NONE);
+                        explosionTarget = XmlToolbox.GetAttributeEnum(ele, "target", TargetType.Self);
                         explosionDamage = XmlToolbox.GetAttributeFloat(element, "damage", 0f);
                     }
                     break;

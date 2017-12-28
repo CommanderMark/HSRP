@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HSRP.Strife
+namespace HSRP
 {
     [Flags]
     public enum TargetType
