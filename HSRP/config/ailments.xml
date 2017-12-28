@@ -9,7 +9,7 @@
     <explosion target="all" damage="0.2" />
     
     <!-- Buffs or debuffs. -->
-    <abilities type="Multiplicative">
+    <abilities type="Multiplication">
       <strength value="2" />
       <constitution value="2" />
       <psion value="2" />

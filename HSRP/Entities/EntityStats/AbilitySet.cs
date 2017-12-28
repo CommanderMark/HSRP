@@ -7,10 +7,10 @@ namespace HSRP
 {
     public enum AbilityOperatorType
     {
-        Additive,
-        Subtractive,
-        Multiplicative,
-        Divisive
+        Addition,
+        Subtraction,
+        Multiplication,
+        Division
     }
 
     public class AbilitySet
@@ -95,19 +95,19 @@ namespace HSRP
 
                 switch (set2.Oper)
                 {
-                    case AbilityOperatorType.Additive:
+                    case AbilityOperatorType.Addition:
                         newVal += val2;
                         break;
 
-                    case AbilityOperatorType.Subtractive:
+                    case AbilityOperatorType.Subtraction:
                         newVal -= val2;
                         break;
 
-                    case AbilityOperatorType.Multiplicative:
+                    case AbilityOperatorType.Multiplication:
                         newVal *= val2;
                         break;
 
-                    case AbilityOperatorType.Divisive:
+                    case AbilityOperatorType.Division:
                         newVal /= val2;
                         break;
                 }
@@ -157,7 +157,7 @@ namespace HSRP
         public AbilitySet() { }
         public AbilitySet(XElement ele)
         {
-            Oper = XmlToolbox.GetAttributeEnum(ele, "type", AbilityOperatorType.Additive);
+            Oper = XmlToolbox.GetAttributeEnum(ele, "type", AbilityOperatorType.Addition);
 
             Type type = this.GetType();
             foreach (PropertyInfo property in type.GetProperties())

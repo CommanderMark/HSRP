@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
@@ -69,19 +68,19 @@ namespace HSRP
 
                     case "inflictMsg":
                     {
-                        inflictMsg = XmlToolbox.ElementInnerText(ele);
+                        inflictMsg = ele.ElementInnerText();
                     }
                     break;
 
                     case "statusMsg":
                     {
-                        statusMsg = XmlToolbox.ElementInnerText(ele);
+                        statusMsg = ele.ElementInnerText();
                     }
                     break;
 
                     case "endMsg":
                     {
-                        endMsg = XmlToolbox.ElementInnerText(ele);
+                        endMsg = ele.ElementInnerText();
                     }
                     break;
 
@@ -145,7 +144,7 @@ namespace HSRP
                 if (!explodes)
                 {
                     System.Console.WriteLine("STRIFE ERROR: invalid turn count!"
-                        + " (Name: " + Name + ", TurnCount: " + turns +maxDamagePercentage + ")");
+                        + " (Name: " + Name + ", TurnCount: " + turns + maxDamagePercentage + ")");
 
                     return string.Empty;
                 }
@@ -174,7 +173,7 @@ namespace HSRP
             {
                 // Pick a value to inflict.
                 float per = Toolbox.RandFloat(minDamagePercentage, maxDamagePercentage);
-                int dmg = (int) Math.Round(ent.MaxHealth * per, MidpointRounding.AwayFromZero);
+                int dmg = ent.InflictDamageByPercentage(per);
 
                 msg.AppendLine(EntityUtil.GetEntityMessage(statusMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(dmg.ToString()), Syntax.ToCodeLine(this.Name)));
             }

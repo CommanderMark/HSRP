@@ -121,6 +121,38 @@ namespace HSRP
                 new XAttribute("amount", damageAmount),
                 new XAttribute("type", damageTarget.ToString())
                 );
+
+            XElement healDamage = new XElement("healDamage",
+                new XAttribute("amount", healAmount),
+                new XAttribute("type", healTarget.ToString())
+                );
+
+            eventEle.Add(inflictDamage, healDamage);
+            
+            foreach(Tuple<TargetType, string> tup in statusEffects)
+            {
+                eventEle.Add(new XElement("ailment",
+                                          new XAttribute("name", tup.Item2),
+                                          new XAttribute("type", tup.Item1.ToString())
+                                         )
+                            );
+            }
+
+            foreach (Tuple<TargetType, string> tup in removeEffects)
+            {
+                eventEle.Add(new XElement("cure",
+                                          new XAttribute("name", tup.Item2),
+                                          new XAttribute("type", tup.Item1.ToString())
+                                         )
+                            );
+            }
+
+            XElement msg = new XElement("message",
+                                        new XText(message)
+                                       );
+            eventEle.Add(msg);
+
+            return eventEle;
         }
     }
 }

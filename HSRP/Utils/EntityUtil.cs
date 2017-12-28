@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace HSRP
@@ -14,6 +15,18 @@ namespace HSRP
         {
             ent.Health -= amount;
             return ent.Health <= 0;
+        }
+
+        /// <summary>
+        /// Inflicts a specified amount of damage on the entity.
+        /// Amount of damage is based on a percentage multiplied by their max health to calculate damage.
+        /// </summary>
+        public static int InflictDamageByPercentage(this IEntity ent, float percentage)
+        {
+            int damage = (int)Math.Round(ent.MaxHealth * percentage, MidpointRounding.AwayFromZero);
+            ent.Health -= damage;
+
+            return damage;
         }
 
         /// <summary>
