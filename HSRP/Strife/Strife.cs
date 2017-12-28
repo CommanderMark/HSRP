@@ -238,9 +238,9 @@ namespace HSRP
             }
             
             XElement logs = new XElement("logs", new XAttribute("posted", postedLogs));
-            foreach (string log in Logs)
+            foreach (string logStr in Logs)
             {
-                logs.Add(new XElement("log", new XText(log)));
+                logs.Add(new XElement("log", new XText(logStr)));
             }
 
             strife.Add(status, attackers, targets, logs);
@@ -541,6 +541,7 @@ namespace HSRP
         /// <returns>A string containing the log of events that transpired when taking this turn.</returns>
         public string TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers)
         {
+            // TODO: Add status effect updating and skip turns.
             IEntity attacker = CurrentEntity;
             IEntity target = GetTarget(targetNum, targetingAttackers);
             // If it's an NPC then don't update the logs. Unless they're mind-controlled.
