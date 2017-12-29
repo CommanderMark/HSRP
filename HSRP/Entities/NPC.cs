@@ -33,7 +33,7 @@ namespace HSRP
         public NPCType Type { get; set; }
         
         //TODO: Is this actually needed?
-        public override Item EquippedWeapon { get; }
+        public override Item EquippedWeapon { set; get; }
 
         public NPC()
         {
@@ -175,7 +175,7 @@ namespace HSRP
 
             result.AppendLine("Base Statistics");
             result.AppendLine(showMods
-                ? BaseAbilities.Display(this.GetModifiers())
+                ? BaseAbilities.Display(this.GetTotalAbilities())
                 : BaseAbilities.Display());
 
             return result.ToString();

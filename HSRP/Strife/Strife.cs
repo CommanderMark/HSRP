@@ -50,7 +50,7 @@ namespace HSRP
         /// <summary>
         /// Returns the entity who is currently ready for their turn.
         /// </summary>
-        public IEntity CurrentEntity
+        public Entity CurrentEntity
         {
             get
             {
@@ -69,7 +69,7 @@ namespace HSRP
         /// <summary>
         /// The user who is responsible for the next turn.
         /// </summary>
-        private IEntity CurrentTurner;
+        private Entity CurrentTurner;
 
         /// <summary>
         /// Gets the entity being targeted based on the inputted values.
@@ -77,7 +77,7 @@ namespace HSRP
         /// <param name="targetNum">The index of the user being targeted.</param>
         /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
         /// <returns>The target entity.</returns>
-        public IEntity GetTarget(int targetNum, bool targetingAttackers)
+        public Entity GetTarget(int targetNum, bool targetingAttackers)
         {
             if (targetingAttackers)
             {
@@ -92,8 +92,8 @@ namespace HSRP
         private Strife()
         {
             Logs = new List<string>();
-            Attackers = new List<IEntity>();
-            Targets = new List<IEntity>();
+            Attackers = new List<Entity>();
+            Targets = new List<Entity>();
         }
 
         public Strife(string filePath, bool idOnly = true) : this()
@@ -181,7 +181,7 @@ namespace HSRP
             }
 
             ulong id = XmlToolbox.GetAttributeUnsignedLong(doc.Root, "currentTurn", 0);
-            foreach (IEntity ent in Entities)
+            foreach (Entity ent in Entities)
             {
                 if (id == ent.ID)
                 {
@@ -210,7 +210,7 @@ namespace HSRP
                 );
 
             XElement attackers = new XElement("attackers");
-            foreach (IEntity ent in Attackers)
+            foreach (Entity ent in Attackers)
             {
                 if (ent is Player plyr)
                 {
@@ -224,7 +224,7 @@ namespace HSRP
             }
 
             XElement targets = new XElement("targets");
-            foreach (IEntity ent in Targets)
+            foreach (Entity ent in Targets)
             {
                 if (ent is Player plyr)
                 {
@@ -260,7 +260,7 @@ namespace HSRP
             StringBuilder txt = new StringBuilder("Team A:\n");
             for (int i = 0; i < Attackers.Count; i++)
             {
-                IEntity ent = Attackers[i];
+                Entity ent = Attackers[i];
                 string usr = $"{i} - {ent.Name} - {ent.Health}/{ent.MaxHealth}";
                 if (ent.Dead)
                 {
@@ -272,7 +272,7 @@ namespace HSRP
             txt.AppendLine("\nTeam T: ");
             for (int i = 0; i < Targets.Count; i++)
             {
-                IEntity ent = Targets[i];
+                Entity ent = Targets[i];
                 string usr = $"{i} - {ent.Name} - {ent.Health}/{ent.MaxHealth}";
                 if (ent.Dead)
                 {
@@ -298,12 +298,12 @@ namespace HSRP
 
             // Add list of users to log but skip it when posting the logs as that's posted separately.
             Logs.Clear();
-            log.Append(Display());
+            Log.Append(Display());
             AddLog();
             postedLogs = 1;
 
             // Notify any player involved.
-            foreach (IEntity ent in Entities)
+            foreach (Entity ent in Entities)
             {
                 if (ent is Player plyr)
                 {
@@ -327,7 +327,7 @@ namespace HSRP
         public Tuple<string, bool> UpdateStrife()
         {
             // Check who the next user is.
-            IEntity turner = CurrentEntity;
+            Entity turner = CurrentEntity;
 
             // This disassociates the one doing the turn from the one who actually controls them.
             CurrentTurner = turner;
@@ -343,14 +343,14 @@ namespace HSRP
             // Are all the members of one team dead?
             if (Attackers.All(x => x.Dead))
             {
-                log.AppendLine("Attackers have been defeated.");
+                Log.AppendLine("Attackers have been defeated.");
                 EndStrife();
                 
                 return new Tuple<string, bool>(GetLogs(), true);
             }
             if (Targets.All(x => x.Dead))
             {
-                log.AppendLine("Targets have been defeated.");
+                Log.AppendLine("Targets have been defeated.");
                 EndStrife();
                 
                 return new Tuple<string, bool>(GetLogs(), true);
@@ -367,11 +367,11 @@ namespace HSRP
             if (controller > 0)
             {
                 bool match = false;
-                foreach (IEntity ent in Entities)
+                foreach (Entity ent in Entities)
                 {
                     if (controller == ent.ID && !ent.Dead && ent.GetMindController() <= 0) 
                     {
-                        log.AppendLine($"{Syntax.ToCodeLine(turner.Name)}, controlled by {Syntax.ToCodeLine(ent.Name)}, is taking their turn!");
+                        Log.AppendLine($"{Syntax.ToCodeLine(turner.Name)}, controlled by {Syntax.ToCodeLine(ent.Name)}, is taking their turn!");
                         CurrentTurner = ent;
                         match = true;
                         break;
@@ -380,7 +380,7 @@ namespace HSRP
                 // Their controller is either dead or being mind-controlled themselves.
                 if (!match)
                 {
-                    log.AppendLine($"{Syntax.ToCodeLine(turner.Name)} is no longer controlled!");
+                    Log.AppendLine($"{Syntax.ToCodeLine(turner.Name)} is no longer controlled!");
                     StatusEffect.RemoveStatusEffect(turner, Constants.MIND_CONTROL_AIL);
                 }
 
@@ -399,7 +399,7 @@ namespace HSRP
             {
                 AddLog();
 
-                log.AppendLine($"{Syntax.ToCodeLine(turner.Name)} is taking their turn!");
+                Log.AppendLine($"{Syntax.ToCodeLine(turner.Name)} is taking their turn!");
                 // AI is taking a turn, do that until a human is found.
                 if (turner is NPC)
                 {
@@ -429,7 +429,7 @@ namespace HSRP
                         turn = 0;
                         AddLog();
 
-                        log.AppendLine("Targets are now taking their turns.");
+                        Log.AppendLine("Targets are now taking their turns.");
                         notValidTurner = Targets[turn].Dead;
                     }
                     else
@@ -446,7 +446,7 @@ namespace HSRP
                         turn = 0;
                         AddLog();
 
-                        log.AppendLine("Attackers are now taking their turns.");
+                        Log.AppendLine("Attackers are now taking their turns.");
                         notValidTurner = Attackers[turn].Dead;
                     }
                     else
@@ -471,8 +471,8 @@ namespace HSRP
         /// <returns>Whether or not the action is valid.</returns>
         public bool ValidateTurn(StrifeAction action, int targetNum, bool targetingAttackers, Player plyr, out string reason)
         {
-            IEntity attacker = CurrentEntity;
-            IEntity target = GetTarget(targetNum, targetingAttackers);
+            Entity attacker = CurrentEntity;
+            Entity target = GetTarget(targetNum, targetingAttackers);
 
             NPC npcAtk = attacker as NPC;
             NPC npcTar = target as NPC;
@@ -542,73 +542,61 @@ namespace HSRP
         public string TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers)
         {
             // TODO: Add status effect updating and skip turns.
-            IEntity attacker = CurrentEntity;
-            IEntity target = GetTarget(targetNum, targetingAttackers);
-            // If it's an NPC then don't update the logs. Unless they're mind-controlled.
-            bool returnEmp = CurrentTurner is NPC ? true : false;
+            Entity attacker = CurrentEntity;
+            Entity target = GetTarget(targetNum, targetingAttackers);
 
-            switch (action)
+            // Update status effects.
+            bool skipturn = false;
+            foreach (StatusEffect sa in attacker.InflictedAilments)
             {
-                case StrifeAction.PhysicalAttack:
-                    PhysicalAttack(attacker, target);
-                    break;
+                Tuple<bool, bool> tup = sa.Update(attacker, target, attackTurn, this);
+                if (tup.Item1)
+                {
+                    StatusEffect.RemoveStatusEffect(target, sa.Name);
+                }
 
-                case StrifeAction.MindControl:
-                    MindControl(attacker, target);
-                    break;
-
-                case StrifeAction.OpticBlast:
-                    OpticBlast(attacker, target);
-                    break;
-
-                case StrifeAction.SpeechAttack:
-                    SpeechAttack(attacker, target);
-                    break;
-
-                case StrifeAction.Guard:
-                    Guard(attacker);
-                    break;
+                skipturn |= tup.Item2;
             }
 
-            attacker.UpdateTempMods();
+            if (!skipturn && attacker.Health >= 1)
+            {
+                switch (action)
+                {
+                    case StrifeAction.PhysicalAttack:
+                        PhysicalAttack(attacker, target);
+                        break;
+
+                    case StrifeAction.MindControl:
+                        MindControl(attacker, target);
+                        break;
+
+                    case StrifeAction.OpticBlast:
+                        OpticBlast(attacker, target);
+                        break;
+
+                    case StrifeAction.SpeechAttack:
+                        SpeechAttack(attacker, target);
+                        break;
+
+                    case StrifeAction.Guard:
+                        Guard(attacker);
+                        break;
+                }
+            }
 
             if (attacker.Health < 1 && !attacker.Dead)
             {
                 LeaveStrife(attacker);
+                attacker.TriggerEvent(EventType.OnDeath, target, attackTurn, this);
             }
             if (target.Health < 1 && !target.Dead)
             {
                 LeaveStrife(target);
-            }
-
-            // Update lists.
-            if (attackTurn)
-            {
-                Attackers[turn] = attacker;
-                if (targetingAttackers)
-                {
-                    Attackers[targetNum] = target;
-                }
-                else
-                {
-                    Targets[targetNum] = target;
-                }
-            }
-            else
-            {
-                Targets[turn] = attacker;
-                if (targetingAttackers)
-                {
-                    Attackers[targetNum] = target;
-                }
-                else
-                {
-                    Targets[targetNum] = target;
-                }
+                target.TriggerEvent(EventType.OnDeath, attacker, !attackTurn, this);
             }
 
             UpdateTurn();
-            return returnEmp ? string.Empty : GetLogs();
+            return GetLogs();
         }
 
         /// <summary>
@@ -617,14 +605,14 @@ namespace HSRP
         /// </summary>
         private void TakeAITurn()
         {
-            IEntity ai = CurrentEntity;
+            Entity ai = CurrentEntity;
             if (ai == null)
             {
                 throw new NullReferenceException($"Current entity is null. (TURN: {turn}, ATTACKTURN: {attackTurn.ToString()})");
             }
             int targetID = 0;
 
-            IEntity target = null;
+            Entity target = null;
 
             while (target == null || target.Dead)
             {
@@ -636,6 +624,7 @@ namespace HSRP
             }
 
             // TODO: More AI-y stuff.
+            // TODO: Re-add mind control.
             if (ai is NPC npc)
             {
                 switch (npc.Type)
@@ -678,20 +667,20 @@ namespace HSRP
             }
         }
 
-        private void LeaveStrife(IEntity ent)
+        private void LeaveStrife(Entity ent)
         {
             ent.Dead = true;
             if (ent.Health < 0)
             {
                 ent.Health = 0;
             }
-            log.AppendLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
+            Log.AppendLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
         }
 
         // TODO: Check that this works properply both when and when not it is their turn.
         public string Forfeit(ulong id)
         {
-            IEntity ent = Entities.FirstOrDefault(x => x.ID == id);
+            Entity ent = Entities.FirstOrDefault(x => x.ID == id);
             if (ent == null)
             {
                 Console.WriteLine("STRIFE ERROR: ID + \"" + id + "\" wasn't able to forfeit!");
@@ -714,16 +703,16 @@ namespace HSRP
         {
             Active = false;
             AddLog();
-            log.AppendLine("The strife is now over. XP will be awarded at the discretion of the GM.");
+            Log.AppendLine("The strife is now over. XP will be awarded at the discretion of the GM.");
             AddLog();
-            log.Append(Display());
+            Log.Append(Display());
             AddLog();
 
-            foreach (IEntity ent in Entities)
+            foreach (Entity ent in Entities)
             {
                 if (!(ent is NPC npc && npc.Type == NPCType.Lusus))
                 {
-                    ent.Controller = 0;
+                    ent.InflictedAilments.Clear();
                 }
 
                 // If an entity is dead reset their HP to 1. 
@@ -744,24 +733,24 @@ namespace HSRP
         // If XDSTR rolls higher than difference between both is the damage on the target.
         // Then the target has a chance to counter attack if they roll higher.
         // XDSTR <-- XDPER: Debuff of the difference between both rolls is applied to the attacker's strength.
-        private void PhysicalAttack(IEntity attacker, IEntity target)
+        private void PhysicalAttack(Entity attacker, Entity target)
         {
-            log.AppendLine(Toolbox.GetMessage("phyStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
-            log.AppendLine("");
+            Log.AppendLine(Toolbox.GetMessage("phyStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
+            Log.AppendLine("");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
-            int atkY = attacker.TotalAbilities.Strength;
+            int atkY = attacker.GetTotalAbilities().Strength;
 
             // Target XDY roll.
             int tarX = target.DiceRolls;
-            int tarY = target.TotalAbilities.Constitution;
+            int tarY = target.GetTotalAbilities().Constitution;
 
             // Dice rolls.
             int atk = Toolbox.DiceRoll(atkX, atkY);
             int tar = Toolbox.DiceRoll(tarX, tarY);
-            log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
-            log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
 
             // If attacker rolled higher inflict damage.
             if (atk > tar)
@@ -769,63 +758,61 @@ namespace HSRP
                 int dmg = atk - tar;
                 target.Health -= dmg;
 
-                log.AppendLine("");
-                log.AppendLine($"{Syntax.ToCodeLine(target.Name)} took {Syntax.ToCodeLine(dmg.ToString())} hitpoint(s) of damage.");
+                Log.AppendLine("");
+                Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} took {Syntax.ToCodeLine(dmg.ToString())} hitpoint(s) of damage.");
+
+                attacker.TriggerEvent(EventType.OnHit, target, attackTurn, this);
+                target.TriggerEvent(EventType.OnAttacked, attacker, !attackTurn, this);
 
                 // If the target died due to this attack end the attack right away.
                 if (target.Health < 1) { return; }
             }
             else if (atk < tar)
             {
-                log.AppendLine("");
-                log.AppendLine("Attack missed.");
+                Log.AppendLine("");
+                Log.AppendLine("Attack missed.");
             }
             // Equal rolls, do nothing.
             else
             {
-                log.AppendLine("");
-                log.AppendLine("Attack blocked.");
+                Log.AppendLine("");
+                Log.AppendLine("Attack blocked.");
             }
 
             // Counter attack.
-            // If the strength modifier of the attacker is already debuffed below 1 then don't debuff.
-            if (attacker.TotalAbilities.Strength < 1)
+            // If the strength modifier of the attacker is already debuffed below a third then don't debuff.
+            if ((attacker.BaseAbilities.Strength / 3) > attacker.GetTotalAbilities().Strength)
             {
-                log.AppendLine("");
-                log.AppendLine(Toolbox.GetMessage("phyCounterMax", Syntax.ToCodeLine(attacker.Name)));
+                Log.AppendLine("");
+                Log.AppendLine(Toolbox.GetMessage("phyCounterMax", Syntax.ToCodeLine(attacker.Name)));
                 return;
             }
             else
             {
-                tarY = target.TotalAbilities.Persuasion;
+                tarY = target.GetTotalAbilities().Persuasion;
 
                 // 25% chance to counter. Increased by an addition 25 if the target's persuasion
                 // is higher than the attacker's strength.
                 if (Toolbox.TrueOrFalse(4 - (2 * Convert.ToInt32(tarY > atkY))))
                 {
-                    log.AppendLine("");
-                    log.AppendLine(Toolbox.GetMessage("phyCounterStart", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
+                    Log.AppendLine("");
+                    Log.AppendLine(Toolbox.GetMessage("phyCounterStart", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
 
                     atk = Toolbox.DiceRoll(atkX, atkY);
                     tar = Toolbox.DiceRoll(tarX, tarY);
-                    log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
-                    log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
+                    Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
+                    Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
 
                     // Counter failed.
                     if (atk >= tar)
                     {
-                        log.AppendLine("");
-                        log.AppendLine(Toolbox.GetMessage("phyCounterBlock"));
+                        Log.AppendLine("");
+                        Log.AppendLine(Toolbox.GetMessage("phyCounterBlock"));
                     }
                     // Counter suceeded, debuff strength.
                     else
                     {
-                        int nonBuff = attacker.TempMods.ContainsKey(1)
-                            ? attacker.TempMods[1].Strength
-                            : 0;
-                        int debuff = Math.Max(nonBuff - (tar - atk), -tarY);
-                        attacker.TempMods.Remove(1);
-                        ApplyTempMod(attacker, "strength", debuff, 1);
+                        attacker.ApplyStatusEffect(Constants.PHYSICAL_COUNTER_AIL, target, attackTurn, this);
                     }
                 }
             }

@@ -297,7 +297,7 @@ namespace HSRP
             }
 
             strife.Log.AppendLine();
-            strife.Log.AppendLine(Entity.GetEntityMessage(message, ent.Name, tar.Name, dmgEnt.ToString(), dmgTar.ToString(), healEnt.ToString(), healTar.ToString()));
+            strife.Log.AppendLine(Entity.GetEntityMessage(message, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(tar.Name), Syntax.ToCodeLine(dmgEnt.ToString()), Syntax.ToCodeLine(dmgTar.ToString()), Syntax.ToCodeLine(healEnt.ToString()), Syntax.ToCodeLine(healTar.ToString())));
 
             foreach (Tuple<TargetType, string> tup in statusEffects)
             {
@@ -311,14 +311,14 @@ namespace HSRP
 
                     case TargetType.Target:
                     {
-                        tar.ApplyStatusEffect(tup.Item2, tar, !attackTeam, strife);
+                        tar.ApplyStatusEffect(tup.Item2, ent, !attackTeam, strife);
                     }
                     break;
 
                     case TargetType.Self | TargetType.Target:
                     {
                         ent.ApplyStatusEffect(tup.Item2, tar, attackTeam, strife);
-                        tar.ApplyStatusEffect(tup.Item2, tar, !attackTeam, strife);
+                        tar.ApplyStatusEffect(tup.Item2, ent, !attackTeam, strife);
                     }
                     break;
 
@@ -335,7 +335,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
                         {
-                            strifer.ApplyStatusEffect(tup.Item2, tar, !attackTeam, strife);
+                            strifer.ApplyStatusEffect(tup.Item2, ent, !attackTeam, strife);
                         }
                     }
                     break;
@@ -348,7 +348,7 @@ namespace HSRP
                         }
                         foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
                         {
-                            strifer.ApplyStatusEffect(tup.Item2, tar, !attackTeam, strife);
+                            strifer.ApplyStatusEffect(tup.Item2, ent, !attackTeam, strife);
                         }
                     }
                     break;

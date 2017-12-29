@@ -123,7 +123,7 @@ namespace HSRP
                         break;
 
                     case "inventory":
-                        equippedWeapon = XmlToolbox.GetAttributeInt(ele, "equippedWeapon", -1);
+                        equippedWeapon = ele.GetAttributeString("equippedWeapon", string.Empty);
                         foreach (XElement item in ele.Elements())
                         {
                             Inventory.Add(new Item(item));
@@ -264,7 +264,7 @@ namespace HSRP
 
             result.AppendLine("Base Statistics");
             result.AppendLine(showMods
-                ? BaseAbilities.Display(this.GetModifiers())
+                ? BaseAbilities.Display(this.GetTotalAbilities())
                 : BaseAbilities.Display());
 
             return result.ToString();
@@ -279,7 +279,7 @@ namespace HSRP
                     ? $"{i} - {Inventory.ElementAt(i).Name} ({Inventory.ElementAt(i).Quantity})"
                     : $"{i} - {Inventory.ElementAt(i).Name}";
 
-                if (i == equippedWeapon)
+                if (Inventory[i].Name == equippedWeapon)
                 {
                     result += " (Equipped)";
                 }

@@ -31,6 +31,7 @@
 
         // Ailments.
         public const string MIND_CONTROL_AIL = "MindControl";
+        public const string PHYSICAL_COUNTER_AIL = "CounterPhy";
     }
 
     public static class Dirs

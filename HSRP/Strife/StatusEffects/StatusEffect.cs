@@ -147,7 +147,10 @@ namespace HSRP
 
             if (skipsTurn)
             {
-                strife.Log.AppendLine(Entity.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), "{1}", Syntax.ToCodeLine(this.Name)));
+                if (!string.IsNullOrWhiteSpace(StatusMsg))
+                {
+                    strife.Log.AppendLine(Entity.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), "{1}", Syntax.ToCodeLine(this.Name)));
+                }
             }
 
             if (Turns == 0 && Explodes)

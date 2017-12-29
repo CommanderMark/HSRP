@@ -239,7 +239,7 @@ namespace HSRP
                     int modVal = (int)prop.GetValue(mod);
 
                     disp += prop.Name + ": " + value;
-                    disp = disp.AddLine($" ({modVal.ToString("+0;-#")})");
+                    disp = disp.AddLine($" ({(modVal - value).ToString("+0;-#")})");
                 }
             }
 

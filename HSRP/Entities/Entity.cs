@@ -109,7 +109,10 @@ namespace HSRP
             }
 
             this.InflictedAilments.Add(sa);
-            strife.Log.AppendLine(GetEntityMessage(sa.InflictMsg, Syntax.ToCodeLine(this.Name), Syntax.ToCodeLine(tar.Name), Syntax.ToCodeLine(sa.Name)));
+            if (!string.IsNullOrWhiteSpace(sa.InflictMsg))
+            {
+                strife.Log.AppendLine(GetEntityMessage(sa.InflictMsg, Syntax.ToCodeLine(this.Name), Syntax.ToCodeLine(tar.Name), Syntax.ToCodeLine(sa.Name)));
+            }
         }
 
         /// <summary>
