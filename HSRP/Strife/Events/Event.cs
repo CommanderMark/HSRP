@@ -64,7 +64,7 @@ namespace HSRP
 
         public Event(XElement element) : this()
         {
-            probability = XmlToolbox.GetAttributeFloat(element, "probability", 1.0f);
+            probability = element.GetAttributeFloat("probability", 1.0f);
 
             foreach (XElement ele in element.Elements())
             {
