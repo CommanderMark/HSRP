@@ -283,43 +283,5 @@ namespace HSRP.Commands
                 await QuantityRemove(plyr, index, amount);
             }
         }
-
-        [Command("damage"), Priority(1)]
-        public async Task DamageSet(Player plyr, int index, int dmg)
-        {
-            Item item = plyr.Inventory.ElementAtOrDefault(index);
-            if (item == null)
-            {
-                await ReplyAsync("Invalid item index.");
-                return;
-            }
-
-            if (dmg <= 0)
-            {
-                await ReplyAsync("Invalid amount.");
-                return;
-            }
-
-            item.Damage = dmg;
-            plyr.Inventory[index] = item;
-
-            plyr.Save();
-            string log = $"{Syntax.ToCodeLine(item.Name)} has been given a damage value of {dmg} in the inventory of {Syntax.ToCodeLine(plyr.Name)}.";
-            await ReplyAsync(log);
-        }
-
-        [Command("damage"), Priority(0)]
-        public async Task DamageSet(Player plyr, string name, int amount)
-        {
-            Item item = plyr.Inventory.FirstOrDefault(x => x.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
-            if (item == null)
-            {
-                await ReplyAsync("Invalid item name.");
-                return;
-            }
-
-            int index = plyr.Inventory.IndexOf(item);
-            await DamageSet(plyr, index, amount);
-        }
     }
 }

@@ -12,7 +12,6 @@ namespace HSRP
 {
     public class Player : Entity
     {
-        public ulong ID { get; set; }
         public Task<Discord.IGuildUser> GuildUser
         {
             get
@@ -27,16 +26,22 @@ namespace HSRP
 
         public BloodType BloodColor { get; set; }
 
+        // TODO: xml and implement its events
         public override Item EquippedWeapon
         {
             get
             {
-                return equippedWeapon < 0
+                return string.IsNullOrWhiteSpace(equippedWeapon)
                     ? null
-                    : Inventory[equippedWeapon];
+                    : Inventory.FirstOrDefault(x => x.Name == equippedWeapon);
+            }
+
+            set
+            {
+                equippedWeapon = value.Name;
             }
         }
-        private int equippedWeapon { get; set; }
+        private string equippedWeapon { get; set; }
         public int StrifeID { get; set; }
 
         /// <summary>

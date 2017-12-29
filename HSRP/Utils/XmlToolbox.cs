@@ -337,6 +337,46 @@ namespace HSRP
             return val;
         }
 
+        public static T[] GetAttributeEnumArray<T>(this XElement element, string name, T[] defaultValue) where T : struct, IConvertible
+        {
+            if (!typeof(T).GetTypeInfo().IsEnum) 
+            {
+                throw new ArgumentException("T must be an enumerated type");
+            }
+
+            if (element == null || element.Attribute(name) == null)
+            {
+                return defaultValue;
+            }
+
+            return GetAttributeEnumArray(element.Attribute(name), defaultValue);
+        }
+
+        private static T[] GetAttributeEnumArray<T>(XAttribute attribute, T[] defaultValue)
+        {
+            if (attribute == null)
+            {
+                return defaultValue;
+            }
+
+            T[] val = defaultValue;
+            try
+            {
+                string[] content = attribute.Value.Split(',');
+                for (int i = 0; i < content.Length; i++)
+                {
+                    val[i] = (T)Enum.Parse(typeof(T), attribute.Value);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("[XML] " + "Error in " + attribute + "! \n" + e);
+                val = defaultValue;
+            }
+
+            return val;
+        }
+
         public static string ElementInnerText(this XElement el)
         {
             StringBuilder str = new StringBuilder();

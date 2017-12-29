@@ -53,9 +53,9 @@ namespace HSRP
             statusEffects = new List<Tuple<TargetType, string>>();
             removeEffects = new List<Tuple<TargetType, string>>();
 
-            damageTarget = TargetType.Self;
+            damageTarget = TargetType.None;
             damageAmount = 0f;
-            healTarget = TargetType.Self;
+            healTarget = TargetType.None;
             healAmount = 0f;
 
             message = string.Empty;
@@ -73,21 +73,34 @@ namespace HSRP
                     case "inflictDamage":
                     {
                         damageAmount = ele.GetAttributeFloat("amount", 0f);
-                        damageTarget = ele.GetAttributeEnum("type", TargetType.Self);
+                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[0]);
+                        foreach(TargetType enumi in enumArr)
+                        {
+                            damageTarget |= enumi;
+                        }
                     }
                     break;
 
                     case "healDamage":
                     {
                         healAmount = ele.GetAttributeFloat("amount", 0f);
-                        healTarget = ele.GetAttributeEnum("type", TargetType.Self);
+                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[0]);
+                        foreach(TargetType enumi in enumArr)
+                        {
+                            healTarget |= enumi;
+                        }
                     }
                     break;
 
                     case "ailment":
                     {
                         string name = ele.GetAttributeString("name", string.Empty);
-                        TargetType type = ele.GetAttributeEnum("type", TargetType.Self);
+                        TargetType type = TargetType.None;
+                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[0]);
+                        foreach(TargetType enumi in enumArr)
+                        {
+                            type |= enumi;
+                        }
 
                         statusEffects.Add(new Tuple<TargetType, string>(type, name));
                     }
@@ -96,7 +109,12 @@ namespace HSRP
                     case "cure":
                     {
                         string name = ele.GetAttributeString("name", string.Empty);
-                        TargetType type = ele.GetAttributeEnum("type", TargetType.Self);
+                        TargetType type = TargetType.None;
+                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[0]);
+                        foreach(TargetType enumi in enumArr)
+                        {
+                            type |= enumi;
+                        }
 
                         removeEffects.Add(new Tuple<TargetType, string>(type, name));
                     }
@@ -153,6 +171,241 @@ namespace HSRP
             eventEle.Add(msg);
 
             return eventEle;
+        }
+
+        /// <summary>
+        /// Fires the event.
+        /// </summary>
+        /// <param name="ent">The entity this event is attached to.</param>
+        /// <param name="tar">The entity the user was targeting or targeted by when the event was triggered.</param>
+        /// <param name="attackTeam">Boolean stating whether the entity is on the attacking team or not.</param>
+        /// <param name="strife">The strife object itself.</param>
+        public void Fire(Entity ent, Entity tar, bool attackTeam, Strife strife)
+        {
+            // Probability to fire.
+            float magicNumber = Toolbox.RandFloat(0f, 1.0f);
+            if (magicNumber > probability)
+            {
+                return;
+            }
+
+            int dmgEnt = 0, dmgTar = 0;
+            int healEnt = 0, healTar = 0;
+
+            if (damageAmount > 0)
+            {
+                switch (damageTarget)
+                {
+                    case TargetType.Self:
+                    {
+                        dmgEnt = ent.InflictDamageByPercentage(damageAmount);
+                    }
+                    break;
+
+                    case TargetType.Target:
+                    {
+                        dmgTar = tar.InflictDamageByPercentage(damageAmount);
+                    }
+                    break;
+
+                    case TargetType.Self | TargetType.Target:
+                    {
+                        dmgEnt = ent.InflictDamageByPercentage(healAmount);
+                        dmgTar = tar.InflictDamageByPercentage(healAmount);
+                    }
+                    break;
+
+                    case TargetType.All | TargetType.Self:
+                    {
+                        foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
+                        {
+                            dmgEnt = strifer.InflictDamageByPercentage(damageAmount);
+                        }
+                    }
+                    break;
+
+                    case TargetType.All | TargetType.Target:
+                    {
+                        foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
+                        {
+                            dmgTar = strifer.InflictDamageByPercentage(damageAmount);
+                        }
+                    }
+                    break;
+
+                    case TargetType.All:
+                    {
+                        foreach (Entity strifer in strife.Entities)
+                        {
+                            dmgEnt = strifer.InflictDamageByPercentage(damageAmount);
+                        }
+                    }
+                    break;
+                }
+            }
+
+            if (healAmount > 0)
+            {
+                switch (healTarget)
+                {
+                    case TargetType.Self:
+                    {
+                        healEnt = ent.InflictDamageByPercentage(-healAmount);
+                    }
+                    break;
+
+                    case TargetType.Target:
+                    {
+                        healTar = tar.InflictDamageByPercentage(-healAmount);
+                    }
+                    break;
+
+                    case TargetType.Self | TargetType.Target:
+                    {
+                        healEnt = ent.InflictDamageByPercentage(-healAmount);
+                        healTar = tar.InflictDamageByPercentage(-healAmount);
+                    }
+                    break;
+
+                    case TargetType.All | TargetType.Self:
+                    {
+                        foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
+                        {
+                            healEnt = strifer.InflictDamageByPercentage(-healAmount);
+                        }
+                    }
+                    break;
+
+                    case TargetType.All | TargetType.Target:
+                    {
+                        foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
+                        {
+                            healTar = strifer.InflictDamageByPercentage(-healAmount);
+                        }
+                    }
+                    break;
+
+                    case TargetType.All:
+                    {
+                        foreach (Entity strifer in strife.Entities)
+                        {
+                            healEnt = strifer.InflictDamageByPercentage(-healAmount);
+                        }
+                    }
+                    break;
+                }
+            }
+
+            strife.Log.AppendLine();
+            strife.Log.AppendLine(Entity.GetEntityMessage(message, ent.Name, tar.Name, dmgEnt.ToString(), dmgTar.ToString(), healEnt.ToString(), healTar.ToString()));
+
+            foreach (Tuple<TargetType, string> tup in statusEffects)
+            {
+                switch (tup.Item1)
+                {
+                    case TargetType.Self:
+                    {
+                        ent.ApplyStatusEffect(tup.Item2, tar, attackTeam, strife);
+                    }
+                    break;
+
+                    case TargetType.Target:
+                    {
+                        tar.ApplyStatusEffect(tup.Item2, tar, !attackTeam, strife);
+                    }
+                    break;
+
+                    case TargetType.Self | TargetType.Target:
+                    {
+                        ent.ApplyStatusEffect(tup.Item2, tar, attackTeam, strife);
+                        tar.ApplyStatusEffect(tup.Item2, tar, !attackTeam, strife);
+                    }
+                    break;
+
+                    case TargetType.All | TargetType.Self:
+                    {
+                        foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
+                        {
+                            strifer.ApplyStatusEffect(tup.Item2, tar, attackTeam, strife);
+                        }
+                    }
+                    break;
+
+                    case TargetType.All | TargetType.Target:
+                    {
+                        foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
+                        {
+                            strifer.ApplyStatusEffect(tup.Item2, tar, !attackTeam, strife);
+                        }
+                    }
+                    break;
+
+                    case TargetType.All:
+                    {
+                        foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
+                        {
+                            strifer.ApplyStatusEffect(tup.Item2, tar, attackTeam, strife);
+                        }
+                        foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
+                        {
+                            strifer.ApplyStatusEffect(tup.Item2, tar, !attackTeam, strife);
+                        }
+                    }
+                    break;
+                }
+            }
+
+            foreach (Tuple<TargetType, string> tup in removeEffects)
+            {
+                switch (tup.Item1)
+                {
+                    case TargetType.Self:
+                    {
+                        ent.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                    }
+                    break;
+
+                    case TargetType.Target:
+                    {
+                        tar.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                    }
+                    break;
+
+                    case TargetType.Self | TargetType.Target:
+                    {
+                        ent.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                        tar.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                    }
+                    break;
+
+                    case TargetType.All | TargetType.Self:
+                    {
+                        foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
+                        {
+                            strifer.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                        }
+                    }
+                    break;
+
+                    case TargetType.All | TargetType.Target:
+                    {
+                        foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
+                        {
+                            strifer.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                        }
+                    }
+                    break;
+
+                    case TargetType.All:
+                    {
+                        foreach (Entity strifer in strife.Entities)
+                        {
+                            strifer.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                        }
+                    }
+                    break;
+                }
+            }
         }
     }
 }

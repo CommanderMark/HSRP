@@ -15,7 +15,11 @@ namespace HSRP
 
         public Explosion(XElement element) : this()
         {
-            ExplosionTarget = element.GetAttributeEnum("target", TargetType.Self);
+            TargetType[] enumArr = element.GetAttributeEnumArray("type", new TargetType[0]);
+            foreach(TargetType enumi in enumArr)
+            {
+                ExplosionTarget |= enumi;
+            }
             ExplosionDamage = element.GetAttributeFloat("damage", 0f);
         }
 

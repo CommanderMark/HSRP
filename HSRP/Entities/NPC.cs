@@ -8,11 +8,10 @@ using System.Xml.Linq;
 
 namespace HSRP
 {
-    public class NPC : IEntity
+    public class NPC : Entity
     {
-        public ulong ID { get; set; }
         public string Title;
-        public string Name
+        public override string Name
         {
             get
             {
@@ -32,28 +31,9 @@ namespace HSRP
         
         public string Description { get; set; }
         public NPCType Type { get; set; }
-
-        public bool LikesPineappleOnPizza { get; set; }
-
-        public AbilitySet BaseAbilities { get; set; }
-
-        public Dictionary<EventType, Event> Events { get; set; }
-        public string[] Immunities { get; set; }
-        public List<StatusEffect> InflictedAilments { get; set; }
-        public List<Move> Moves { get; set; }
-
-        public int Health { get; set; }
-        public int MaxHealth { get; set; }
-        public bool Dead { get; set; }
-
-        public string Specibus { get; set; }
+        
         //TODO: Is this actually needed?
-        public Item EquippedWeapon { get; }
-
-        /// <summary>
-        /// The amount of times the NPC gets to roll a die for their attack or defense turn.
-        /// </summary>
-        public int DiceRolls { get; set; }
+        public override Item EquippedWeapon { get; }
 
         public NPC()
         {
@@ -177,7 +157,7 @@ namespace HSRP
             return npc;
         }
 
-        public string Display(bool showMods = false)
+        public override string Display(bool showMods = false)
         {
             StringBuilder result = new StringBuilder();
 

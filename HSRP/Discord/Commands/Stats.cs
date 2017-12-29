@@ -52,8 +52,8 @@ namespace HSRP.Commands
             
             if (ability.CanRead && ability.CanWrite)
             {
-                int value = (int)ability.GetValue(plyr.Abilities);
-                ability.SetValue(plyr.Abilities, value + amount);
+                int value = (int)ability.GetValue(plyr.BaseAbilities);
+                ability.SetValue(plyr.BaseAbilities, value + amount);
 
                 plyr.PendingSkillPointAllocations -= amount;
 

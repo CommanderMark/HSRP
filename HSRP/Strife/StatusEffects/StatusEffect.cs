@@ -131,42 +131,47 @@ namespace HSRP
         /// </summary>
         /// <param name="ent">The entity this effect is being applied to.</param>
         /// <param name="tar">The entity the user was targeting or targeted by when the effect was applied.</param>
+        /// <param name="attackTeam">Boolean stating whether the entity is on the attacking team or not.</param>
         /// <param name="strife">The strife object itself.</param>
-        /// <returns>A tuple containing a log of the event, whether the effect is removed this turn and whether the player's turn is skipped.</returns>
-        public Tuple<string, bool, bool> Update(IEntity ent, IEntity tar, Strife strife)
+        /// <returns>A tuple containing whether the effect is removed this turn and whether the player's turn is skipped.</returns>
+        public Tuple<bool, bool> Update(Entity ent, Entity tar, bool attackTeam, Strife strife)
         {
-            StringBuilder msg = new StringBuilder();
             if (inflictsDamage)
             {
                 // Pick a value to inflict.
                 float per = Toolbox.RandFloat(MinDamagePercentage, MaxDamagePercentage);
                 int dmg = ent.InflictDamageByPercentage(per);
 
-                msg.AppendLine(EntityUtil.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(dmg.ToString()), Syntax.ToCodeLine(this.Name)));
+                strife.Log.AppendLine(Entity.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(dmg.ToString()), Syntax.ToCodeLine(this.Name)));
             }
 
             if (skipsTurn)
             {
-                msg.AppendLine(EntityUtil.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), "{1}", Syntax.ToCodeLine(this.Name)));
+                strife.Log.AppendLine(Entity.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), "{1}", Syntax.ToCodeLine(this.Name)));
             }
 
             if (Turns == 0 && Explodes)
             {
-                msg.AppendLine(strife.Explosion(StatusMsg, Explosion, ent, tar, EXPLOSION_FALLOFF_FACTOR));
+                strife.Log.AppendLine(strife.Explosion(StatusMsg, Explosion, ent, tar, attackTeam, strife, EXPLOSION_FALLOFF_FACTOR));
             }
 
             --Turns;
             bool endEffect = Turns < 0;
+            strife.Log.AppendLine((endEffect ? "\n" + Entity.GetEntityMessage(EndMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(this.Name)) : string.Empty));
 
-            return new Tuple<string, bool, bool>
+            return new Tuple<bool, bool>
                 (
-                msg.ToString() + (endEffect ? "\n" + EntityUtil.GetEntityMessage(EndMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(this.Name)) : string.Empty),
                 endEffect,
                 skipsTurn
                 );
         }
 
-        public static string RemoveStatusEffect(IEntity ent, string name)
+        /// <summary>
+        /// Removes the status effect from the specified entity.
+        /// </summary>
+        /// <returns>The log of the event.</returns>
+        // TODO: Make sure the strife object gets this log.
+        public static string RemoveStatusEffect(Entity ent, string name)
         {
             StatusEffect sa = ent.InflictedAilments.FirstOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
 

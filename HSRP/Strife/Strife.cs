@@ -31,15 +31,15 @@ namespace HSRP
         /// <summary>
         /// Log of current event.
         /// </summary>
-        private StringBuilder log = new StringBuilder();
+        public StringBuilder Log = new StringBuilder();
         private int postedLogs;
 
         /// <summary>
         /// The enitites on the team that initiated the strife.
         /// </summary>
-        public List<IEntity> Attackers { get; set; }
-        public List<IEntity> Targets { get; set; }
-        public IEnumerable<IEntity> Entities
+        public List<Entity> Attackers { get; set; }
+        public List<Entity> Targets { get; set; }
+        public IEnumerable<Entity> Entities
         {
             get
             {
