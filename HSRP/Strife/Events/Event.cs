@@ -72,22 +72,22 @@ namespace HSRP
                 {
                     case "inflictDamage":
                     {
-                        damageAmount = XmlToolbox.GetAttributeFloat(ele, "amount", 0f);
-                        damageTarget = XmlToolbox.GetAttributeEnum(ele, "type", TargetType.Self);
+                        damageAmount = ele.GetAttributeFloat("amount", 0f);
+                        damageTarget = ele.GetAttributeEnum("type", TargetType.Self);
                     }
                     break;
 
                     case "healDamage":
                     {
-                        healAmount = XmlToolbox.GetAttributeFloat(ele, "amount", 0f);
-                        healTarget = XmlToolbox.GetAttributeEnum(ele, "type", TargetType.Self);
+                        healAmount = ele.GetAttributeFloat("amount", 0f);
+                        healTarget = ele.GetAttributeEnum("type", TargetType.Self);
                     }
                     break;
 
                     case "ailment":
                     {
-                        string name = XmlToolbox.GetAttributeString(ele, "name", string.Empty);
-                        TargetType type = XmlToolbox.GetAttributeEnum(ele, "type", TargetType.Self);
+                        string name = ele.GetAttributeString("name", string.Empty);
+                        TargetType type = ele.GetAttributeEnum("type", TargetType.Self);
 
                         statusEffects.Add(new Tuple<TargetType, string>(type, name));
                     }
@@ -95,8 +95,8 @@ namespace HSRP
 
                     case "cure":
                     {
-                        string name = XmlToolbox.GetAttributeString(ele, "name", string.Empty);
-                        TargetType type = XmlToolbox.GetAttributeEnum(ele, "type", TargetType.Self);
+                        string name = ele.GetAttributeString("name", string.Empty);
+                        TargetType type = ele.GetAttributeEnum("type", TargetType.Self);
 
                         removeEffects.Add(new Tuple<TargetType, string>(type, name));
                     }
