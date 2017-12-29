@@ -240,7 +240,7 @@ namespace HSRP.Commands
                 return;
             }
 
-            IEntity ent = strf.GetTarget(index, attackAtks);
+            Entity ent = strf.GetTarget(index, attackAtks);
             if (ent == null)
             {
                 await ReplyAsync("Invalid strifer.");

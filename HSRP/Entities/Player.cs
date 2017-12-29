@@ -38,7 +38,9 @@ namespace HSRP
 
             set
             {
-                equippedWeapon = value.Name;
+                equippedWeapon = value == null
+                    ? string.Empty
+                    : value.Name;
             }
         }
         private string equippedWeapon { get; set; }

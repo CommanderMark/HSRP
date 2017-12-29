@@ -96,14 +96,13 @@ namespace HSRP.Commands
                 return;
             }
 
-            if (item.Equipped)
+            if (item.Name == plyr.EquippedWeapon.Name)
             {
                 await ReplyAsync("This item is already equipped.");
                 return;
             }
 
-            item.Equipped = true;
-            plyr.Inventory[index] = item;
+            plyr.EquippedWeapon = item;
 
             plyr.Save();
             string log = Syntax.ToCodeLine(item.Name) + " was equipped to " + Syntax.ToCodeLine(plyr.Name) + ".";
@@ -136,14 +135,13 @@ namespace HSRP.Commands
                 return;
             }
 
-            if (!item.Equipped)
+            if (item.Name != plyr.EquippedWeapon?.Name)
             {
                 await ReplyAsync("This item is not equipped.");
                 return;
             }
 
-            item.Equipped = false;
-            plyr.Inventory[index] = item;
+            plyr.EquippedWeapon = null;
 
             plyr.Save();
             string log = Syntax.ToCodeLine(item.Name) + " was un-equipped from " + Syntax.ToCodeLine(plyr.Name) + ".";
@@ -186,7 +184,6 @@ namespace HSRP.Commands
                 }
 
                 item.Quantity = amount;
-                plyr.Inventory[index] = item;
 
                 plyr.Save();
                 string log = $"{Syntax.ToCodeLine(item.Name)} amount was set to {Syntax.ToCodeLine(amount.ToString())} in the inventory of {Syntax.ToCodeLine(plyr.Name)}.";
@@ -224,7 +221,6 @@ namespace HSRP.Commands
                 }
 
                 item.Quantity += amount;
-                plyr.Inventory[index] = item;
 
                 plyr.Save();
                 string log = $"{amount} {Syntax.ToCodeLine(item.Name)} added to the inventory of {Syntax.ToCodeLine(plyr.Name)}.";
@@ -262,7 +258,6 @@ namespace HSRP.Commands
                 }
 
                 item.Quantity -= amount;
-                plyr.Inventory[index] = item;
 
                 plyr.Save();
                 string log = $"{amount} {Syntax.ToCodeLine(item.Name)} removed from the inventory of {Syntax.ToCodeLine(plyr.Name)}.";
