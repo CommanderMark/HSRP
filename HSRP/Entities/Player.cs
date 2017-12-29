@@ -126,7 +126,6 @@ namespace HSRP
                         break;
 
                     case "strife":
-                        //TODO: events
                         StrifeID = XmlToolbox.GetAttributeInt(ele, "id", 0);
 
                         if (StrifeID > 0)
@@ -145,6 +144,22 @@ namespace HSRP
                         }
                         break;
 
+                    case "events":
+                        foreach (XElement strifeEle in ele.Elements("event"))
+                        {
+                            Event evnt = new Event(strifeEle);
+                            EventType type = strifeEle.GetAttributeEnum("trigger", EventType.NONE);
+
+                            if (type != EventType.NONE)
+                            {
+                                Events.Add(type, evnt);
+                            }
+                            else
+                            {
+                                Console.WriteLine("STRIFE ERROR: Event has invalid type for \"" + this.Name + "\"!");
+                            }
+                        }
+                        break;
                 }
             }
         }
@@ -193,11 +208,19 @@ namespace HSRP
                 inventory.Add(ele);
             }
 
-            player.Add(info, status, levels, abilities, inventory);
+            XElement events = new XElement("events");
+            foreach (KeyValuePair<EventType, Event> evnt in Events)
+            {
+                XElement ailEle = evnt.Value.Save();
+                ailEle.Add(new XAttribute("trigger", evnt.Key.ToString()));
+
+                events.Add(ailEle);
+            }
+
+            player.Add(info, status, levels, abilities, inventory, events);
 
             if (StrifeID > 0)
             {
-                //TODO: events
                 XElement strife = new XElement("strife", new XAttribute("id", StrifeID));
 
                 foreach (StatusEffect sa in InflictedAilments)
@@ -209,7 +232,6 @@ namespace HSRP
                 player.Add(strife);
             }
 
-            
             doc.Add(player);
             XmlToolbox.WriteXml(this.ToXmlPath(), doc);
         }

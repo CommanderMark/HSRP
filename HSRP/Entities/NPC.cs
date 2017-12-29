@@ -78,35 +78,51 @@ namespace HSRP
                 switch (ele.Name.LocalName)
                 {
                     case "info":
-                        Name = XmlToolbox.GetAttributeString(ele, "name", string.Empty);
-                        Type = XmlToolbox.GetAttributeEnum(ele, "type", NPCType.Normal);
-                        LikesPineappleOnPizza = XmlToolbox.GetAttributeBool(ele, "pineappleOnPizza", false);
-                        Description = XmlToolbox.ElementInnerText(ele);
+                        Name = ele.GetAttributeString("name", string.Empty);
+                        Type = ele.GetAttributeEnum("type", NPCType.Normal);
+                        LikesPineappleOnPizza = ele.GetAttributeBool("pineappleOnPizza", false);
+                        Description = ele.ElementInnerText();
                         break;
 
                     case "status":
-                        Health = XmlToolbox.GetAttributeInt(ele, "hp", -1);
-                        MaxHealth = XmlToolbox.GetAttributeInt(ele, "maxhp", Health);
-                        Dead = XmlToolbox.GetAttributeBool(ele, "dead", false);
-                        Specibus = XmlToolbox.GetAttributeString(ele, "specibus", string.Empty);
-                        DiceRolls = XmlToolbox.GetAttributeInt(ele, "diceRolls", 1);
-                        Immunities = XmlToolbox.GetAttributeStringArray(ele, "immune", new string[0]);
+                        Health = ele.GetAttributeInt("hp", -1);
+                        MaxHealth = ele.GetAttributeInt("maxhp", Health);
+                        Dead = ele.GetAttributeBool("dead", false);
+                        Specibus = ele.GetAttributeString("specibus", string.Empty);
+                        DiceRolls = ele.GetAttributeInt("diceRolls", 1);
+                        Immunities = ele.GetAttributeStringArray("immune", new string[0]);
                         break;
                     
                     case "abilities":
                         BaseAbilities = new AbilitySet(ele);
                         break;
                     case "ailments":
-                        //TODO: events
                         foreach (XElement strifeEle in ele.Elements("ailment"))
                         {
-                            string ailName = XmlToolbox.GetAttributeString(strifeEle, "name", string.Empty);
-                            ulong ailController = XmlToolbox.GetAttributeUnsignedLong(strifeEle, "controller", 0);
-                            int ailTurns = XmlToolbox.GetAttributeInt(strifeEle, "turns", 0);
+                            string ailName = strifeEle.GetAttributeString("name", string.Empty);
+                            ulong ailController = strifeEle.GetAttributeUnsignedLong("controller", 0);
+                            int ailTurns = strifeEle.GetAttributeInt("turns", 0);
 
                             if (StatusEffect.TryParse(ailName, out StatusEffect sa, ailController, ailTurns))
                             {
                                 InflictedAilments.Add(sa);
+                            }
+                        }
+                        break;
+
+                    case "events":
+                        foreach (XElement strifeEle in ele.Elements("event"))
+                        {
+                            Event evnt = new Event(strifeEle);
+                            EventType type = strifeEle.GetAttributeEnum("trigger", EventType.NONE);
+
+                            if (type != EventType.NONE)
+                            {
+                                Events.Add(type, evnt);
+                            }
+                            else
+                            {
+                                Console.WriteLine("STRIFE ERROR: Event has invalid type for \"" + this.Name + "\"!");
                             }
                         }
                         break;
@@ -141,7 +157,6 @@ namespace HSRP
 
             XElement abilities = BaseAbilities.ToXmlElement();
             
-            // TODO: events.
             XElement ailments = new XElement("ailments");
             foreach (StatusEffect sa in InflictedAilments)
             {
@@ -149,7 +164,16 @@ namespace HSRP
                 ailments.Add(ailEle);
             }
 
-            npc.Add(info, status, abilities, ailments);
+            XElement events = new XElement("events");
+            foreach (KeyValuePair<EventType, Event> evnt in Events)
+            {
+                XElement ailEle = evnt.Value.Save();
+                ailEle.Add(new XAttribute("trigger", evnt.Key.ToString()));
+
+                events.Add(ailEle);
+            }
+
+            npc.Add(info, status, abilities, ailments, events);
             return npc;
         }
 
