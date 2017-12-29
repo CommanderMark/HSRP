@@ -10,7 +10,7 @@ using Discord;
 
 namespace HSRP
 {
-    public class Player : IEntity
+    public class Player : Entity
     {
         public ulong ID { get; set; }
         public Task<Discord.IGuildUser> GuildUser
@@ -20,28 +20,14 @@ namespace HSRP
                 return Program.Instance.RpGuild.GetUserAsync(ID);
             }
         }
-        public string Name { get; set; }
         /// <summary>
         /// The then-username of the owner of this player.
         /// </summary>
         public string OwnerUsername;
 
         public BloodType BloodColor { get; set; }
-        public bool LikesPineappleOnPizza { get; set; }
 
-        public AbilitySet BaseAbilities { get; set; }
-
-        public Dictionary<EventType, Event> Events { get; set; }
-        public string[] Immunities { get; set; }
-        public List<StatusEffect> InflictedAilments { get; set; }
-        public List<Move> Moves { get; set; }
-
-        public int Health { get; set; }
-        public int MaxHealth { get; set; }
-        public bool Dead { get; set; }
-
-        public string Specibus { get; set; }
-        public Item EquippedWeapon
+        public override Item EquippedWeapon
         {
             get
             {
@@ -57,7 +43,7 @@ namespace HSRP
         /// Returns the total damage of the character's equipped items.
         /// </summary>
         //TODO: this
-        public int DiceRolls
+        public override int DiceRolls
         {
             get
             {
@@ -230,7 +216,7 @@ namespace HSRP
 
         public string ToXmlPath() => Path.Combine(Dirs.Players, ID.ToString() + ".xml");
 
-        public string Display(bool showMods = false)
+        public override string Display(bool showMods = false)
         {
             StringBuilder result = new StringBuilder();
 

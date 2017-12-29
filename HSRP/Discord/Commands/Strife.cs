@@ -135,9 +135,9 @@ namespace HSRP.Commands
         public class EditStrife : JModuleBase
         {
             [Command("atk"), Alias("attack", "at")]
-            public async Task Attack(Strife strf, params IEntity[] entities)
+            public async Task Attack(Strife strf, params Entity[] entities)
             {
-                foreach (IEntity ent in entities)
+                foreach (Entity ent in entities)
                 {
                     strf.Attackers.Add(ent);
                 }
@@ -147,9 +147,9 @@ namespace HSRP.Commands
             }
 
             [Command("target"), Alias("tar", "targets")]
-            public async Task Target(Strife strf, params IEntity[] entities)
+            public async Task Target(Strife strf, params Entity[] entities)
             {
-                foreach (IEntity ent in entities)
+                foreach (Entity ent in entities)
                 {
                     strf.Targets.Add(ent);
                 }
