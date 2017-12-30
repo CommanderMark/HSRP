@@ -31,22 +31,10 @@ namespace HSRP
         
         public string Description { get; set; }
         public NPCType Type { get; set; }
-        
-        //TODO: Is this actually needed?
-        public override Item EquippedWeapon { set; get; }
 
-        public NPC()
+        private NPC() : base()
         {
-            BaseAbilities = new AbilitySet();
-
-            Events = new Dictionary<EventType, Event>();
-            Immunities = null;
-            InflictedAilments = new List<StatusEffect>();
-            Moves = new List<Move>();
-
-            Name = "";
             Description = "";
-            Specibus = "";
         }
 
         public NPC(XElement element) : this()
@@ -147,6 +135,7 @@ namespace HSRP
             XElement events = new XElement("events");
             foreach (KeyValuePair<EventType, Event> evnt in Events)
             {
+                if (evnt.Value == Event.WakeUpAfterHit) { continue; }
                 XElement ailEle = evnt.Value.Save();
                 ailEle.Add(new XAttribute("trigger", evnt.Key.ToString()));
 

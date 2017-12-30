@@ -18,4 +18,9 @@
     -->
     <message>{0} stole {4} health from {1} to heal themselves for {5} health. Also gave {1} AIDS.</message>
   </event>
+
+  <!-- Template. Applied to all entities automatically. -->
+  <event trigger="OnAttacked" probability="0.25">
+    <cure name="Sleeping" type="Self" />
+  </event>
 </events>

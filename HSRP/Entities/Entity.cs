@@ -22,8 +22,22 @@ namespace HSRP
         public bool Dead { get; set; }
 
         public string Specibus { get; set; }
-        public virtual Item EquippedWeapon { set; get; }
         public virtual int DiceRolls { set; get; }
+
+        protected Entity()
+        {
+            BaseAbilities = new AbilitySet();
+
+            Events = new Dictionary<EventType, Event>();
+            Immunities = null;
+            InflictedAilments = new List<StatusEffect>();
+            Moves = new List<Move>();
+
+            Name = "";
+            Specibus = "";
+
+            Events.Add(EventType.OnAttacked, Event.WakeUpAfterHit);
+        }
 
         public abstract string Display(bool showMods);
 

@@ -53,11 +53,12 @@
 
   <ailment name="MindControl" turns="4" controller="0">
     <inflictMsg>{0} is being mind-controlled by {1}!</inflictMsg>
-    <inflictMsg>{0} is no longer mind-controlled!</inflictMsg>
+    <endMsg>{0} is no longer mind-controlled!</endMsg>
   </ailment>
 
-  <ailment name="Sleep" turns="4" controller="0">
-    <inflictMsg>{0} is being mind-controlled by {1}!</inflictMsg>
-    <inflictMsg>{0} is no longer mind-controlled!</inflictMsg>
+  <ailment name="Sleeping" turns="4">
+    <inflictMsg>{0} fell asleep!</inflictMsg>
+    <statusMsg>{0} is still sleeping!</statusMsg>
+    <endMsg>{0} woke up!</endMsg>
   </ailment>
 </root>

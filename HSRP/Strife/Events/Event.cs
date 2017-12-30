@@ -9,6 +9,18 @@ namespace HSRP
     /// </summary>
     public class Event
     {
+        public static Event WakeUpAfterHit
+        {
+            get
+            {
+                Event evnt = new Event();
+                evnt.probability = 0.25f;
+                evnt.removeEffects.Add(new Tuple<TargetType, string>(TargetType.Self, Constants.SLEEPING_AIL));
+
+                return evnt;
+            }
+        }
+
         /// <summary>
         /// Contains the type of target the status effect should affect and the name of the status effects invoked when this event is triggered.
         /// </summary>
@@ -361,20 +373,20 @@ namespace HSRP
                 {
                     case TargetType.Self:
                     {
-                        ent.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                        StatusEffect.RemoveStatusEffect(ent, tup.Item2);
                     }
                     break;
 
                     case TargetType.Target:
                     {
-                        tar.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                        StatusEffect.RemoveStatusEffect(tar, tup.Item2);
                     }
                     break;
 
                     case TargetType.Self | TargetType.Target:
                     {
-                        ent.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
-                        tar.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                        StatusEffect.RemoveStatusEffect(ent, tup.Item2);
+                        StatusEffect.RemoveStatusEffect(tar, tup.Item2);
                     }
                     break;
 
@@ -382,7 +394,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
                         {
-                            strifer.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                            StatusEffect.RemoveStatusEffect(strifer, tup.Item2);
                         }
                     }
                     break;
@@ -391,7 +403,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
                         {
-                            strifer.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                            StatusEffect.RemoveStatusEffect(strifer, tup.Item2);
                         }
                     }
                     break;
@@ -400,7 +412,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in strife.Entities)
                         {
-                            strifer.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == tup.Item2.ToLowerInvariant());
+                            StatusEffect.RemoveStatusEffect(strifer, tup.Item2);
                         }
                     }
                     break;

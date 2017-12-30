@@ -5,6 +5,7 @@ using System.Xml.Linq;
 
 namespace HSRP
 {
+    // TODO: Add thing for preventing moves.
     public class StatusEffect
     {
         // Inflict damage stuff.
@@ -173,14 +174,12 @@ namespace HSRP
         /// Removes the status effect from the specified entity.
         /// </summary>
         /// <returns>The log of the event.</returns>
-        // TODO: Make sure the strife object gets this log.
         public static string RemoveStatusEffect(Entity ent, string name)
         {
             StatusEffect sa = ent.InflictedAilments.FirstOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
 
             if (sa == null)
             {
-                Console.WriteLine("STRIFE ERROR: Attemted to remove ailment \"" + name + "\" from user \"" + ent.Name + "\" who did not have it.");
                 return string.Empty;
             }
 

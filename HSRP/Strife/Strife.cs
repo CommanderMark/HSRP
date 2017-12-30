@@ -469,6 +469,7 @@ namespace HSRP
         /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
         /// <param name="reason">The reason for a turn being rejected if done so.</param>
         /// <returns>Whether or not the action is valid.</returns>
+        // TODO: Add moves check for burning.
         public bool ValidateTurn(StrifeAction action, int targetNum, bool targetingAttackers, Player plyr, out string reason)
         {
             Entity attacker = CurrentEntity;
@@ -547,18 +548,21 @@ namespace HSRP
 
             // Update status effects.
             bool skipturn = false;
-            foreach (StatusEffect sa in attacker.InflictedAilments)
+            for (int i = 0; i < attacker.InflictedAilments.Count; i++)
             {
+                StatusEffect sa = attacker.InflictedAilments[i];
                 Tuple<bool, bool> tup = sa.Update(attacker, target, attackTurn, this);
                 if (tup.Item1)
                 {
-                    StatusEffect.RemoveStatusEffect(target, sa.Name);
+                    Log.AppendLine(StatusEffect.RemoveStatusEffect(attacker, sa.Name));
+                    --i;
                 }
 
                 skipturn |= tup.Item2;
             }
 
-            if (!skipturn && attacker.Health >= 1)
+            bool killedbyStatusEffect = attacker.Health < 1;
+            if (!skipturn && !killedbyStatusEffect)
             {
                 switch (action)
                 {
@@ -588,11 +592,16 @@ namespace HSRP
             {
                 LeaveStrife(attacker);
                 attacker.TriggerEvent(EventType.OnDeath, target, attackTurn, this);
+                if (!killedbyStatusEffect)
+                {
+                    target.TriggerEvent(EventType.OnKill, attacker, !attackTurn, this);
+                }
             }
             if (target.Health < 1 && !target.Dead)
             {
                 LeaveStrife(target);
                 target.TriggerEvent(EventType.OnDeath, attacker, !attackTurn, this);
+                attacker.TriggerEvent(EventType.OnKill, target, attackTurn, this);
             }
 
             UpdateTurn();
@@ -820,17 +829,17 @@ namespace HSRP
 
         // Mental: XDPSI --> XDFOR 3 times in a row.
         // TODO: Mind control can break somehow?
-        private void MindControl(IEntity attacker, IEntity target)
+        private void MindControl(Entity attacker, Entity target)
         {
-            log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} attempts to mind control {Syntax.ToCodeLine(target.Name)}.\n");
+            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} attempts to mind control {Syntax.ToCodeLine(target.Name)}.\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
-            int atkY = attacker.TotalAbilities.Psion;
+            int atkY = attacker.GetTotalAbilities().Psion;
 
             // Target XDY roll.
             int tarX = target.DiceRolls;
-            int tarY = target.TotalAbilities.Fortitude;
+            int tarY = target.GetTotalAbilities().Fortitude;
 
             // Dice rolls.
             int[] atk = new int[3];
@@ -844,33 +853,42 @@ namespace HSRP
                 if (tar[i] >= atk[i]) { success = false; }
             }
 
-            log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
-            log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar[0]}, {tar[1]}, {tar[2]}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar[0]}, {tar[1]}, {tar[2]}!");
 
             int atkTotal = atk[0] + atk[1] + atk[2];
             int tarTotal = tar[0] + tar[1] + tar[2];
             // Mind control wooo.
             if (success)
             {
-                target.Controller = attacker.ID;
-                log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} has successfully mind controlled {Syntax.ToCodeLine(target.Name)}.");
+                // Or not???
+                if (Toolbox.RandFloat(0f, 1.0f) < 5.0f)
+                {
+                    // NANI?!?
+                    target.ApplyStatusEffect(Constants.SLEEPING_AIL, attacker, !attackTurn, this);
+                }
+                else
+                {
+                    target.ApplyStatusEffect(Constants.MIND_CONTROL_AIL, attacker, !attackTurn, this);
+                }
             }
             else
             {
-                log.AppendLine("Mind control failed.");
+                Log.AppendLine("Mind control failed.");
             }
         }
-        private void OpticBlast(IEntity attacker, IEntity target)
+
+        private void OpticBlast(Entity attacker, Entity target)
         {
-            log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} is preparing an Optic Blast.\n");
+            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} is preparing an Optic Blast.\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
-            int atkY = attacker.TotalAbilities.Psion;
+            int atkY = attacker.GetTotalAbilities().Psion;
 
             // Target XDY roll.
             int tarX = target.DiceRolls;
-            int tarY = target.TotalAbilities.Fortitude;
+            int tarY = target.GetTotalAbilities().Fortitude;
 
             // Dice rolls.
             int[] atk = new int[3];
@@ -882,8 +900,8 @@ namespace HSRP
                 tar[i] = Toolbox.DiceRoll(tarX, tarY);
             }
 
-            log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
-            log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar[0]}, {tar[1]}, {tar[2]}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar[0]}, {tar[1]}, {tar[2]}!");
 
             int atkTotal = atk[0] + atk[1] + atk[2];
             int tarTotal = tar[0] + tar[1] + tar[2];
@@ -892,11 +910,14 @@ namespace HSRP
             {
                 int dmg = atkTotal - tarTotal;
                 target.Health -= dmg;
-                log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} struck {Syntax.ToCodeLine(target.Name)} for {Syntax.ToCodeLine(dmg.ToString())} hitpoints.");
+                Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} struck {Syntax.ToCodeLine(target.Name)} for {Syntax.ToCodeLine(dmg.ToString())} hitpoints.");
+
+                attacker.TriggerEvent(EventType.OnHit, target, attackTurn, this);
+                target.TriggerEvent(EventType.OnAttacked, attacker, !attackTurn, this);
             }
             else
             {
-                log.AppendLine("Optic Blast missed.");
+                Log.AppendLine("Optic Blast missed.");
             }
         }
 
@@ -906,7 +927,7 @@ namespace HSRP
         // Roll 1DPER to debuff FOR for 1 turn.
         // Roll 1DINT to debuff INT for 1 turn.
         // If STR or FOR reach 0 they leave the strife.
-        private void SpeechAttack(IEntity attacker, IEntity target)
+        private void SpeechAttack(Entity attacker, Entity target)
         {
             log.AppendLine(Toolbox.GetMessage("speStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)) + "\n");
 

@@ -27,7 +27,7 @@ namespace HSRP
         public BloodType BloodColor { get; set; }
 
         // TODO: xml and implement its events
-        public override Item EquippedWeapon
+        public Item EquippedWeapon
         {
             get
             {
@@ -67,19 +67,9 @@ namespace HSRP
 
         public bool Errored { get; set; }
 
-        public Player()
+        public Player() : base()
         {
-            BaseAbilities = new AbilitySet();
-
-            Events = new Dictionary<EventType, Event>();
-            Immunities = null;
-            InflictedAilments = new List<StatusEffect>();
-            Moves = new List<Move>();
-
             Inventory = new List<Item>();
-
-            Name = "";
-            Specibus = "";
         }
 
         public Player(IUser user) : this(user.Id.ToString()) { }
@@ -218,6 +208,7 @@ namespace HSRP
             XElement events = new XElement("events");
             foreach (KeyValuePair<EventType, Event> evnt in Events)
             {
+                if (evnt.Value == Event.WakeUpAfterHit) { continue; }
                 XElement ailEle = evnt.Value.Save();
                 ailEle.Add(new XAttribute("trigger", evnt.Key.ToString()));
 
