@@ -50,4 +50,14 @@
 
     <inflictMsg>{0}'s current strength was halfed!</inflictMsg>
   </ailment>
+
+  <ailment name="MindControl" turns="4" controller="0">
+    <inflictMsg>{0} is being mind-controlled by {1}!</inflictMsg>
+    <inflictMsg>{0} is no longer mind-controlled!</inflictMsg>
+  </ailment>
+
+  <ailment name="Sleep" turns="4" controller="0">
+    <inflictMsg>{0} is being mind-controlled by {1}!</inflictMsg>
+    <inflictMsg>{0} is no longer mind-controlled!</inflictMsg>
+  </ailment>
 </root>
