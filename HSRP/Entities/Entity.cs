@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HSRP
 {
@@ -105,27 +106,23 @@ namespace HSRP
                 }
             }
 
-            // Check that it is not an immediate explosion or invalid.
+            // Check that it is not an immediate status effect.
             if (sa.Turns < 0)
             {
-                if (!sa.Explodes)
-                {
-                    Console.WriteLine("STRIFE ERROR: invalid turn count!"
-                        + " (Name: " + sa.Name + ", TurnCount: " + sa.Turns + sa.MaxDamagePercentage + ")");
-
-                    return;
-                }
-                else
-                {
-                    // Boom boom now.
-                    return strife.Explosion(sa.InflictMsg, sa.Explosion, this, tar, attackTeam, strife, StatusEffect.EXPLOSION_FALLOFF_FACTOR);
-                }
+                sa.Update(this, tar, attackTeam, strife);
             }
 
             this.InflictedAilments.Add(sa);
+
             if (!string.IsNullOrWhiteSpace(sa.InflictMsg))
             {
                 strife.Log.AppendLine(GetEntityMessage(sa.InflictMsg, Syntax.ToCodeLine(this.Name), Syntax.ToCodeLine(tar.Name), Syntax.ToCodeLine(sa.Name)));
+            }
+
+            // If the status effect makes you immune to anything then cure them immediately.
+            foreach (string cure in sa.Immunities)
+            {
+                StatusEffect.RemoveStatusEffect(this, cure);
             }
         }
 

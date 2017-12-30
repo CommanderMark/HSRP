@@ -4,13 +4,13 @@ namespace HSRP
 {
     public class Explosion
     {
-        public TargetType ExplosionTarget;
-        public float ExplosionDamage;
+        public TargetType Target;
+        public float Damage;
 
         public Explosion()
         {
-            ExplosionTarget = TargetType.Self;
-            ExplosionDamage = 0f;
+            Target = TargetType.Self;
+            Damage = 0f;
         }
 
         public Explosion(XElement element) : this()
@@ -18,15 +18,15 @@ namespace HSRP
             TargetType[] enumArr = element.GetAttributeEnumArray("type", new TargetType[0]);
             foreach(TargetType enumi in enumArr)
             {
-                ExplosionTarget |= enumi;
+                Target |= enumi;
             }
-            ExplosionDamage = element.GetAttributeFloat("damage", 0f);
+            Damage = element.GetAttributeFloat("damage", 0f);
         }
 
         public Explosion(Explosion ex)
         {
-            ExplosionTarget = ex.ExplosionTarget;
-            ExplosionDamage = ex.ExplosionDamage;
+            Target = ex.Target;
+            Damage = ex.Damage;
         }
     }
 }

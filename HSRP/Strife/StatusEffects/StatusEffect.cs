@@ -34,6 +34,7 @@ namespace HSRP
         public string InflictMsg = string.Empty;
         public string StatusMsg = string.Empty;
         public string EndMsg = string.Empty;
+        private string description = string.Empty;
 
         //TODO:1`00% next to.
         public const int EXPLOSION_FALLOFF_FACTOR = 2;
@@ -83,6 +84,12 @@ namespace HSRP
                     }
                     break;
 
+                    case "description":
+                    {
+                        description = ele.ElementInnerText();
+                    }
+                    break;
+
                     case "abilities":
                     {
                         Modifiers = new AbilitySet(ele);
@@ -114,6 +121,7 @@ namespace HSRP
             this.InflictMsg = sa.InflictMsg;
             this.StatusMsg = sa.StatusMsg;
             this.EndMsg = sa.EndMsg;
+            this.description = sa.description;
         }
 
         public XElement Save()
@@ -127,6 +135,95 @@ namespace HSRP
             return ailment;
         }
 
+        public string Display()
+        {
+            StringBuilder result = new StringBuilder();
+            string indent = "  ";
+
+            result.AppendLine(Name + ":");
+            if (!string.IsNullOrWhiteSpace(description))
+            {
+                result.AppendLine("Description: " + description);
+            }
+
+            if (Turns >= 0)
+            {
+                result.AppendLine($"Lasts {Turns + 1} turns.");
+            }
+            else
+            {
+                result.AppendLine($"This status effect is applied immediately instead of over multiple turns.");
+            }
+
+            result.AppendLine();
+            if (inflictsDamage)
+            {
+                result.AppendLine(indent + $"Does between {MinDamagePercentage}-{MinDamagePercentage}% of the user's max health in damage each turn.");
+            }
+            if (skipsTurn)
+            {
+                result.AppendLine(indent + "Skips the user's turn.");
+            }
+            if (Controller != 0)
+            {
+                result.AppendLine(indent + "Invokes mind-control on the user by whoever inflicts the status effect.");
+            }
+            if (Explodes)
+            {
+                result.Append("Causes an explosion. ");
+                switch (Explosion.Target)
+                {
+                    case TargetType.Self:
+                    {
+                        result.AppendLine("Only affects the user themself.");
+                    }
+                    break;
+
+                    case TargetType.Target:
+                    {
+                        result.AppendLine("Only affects the user's target.");
+                    }
+                    break;
+
+                    case TargetType.Self | TargetType.Target:
+                    {
+                        result.AppendLine("Only affects the user and their target.");
+                    }
+                    break;
+
+                    case TargetType.All | TargetType.Self:
+                    {
+                        result.AppendLine("Only affects the user's target's team.");
+                    }
+                    break;
+
+                    case TargetType.All | TargetType.Target:
+                    {
+                        result.AppendLine("Only affects the user's team.");
+                    }
+                    break;
+
+                    case TargetType.All:
+                    {
+                        result.AppendLine("Affects every entity in the strife.");
+                    }
+                    break;
+                }
+            }
+
+            if (!Immunities.Any())
+            {
+                result.Append("Cures you of " + Immunities[0]);
+                for (int i = 1; i < Immunities.Count(); i++)
+                {
+                    result.Append(", " + Immunities[i]);
+                }
+                result.AppendLine(".");
+            }
+
+            return result.ToString();
+        }
+
         /// <summary>
         /// Goes through a cycle of the given status effect.
         /// </summary>
@@ -137,26 +234,22 @@ namespace HSRP
         /// <returns>A tuple containing whether the effect is removed this turn and whether the player's turn is skipped.</returns>
         public Tuple<bool, bool> Update(Entity ent, Entity tar, bool attackTeam, Strife strife)
         {
+            int dmg = 0;
             if (inflictsDamage)
             {
                 // Pick a value to inflict.
                 float per = Toolbox.RandFloat(MinDamagePercentage, MaxDamagePercentage);
-                int dmg = ent.InflictDamageByPercentage(per);
-
-                strife.Log.AppendLine(Entity.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(dmg.ToString()), Syntax.ToCodeLine(this.Name)));
+                dmg = ent.InflictDamageByPercentage(per);
             }
 
-            if (skipsTurn)
+            if (!string.IsNullOrWhiteSpace(StatusMsg))
             {
-                if (!string.IsNullOrWhiteSpace(StatusMsg))
-                {
-                    strife.Log.AppendLine(Entity.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), "{1}", Syntax.ToCodeLine(this.Name)));
-                }
+                strife.Log.AppendLine(Entity.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(dmg.ToString()), Syntax.ToCodeLine(this.Name)));
             }
 
             if (Turns == 0 && Explodes)
             {
-                strife.Log.AppendLine(strife.Explosion(StatusMsg, Explosion, ent, tar, attackTeam, strife, EXPLOSION_FALLOFF_FACTOR));
+                strife.Log.AppendLine(strife.Explosion(Explosion, ent, tar, attackTeam, strife, EXPLOSION_FALLOFF_FACTOR));
             }
 
             --Turns;

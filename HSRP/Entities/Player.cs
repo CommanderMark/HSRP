@@ -243,17 +243,17 @@ namespace HSRP
             result.AppendLine("Name: " + Name);
             result.AppendLine($"Owned by: {OwnerUsername} ({ID})");
             result.AppendLine("Blood Color: " + BloodColor);
-            result.AppendLine("");
+            result.AppendLine();
 
             result.AppendLine("Health Vial: " + Health + "/" + MaxHealth);
             result.AppendLine("Strife Specibus: " + Specibus);
-            result.AppendLine("");
+            result.AppendLine();
 
             result.AppendLine("Echeladder Rung: " + Echeladder);
             result.AppendLine("Total XP: " + XP);
             result.AppendLine("Next Level In: " + (NextLevelXP - XP));
             result.AppendLine("Pending Skill Points: " + PendingSkillPointAllocations);
-            result.AppendLine("");
+            result.AppendLine();
 
             result.AppendLine("Base Statistics");
             result.AppendLine(showMods

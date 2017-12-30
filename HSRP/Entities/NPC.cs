@@ -152,15 +152,15 @@ namespace HSRP
 
             result.AppendLine("Name: " + Name);
             result.AppendLine("Type: " + Type.ToString());
-            result.AppendLine("");
+            result.AppendLine();
             
             result.AppendLine("Description: " + Description);
-            result.AppendLine("");
+            result.AppendLine();
 
             result.AppendLine("Health Vial: " + Health + "/" + MaxHealth);
             result.AppendLine("Strife Specibus: " + Specibus);
             result.AppendLine("Dice Rolls: " + DiceRolls);
-            result.AppendLine("");
+            result.AppendLine();
 
             result.AppendLine("Base Statistics");
             result.AppendLine(showMods

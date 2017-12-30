@@ -96,14 +96,13 @@ namespace HSRP.Commands
                 return;
             }
 
-            if (item.Equipped)
+            if (item.Name == plyr.EquippedWeapon.Name)
             {
                 await ReplyAsync("This item is already equipped.");
                 return;
             }
 
-            item.Equipped = true;
-            plyr.Inventory[index] = item;
+            plyr.EquippedWeapon = item;
 
             plyr.Save();
             string log = Syntax.ToCodeLine(item.Name) + " was equipped to " + Syntax.ToCodeLine(plyr.Name) + ".";
