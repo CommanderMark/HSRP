@@ -2,6 +2,8 @@ using Discord.Commands;
 using System.Threading.Tasks;
 using System.IO;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace HSRP.Commands
 {
@@ -32,8 +34,20 @@ namespace HSRP.Commands
         }
 
         [Command("action"), InStrife]
-        public async Task Action(string who, int index, StrifeAction sa)
+        public async Task Action(string who, int index, string action)
         {
+            // Figure out whether this is a pre-defined strife action or a move.
+            // TODO: Moves.
+            IEnumerable<StrifeAction> fields = Enum.GetValues(typeof(StrifeAction)).Cast<StrifeAction>();
+            foreach (StrifeAction sa in fields)
+            {
+                if (sa.ToString().StartsWith(action, StringComparison.OrdinalIgnoreCase))
+                {
+                    action = sa.ToString();
+                    break;
+                }
+            }
+
             Strife strf = Context.GetStrife();
             Player plyr = Context.GetPlayerEntity();
 
@@ -53,9 +67,9 @@ namespace HSRP.Commands
                 return;
             }
 
-            if (strf.ValidateTurn(sa, index, attackAtks, plyr, out string reason))
+            if (strf.ValidateTurn(action, index, attackAtks, plyr, out string reason))
             {
-                await ReplyStrifeAsync(strf.TakeTurn(sa, index, attackAtks));
+                await ReplyStrifeAsync(strf.TakeTurn(action, index, attackAtks));
 
                 // Keep updating the strife until a human is next.
                 await UpdateStrifeUntilHumanAsync(strf);

@@ -470,10 +470,11 @@ namespace HSRP
         /// <param name="reason">The reason for a turn being rejected if done so.</param>
         /// <returns>Whether or not the action is valid.</returns>
         // TODO: Add moves check for burning.
-        public bool ValidateTurn(StrifeAction action, int targetNum, bool targetingAttackers, Player plyr, out string reason)
+        public bool ValidateTurn(string action, int targetNum, bool targetingAttackers, Player plyr, out string reason)
         {
             Entity attacker = CurrentEntity;
             Entity target = GetTarget(targetNum, targetingAttackers);
+            StrifeAction sa = (StrifeAction)Enum.Parse(typeof(StrifeAction), action);
 
             NPC npcAtk = attacker as NPC;
             NPC npcTar = target as NPC;
@@ -507,7 +508,7 @@ namespace HSRP
             }
 
             // Are they trying to mind-control while mind-controlling?
-            if (attacker.GetMindController() > 0 && action == StrifeAction.MindControl)
+            if (attacker.GetMindController() > 0 && sa == StrifeAction.MindControl)
             {
                 reason = "Invalid attack. Cannot mind-control while controlling someone else.";
                 return false;
@@ -515,7 +516,7 @@ namespace HSRP
 
             // Are they trying to use a lusus to perform psionic attacks?
             if (npcAtk != null && npcAtk.Type == NPCType.Lusus
-                && !(action == StrifeAction.PhysicalAttack || action == StrifeAction.Guard)
+                && (sa == StrifeAction.MindControl || sa == StrifeAction.OpticBlast || sa == StrifeAction.SpeechAttack)
                 )
             {
                 reason = "Invalid attack. A lusus cannot perform psionic or speech attacks.";
@@ -523,7 +524,7 @@ namespace HSRP
             }
 
             // Are they trying to intimidate a lusus?
-            if (npcTar != null && npcTar.Type == NPCType.Lusus && action == StrifeAction.SpeechAttack)
+            if (npcTar != null && npcTar.Type == NPCType.Lusus && sa == StrifeAction.SpeechAttack)
             {
                 reason = "Invalid attack. Cannot indimidate lusus.";
                 return false;
