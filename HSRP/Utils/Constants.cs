@@ -33,6 +33,7 @@
         public const string MIND_CONTROL_AIL = "MindControl";
         public const string SLEEPING_AIL = "Sleeping";
         public const string PHYSICAL_COUNTER_AIL = "CounterPhy";
+        public const string SPE_ATTACK_AIL = "SpeAttack";
     }
 
     public static class Dirs

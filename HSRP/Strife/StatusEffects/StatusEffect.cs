@@ -99,6 +99,7 @@ namespace HSRP
             }
         }
 
+        public StatusEffect() { }
         public StatusEffect(StatusEffect sa)
         {
             this.inflictsDamage = sa.inflictsDamage;
@@ -131,6 +132,11 @@ namespace HSRP
                 new XAttribute("controller", Controller),
                 new XAttribute("turns", Turns)
                 );
+            
+            if (!Modifiers.Equals(new AbilitySet()))
+            {
+                ailment.Add(Modifiers.ToXmlWithoutEmpties());
+            }
 
             return ailment;
         }
@@ -269,17 +275,12 @@ namespace HSRP
         /// <returns>The log of the event.</returns>
         public static string RemoveStatusEffect(Entity ent, string name)
         {
-            StatusEffect sa = ent.InflictedAilments.FirstOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
-
-            if (sa == null)
-            {
-                return string.Empty;
-            }
-
-            string msg = sa.EndMsg;
             ent.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
 
-            return msg;
+            StatusEffect sa = ent.InflictedAilments.FirstOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
+            return sa == null
+                ? string.Empty
+                : sa.EndMsg;
         }
 
         public static bool TryParse(string name, out StatusEffect sa)
@@ -296,12 +297,13 @@ namespace HSRP
         }
 
 
-        public static bool TryParse(string name, out StatusEffect sa, ulong controller, int turns)
+        public static bool TryParse(string name, out StatusEffect sa, ulong controller, int turns, AbilitySet set)
         {
             if (TryParse(name, out sa))
             {
                 sa.Controller = controller;
                 sa.Turns = turns;
+                sa.Modifiers = set;
 
                 return true;
             }

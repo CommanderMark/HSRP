@@ -37,21 +37,6 @@
     <endMsg>{0} is no longer "{1}"!</endMsg>
   </ailment>
 
-  <!-- Debuff for PhysicalAttack counter attack. -->
-  <ailment name="CounterPhy" turns="1">
-    <abilities type="Division">
-      <strength value="2" />
-      <constitution value="1" />
-      <psion value="1" />
-      <fortitude value="1" />
-      <intimidation value="1" />
-      <persuasion value="1" />
-    </abilities>
-
-    <inflictMsg>{0}'s current strength was halfed!</inflictMsg>
-    <description>Halfs the user's strength.</description>
-  </ailment>
-
   <ailment name="MindControl" turns="4" controller="-1">
     <inflictMsg>{0} is being mind-controlled by {1}!</inflictMsg>
     <endMsg>{0} is no longer mind-controlled!</endMsg>

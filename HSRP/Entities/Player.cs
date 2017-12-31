@@ -129,14 +129,23 @@ namespace HSRP
                         {
                             foreach (XElement strifeEle in ele.Elements("ailment"))
                             {
-                                string ailName = XmlToolbox.GetAttributeString(strifeEle, "name", string.Empty);
-                                ulong ailController = XmlToolbox.GetAttributeUnsignedLong(strifeEle, "controller", 0);
-                                int ailTurns = XmlToolbox.GetAttributeInt(strifeEle, "turns", 0);
+                                string ailName = strifeEle.GetAttributeString("name", string.Empty);
+                                ulong ailController = strifeEle.GetAttributeUnsignedLong("controller", 0);
+                                int ailTurns = strifeEle.GetAttributeInt("turns", 0);
+                                XElement abEle = strifeEle.Element("abilities");
+                                AbilitySet set = abEle != null
+                                    ? new AbilitySet(abEle)
+                                    : new AbilitySet();
 
-                                if (StatusEffect.TryParse(ailName, out StatusEffect sa, ailController, ailTurns))
+                                if (!StatusEffect.TryParse(ailName, out StatusEffect sa, ailController, ailTurns, set))
                                 {
-                                    InflictedAilments.Add(sa);
+                                    sa = new StatusEffect();
+                                    sa.Name = ailName;
+                                    sa.Controller = ailController;
+                                    sa.Turns = ailTurns;
+                                    sa.Modifiers = set;
                                 }
+                                InflictedAilments.Add(sa);
                             }
                         }
                         break;
@@ -376,7 +385,7 @@ namespace HSRP
         public void LevelUp()
         {
             Echeladder++;
-            int hp = Toolbox.DiceRoll(1, 6 + BaseAbilities.Constitution);
+            int hp = Toolbox.DiceRoll(1, 6 + BaseAbilities.Constitution.Value);
             MaxHealth += hp;
             Health += hp;
 

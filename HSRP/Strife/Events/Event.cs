@@ -149,12 +149,12 @@ namespace HSRP
 
             XElement inflictDamage = new XElement("inflictDamage",
                 new XAttribute("amount", damageAmount),
-                new XAttribute("type", damageTarget.ToString())
+                new XAttribute("type", String.Join(",", damageTarget.GetIndividualFlags()))
                 );
 
             XElement healDamage = new XElement("healDamage",
                 new XAttribute("amount", healAmount),
-                new XAttribute("type", healTarget.ToString())
+                new XAttribute("type", String.Join(",", healTarget.GetIndividualFlags()))
                 );
 
             eventEle.Add(inflictDamage, healDamage);
@@ -163,7 +163,7 @@ namespace HSRP
             {
                 eventEle.Add(new XElement("ailment",
                                           new XAttribute("name", tup.Item2),
-                                          new XAttribute("type", tup.Item1.ToString())
+                                          new XAttribute("type", String.Join(",", tup.Item1.GetIndividualFlags()))
                                          )
                             );
             }
@@ -172,7 +172,7 @@ namespace HSRP
             {
                 eventEle.Add(new XElement("cure",
                                           new XAttribute("name", tup.Item2),
-                                          new XAttribute("type", tup.Item1.ToString())
+                                          new XAttribute("type", String.Join(",", tup.Item1.GetIndividualFlags()))
                                          )
                             );
             }

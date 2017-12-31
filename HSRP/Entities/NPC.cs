@@ -70,11 +70,20 @@ namespace HSRP
                             string ailName = strifeEle.GetAttributeString("name", string.Empty);
                             ulong ailController = strifeEle.GetAttributeUnsignedLong("controller", 0);
                             int ailTurns = strifeEle.GetAttributeInt("turns", 0);
+                            XElement abEle = strifeEle.Element("abilities");
+                            AbilitySet set = abEle != null
+                                ? new AbilitySet(abEle)
+                                : new AbilitySet();
 
-                            if (StatusEffect.TryParse(ailName, out StatusEffect sa, ailController, ailTurns))
+                            if (!StatusEffect.TryParse(ailName, out StatusEffect sa, ailController, ailTurns, set))
                             {
-                                InflictedAilments.Add(sa);
+                                sa = new StatusEffect();
+                                sa.Name = ailName;
+                                sa.Controller = ailController;
+                                sa.Turns = ailTurns;
+                                sa.Modifiers = set;
                             }
+                            InflictedAilments.Add(sa);
                         }
                         break;
 

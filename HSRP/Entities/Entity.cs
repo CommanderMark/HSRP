@@ -77,7 +77,18 @@ namespace HSRP
             {
                 return;
             }
+            ApplyStatusEffect(sa, tar, attackTeam, strife);
+        }
 
+        /// <summary>
+        /// Applies a status effect to an entity.
+        /// </summary>
+        /// <param name="sa">The status effect.</param>
+        /// <param name="tar">The entity the user was targeting or targeted by when the effect was applied.</param>
+        /// <param name="attackTeam">Boolean stating whether the entity is on the attacking team or not.</param>
+        /// <param name="strife">The strife object itself.</param>
+        public void ApplyStatusEffect(StatusEffect sa, Entity tar, bool attackTeam, Strife strife)
+        {
             // Are they immune?
             foreach (string name in this.Immunities)
             {
@@ -105,6 +116,9 @@ namespace HSRP
                     }
                 }
             }
+
+            // If the modifier affects a percentage of health convert it to a fixed number.
+            sa.Modifiers = AbilitySet.ToFixedNumber(sa.Modifiers, this.BaseAbilities);
 
             // Check that it is not an immediate status effect.
             if (sa.Turns < 0)

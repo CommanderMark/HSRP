@@ -25,13 +25,20 @@ namespace HSRP
             int total = 0;
             for (int i = 0; i < rolls; i++)
             {
-                total += RandInt(1, dieType + 1);
+                total += RandInt(1, dieType);
             }
 
             return total;
         }
 
         private static readonly RandomNumberGenerator generator = RandomNumberGenerator.Create();
+
+        /// <summary>
+        /// Returns a random number within the range, inclusive
+        /// </summary>
+        /// <param name="minimumValue">min number</param>
+        /// <param name="maximumValue">max number, inclusive</param>
+        // TODO: Check if inclusive.
         public static int RandInt(int minimumValue, int maximumValue)
         {
             byte[] randomNumber = new byte[1];

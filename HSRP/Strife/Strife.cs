@@ -750,11 +750,11 @@ namespace HSRP
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
-            int atkY = attacker.GetTotalAbilities().Strength;
+            int atkY = attacker.GetTotalAbilities().Strength.Value;
 
             // Target XDY roll.
             int tarX = target.DiceRolls;
-            int tarY = target.GetTotalAbilities().Constitution;
+            int tarY = target.GetTotalAbilities().Constitution.Value;
 
             // Dice rolls.
             int atk = Toolbox.DiceRoll(atkX, atkY);
@@ -790,8 +790,8 @@ namespace HSRP
             }
 
             // Counter attack.
-            // If the strength modifier of the attacker is already debuffed below a third then don't debuff.
-            if ((attacker.BaseAbilities.Strength / 3) > attacker.GetTotalAbilities().Strength)
+            // If the strength modifier of the attacker is already debuffed below 1 then don't debuff.
+            if (attacker.GetTotalAbilities().Strength.Value < 1)
             {
                 Log.AppendLine("");
                 Log.AppendLine(Toolbox.GetMessage("phyCounterMax", Syntax.ToCodeLine(attacker.Name)));
@@ -799,7 +799,7 @@ namespace HSRP
             }
             else
             {
-                tarY = target.GetTotalAbilities().Persuasion;
+                tarY = target.GetTotalAbilities().Persuasion.Value;
 
                 // 25% chance to counter. Increased by an addition 25 if the target's persuasion
                 // is higher than the attacker's strength.
@@ -822,7 +822,8 @@ namespace HSRP
                     // Counter suceeded, debuff strength.
                     else
                     {
-                        attacker.ApplyStatusEffect(Constants.PHYSICAL_COUNTER_AIL, target, attackTurn, this);
+                        int debuff = Math.Max(- (tar - atk), -tarY);
+                        ApplyMod(attacker, Constants.PHYSICAL_COUNTER_AIL, Ability.STR, debuff, 1, target, attackTurn);
                     }
                 }
             }
@@ -836,11 +837,11 @@ namespace HSRP
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
-            int atkY = attacker.GetTotalAbilities().Psion;
+            int atkY = attacker.GetTotalAbilities().Psion.Value;
 
             // Target XDY roll.
             int tarX = target.DiceRolls;
-            int tarY = target.GetTotalAbilities().Fortitude;
+            int tarY = target.GetTotalAbilities().Fortitude.Value;
 
             // Dice rolls.
             int[] atk = new int[3];
@@ -885,11 +886,11 @@ namespace HSRP
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
-            int atkY = attacker.GetTotalAbilities().Psion;
+            int atkY = attacker.GetTotalAbilities().Psion.Value;
 
             // Target XDY roll.
             int tarX = target.DiceRolls;
-            int tarY = target.GetTotalAbilities().Fortitude;
+            int tarY = target.GetTotalAbilities().Fortitude.Value;
 
             // Dice rolls.
             int[] atk = new int[3];
@@ -930,26 +931,26 @@ namespace HSRP
         // If STR or FOR reach 0 they leave the strife.
         private void SpeechAttack(Entity attacker, Entity target)
         {
-            log.AppendLine(Toolbox.GetMessage("speStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)) + "\n");
+            Log.AppendLine(Toolbox.GetMessage("speStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)) + "\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
-            int atkY = attacker.TotalAbilities.Intimidation + attacker.TotalAbilities.Strength;
+            int atkY = attacker.GetTotalAbilities().Intimidation.Value + attacker.GetTotalAbilities().Strength.Value;
 
             // Target XDY roll.
             int tarX = target.DiceRolls;
-            int tarY = target.TotalAbilities.Persuasion + target.TotalAbilities.Fortitude;
+            int tarY = target.GetTotalAbilities().Persuasion.Value + target.GetTotalAbilities().Fortitude.Value;
 
             // Dice rolls.
             int atk = Toolbox.DiceRoll(atkX, atkY);
             int tar = Toolbox.DiceRoll(tarX, tarY);
-            log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
-            log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
             
             // Attack rolls higher, random chance begins.
             if (atk > tar)
             {
-                int rng = Toolbox.RandInt(2, true);
+                int rng = Toolbox.RandInt(0, 2);
                 int debuff = 0;
                 string stat = "";
                 switch (rng)
@@ -957,57 +958,58 @@ namespace HSRP
                     // Roll 1DINT to debuff STR for 3 turns.
                     case 0:
                         {
-                            int y = attacker.TotalAbilities.Intimidation;
+                            int y = attacker.GetTotalAbilities().Intimidation.Value;
                             debuff = Toolbox.DiceRoll(1, y);
-                            debuff = Math.Min(target.Abilities.Strength / 3, debuff);
-                            stat = "strength";
+                            debuff = Math.Min(target.BaseAbilities.Strength.Value / 3, debuff);
+                            stat = Ability.STR;
                         } break;
 
                     // Roll 1DPER to debuff FOR for 1 turn.
                     case 1:
                         {
-                            int y = attacker.TotalAbilities.Persuasion;
+                            int y = attacker.GetTotalAbilities().Persuasion.Value;
                             debuff = Toolbox.DiceRoll(1, y);
-                            debuff = Math.Min(target.Abilities.Fortitude / 3, debuff);
-                            stat = "fortitude";
+                            debuff = Math.Min(target.BaseAbilities.Fortitude.Value / 3, debuff);
+                            stat = Ability.FOR;
                         } break;
                     
                     // Roll 1DINT to debuff INT for 1 turn.
                     case 2:
                         {
-                            int y = attacker.TotalAbilities.Intimidation;
+                            int y = attacker.GetTotalAbilities().Intimidation.Value;
                             debuff = Toolbox.DiceRoll(1, y);
-                            stat = "intimidation";
+                            stat = Ability.INT;
                         } break;
                 }
 
-                ApplyTempMod(target, stat, -debuff, -1);
+                ApplyMod(target, Constants.SPE_ATTACK_AIL, stat, -debuff, 10, attacker, !attackTurn);
 
+                // TODO: No end?
                 // If STR or FOR reach 0 they leave the strife.
-                if ((target.TotalAbilities.Strength < 1 && rng == 0) || (target.TotalAbilities.Fortitude < 1 && rng == 1))
+                if ((target.GetTotalAbilities().Strength.Value < 1 && rng == 0) || (target.GetTotalAbilities().Fortitude.Value < 1 && rng == 1))
                 {
-                    log.AppendLine($"{Syntax.ToCodeLine(target.Name.ToApostrophe())} {stat} has fallen below 1.");
+                    Log.AppendLine($"{Syntax.ToCodeLine(target.Name.ToApostrophe())} {stat} has fallen below 1.");
 
                     // 50% chance for them to leave the strife.
                     if (Toolbox.TrueOrFalse())
                     {
-                        log.AppendLine(Toolbox.GetMessage("speKill", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
+                        Log.AppendLine(Toolbox.GetMessage("speKill", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
 
                         LeaveStrife(target);
                     }
                     // Otherwise their debuffs are removed.
                     else
                     {
-                        log.AppendLine(Toolbox.GetMessage("speKillFail", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
-                        log.AppendLine(Syntax.ToCodeLine(target.Name.ToApostrophe()) + " debuffs were removed.");
-                        target.PermanentModifiers = new AbilitySet();
+                        Log.AppendLine(Toolbox.GetMessage("speKillFail", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
+                        Log.AppendLine(Syntax.ToCodeLine(target.Name.ToApostrophe()) + " debuffs were removed.");
+                        StatusEffect.RemoveStatusEffect(target, Constants.SPE_ATTACK_AIL);
                     }
                 }
             }
             else
             {
-                log.AppendLine("");
-                log.AppendLine(Toolbox.GetMessage("speFail", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
+                Log.AppendLine("");
+                Log.AppendLine(Toolbox.GetMessage("speFail", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
             }
         }
 
@@ -1020,14 +1022,45 @@ namespace HSRP
             ApplyTempMod(plyr, "constitution", Toolbox.DiceRoll(1, plyr.Abilities.Constitution), 0);
         }
 
+        private void ApplyMod(Entity ent, string name, string stat, int value, int turns, Entity tar, bool attackTeam)
+        {
+            
+            AbilitySet set = new AbilitySet();
+            foreach (PropertyInfo prop in set.GetType().GetProperties())
+            {
+                if (prop.Name.Contains(stat, StringComparison.OrdinalIgnoreCase))
+                {
+                    Ability uh = new Ability();
+                    uh.Value = value;
+                    
+                    prop.SetValue(set, uh);
+                    if (turns >= 0)
+                    {
+                        StatusEffect sa = new StatusEffect();
+                        sa.Name = name;
+                        sa.Modifiers = set;
+                        sa.Turns = turns;
+                        ent.ApplyStatusEffect(sa, tar, attackTeam, this);
+
+                        string plural = turns == 0
+                            ? "1 turn"
+                            : (turns + 1).ToString() + " turns";
+                        Log.AppendLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for {Syntax.ToCodeLine(plural)}.");
+                    }
+
+                    return;
+                }
+            }
+        }
+
         private void AddLog()
         {
-            if (string.IsNullOrWhiteSpace(log.ToString())) { return; }
+            if (string.IsNullOrWhiteSpace(Log.ToString())) { return; }
 
-            log.AppendLine("\n------------");
+            Log.AppendLine("\n------------");
 
-            Logs.Add(log.ToString());
-            log.Clear();
+            Logs.Add(Log.ToString());
+            Log.Clear();
         }
 
         /// <summary>

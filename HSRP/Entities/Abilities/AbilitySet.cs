@@ -1,18 +1,11 @@
 using System;
 using System.Reflection;
+using System.Text;
 using System.Xml.Linq;
 using HSRP.Commands;
 
 namespace HSRP
 {
-    public enum AbilityOperatorType
-    {
-        Addition,
-        Subtraction,
-        Multiplication,
-        Division
-    }
-
     public class AbilitySet
     {
         [Ability(AbilityType.Physical, true,
@@ -23,7 +16,7 @@ namespace HSRP
             + "\n\nHaving a high value in this stat grants you excelled use of melee weapons and hand-to-hand combat skill. "
             + "Your beefy nature makes you less approachable and more threatening. You can even reach a point where you "
             + "end up skipping combat altogether against weaker physical opponents.")]
-        public int Strength { get; set; }
+        public Ability Strength { get; set; }
         
         [Ability(AbilityType.Physical, false,
             "Muscle strength helps with getting out in the world, but without enough muscle endurance "
@@ -36,7 +29,7 @@ namespace HSRP
             + "Your ability to use projectile-based weapons is significantly improved. "
             + "It also grants the user better dexterity, making them better equipped at handling "
             + "hazardous terrain and stealth, depending on your playstyle. ")]
-        public int Constitution { get; set; }
+        public Ability Constitution { get; set; }
         
         [Ability(AbilityType.Mental, true,
             "The best offense is a good defense, by which I mean you don't need defense if you can take down "
@@ -48,7 +41,7 @@ namespace HSRP
             + "and their effectiveness, is based upon the enemy's Fortitude compared to your Psion. "
             + "Attacks can range from mild disorientation, suggestion, to full on mind control if the opponent is "
             + "weak minded.")]
-        public int Psion { get; set; }
+        public Ability Psion { get; set; }
         
         [Ability(AbilityType.Mental, false,
             "The best defense is a good offense, said no one ever. Regardless, you possess a strong will with this trait, "
@@ -58,7 +51,7 @@ namespace HSRP
             + "\n\nHaving a high value in this stat grants you protection to Psion special attacks. "
             + "You think best when you're under pressure, so your Fortitude if weighed in on various actions "
             + "when under stress.")]
-        public int Fortitude { get; set; }
+        public Ability Fortitude { get; set; }
         
         [Ability(AbilityType.Speech, true,
             "You're fucking nuts, but people still listen to what you say regardless. This stat lets your words "
@@ -69,7 +62,7 @@ namespace HSRP
             + "\n\nHaving a high value in this stat grants you the ability to 'talk' your way out of danger. "
             + "You can also gather intel more fleshy sources much easier, based upon the target's Persuation "
             + "in relation to your Intimidation.")]
-        public int Intimidation { get; set; }
+        public Ability Intimidation { get; set; }
         
         [Ability(AbilityType.Speech, false,
             "You're fucking nuts, but people can't convince you otherwise. This stat benefits your speech "
@@ -80,39 +73,17 @@ namespace HSRP
             + "\n\nHaving a high value in this stat makes you resilient to high Intidimation stats. You appear less suspicious "
             + "and can use speech to bypass hazards in unusual fashions. Your charm makes it more likely "
             + "for people to perceive you as non-threatening, regardless of your actual motive.")]
-        public int Persuasion { get; set; }
-
-        public AbilityOperatorType Oper;
+        public Ability Persuasion { get; set; }
 
         public static AbilitySet operator +(AbilitySet set1, AbilitySet set2)
         {
             AbilitySet newSet = new AbilitySet();
-            foreach (PropertyInfo prop in newSet.GetType().GetProperties())
-            {
-                int val1 = (int)prop.GetValue(set1);
-                int val2 = (int)prop.GetValue(set2);
-                int newVal = val1;
-
-                switch (set2.Oper)
-                {
-                    case AbilityOperatorType.Addition:
-                        newVal += val2;
-                        break;
-
-                    case AbilityOperatorType.Subtraction:
-                        newVal -= val2;
-                        break;
-
-                    case AbilityOperatorType.Multiplication:
-                        newVal *= val2;
-                        break;
-
-                    case AbilityOperatorType.Division:
-                        newVal /= val2;
-                        break;
-                }
-                prop.SetValue(newSet, newVal);
-            }
+            newSet.Strength.Value = set1.Strength.Value + set2.Strength.Value;
+            newSet.Constitution.Value = set1.Constitution.Value + set2.Constitution.Value;
+            newSet.Psion.Value = set1.Psion.Value + set2.Psion.Value;
+            newSet.Fortitude.Value = set1.Fortitude.Value + set2.Fortitude.Value;
+            newSet.Intimidation.Value = set1.Intimidation.Value + set2.Intimidation.Value;
+            newSet.Persuasion.Value = set1.Persuasion.Value + set2.Persuasion.Value;
 
             return newSet;
         }
@@ -154,41 +125,90 @@ namespace HSRP
             return base.GetHashCode();
         }
 
-        public AbilitySet() { }
-        public AbilitySet(XElement ele)
+        public static AbilitySet ToFixedNumber(AbilitySet mod, AbilitySet set)
         {
-            Oper = XmlToolbox.GetAttributeEnum(ele, "type", AbilityOperatorType.Addition);
+            AbilitySet newSet = new AbilitySet();
+            newSet.Strength.Value = newSet.Strength.Value + (int) (mod.Strength.Percentage * set.Strength.Value);
+            newSet.Constitution.Value = newSet.Constitution.Value + (int) (mod.Constitution.Percentage * set.Constitution.Value);
+            newSet.Psion.Value = newSet.Psion.Value + (int) (mod.Psion.Percentage * set.Psion.Value);
+            newSet.Fortitude.Value = newSet.Fortitude.Value + (int) (mod.Fortitude.Percentage * set.Fortitude.Value);
+            newSet.Intimidation.Value = newSet.Intimidation.Value + (int) (mod.Intimidation.Percentage * set.Intimidation.Value);
+            newSet.Persuasion.Value = newSet.Persuasion.Value + (int) (mod.Persuasion.Percentage * set.Persuasion.Value);
 
-            Type type = this.GetType();
-            foreach (PropertyInfo property in type.GetProperties())
+            return newSet;
+        }
+
+        public AbilitySet() 
+        {
+            Strength = new Ability();
+            Constitution = new Ability();
+            Psion = new Ability();
+            Fortitude = new Ability();
+            Intimidation = new Ability();
+            Persuasion = new Ability();
+        }
+        public AbilitySet(XElement element)
+        {
+            foreach (XElement ele in element.Elements())
             {
-                if (property.CanWrite)
+                switch (ele.Name.LocalName)
                 {
-                    int value = XmlToolbox.GetAttributeInt(ele.Element(property.Name.ToLower()), "value", 0);
-                    property.SetValue(this, value);
+                    case Ability.STR:
+                    {
+                        Strength = new Ability(ele);
+                    }
+                    break;
+
+                    case Ability.CON:
+                    {
+                        Constitution = new Ability(ele);
+                    }
+                    break;
+
+                    case Ability.PSI:
+                    {
+                        Psion = new Ability(ele);
+                    }
+                    break;
+
+                    case Ability.FOR:
+                    {
+                        Fortitude = new Ability(ele);
+                    }
+                    break;
+
+                    case Ability.INT:
+                    {
+                        Intimidation = new Ability(ele);
+                    }
+                    break;
+
+                    case Ability.PER:
+                    {
+                        Persuasion = new Ability(ele);
+                    }
+                    break;
                 }
             }
         }
 
         public XElement ToXmlElement()
         {
-            XElement ele = new XElement("abilities", new XAttribute("type", Oper.ToString()));
+            XElement element = new XElement("abilities");
 
             Type type = this.GetType();
             foreach (PropertyInfo property in type.GetProperties())
             {
                 if (property.CanRead)
                 {
-                    int value = (int)property.GetValue(this);
-                    ele.Add(
-                        new XElement(property.Name.ToLower(),
-                            new XAttribute("value", value)
-                            )
-                        );
+                    Ability value = ((Ability) property.GetValue(this));
+                    XElement propEle = value.Save(property.Name);
+
+                    element.Add(propEle);
                 }
             }
 
-            return ele;
+            return element;
         }
 
         /// <summary>
@@ -197,53 +217,49 @@ namespace HSRP
         /// </summary>
         public XElement ToXmlWithoutEmpties()
         {
-            XElement ele = new XElement("abilities", new XAttribute("type", Oper.ToString()));
+            XElement element = new XElement("abilities");
 
             Type type = this.GetType();
             foreach (PropertyInfo property in type.GetProperties())
             {
                 if (property.CanRead)
                 {
-                    int value = (int)property.GetValue(this);
-                    if (value != 0)
+                    Ability value = ((Ability) property.GetValue(this));
+                    if (value.Value != 0)
                     {
-                        ele.Add(
-                        new XElement(property.Name.ToLower(),
-                            new XAttribute("value", value)
-                            )
-                        );
+                        element.Add(value.Save(property.Name));
                     }
                 }
             }
 
-            return ele;
+            return element;
         }
 
         public string Display(AbilitySet mod = null)
         {
-            string disp = "";
+            StringBuilder disp = new StringBuilder();
             
             if (mod == null)
             {
                 foreach (PropertyInfo prop in GetType().GetProperties())
                 {
-                    int value = (int)prop.GetValue(this);
-                    disp = disp.AddLine(prop.Name + ": " + value);
+                    int value = ((Ability) prop.GetValue(this)).Value;
+                    disp.AppendLine(prop.Name + ": " + value);
                 }
             }
             else
             {
                 foreach (PropertyInfo prop in GetType().GetProperties())
                 {
-                    int value = (int)prop.GetValue(this);
-                    int modVal = (int)prop.GetValue(mod);
+                    int value = ((Ability) prop.GetValue(this)).Value;
+                    int modVal = ((Ability) prop.GetValue(mod)).Value;
 
-                    disp += prop.Name + ": " + value;
-                    disp = disp.AddLine($" ({(modVal - value).ToString("+0;-#")})");
+                    disp.Append(prop.Name + ": " + value);
+                    disp.AppendLine(" " + (modVal - value).ToString("+0;-#"));
                 }
             }
 
-            return disp;
+            return disp.ToString();
         }
     }
 }
