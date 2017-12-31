@@ -139,11 +139,7 @@ namespace HSRP
 
                                 if (!StatusEffect.TryParse(ailName, out StatusEffect sa, ailController, ailTurns, set))
                                 {
-                                    sa = new StatusEffect();
-                                    sa.Name = ailName;
-                                    sa.Controller = ailController;
-                                    sa.Turns = ailTurns;
-                                    sa.Modifiers = set;
+                                    sa = new StatusEffect(strifeEle);
                                 }
                                 InflictedAilments.Add(sa);
                             }

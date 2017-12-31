@@ -255,7 +255,7 @@ namespace HSRP
 
             if (Turns == 0 && Explodes)
             {
-                strife.Log.AppendLine(strife.Explosion(Explosion, ent, tar, attackTeam, strife, EXPLOSION_FALLOFF_FACTOR));
+                strife.Explosion(Explosion, ent, tar, attackTeam, EXPLOSION_FALLOFF_FACTOR);
             }
 
             --Turns;

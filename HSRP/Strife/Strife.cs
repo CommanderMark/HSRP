@@ -1019,6 +1019,83 @@ namespace HSRP
             ApplyTempMod(plyr, "constitution", Toolbox.DiceRoll(1, plyr.Abilities.Constitution), 0);
         }
 
+        // TODO:
+        public void Explosion(Explosion explosion, Entity ent, Entity tar, bool attackTeam, float fallOffFactor)
+        {
+            Entity splashZone = null;
+
+            // Find the initial splash zone of the explosion.
+            if ((explosion.Target & TargetType.Self) == TargetType.Self)
+            {
+                splashZone = ent;
+            }
+            else if ((explosion.Target & TargetType.Target) == TargetType.Target)
+            {
+                splashZone = tar;
+            }
+            else if ((explosion.Target & TargetType.All) == TargetType.All)
+            {
+                int index = Toolbox.RandInt(0, Entities.Count() - 1);
+                splashZone = Entities.ElementAt(index);
+            }
+            bool doubleTarget = explosion.Target == (TargetType.Self | TargetType.Target);
+
+            Log.AppendLine();
+            if (Toolbox.RandFloat(0f, 1.0f) >= 0.01)
+            {
+                if (doubleTarget)
+                {
+                    Log.AppendLine($"An explosion has occured at {Syntax.ToCodeLine(splashZone.Name)} and {Syntax.ToCodeLine(tar.Name.ToApostrophe())} positions!");
+                }
+                else
+                {
+                    Log.AppendLine($"An explosion has occured at {Syntax.ToCodeLine(splashZone.Name.ToApostrophe())} position!");
+                }
+            }
+            else
+            {
+                Log.AppendLine("SHIT BLOWS THE FUCK UP!");
+            }
+
+            // Initial damage at splash zone.
+            int dmg = explosion.FixedNumber
+                ? (int) explosion.Damage
+                : (int) (explosion.Damage * splashZone.MaxHealth);
+
+            splashZone.Health -= dmg;
+            Log.AppendLine();
+            Log.AppendLine($"{Syntax.ToCodeLine(splashZone.Name)} took {dmg} damage!");
+            if (doubleTarget)
+            {
+                tar.Health -= dmg;
+                Log.AppendLine($"{Syntax.ToCodeLine(tar.Name)} took {dmg} damage!");
+            }
+
+            if (splashZone.Health <= 0)
+            {
+                LeaveStrife(splashZone);
+            }
+            if (tar.Health <= 0)
+            {
+                LeaveStrife(tar);
+            }
+
+            // If the explosion was only targetting one person/two people then end the function here.
+            if (explosion.Target == TargetType.Self || explosion.Target == TargetType.Target || doubleTarget)
+            {
+                return;
+            }
+
+            switch (explosion.Target)
+            {
+                case TargetType.All | TargetType.Self:
+                {
+
+                }
+                break;
+            }
+        }
+
         private void ApplyMod(Entity ent, string name, string stat, int value, int turns, Entity tar, bool attackTeam)
         {
             
