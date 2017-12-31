@@ -9,13 +9,13 @@
     <explosion target="all" damage="0.2" />
     
     <!-- Buffs or debuffs. -->
-    <abilities type="Multiplication">
-      <strength value="2" />
-      <constitution value="2" />
-      <psion value="2" />
-      <fortitude value="2" />
-      <intimidation value="2" />
-      <persuasion value="2" />
+    <abilities>
+      <strength per="2" />
+      <constitution per="2" />
+      <psion per="2" />
+      <fortitude per="2" />
+      <intimidation per="2" />
+      <persuasion per="2" />
     </abilities>
     
     <!-- 
@@ -46,5 +46,16 @@
     <inflictMsg>{0} fell asleep!</inflictMsg>
     <statusMsg>{0} is still sleeping!</statusMsg>
     <endMsg>{0} woke up!</endMsg>
+  </ailment>
+
+  <ailment name="Enraged" turns="4">
+    <abilities>
+      <strength per="0.1" />
+      <constitution per="-0.1" />
+    </abilities>
+
+    <inflictMsg>{0} is {2}!</inflictMsg>
+    <statusMsg>{0} is still sleeping!</statusMsg>
+    <endMsg>{0} is no longer {1}!</endMsg>
   </ailment>
 </root>
