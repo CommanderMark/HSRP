@@ -541,9 +541,8 @@ namespace HSRP
         /// <param name="targetNum">The index of the user being targeted.</param>
         /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
         /// <returns>A string containing the log of events that transpired when taking this turn.</returns>
-        public string TakeTurn(StrifeAction action, int targetNum, bool targetingAttackers)
+        public string TakeTurn(string action, int targetNum, bool targetingAttackers)
         {
-            // TODO: Add status effect updating and skip turns.
             Entity attacker = CurrentEntity;
             Entity target = GetTarget(targetNum, targetingAttackers);
 
@@ -567,23 +566,23 @@ namespace HSRP
             {
                 switch (action)
                 {
-                    case StrifeAction.PhysicalAttack:
+                    case "PhysicalAttack":
                         PhysicalAttack(attacker, target);
                         break;
 
-                    case StrifeAction.MindControl:
+                    case "MindControl":
                         MindControl(attacker, target);
                         break;
 
-                    case StrifeAction.OpticBlast:
+                    case "OpticBlast":
                         OpticBlast(attacker, target);
                         break;
 
-                    case StrifeAction.SpeechAttack:
+                    case "SpeechAttack":
                         SpeechAttack(attacker, target);
                         break;
 
-                    case StrifeAction.Guard:
+                    case "Guard":
                         Guard(attacker);
                         break;
                 }
@@ -634,43 +633,42 @@ namespace HSRP
             }
 
             // TODO: More AI-y stuff.
-            // TODO: Re-add mind control.
             if (ai is NPC npc)
             {
                 switch (npc.Type)
                 {
                     case NPCType.Lusus:
                     case NPCType.Normal:
-                        TakeTurn(StrifeAction.PhysicalAttack, targetID, !attackTurn);
+                        TakeTurn("PhysicalAttack", targetID, !attackTurn);
                         break;
 
                     case NPCType.Psionic:
                         int rng = Toolbox.RandInt(4);
                         // 25% chance to mind-control.
-                        /*if (rng == 3 && target.Controller != ai.ID)
+                        if (rng == 3 && target.GetMindController() != ai.ID)
                         {
-                            TakeTurn(StrifeAction.MindControl, targetID, !attackTurn);
+                            TakeTurn("MindControl", targetID, !attackTurn);
                         }
                         // 25% chance to attack.
-                        else */if (rng == 2)
+                        else if (rng == 2)
                         {
-                            TakeTurn(StrifeAction.PhysicalAttack, targetID, !attackTurn);
+                            TakeTurn("PhysicalAttack", targetID, !attackTurn);
                         }
                         // 25% chance to optic blast.
                         else
                         {
-                            TakeTurn(StrifeAction.OpticBlast, targetID, !attackTurn);
+                            TakeTurn("OpticBlast", targetID, !attackTurn);
                         }
                         break;
                     
                     case NPCType.Talker:
                         if (Toolbox.TrueOrFalse(4))
                         {
-                            TakeTurn(StrifeAction.SpeechAttack, targetID, !attackTurn);
+                            TakeTurn("SpeechAttack", targetID, !attackTurn);
                         }
                         else
                         {
-                            TakeTurn(StrifeAction.Guard, targetID, !attackTurn);
+                            TakeTurn("Guard", targetID, !attackTurn);
                         }
                         break;
                 }
@@ -830,7 +828,6 @@ namespace HSRP
         }
 
         // Mental: XDPSI --> XDFOR 3 times in a row.
-        // TODO: Mind control can break somehow?
         private void MindControl(Entity attacker, Entity target)
         {
             Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} attempts to mind control {Syntax.ToCodeLine(target.Name)}.\n");
@@ -1014,9 +1011,9 @@ namespace HSRP
         }
 
         // Guard CON += XDCON
-        private void Guard(IEntity plyr)
+        private void Guard(Entity plyr)
         {
-            log.AppendLine($"{Syntax.ToCodeLine(plyr.Name)} is guarding.");
+            log.AppendLine($"{Syntax.ToCodeLine(plyr.Name)} is guarding!");
 
             AbilitySet mod = new AbilitySet();
             ApplyTempMod(plyr, "constitution", Toolbox.DiceRoll(1, plyr.Abilities.Constitution), 0);
