@@ -4,6 +4,7 @@
     <msg>{0} attacks {1}.</msg>
     <msg>{0} lunges for a strike towards {1}.</msg>
     <msg>{0} assaults {1}.</msg>
+    <msg>{0} tries to deliver the punchline of a joke to {1}.</msg>
   </messages>
 
   <messages trigger="phyCounterStart">
@@ -27,6 +28,7 @@
   <messages trigger="speStart">
     <msg>{0} attempts to intimidate {1}.</msg>
     <msg>{0} tries to influence {1}.</msg>
+    <msg>{0} attempts to provoke {1}.</msg>
     <msg>{0} tries their hand at using a silver tongue.</msg>
   </messages>
   <messages trigger="speFail">
@@ -34,14 +36,5 @@
     <msg>{1} was not influenced.</msg>
     <msg>{1} was not intimidated.</msg>
     <msg>Intimidation failed.</msg>
-  </messages>
-  <!-- Attack kills someone. -->
-  <messages trigger="speKillFail">
-    <msg>{0} still appears to be holding on.</msg>
-    <msg>{0} managed to resist {1}'s charm.</msg>
-  </messages>
-  <messages trigger="speKill">
-    <msg>{0} was unable to resist {1}'s charm.</msg>
-    <msg>{0} was influenced to stop strifing.</msg>
   </messages>
 </root>

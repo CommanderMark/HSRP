@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace HSRP.Commands
 {
+    // TODO: Ability to read stats of abilities and see current ailments.
     [Group("strife")]
     public class StrifeCommands : JModuleBase
     {

@@ -582,7 +582,7 @@ namespace HSRP
                         break;
 
                     case "Guard":
-                        Guard(attacker);
+                        Guard(attacker, target);
                         break;
                 }
             }
@@ -717,7 +717,7 @@ namespace HSRP
 
             foreach (Entity ent in Entities)
             {
-                if (!(ent is NPC npc && npc.Type == NPCType.Lusus))
+                if (!(ent is NPC))
                 {
                     ent.InflictedAilments.Clear();
                 }
@@ -829,7 +829,7 @@ namespace HSRP
         // Mental: XDPSI --> XDFOR 3 times in a row.
         private void MindControl(Entity attacker, Entity target)
         {
-            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} attempts to mind control {Syntax.ToCodeLine(target.Name)}.\n");
+            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} is attempting to mind control {Syntax.ToCodeLine(target.Name)}.\n");
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -860,7 +860,7 @@ namespace HSRP
             if (success)
             {
                 // Or not???
-                if (Toolbox.RandFloat(0f, 1.0f) < 5.0f)
+                if (Toolbox.RandFloat(0f, 1.0f) < 0.5f)
                 {
                     // NANI?!?
                     target.ApplyStatusEffect(Constants.SLEEPING_AIL, attacker, !attackTurn, this);
@@ -921,10 +921,10 @@ namespace HSRP
 
         // Speech: XD(INT+STR) --> XD(PER+FOR)
         // Random chance to do 3 things on success:
-        // Roll 1DINT to debuff STR for 3 turns.
-        // Roll 1DPER to debuff FOR for 1 turn.
-        // Roll 1DINT to debuff INT for 1 turn.
-        // If STR or FOR reach 0 they leave the strife.
+        // Roll 1DINT to debuff STR.
+        // Roll 1DPER to debuff FOR.
+        // Roll 1DINT to debuff INT.
+        // If STR or FOR reach 0 the debuffs are removed but 'Enraged' is inflicted.
         private void SpeechAttack(Entity attacker, Entity target)
         {
             Log.AppendLine(Toolbox.GetMessage("speStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)) + "\n");
@@ -951,7 +951,7 @@ namespace HSRP
                 string stat = "";
                 switch (rng)
                 {
-                    // Roll 1DINT to debuff STR for 3 turns.
+                    // Roll 1DINT to debuff STR.
                     case 0:
                         {
                             int y = attacker.GetTotalAbilities().Intimidation.Value;
@@ -960,7 +960,7 @@ namespace HSRP
                             stat = Ability.STR;
                         } break;
 
-                    // Roll 1DPER to debuff FOR for 1 turn.
+                    // Roll 1DPER to debuff FOR.
                     case 1:
                         {
                             int y = attacker.GetTotalAbilities().Persuasion.Value;
@@ -969,7 +969,7 @@ namespace HSRP
                             stat = Ability.FOR;
                         } break;
                     
-                    // Roll 1DINT to debuff INT for 1 turn.
+                    // Roll 1DINT to debuff INT.
                     case 2:
                         {
                             int y = attacker.GetTotalAbilities().Intimidation.Value;
@@ -978,7 +978,7 @@ namespace HSRP
                         } break;
                 }
 
-                ApplyMod(target, Constants.SPE_ATTACK_AIL, stat, -debuff, 9, attacker, !attackTurn);
+                ApplyMod(target, Constants.SPE_ATTACK_AIL, stat, -debuff, 10, attacker, !attackTurn);
 
                 // If STR or FOR reach 0 then inflict them with the 'Enraged' status effect and remove all previous speech debuffs.
                 if ((target.GetTotalAbilities().Strength.Value < 1 && rng == 0) || (target.GetTotalAbilities().Fortitude.Value < 1 && rng == 1))
@@ -999,12 +999,12 @@ namespace HSRP
         }
 
         // Guard CON += XDCON
-        private void Guard(Entity plyr)
+        private void Guard(Entity attacker, Entity target)
         {
-            log.AppendLine($"{Syntax.ToCodeLine(plyr.Name)} is guarding!");
+            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} is guarding!");
 
-            AbilitySet mod = new AbilitySet();
-            ApplyTempMod(plyr, "constitution", Toolbox.DiceRoll(1, plyr.Abilities.Constitution), 0);
+            int amount = Toolbox.DiceRoll(1, attacker.GetTotalAbilities().Constitution.Value);
+            attacker.ApplyStatusEffect(Constants.GUARDING_AIL, target, attackTurn, this);
         }
 
         // TODO:
@@ -1096,6 +1096,8 @@ namespace HSRP
         /// <param name="attackTeam">Whether or not the entity this status effect is applied to was on the attacking team.</param>
         private void ApplyMod(Entity ent, string name, string stat, int value, int turns, Entity tar, bool attackTeam)
         {
+            if (turns <= 0) { return; }
+
             AbilitySet set = new AbilitySet();
             foreach (PropertyInfo prop in set.GetType().GetProperties())
             {
@@ -1105,19 +1107,17 @@ namespace HSRP
                     uh.Value = value;
                     
                     prop.SetValue(set, uh);
-                    if (turns >= 0)
-                    {
-                        StatusEffect sa = new StatusEffect();
-                        sa.Name = name;
-                        sa.Modifiers = set;
-                        sa.Turns = turns;
-                        ent.ApplyStatusEffect(sa, tar, attackTeam, this);
 
-                        string plural = turns == 0
-                            ? "1 turn"
-                            : (turns + 1).ToString() + " turns";
-                        Log.AppendLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for {Syntax.ToCodeLine(plural)}.");
-                    }
+                    StatusEffect sa = new StatusEffect();
+                    sa.Name = name;
+                    sa.Modifiers = set;
+                    sa.Turns = turns;
+                    ent.ApplyStatusEffect(sa, tar, attackTeam, this);
+
+                    string plural = turns == 1
+                        ? "1 turn"
+                        : (turns).ToString() + " turns";
+                    Log.AppendLine($"\n{Syntax.ToCodeLine(ent.Name)} was inflicted with {Syntax.ToCodeLine(value.ToString("+0;-#"))} {prop.Name} for {Syntax.ToCodeLine(plural)}.");
 
                     return;
                 }

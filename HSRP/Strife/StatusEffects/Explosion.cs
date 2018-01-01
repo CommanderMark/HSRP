@@ -28,13 +28,14 @@ namespace HSRP
                 Target |= enumi;
             }
             Damage = element.GetAttributeFloat("damage", 0f);
-            FixedNumber = element.GetAttributeBool("damage", false);
+            FixedNumber = element.GetAttributeBool("fixedNumber", false);
         }
 
         public Explosion(Explosion ex)
         {
             Target = ex.Target;
             Damage = ex.Damage;
+            FixedNumber = ex.FixedNumber;
         }
     }
 }

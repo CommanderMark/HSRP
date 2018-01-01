@@ -1,6 +1,6 @@
 ﻿<root>
   <!-- Turns are amount of turns that come after it. -->
-  <ailment name="Debugging" canDamage="true" skipTurns="true" turns="2" immune="Debugging2,Debugging3">
+  <ailment name="Debugging" canDamage="true" skipTurns="true" turns="3" immune="Debugging2,Debugging3">
     <!-- Does between 5% and 15% of the entity's max health in damage. -->
     <inflictDamage minAmount="0.05" maxAmount="0.15" />
 
@@ -37,21 +37,29 @@
     <endMsg>{0} is no longer "{1}"!</endMsg>
   </ailment>
 
-  <ailment name="MindControl" turns="4" controller="1">
+  <ailment name="MindControl" turns="5" controller="1">
     <inflictMsg>{0} is being mind-controlled by {1}!</inflictMsg>
     <endMsg>{0} is no longer mind-controlled!</endMsg>
   </ailment>
 
-  <ailment name="Sleeping" turns="9">
+  <ailment name="Sleeping" turns="10">
     <inflictMsg>{0} fell asleep!</inflictMsg>
     <statusMsg>{0} is still sleeping!</statusMsg>
     <endMsg>{0} woke up!</endMsg>
   </ailment>
 
-  <ailment name="Enraged" turns="14" stacks="true">
+  <ailment name="Enraged" turns="15" stacks="true">
     <abilities>
       <strength per="0.15" />
       <constitution per="-0.15" />
+    </abilities>
+
+    <inflictMsg>{0} is {2}!</inflictMsg>
+  </ailment>
+
+  <ailment name="Guarding" turns="1" immune="Bleeding,Poisoned,Stunned">
+    <abilities>
+      <constitution per="0.5" />
     </abilities>
 
     <inflictMsg>{0} is {2}!</inflictMsg>

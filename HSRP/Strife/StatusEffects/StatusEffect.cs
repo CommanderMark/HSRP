@@ -6,6 +6,7 @@ using System.Xml.Linq;
 namespace HSRP
 {
     // TODO: Add thing for preventing moves.
+    // TODO: Burning, Bleeding, Stunned
     public class StatusEffect
     {
         // Inflict damage stuff.
@@ -159,9 +160,10 @@ namespace HSRP
                 result.AppendLine("Description: " + description);
             }
 
-            if (Turns >= 0)
+            result.AppendLine();
+            if (Turns > 0)
             {
-                result.AppendLine($"Lasts {Turns + 1} turns.");
+                result.AppendLine($"Lasts {Turns} turns.");
             }
             else
             {
@@ -260,13 +262,13 @@ namespace HSRP
                 strife.Log.AppendLine(Entity.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(dmg.ToString()), Syntax.ToCodeLine(this.Name)));
             }
 
-            if (Turns == 0 && Explodes)
+            if (Turns < 1 && Explodes)
             {
                 strife.Explosion(Explosion, ent, tar, attackTeam, EXPLOSION_FALLOFF_FACTOR);
             }
 
             --Turns;
-            bool endEffect = Turns < 0;
+            bool endEffect = Turns < 1;
             strife.Log.AppendLine((endEffect ? "\n" + Entity.GetEntityMessage(EndMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(this.Name)) : string.Empty));
 
             return new Tuple<bool, bool>
