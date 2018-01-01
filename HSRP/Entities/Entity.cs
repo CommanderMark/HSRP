@@ -100,19 +100,22 @@ namespace HSRP
             }
 
             // Do they already have this status effect or posses one which makes them immune?
-            foreach (StatusEffect saOther in this.InflictedAilments)
+            if (!sa.Stacks)
             {
-                if (sa.Name.ToLowerInvariant() == saOther.Name.ToLowerInvariant())
+                foreach (StatusEffect saOther in this.InflictedAilments)
                 {
-                    strife.Log.AppendLine($"{Syntax.ToCodeLine(this.Name)} is already \"{Syntax.ToCodeLine(sa.Name.ToString())}\"!");
-                    return;
-                }
-                foreach (string name in saOther.Immunities)
-                {
-                    if (sa.Name.ToLowerInvariant() == name.ToLowerInvariant())
+                    if (sa.Name.ToLowerInvariant() == saOther.Name.ToLowerInvariant())
                     {
-                        strife.Log.AppendLine($"{Syntax.ToCodeLine(this.Name)} is immune to \"{Syntax.ToCodeLine(name.ToString())}\"!");
+                        strife.Log.AppendLine($"{Syntax.ToCodeLine(this.Name)} is already \"{Syntax.ToCodeLine(sa.Name.ToString())}\"!");
                         return;
+                    }
+                    foreach (string name in saOther.Immunities)
+                    {
+                        if (sa.Name.ToLowerInvariant() == name.ToLowerInvariant())
+                        {
+                            strife.Log.AppendLine($"{Syntax.ToCodeLine(this.Name)} is immune to \"{Syntax.ToCodeLine(name.ToString())}\"!");
+                            return;
+                        }
                     }
                 }
             }

@@ -36,6 +36,11 @@ namespace HSRP
         public string EndMsg = string.Empty;
         private string description = string.Empty;
 
+        /// <summary>
+        /// Whether not the status effect can be applied multiple times.
+        /// </summary>
+        public bool Stacks = false;
+
         //TODO:1`00% next to.
         public const int EXPLOSION_FALLOFF_FACTOR = 2;
 
@@ -47,6 +52,7 @@ namespace HSRP
             Controller = XmlToolbox.GetAttributeUnsignedLong(element, "controller", 0);
             Explodes = element.GetAttributeBool("explodes", false);
             Turns = element.GetAttributeInt("turns", 0);
+            Stacks = element.GetAttributeBool("stacks", false);
             Immunities = XmlToolbox.GetAttributeStringArray(element, "immune", new string[0]);
 
             foreach (XElement ele in element.Elements())

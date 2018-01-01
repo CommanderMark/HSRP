@@ -48,7 +48,7 @@
     <endMsg>{0} woke up!</endMsg>
   </ailment>
 
-  <ailment name="Enraged" turns="4">
+  <ailment name="Enraged" turns="4" stacks="true">
     <abilities>
       <strength per="0.1" />
       <constitution per="-0.1" />
