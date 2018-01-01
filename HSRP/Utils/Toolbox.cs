@@ -72,7 +72,7 @@ namespace HSRP
 
         public static bool TrueOrFalse(int denominator) => RandInt(denominator) == 0;
 
-        public static void UpdateMessages()
+        private static void UpdateMessages()
         {
             Messages = new Dictionary<string, string[]>();
 
@@ -108,7 +108,7 @@ namespace HSRP
             }
         }
 
-        public static void UpdateStatusEffects()
+        private static void UpdateStatusEffects()
         {
             StatusEffects = new Dictionary<string, StatusEffect>();
 

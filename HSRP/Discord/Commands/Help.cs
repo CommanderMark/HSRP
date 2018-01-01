@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Threading.Tasks;
 using Discord.Commands;
@@ -27,6 +29,32 @@ namespace HSRP.Commands
             }
 
             await ReplyAsync(msg);
+        }
+
+        [Command("ailments"), Alias("ailment", "status effects")]
+        public async Task AilmentHelp()
+        {
+            string msg = Syntax.ToBold("List of ailments") + ":\n";
+
+            foreach (KeyValuePair<string, StatusEffect> sa in Toolbox.StatusEffects)
+            {
+                msg += "\n-" + sa.Value.Name;
+            }
+
+            await ReplyAsync(msg);
+        }
+
+        [Command("ailments"), Alias("ailment", "status effects")]
+        public async Task AilmentHelp(string ailName)
+        {
+            foreach (KeyValuePair<string, StatusEffect> sa in Toolbox.StatusEffects)
+            {
+                if (sa.Value.Name.StartsWith(ailName, true, CultureInfo.InvariantCulture))
+                {
+                    await ReplyAsync(sa.Value.Display());
+                    return;
+                }
+            }
         }
 
         [Command("skills")]

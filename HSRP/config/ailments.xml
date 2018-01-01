@@ -49,6 +49,7 @@
   </ailment>
 
   <ailment name="Enraged" turns="15" stacks="true">
+    <description>Decreases a strifer's constitution by 15% but increases their strength by 15%.</description>
     <abilities>
       <strength per="0.15" />
       <constitution per="-0.15" />

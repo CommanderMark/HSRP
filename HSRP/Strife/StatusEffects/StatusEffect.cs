@@ -152,12 +152,11 @@ namespace HSRP
         public string Display()
         {
             StringBuilder result = new StringBuilder();
-            string indent = "  ";
 
-            result.AppendLine(Name + ":");
+            result.AppendLine(Syntax.ToBold(Name) + ":");
             if (!string.IsNullOrWhiteSpace(description))
             {
-                result.AppendLine("Description: " + description);
+                result.AppendLine(Syntax.ToBold("Description") + ": " + description);
             }
 
             result.AppendLine();
@@ -173,15 +172,15 @@ namespace HSRP
             result.AppendLine();
             if (inflictsDamage)
             {
-                result.AppendLine(indent + $"Does between {MinDamagePercentage}-{MinDamagePercentage}% of the user's max health in damage each turn.");
+                result.AppendLine($"Does between {MinDamagePercentage * 100}-{MaxDamagePercentage * 100}% of the user's max health in damage each turn.");
             }
             if (skipsTurn)
             {
-                result.AppendLine(indent + "Skips the user's turn.");
+                result.AppendLine("Skips the user's turn.");
             }
             if (Controller != 0)
             {
-                result.AppendLine(indent + "Invokes mind-control on the user by whoever inflicts the status effect.");
+                result.AppendLine("Whoever inflicts the status effect will have control over the strifer's mind.");
             }
             if (Explodes)
             {
@@ -226,7 +225,7 @@ namespace HSRP
                 }
             }
 
-            if (!Immunities.Any())
+            if (Immunities.Any())
             {
                 result.Append("Cures you of " + Immunities[0]);
                 for (int i = 1; i < Immunities.Count(); i++)
@@ -269,7 +268,6 @@ namespace HSRP
 
             --Turns;
             bool endEffect = Turns < 1;
-            strife.Log.AppendLine((endEffect ? "\n" + Entity.GetEntityMessage(EndMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(this.Name)) : string.Empty));
 
             return new Tuple<bool, bool>
                 (
