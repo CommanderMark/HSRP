@@ -129,6 +129,7 @@ namespace HSRP
             this.StatusMsg = sa.StatusMsg;
             this.EndMsg = sa.EndMsg;
             this.description = sa.description;
+            this.Stacks = sa.Stacks;
         }
 
         public XElement Save()
@@ -275,20 +276,6 @@ namespace HSRP
                 );
         }
 
-        /// <summary>
-        /// Removes the status effect from the specified entity.
-        /// </summary>
-        /// <returns>The log of the event.</returns>
-        public static string RemoveStatusEffect(Entity ent, string name)
-        {
-            ent.InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
-
-            StatusEffect sa = ent.InflictedAilments.FirstOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
-            return sa == null
-                ? string.Empty
-                : sa.EndMsg;
-        }
-
         public static bool TryParse(string name, out StatusEffect sa)
         {
             if (Toolbox.StatusEffects.TryGetValue(name, out StatusEffect ail))
@@ -296,24 +283,8 @@ namespace HSRP
                 sa = new StatusEffect(ail);
                 return true;
             }
-
-            Console.WriteLine("STRIFE ERROR: Ailment \"" + name + "\" not found!");
+            
             sa = null;
-            return false;
-        }
-
-
-        public static bool TryParse(string name, out StatusEffect sa, ulong controller, int turns, AbilitySet set)
-        {
-            if (TryParse(name, out sa))
-            {
-                sa.Controller = controller;
-                sa.Turns = turns;
-                sa.Modifiers = set;
-
-                return true;
-            }
-
             return false;
         }
     }

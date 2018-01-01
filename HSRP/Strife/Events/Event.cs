@@ -373,20 +373,20 @@ namespace HSRP
                 {
                     case TargetType.Self:
                     {
-                        StatusEffect.RemoveStatusEffect(ent, tup.Item2);
+                        ent.RemoveStatusEffect(tup.Item2, strife, false);
                     }
                     break;
 
                     case TargetType.Target:
                     {
-                        StatusEffect.RemoveStatusEffect(tar, tup.Item2);
+                        tar.RemoveStatusEffect(tup.Item2, strife, false);
                     }
                     break;
 
                     case TargetType.Self | TargetType.Target:
                     {
-                        StatusEffect.RemoveStatusEffect(ent, tup.Item2);
-                        StatusEffect.RemoveStatusEffect(tar, tup.Item2);
+                        ent.RemoveStatusEffect(tup.Item2, strife, false);
+                        tar.RemoveStatusEffect(tup.Item2, strife, false);
                     }
                     break;
 
@@ -394,7 +394,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
                         {
-                            StatusEffect.RemoveStatusEffect(strifer, tup.Item2);
+                            strifer.RemoveStatusEffect(tup.Item2, strife, false);
                         }
                     }
                     break;
@@ -403,7 +403,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
                         {
-                            StatusEffect.RemoveStatusEffect(strifer, tup.Item2);
+                            strifer.RemoveStatusEffect(tup.Item2, strife, false);
                         }
                     }
                     break;
@@ -412,7 +412,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in strife.Entities)
                         {
-                            StatusEffect.RemoveStatusEffect(strifer, tup.Item2);
+                            strifer.RemoveStatusEffect(tup.Item2, strife, false);
                         }
                     }
                     break;

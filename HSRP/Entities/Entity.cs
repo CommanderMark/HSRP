@@ -127,6 +127,12 @@ namespace HSRP
             if (sa.Turns < 0)
             {
                 sa.Update(this, tar, attackTeam, strife);
+                return;
+            }
+
+            if (sa.Controller != 0)
+            {
+                sa.Controller = tar.ID;
             }
 
             this.InflictedAilments.Add(sa);
@@ -139,7 +145,35 @@ namespace HSRP
             // If the status effect makes you immune to anything then cure them immediately.
             foreach (string cure in sa.Immunities)
             {
-                StatusEffect.RemoveStatusEffect(this, cure);
+                this.RemoveStatusEffect(cure, strife, false);
+            }
+        }
+
+        /// <summary>
+        /// Removes the status effect from the specified entity.
+        /// </summary>
+        /// <param name="name">Name of the status effect.</param>
+        /// <param name="strife">The strife object itself.</param>
+        /// <param name="turnSensitive">When set to true, only removes the status effect if it's turn counter is below 0.</param>
+        /// <returns>The log of the event.</returns>
+        public void RemoveStatusEffect(string name, Strife strife, bool turnSensitive)
+        {
+            if (!turnSensitive)
+            {
+                InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
+            }
+            else
+            {
+                InflictedAilments.RemoveAll(x =>
+                    x.Name.ToLowerInvariant() == name.ToLowerInvariant()
+                    && x.Turns < 0
+                    );
+            }
+
+            StatusEffect sa = InflictedAilments.FirstOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
+            if (!string.IsNullOrWhiteSpace(sa.EndMsg))
+            {
+                strife.Log.AppendLine(sa.EndMsg);
             }
         }
 

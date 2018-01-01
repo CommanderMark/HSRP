@@ -34,6 +34,7 @@
         public const string SLEEPING_AIL = "Sleeping";
         public const string PHYSICAL_COUNTER_AIL = "CounterPhy";
         public const string SPE_ATTACK_AIL = "SpeAttack";
+        public const string ENRAGED_AIL = "Enraged";
         public const string GUARDING_AIL = "Guarding";
     }
 

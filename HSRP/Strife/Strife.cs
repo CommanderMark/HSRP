@@ -380,8 +380,7 @@ namespace HSRP
                 // Their controller is either dead or being mind-controlled themselves.
                 if (!match)
                 {
-                    Log.AppendLine($"{Syntax.ToCodeLine(turner.Name)} is no longer controlled!");
-                    StatusEffect.RemoveStatusEffect(turner, Constants.MIND_CONTROL_AIL);
+                    turner.RemoveStatusEffect(Constants.MIND_CONTROL_AIL, this, true);
                 }
 
                 AddLog();
@@ -554,7 +553,7 @@ namespace HSRP
                 Tuple<bool, bool> tup = sa.Update(attacker, target, attackTurn, this);
                 if (tup.Item1)
                 {
-                    Log.AppendLine(StatusEffect.RemoveStatusEffect(attacker, sa.Name));
+                    attacker.RemoveStatusEffect(sa.Name, this, true);
                     --i;
                 }
 
@@ -979,28 +978,17 @@ namespace HSRP
                         } break;
                 }
 
-                ApplyMod(target, Constants.SPE_ATTACK_AIL, stat, -debuff, 10, attacker, !attackTurn);
+                ApplyMod(target, Constants.SPE_ATTACK_AIL, stat, -debuff, 9, attacker, !attackTurn);
 
-                // TODO: No end?
-                // If STR or FOR reach 0 they leave the strife.
+                // If STR or FOR reach 0 then inflict them with the 'Enraged' status effect and remove all previous speech debuffs.
                 if ((target.GetTotalAbilities().Strength.Value < 1 && rng == 0) || (target.GetTotalAbilities().Fortitude.Value < 1 && rng == 1))
                 {
                     Log.AppendLine($"{Syntax.ToCodeLine(target.Name.ToApostrophe())} {stat} has fallen below 1.");
 
-                    // 50% chance for them to leave the strife.
-                    if (Toolbox.TrueOrFalse())
-                    {
-                        Log.AppendLine(Toolbox.GetMessage("speKill", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
-
-                        LeaveStrife(target);
-                    }
-                    // Otherwise their debuffs are removed.
-                    else
-                    {
-                        Log.AppendLine(Toolbox.GetMessage("speKillFail", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
-                        Log.AppendLine(Syntax.ToCodeLine(target.Name.ToApostrophe()) + " debuffs were removed.");
-                        StatusEffect.RemoveStatusEffect(target, Constants.SPE_ATTACK_AIL);
-                    }
+                    // HE'S ANGRY
+                    Log.AppendLine(Syntax.ToCodeLine(target.Name.ToApostrophe()) + " speech debuffs were removed.");
+                    target.ApplyStatusEffect(Constants.ENRAGED_AIL, attacker, !attackTurn, this);
+                    target.RemoveStatusEffect(Constants.SPE_ATTACK_AIL, this, false);
                 }
             }
             else
@@ -1096,9 +1084,18 @@ namespace HSRP
             }
         }
 
+        /// <summary>
+        /// Generates a status effect with the specified ability modification.
+        /// </summary>
+        /// <param name="ent">The entity the effect is being applied to.</param>
+        /// <param name="name">What to call the status effect.</param>
+        /// <param name="stat">The ability being affected.</param>
+        /// <param name="value">The amount to affect the ability by.</param>
+        /// <param name="turns">The number of turns the status effect should last for.</param>
+        /// <param name="target">The entity the user was targetting.</param>
+        /// <param name="attackTeam">Whether or not the entity this status effect is applied to was on the attacking team.</param>
         private void ApplyMod(Entity ent, string name, string stat, int value, int turns, Entity tar, bool attackTeam)
         {
-            
             AbilitySet set = new AbilitySet();
             foreach (PropertyInfo prop in set.GetType().GetProperties())
             {
