@@ -1,11 +1,517 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<strife id="6168" active="false" currentTurn="184763855803645952">
-  <status attackTurn="false" turn="0" />
+<strife id="6168" active="true" currentTurn="184763855803645952">
+  <status attackTurn="false" turn="1" />
   <attackers>
     <player id="103547713932529664" />
   </attackers>
   <targets>
+    <npc id="26">
+      <info name="Defenseless Lowblood" type="Normal" pineappleOnPizza="false">She isn't going to hurt you and yet here you are killing her, you monster.</info>
+      <status hp="92" maxhp="100" dead="false" specibus="Feralkind" diceRolls="1" />
+      <abilities>
+        <Strength value="5" />
+        <Constitution value="7" />
+        <Psion value="0" />
+        <Fortitude value="4" />
+        <Intimidation value="3" />
+        <Persuasion value="3" />
+      </abilities>
+      <ailments>
+        <ailment name="Enraged" controller="0" turns="12">
+          <abilities>
+            <Constitution value="-1" />
+          </abilities>
+        </ailment>
+        <ailment name="SpeAttack" controller="0" turns="9">
+          <abilities>
+            <Intimidation value="-18" />
+          </abilities>
+        </ailment>
+      </ailments>
+    </npc>
     <player id="184763855803645952" />
   </targets>
-  <logs posted="0" />
+  <logs posted="71">
+    <log>Team A:
+0 - Sidewind Langston - 19/178
+
+Team T: 
+0 - Defenseless Lowblood - 100/100
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` assaults `Defenseless Lowblood`.
+
+`Sidewind Langston` rolls 12!
+`Defenseless Lowblood` rolls 4!
+
+`Defenseless Lowblood` took `8` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` lunges for a strike towards `Sidewind Langston`.
+
+`Defenseless Lowblood` rolls 4!
+`Sidewind Langston` rolls 11!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` attacks `Defenseless Lowblood`.
+
+`Sidewind Langston` rolls 3!
+`Defenseless Lowblood` rolls 6!
+
+Attack missed.
+
+`Defenseless Lowblood` is counter attacking.
+`Sidewind Langston` rolls 23!
+`Defenseless Lowblood` rolls 3!
+
+Counter attack dodged.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` assaults `Sidewind Langston`.
+
+`Defenseless Lowblood` rolls 4!
+`Sidewind Langston` rolls 18!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `Defenseless Lowblood`.
+
+`Sidewind Langston` rolls 2!
+`Defenseless Lowblood` rolls 7!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` lunges for a strike towards `Sidewind Langston`.
+
+`Defenseless Lowblood` rolls 3!
+`Sidewind Langston` rolls 4!
+
+Attack missed.
+
+`Sidewind Langston` tries to retaliate.
+`Defenseless Lowblood` rolls 4!
+`Sidewind Langston` rolls 8!
+
+`Defenseless Lowblood` was inflicted with `-4` Strength for `1 turn`.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` is `Guarding`!
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` attacks `Sidewind Langston`.
+
+`Defenseless Lowblood` rolls 5!
+`Sidewind Langston` rolls 1!
+
+`Sidewind Langston` took `4` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` is `Guarding`!
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` lunges for a strike towards `Sidewind Langston`.
+
+`Defenseless Lowblood` rolls 5!
+`Sidewind Langston` rolls 30!
+
+Attack missed.
+
+`Sidewind Langston` tries to retaliate.
+`Defenseless Lowblood` rolls 5!
+`Sidewind Langston` rolls 4!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` is `Guarding`!
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` assaults `Sidewind Langston`.
+
+`Defenseless Lowblood` rolls 4!
+`Sidewind Langston` rolls 32!
+
+Attack missed.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` lunges for a strike towards `Defenseless Lowblood`.
+
+`Sicarius Anathera` rolls 2!
+`Defenseless Lowblood` rolls 2!
+
+Attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` assaults `Sicarius Anathera`.
+
+`Sidewind Langston` rolls 17!
+`Sicarius Anathera` rolls 20!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` attacks `Sidewind Langston`.
+
+`Defenseless Lowblood` rolls 1!
+`Sidewind Langston` rolls 18!
+
+Attack missed.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` tries to influence `Defenseless Lowblood`.
+
+`Sicarius Anathera` rolls 32!
+`Defenseless Lowblood` rolls 2!
+
+`Defenseless Lowblood` was inflicted with `-1` Strength for `10 turns`.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` assaults `Sicarius Anathera`.
+
+`Sidewind Langston` rolls 7!
+`Sicarius Anathera` rolls 2!
+
+`Sicarius Anathera` took `5` hitpoint(s) of damage.
+
+
+
+`Sicarius Anathera` is counter attacking.
+`Sidewind Langston` rolls 14!
+`Sicarius Anathera` rolls 10!
+
+Counter attack successfully blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` attacks `Sidewind Langston`.
+
+`Defenseless Lowblood` rolls 2!
+`Sidewind Langston` rolls 4!
+
+Attack missed.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` is `Guarding`!
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `Sicarius Anathera`.
+
+`Sidewind Langston` rolls 20!
+`Sicarius Anathera` rolls 19!
+
+`Sicarius Anathera` took `1` hitpoint(s) of damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` lunges for a strike towards `Sidewind Langston`.
+
+`Defenseless Lowblood` rolls 2!
+`Sidewind Langston` rolls 18!
+
+Attack missed.
+
+`Sidewind Langston` is counter attacking.
+`Defenseless Lowblood` rolls 2!
+`Sidewind Langston` rolls 6!
+
+`Defenseless Lowblood` was inflicted with `-4` Strength for `1 turn`.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` tries their hand at using a silver tongue.
+
+`Sicarius Anathera` rolls 4!
+`Defenseless Lowblood` rolls 1!
+
+`Defenseless Lowblood` was inflicted with `-1` Strength for `10 turns`.
+`Defenseless Lowblood's` Strength has fallen below 1.
+`Defenseless Lowblood's` speech debuffs were removed.
+`Defenseless Lowblood` is `Enraged`!
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `Sicarius Anathera`.
+
+`Sidewind Langston` rolls 27!
+`Sicarius Anathera` rolls 1!
+
+`Sicarius Anathera` took `26` hitpoint(s) of damage.
+`Sicarius Anathera` is no longer participating in the strife.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` assaults `Sidewind Langston`.
+
+`Defenseless Lowblood` rolls 4!
+`Sidewind Langston` rolls 10!
+
+Attack missed.
+
+`Sidewind Langston` tries to retaliate.
+`Defenseless Lowblood` rolls 4!
+`Sidewind Langston` rolls 4!
+
+Counter attack dodged.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` lunges for a strike towards `Sicarius Anathera`.
+
+`Sidewind Langston` rolls 26!
+`Sicarius Anathera` rolls 2!
+
+`Sicarius Anathera` took `24` hitpoint(s) of damage.
+
+
+
+`Sicarius Anathera` is counter attacking.
+`Sidewind Langston` rolls 23!
+`Sicarius Anathera` rolls 2!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` lunges for a strike towards `Sidewind Langston`.
+
+`Defenseless Lowblood` rolls 2!
+`Sidewind Langston` rolls 16!
+
+Attack missed.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+    <log>`Sicarius Anathera` attempts to intimidate `Defenseless Lowblood`.
+
+`Sicarius Anathera` rolls 19!
+`Defenseless Lowblood` rolls 6!
+
+`Defenseless Lowblood` was inflicted with `-18` Intimidation for `10 turns`.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` assaults `Sicarius Anathera`.
+
+`Sidewind Langston` rolls 8!
+`Sicarius Anathera` rolls 14!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` attacks `Sidewind Langston`.
+
+`Defenseless Lowblood` rolls 1!
+`Sidewind Langston` rolls 10!
+
+Attack missed.
+
+`Sidewind Langston` tries to retaliate.
+`Defenseless Lowblood` rolls 4!
+`Sidewind Langston` rolls 3!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>`Sicarius Anathera` is taking their turn!
+
+------------
+</log>
+  </logs>
 </strife>

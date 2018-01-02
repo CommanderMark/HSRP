@@ -21,7 +21,6 @@ namespace HSRP.Commands
             string msg = string.Empty;
             while (!humanNext)
             {
-                // TODO: Add delay?
                 if (msg.Length >= Constants.DiscordCharLimit)
                 {
                     await ReplyStrifeAsync(msg);
@@ -42,13 +41,20 @@ namespace HSRP.Commands
             // Figure out whether this is a pre-defined strife action or a move.
             // TODO: Moves.
             IEnumerable<StrifeAction> fields = Enum.GetValues(typeof(StrifeAction)).Cast<StrifeAction>();
+            bool valid = false;
             foreach (StrifeAction sa in fields)
             {
                 if (sa.ToString().StartsWith(action, StringComparison.OrdinalIgnoreCase))
                 {
                     action = sa.ToString();
+                    valid = true;
                     break;
                 }
+            }
+            if (!valid)
+            {
+                await ReplyAsync("Invalid input.");
+                return;
             }
 
             Strife strf = Context.GetStrife();
@@ -78,6 +84,7 @@ namespace HSRP.Commands
                 await UpdateStrifeUntilHumanAsync(strf);
 
                 // If the strife is no longer active then it was completed this turn. So post logs.
+                // TODO: Doesn't work.
                 if (!strf.Active)
                 {
                     string path = strf.LogLogs();

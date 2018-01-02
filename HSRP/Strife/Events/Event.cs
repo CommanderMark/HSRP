@@ -198,21 +198,12 @@ namespace HSRP
                 return false;
             }
 
-            foreach (PropertyInfo property in GetType().GetProperties())
-            {
-                if (property.CanWrite && property.CanRead)
-                {
-                    Object val1 = property.GetValue(this);
-                    Object val2 = property.GetValue(evnt);
-
-                    if (val1 != val2)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
+            return this.damageTarget == evnt.damageTarget
+                && this.damageAmount == evnt.damageAmount
+                && this.healTarget == evnt.healTarget
+                && this.healAmount == evnt.healAmount
+                && this.message == evnt.message
+                && this.probability == evnt.probability;
         }
 
         public override int GetHashCode()

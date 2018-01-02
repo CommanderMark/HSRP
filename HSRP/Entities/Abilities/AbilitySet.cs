@@ -122,12 +122,12 @@ namespace HSRP
         public static AbilitySet ToFixedNumber(AbilitySet mod, AbilitySet set)
         {
             AbilitySet newSet = new AbilitySet();
-            newSet.Strength.Value = newSet.Strength.Value + (int) (mod.Strength.Percentage * set.Strength.Value);
-            newSet.Constitution.Value = newSet.Constitution.Value + (int) (mod.Constitution.Percentage * set.Constitution.Value);
-            newSet.Psion.Value = newSet.Psion.Value + (int) (mod.Psion.Percentage * set.Psion.Value);
-            newSet.Fortitude.Value = newSet.Fortitude.Value + (int) (mod.Fortitude.Percentage * set.Fortitude.Value);
-            newSet.Intimidation.Value = newSet.Intimidation.Value + (int) (mod.Intimidation.Percentage * set.Intimidation.Value);
-            newSet.Persuasion.Value = newSet.Persuasion.Value + (int) (mod.Persuasion.Percentage * set.Persuasion.Value);
+            newSet.Strength.Value = mod.Strength.Value + (int) (mod.Strength.Percentage * set.Strength.Value);
+            newSet.Constitution.Value = mod.Constitution.Value + (int) (mod.Constitution.Percentage * set.Constitution.Value);
+            newSet.Psion.Value = mod.Psion.Value + (int) (mod.Psion.Percentage * set.Psion.Value);
+            newSet.Fortitude.Value = mod.Fortitude.Value + (int) (mod.Fortitude.Percentage * set.Fortitude.Value);
+            newSet.Intimidation.Value = mod.Intimidation.Value + (int) (mod.Intimidation.Percentage * set.Intimidation.Value);
+            newSet.Persuasion.Value = mod.Persuasion.Value + (int) (mod.Persuasion.Percentage * set.Persuasion.Value);
 
             return newSet;
         }

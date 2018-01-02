@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
-  <status hp="20" maxhp="232" dead="false" specibus="Bladekindx2" />
+  <status hp="16" maxhp="232" dead="false" specibus="Bladekindx2" />
   <levels echeladder="12" pendingSkillPoints="0" xp="4354" nextLevel="5000" />
   <abilities>
     <Strength value="36" />
@@ -29,4 +29,5 @@
     <item value="Toxin Syringe" quantity="1" />
     <item value="TROLL SHINOBI outfit" quantity="1" />
   </inventory>
+  <strife id="6168" />
 </player>

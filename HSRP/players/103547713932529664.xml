@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sidewind Langston" id="103547713932529664" owner="CommanderMark" blood="Violet" pineappleOnPizza="false" />
-  <status hp="20" maxhp="178" dead="false" specibus="Hatchetkind" />
+  <status hp="115" maxhp="178" dead="false" specibus="Hatchetkind" />
   <levels echeladder="11" pendingSkillPoints="0" xp="2910" nextLevel="3300" />
   <abilities>
     <Strength value="30" />
@@ -24,4 +24,12 @@
     <item value="Pail" quantity="1" />
     <item value="Expensive Cider" quantity="300" />
   </inventory>
+  <events>
+    <event probability="1" trigger="OnHit">
+      <inflictDamage amount="0" type="None" />
+      <healDamage amount="0" type="None" />
+      <ailment name="Debugging" type="Target" />
+    </event>
+  </events>
+  <strife id="6168" />
 </player>

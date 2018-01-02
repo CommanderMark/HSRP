@@ -372,6 +372,27 @@ namespace HSRP
                     if (controller == ent.ID && !ent.Dead && ent.GetMindController() <= 0) 
                     {
                         Log.AppendLine($"{Syntax.ToCodeLine(turner.Name)}, controlled by {Syntax.ToCodeLine(ent.Name)}, is taking their turn!");
+                        
+                        // Update status effects.
+                        bool skipturn = false;
+                        for (int i = 0; i < turner.InflictedAilments.Count; i++)
+                        {
+                            StatusEffect sa = turner.InflictedAilments[i];
+                            Tuple<bool, bool> tup = sa.Update(turner, null, attackTurn, this);
+                            if (tup.Item1)
+                            {
+                                turner.RemoveStatusEffect(sa.Name, this, true);
+                                --i;
+                            }
+
+                            skipturn |= tup.Item2;
+                        }
+
+                        if (skipturn || turner.Dead)
+                        {
+                            humanNext = false;
+                        }
+
                         CurrentTurner = ent;
                         match = true;
                         break;
@@ -399,6 +420,27 @@ namespace HSRP
                 AddLog();
 
                 Log.AppendLine($"{Syntax.ToCodeLine(turner.Name)} is taking their turn!");
+
+                // Update status effects.
+                bool skipturn = false;
+                for (int i = 0; i < turner.InflictedAilments.Count; i++)
+                {
+                    StatusEffect sa = turner.InflictedAilments[i];
+                    Tuple<bool, bool> tup = sa.Update(turner, null, attackTurn, this);
+                    if (tup.Item1)
+                    {
+                        turner.RemoveStatusEffect(sa.Name, this, true);
+                        --i;
+                    }
+
+                    skipturn |= tup.Item2;
+                }
+
+                if (skipturn || turner.Dead)
+                {
+                    humanNext = false;
+                }
+
                 // AI is taking a turn, do that until a human is found.
                 if (turner is NPC)
                 {
@@ -545,56 +587,34 @@ namespace HSRP
             Entity attacker = CurrentEntity;
             Entity target = GetTarget(targetNum, targetingAttackers);
 
-            // Update status effects.
-            bool skipturn = false;
-            for (int i = 0; i < attacker.InflictedAilments.Count; i++)
+            switch (action)
             {
-                StatusEffect sa = attacker.InflictedAilments[i];
-                Tuple<bool, bool> tup = sa.Update(attacker, target, attackTurn, this);
-                if (tup.Item1)
-                {
-                    attacker.RemoveStatusEffect(sa.Name, this, true);
-                    --i;
-                }
+                case "PhysicalAttack":
+                    PhysicalAttack(attacker, target);
+                    break;
 
-                skipturn |= tup.Item2;
-            }
+                case "MindControl":
+                    MindControl(attacker, target);
+                    break;
 
-            bool killedbyStatusEffect = attacker.Health < 1;
-            if (!skipturn && !killedbyStatusEffect)
-            {
-                switch (action)
-                {
-                    case "PhysicalAttack":
-                        PhysicalAttack(attacker, target);
-                        break;
+                case "OpticBlast":
+                    OpticBlast(attacker, target);
+                    break;
 
-                    case "MindControl":
-                        MindControl(attacker, target);
-                        break;
+                case "SpeechAttack":
+                    SpeechAttack(attacker, target);
+                    break;
 
-                    case "OpticBlast":
-                        OpticBlast(attacker, target);
-                        break;
-
-                    case "SpeechAttack":
-                        SpeechAttack(attacker, target);
-                        break;
-
-                    case "Guard":
-                        Guard(attacker, target);
-                        break;
-                }
+                case "Guard":
+                    Guard(attacker, target);
+                    break;
             }
 
             if (attacker.Health < 1 && !attacker.Dead)
             {
                 LeaveStrife(attacker);
                 attacker.TriggerEvent(EventType.OnDeath, target, attackTurn, this);
-                if (!killedbyStatusEffect)
-                {
-                    target.TriggerEvent(EventType.OnKill, attacker, !attackTurn, this);
-                }
+                target.TriggerEvent(EventType.OnKill, attacker, !attackTurn, this);
             }
             if (target.Health < 1 && !target.Dead)
             {
@@ -717,10 +737,7 @@ namespace HSRP
 
             foreach (Entity ent in Entities)
             {
-                if (!(ent is NPC))
-                {
-                    ent.InflictedAilments.Clear();
-                }
+                ent.InflictedAilments.Clear();
 
                 // If an entity is dead reset their HP to 1. 
                 if (ent.Dead)
@@ -993,7 +1010,7 @@ namespace HSRP
             }
             else
             {
-                Log.AppendLine("");
+                Log.AppendLine();
                 Log.AppendLine(Toolbox.GetMessage("speFail", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
             }
         }
@@ -1110,6 +1127,7 @@ namespace HSRP
                     sa.Name = name;
                     sa.Modifiers = set;
                     sa.Turns = turns;
+                    sa.Stacks = true;
                     ent.ApplyStatusEffect(sa, tar, attackTeam, this);
 
                     string plural = turns == 1
