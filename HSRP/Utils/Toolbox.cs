@@ -132,10 +132,10 @@ namespace HSRP
             {
                 if (args == null)
                 {
-                    return value[RandInt(value.Length)];
+                    return value[RandInt(value.Length - 1)];
                 }
                 
-                string msg = value[RandInt(value.Length)];
+                string msg = value[RandInt(value.Length - 1)];
                 for (int i = 0; i < args.Length; i++)
                 {
                     msg = msg.Replace("{" + i + "}", args[i]);

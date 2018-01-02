@@ -3,7 +3,7 @@
     public static class Constants
     {
         public const string BotPrefix = "==>";
-        public const int DiscordCharLimit = 1950;
+        public const int DiscordCharLimit = 1500;
 
         public const int StartingSkillPoints = 24;
         public const int SkillPointsPerLevel = 6;
@@ -24,7 +24,7 @@
         public const ulong GEN_CHANNEL = 325511181634895872;
 
         // There are 2 channels for strife: one for testing and one for RPing. This is toggled at runtime.
-        public static ulong STRIFE_CHANNEL = RP_STRIFE_CHANNEL;
+        public static ulong STRIFE_CHANNEL = TEST_STRIFE_CHANNEL; // TODO:
 
         public const ulong TEST_STRIFE_CHANNEL = 343972292730028042;
         public const ulong RP_STRIFE_CHANNEL = 351522810008436736;

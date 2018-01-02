@@ -604,7 +604,7 @@ namespace HSRP
             }
 
             UpdateTurn();
-            return GetLogs();
+            return attacker is NPC ? string.Empty : GetLogs();
         }
 
         /// <summary>
@@ -684,7 +684,7 @@ namespace HSRP
             Log.AppendLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
         }
 
-        // TODO: Check that this works properply both when and when not it is their turn.
+        // TODO: Check that this works properly both when and when not it is their turn.
         public string Forfeit(ulong id)
         {
             Entity ent = Entities.FirstOrDefault(x => x.ID == id);
@@ -743,7 +743,7 @@ namespace HSRP
         private void PhysicalAttack(Entity attacker, Entity target)
         {
             Log.AppendLine(Toolbox.GetMessage("phyStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
-            Log.AppendLine("");
+            Log.AppendLine();
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -765,7 +765,7 @@ namespace HSRP
                 int dmg = atk - tar;
                 target.Health -= dmg;
 
-                Log.AppendLine("");
+                Log.AppendLine();
                 Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} took {Syntax.ToCodeLine(dmg.ToString())} hitpoint(s) of damage.");
 
                 attacker.TriggerEvent(EventType.OnHit, target, attackTurn, this);
@@ -776,13 +776,13 @@ namespace HSRP
             }
             else if (atk < tar)
             {
-                Log.AppendLine("");
+                Log.AppendLine();
                 Log.AppendLine("Attack missed.");
             }
             // Equal rolls, do nothing.
             else
             {
-                Log.AppendLine("");
+                Log.AppendLine();
                 Log.AppendLine("Attack blocked.");
             }
 
@@ -790,7 +790,7 @@ namespace HSRP
             // If the strength modifier of the attacker is already debuffed below 1 then don't debuff.
             if (attacker.GetTotalAbilities().Strength.Value < 1)
             {
-                Log.AppendLine("");
+                Log.AppendLine();
                 Log.AppendLine(Toolbox.GetMessage("phyCounterMax", Syntax.ToCodeLine(attacker.Name)));
                 return;
             }
@@ -802,7 +802,7 @@ namespace HSRP
                 // is higher than the attacker's strength.
                 if (Toolbox.TrueOrFalse(4 - (2 * Convert.ToInt32(tarY > atkY))))
                 {
-                    Log.AppendLine("");
+                    Log.AppendLine();
                     Log.AppendLine(Toolbox.GetMessage("phyCounterStart", Syntax.ToCodeLine(target.Name), Syntax.ToCodeLine(attacker.Name)));
 
                     atk = Toolbox.DiceRoll(atkX, atkY);
@@ -813,7 +813,7 @@ namespace HSRP
                     // Counter failed.
                     if (atk >= tar)
                     {
-                        Log.AppendLine("");
+                        Log.AppendLine();
                         Log.AppendLine(Toolbox.GetMessage("phyCounterBlock"));
                     }
                     // Counter suceeded, debuff strength.
@@ -1001,8 +1001,6 @@ namespace HSRP
         // Guard CON += XDCON
         private void Guard(Entity attacker, Entity target)
         {
-            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} is guarding!");
-
             int amount = Toolbox.DiceRoll(1, attacker.GetTotalAbilities().Constitution.Value);
             attacker.ApplyStatusEffect(Constants.GUARDING_AIL, target, attackTurn, this);
         }

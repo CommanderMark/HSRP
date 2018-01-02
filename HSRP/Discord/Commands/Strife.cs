@@ -32,6 +32,8 @@ namespace HSRP.Commands
                 msg += "\n" + tup.Item1;
                 humanNext = tup.Item2;
             }
+
+            await ReplyStrifeAsync(msg);
         }
 
         [Command("action"), InStrife]

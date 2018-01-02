@@ -4,7 +4,6 @@
     <msg>{0} attacks {1}.</msg>
     <msg>{0} lunges for a strike towards {1}.</msg>
     <msg>{0} assaults {1}.</msg>
-    <msg>{0} tries to deliver the punchline of a joke to {1}.</msg>
   </messages>
 
   <messages trigger="phyCounterStart">

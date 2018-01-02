@@ -27,7 +27,7 @@ namespace HSRP
         // Stat buffs/debuffs.
         public AbilitySet Modifiers = new AbilitySet();
 
-        public string[] Immunities;
+        public string[] Immunities = new string[0];
 
         // Misc. general status effect stuff.
         public string Name = string.Empty;

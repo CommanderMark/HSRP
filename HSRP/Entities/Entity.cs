@@ -171,7 +171,7 @@ namespace HSRP
             }
 
             StatusEffect sa = InflictedAilments.FirstOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
-            if (!string.IsNullOrWhiteSpace(sa.EndMsg))
+            if (!string.IsNullOrWhiteSpace(sa?.EndMsg))
             {
                 strife.Log.AppendLine(sa.EndMsg);
             }
