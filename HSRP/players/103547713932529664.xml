@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sidewind Langston" id="103547713932529664" owner="CommanderMark" blood="Violet" pineappleOnPizza="false" />
-  <status hp="1" maxhp="178" dead="false" specibus="Hatchetkind" />
+  <status hp="20" maxhp="178" dead="false" specibus="Hatchetkind" />
   <levels echeladder="11" pendingSkillPoints="0" xp="2910" nextLevel="3300" />
   <abilities>
-    <strength value="30" />
-    <constitution value="22" />
-    <psion value="0" />
-    <fortitude value="4" />
-    <intimidation value="36" />
-    <persuasion value="10" />
+    <Strength value="30" />
+    <Constitution value="22" />
+    <Psion value="0" />
+    <Fortitude value="4" />
+    <Intimidation value="36" />
+    <Persuasion value="10" />
   </abilities>
-  <inventory>
+  <inventory equippedWeapon="">
     <item value="Map" quantity="1" />
-    <item value="SOCKS" quantity="1" equipped="true" />
-    <item value="MOODY BLUE CAPE" quantity="1" equipped="true" />
-    <item value="MOODY BLUE RUSTY HATCHET" quantity="1" equipped="true" />
+    <item value="SOCKS" quantity="1" />
+    <item value="MOODY BLUE CAPE" quantity="1" />
+    <item value="MOODY BLUE RUSTY HATCHET" quantity="1" />
     <item value="Stolen Dagger" quantity="1" />
     <item value="Cash" quantity="62520" />
     <item value="Phones" quantity="2" />

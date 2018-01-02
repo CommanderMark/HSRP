@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Xml.Linq;
 
 namespace HSRP
@@ -85,7 +86,7 @@ namespace HSRP
                     case "inflictDamage":
                     {
                         damageAmount = ele.GetAttributeFloat("amount", 0f);
-                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[0]);
+                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[2]);
                         foreach(TargetType enumi in enumArr)
                         {
                             damageTarget |= enumi;
@@ -96,7 +97,7 @@ namespace HSRP
                     case "healDamage":
                     {
                         healAmount = ele.GetAttributeFloat("amount", 0f);
-                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[0]);
+                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[2]);
                         foreach(TargetType enumi in enumArr)
                         {
                             healTarget |= enumi;
@@ -108,7 +109,7 @@ namespace HSRP
                     {
                         string name = ele.GetAttributeString("name", string.Empty);
                         TargetType type = TargetType.None;
-                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[0]);
+                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[2]);
                         foreach(TargetType enumi in enumArr)
                         {
                             type |= enumi;
@@ -122,7 +123,7 @@ namespace HSRP
                     {
                         string name = ele.GetAttributeString("name", string.Empty);
                         TargetType type = TargetType.None;
-                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[0]);
+                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[2]);
                         foreach(TargetType enumi in enumArr)
                         {
                             type |= enumi;
@@ -177,12 +178,46 @@ namespace HSRP
                             );
             }
 
-            XElement msg = new XElement("message",
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                XElement msg = new XElement("message",
                                         new XText(message)
                                        );
-            eventEle.Add(msg);
+                eventEle.Add(msg);
+            }
 
             return eventEle;
+        }
+
+        public override bool Equals(Object obj)
+        {
+            // If parameter cannot be cast to Point return false.
+            Event evnt = obj as Event;
+            if (evnt == null)
+            {
+                return false;
+            }
+
+            foreach (PropertyInfo property in GetType().GetProperties())
+            {
+                if (property.CanWrite && property.CanRead)
+                {
+                    Object val1 = property.GetValue(this);
+                    Object val2 = property.GetValue(evnt);
+
+                    if (val1 != val2)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         /// <summary>

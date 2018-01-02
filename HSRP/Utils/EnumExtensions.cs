@@ -47,9 +47,15 @@ namespace HSRP
             {
                 ulong bits = Convert.ToUInt64(value);
                 if (bits == 0L)
-                    //yield return value;
-                    continue; // skip the zero value
-                while (flag < bits) flag <<= 1;
+                {
+                    yield return value;
+                    continue;
+                }
+
+                while (flag < bits)
+                {
+                     flag <<= 1;
+                }
                 if (flag == bits)
                     yield return value;
             }

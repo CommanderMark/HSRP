@@ -19,7 +19,7 @@ namespace HSRP
         public Ability(XElement element)
         {
             Value = element.GetAttributeInt("value", 0);
-            Percentage = element.GetAttributeFloat("per", 1.0f);
+            Percentage = element.GetAttributeFloat("per", 0f);
         }
 
         public XElement Save(string name)

@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace HSRP
 {
     public interface IEventable
     {
-        Dictionary<EventType, Event> Events { set; get; }
+        List<Tuple<EventType, Event>> Events { set; get; }
         string[] Immunities { get; set; }
     }
 }

@@ -365,7 +365,7 @@ namespace HSRP
                 string[] content = attribute.Value.Split(',');
                 for (int i = 0; i < content.Length; i++)
                 {
-                    val[i] = (T)Enum.Parse(typeof(T), attribute.Value);
+                    val[i] = (T)Enum.Parse(typeof(T), content[i]);
                 }
             }
             catch (Exception e)

@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
-  <status hp="1" maxhp="232" dead="false" specibus="Bladekindx2" />
+  <status hp="20" maxhp="232" dead="false" specibus="Bladekindx2" />
   <levels echeladder="12" pendingSkillPoints="0" xp="4354" nextLevel="5000" />
   <abilities>
-    <strength value="36" />
-    <constitution value="22" />
-    <psion value="0" />
-    <fortitude value="20" />
-    <intimidation value="20" />
-    <persuasion value="10" />
+    <Strength value="36" />
+    <Constitution value="22" />
+    <Psion value="0" />
+    <Fortitude value="20" />
+    <Intimidation value="20" />
+    <Persuasion value="10" />
   </abilities>
-  <inventory>
-    <item value="CINQUEDEA DAGGER" quantity="1" equipped="true" />
+  <inventory equippedWeapon="">
+    <item value="CINQUEDEA DAGGER" quantity="1" />
     <item value="Un-Stolen Computer" quantity="1" />
     <item value="Cash" quantity="34106" />
     <item value="Strana's Mask" quantity="1" />
@@ -23,9 +23,9 @@
     <item value="Kornla's Poison" quantity="1" />
     <item value="New Fiduspawn Collection" quantity="1" />
     <item value="Bombs" quantity="1" />
-    <item value="Anime Shades" quantity="1" equipped="true" />
-    <item value="Cool Jacket" quantity="1" equipped="true" />
-    <item value="DEADLY CORVOS" quantity="1" equipped="true" />
+    <item value="Anime Shades" quantity="1" />
+    <item value="Cool Jacket" quantity="1" />
+    <item value="DEADLY CORVOS" quantity="1" />
     <item value="Toxin Syringe" quantity="1" />
     <item value="TROLL SHINOBI outfit" quantity="1" />
   </inventory>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace HSRP
@@ -9,7 +10,7 @@ namespace HSRP
         public int Quantity;
 
         // TODO: XML events
-        public Dictionary<EventType, Event> Events { set; get; }
+        public List<Tuple<EventType, Event>> Events { set; get; }
         public string[] Immunities { get; set; }
 
         public Item()
@@ -17,7 +18,7 @@ namespace HSRP
             Name = string.Empty;
             Quantity = 1;
 
-            Events = new Dictionary<EventType, Event>();
+            Events = new List<Tuple<EventType, Event>>();
             Immunities = null;
         }
 

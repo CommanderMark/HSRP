@@ -13,7 +13,7 @@ namespace HSRP
 
         public AbilitySet BaseAbilities { get; set; }
 
-        public Dictionary<EventType, Event> Events { get; set; }
+        public List<Tuple<EventType, Event>> Events { get; set; }
         public string[] Immunities { get; set; }
         public List<StatusEffect> InflictedAilments { get; set; }
         public List<Move> Moves { get; set; }
@@ -29,7 +29,7 @@ namespace HSRP
         {
             BaseAbilities = new AbilitySet();
 
-            Events = new Dictionary<EventType, Event>();
+            Events = new List<Tuple<EventType, Event>>();
             Immunities = null;
             InflictedAilments = new List<StatusEffect>();
             Moves = new List<Move>();
@@ -37,7 +37,7 @@ namespace HSRP
             Name = "";
             Specibus = "";
 
-            Events.Add(EventType.OnAttacked, Event.WakeUpAfterHit);
+            Events.Add(new Tuple<EventType, Event>(EventType.OnAttacked, Event.WakeUpAfterHit));
         }
 
         public abstract string Display(bool showMods);
@@ -185,9 +185,12 @@ namespace HSRP
         /// <param name="strife">The strife object itself.</param>
         public void TriggerEvent(EventType type, Entity tar, bool attackTeam, Strife strife)
         {
-            if (this.Events.TryGetValue(type, out Event evnt))
+            foreach (Tuple<EventType, Event> tup in Events)
             {
-                evnt.Fire(this, tar, attackTeam, strife);
+                if (tup.Item1 == type)
+                {
+                    tup.Item2.Fire(this, tar, attackTeam, strife);
+                }
             }
         }
 

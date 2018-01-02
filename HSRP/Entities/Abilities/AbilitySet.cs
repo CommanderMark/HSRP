@@ -90,12 +90,6 @@ namespace HSRP
 
         public override bool Equals(Object obj)
         {
-            // If parameter is null return false.
-            if (obj == null)
-            {
-                return false;
-            }
-
             // If parameter cannot be cast to Point return false.
             AbilitySet set = obj as AbilitySet;
             if (set == null)
@@ -147,11 +141,12 @@ namespace HSRP
             Intimidation = new Ability();
             Persuasion = new Ability();
         }
-        public AbilitySet(XElement element)
+
+        public AbilitySet(XElement element) : this()
         {
             foreach (XElement ele in element.Elements())
             {
-                switch (ele.Name.LocalName)
+                switch (ele.Name.LocalName.FirstCharUpper())
                 {
                     case Ability.STR:
                     {

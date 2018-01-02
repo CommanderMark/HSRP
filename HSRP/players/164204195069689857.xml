@@ -4,14 +4,14 @@
   <status hp="122" maxhp="122" dead="false" specibus="axekind" />
   <levels echeladder="4" pendingSkillPoints="0" xp="130" nextLevel="150" />
   <abilities>
-    <strength value="8" />
-    <constitution value="5" />
-    <psion value="12" />
-    <fortitude value="12" />
-    <intimidation value="1" />
-    <persuasion value="10" />
+    <Strength value="8" />
+    <Constitution value="5" />
+    <Psion value="12" />
+    <Fortitude value="12" />
+    <Intimidation value="1" />
+    <Persuasion value="10" />
   </abilities>
-  <inventory>
+  <inventory equippedWeapon="">
     <item value="Cash" quantity="700" />
   </inventory>
 </player>

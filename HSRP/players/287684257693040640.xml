@@ -4,12 +4,12 @@
   <status hp="259" maxhp="259" dead="false" specibus="2x3dent" />
   <levels echeladder="13" pendingSkillPoints="0" xp="5001" nextLevel="7600" />
   <abilities>
-    <strength value="25" />
-    <constitution value="25" />
-    <psion value="0" />
-    <fortitude value="30" />
-    <intimidation value="0" />
-    <persuasion value="34" />
+    <Strength value="25" />
+    <Constitution value="25" />
+    <Psion value="0" />
+    <Fortitude value="30" />
+    <Intimidation value="0" />
+    <Persuasion value="34" />
   </abilities>
-  <inventory />
+  <inventory equippedWeapon="" />
 </player>

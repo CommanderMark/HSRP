@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strife id="6168" active="false" currentTurn="184763855803645952">
+  <status attackTurn="false" turn="0" />
+  <attackers>
+    <player id="103547713932529664" />
+  </attackers>
+  <targets>
+    <player id="184763855803645952" />
+  </targets>
+  <logs posted="0" />
+</strife>

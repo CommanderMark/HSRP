@@ -156,7 +156,7 @@ namespace HSRP
 
                             if (type != EventType.NONE)
                             {
-                                Events.Add(type, evnt);
+                                Events.Add(new Tuple<EventType, Event>(type, evnt));
                             }
                             else
                             {
@@ -212,17 +212,21 @@ namespace HSRP
                 inventory.Add(ele);
             }
 
+            player.Add(info, status, levels, abilities, inventory);
+
             XElement events = new XElement("events");
-            foreach (KeyValuePair<EventType, Event> evnt in Events)
+            foreach (Tuple<EventType, Event> evnt in Events)
             {
-                if (evnt.Value == Event.WakeUpAfterHit) { continue; }
-                XElement ailEle = evnt.Value.Save();
-                ailEle.Add(new XAttribute("trigger", evnt.Key.ToString()));
+                if (evnt.Item2.Equals(Event.WakeUpAfterHit)) { continue; }
+                XElement ailEle = evnt.Item2.Save();
+                ailEle.Add(new XAttribute("trigger", evnt.Item1.ToString()));
 
                 events.Add(ailEle);
             }
-
-            player.Add(info, status, levels, abilities, inventory, events);
+            if (events.Elements().Count() > 0)
+            {
+                player.Add(events);
+            }
 
             if (StrifeID > 0)
             {
