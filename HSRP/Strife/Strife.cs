@@ -356,12 +356,6 @@ namespace HSRP
                 return new Tuple<string, bool>(GetLogs(), true);
             }
 
-            // Update turns. Sorry you have to see this.
-            if (attackTurn ? Attackers[turn].Dead : Targets[turn].Dead)
-            {
-                UpdateTurn();
-            }
-
             // Are they being mind-controlled?
             ulong controller = turner.GetMindController();
             if (controller > 0)
@@ -637,7 +631,7 @@ namespace HSRP
             }
 
             UpdateTurn();
-            return attacker is NPC ? string.Empty : GetLogs();
+            return CurrentTurner is NPC ? string.Empty : GetLogs();
         }
 
         /// <summary>
@@ -717,7 +711,6 @@ namespace HSRP
             Log.AppendLine(Syntax.ToCodeLine(ent.Name) + " is no longer participating in the strife.");
         }
 
-        // TODO: Check that this works properly both when and when not it is their turn.
         public string Forfeit(ulong id)
         {
             Entity ent = Entities.FirstOrDefault(x => x.ID == id);
@@ -734,6 +727,12 @@ namespace HSRP
 
             // Kill 'em.
             LeaveStrife(ent);
+
+            // If it was their turn go to the next one.
+            if (CurrentTurner.ID == id)
+            {
+                UpdateTurn();
+            }
             
             AddLog();
             return GetLogs();

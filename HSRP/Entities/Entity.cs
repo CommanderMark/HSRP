@@ -104,7 +104,7 @@ namespace HSRP
             {
                 foreach (StatusEffect saOther in this.InflictedAilments)
                 {
-                    if (sa.Name.ToLowerInvariant() == saOther.Name.ToLowerInvariant())
+                    if (sa.Name.ToLowerInvariant() == saOther.Name.ToLowerInvariant() && saOther.Turns > 0)
                     {
                         strife.Log.AppendLine($"{Syntax.ToCodeLine(this.Name)} is already \"{Syntax.ToCodeLine(sa.Name.ToString())}\"!");
                         return;

@@ -112,15 +112,7 @@ namespace HSRP.Commands
         {
             Strife strf = Context.GetStrife();
             await ReplyStrifeAsync(strf.Forfeit(Context.User.Id));
-            await ReplyStrifeAsync(strf.UpdateStrife().Item1);
-            // If the strife is no longer active then it was completed this turn. So post logs.
-            if (!strf.Active)
-            {
-                string path = strf.LogLogs();
-
-                await Context.Channel.SendFileAsync(path, "The log of the strife is now being posted.");
-                File.Delete(path);
-            }
+            await UpdateStrifeUntilHumanAsync(strf);
 
             strf.Save();
         }
