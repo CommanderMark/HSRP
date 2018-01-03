@@ -29,8 +29,8 @@
          {1} - damage
          {2} - ailment name
     -->
-    <statusMsg>{0} received {1} damage from "{2}"!</statusMsg>
-    <!-- 
+    <statusMsg>{0} received {1} damage from "{2}"! Also skipped their turn.</statusMsg>
+    <!--
          {0} - inflicted strifer 
          {1} - ailment name
     -->
@@ -42,7 +42,7 @@
     <endMsg>{0} is no longer mind-controlled!</endMsg>
   </ailment>
 
-  <ailment name="Sleeping" turns="10">
+  <ailment name="Sleeping" turns="10" skipTurns="true">
     <inflictMsg>{0} fell asleep!</inflictMsg>
     <statusMsg>{0} is still sleeping!</statusMsg>
     <endMsg>{0} woke up!</endMsg>

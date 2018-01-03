@@ -97,21 +97,12 @@ namespace HSRP
                 return false;
             }
 
-            foreach (PropertyInfo property in GetType().GetProperties())
-            {
-                if (property.CanWrite && property.CanRead)
-                {
-                    Object val1 = property.GetValue(this);
-                    Object val2 = property.GetValue(set);
-
-                    if (val1 != val2)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
+            return this.Strength.Value == set.Strength.Value
+                && this.Constitution.Value == set.Constitution.Value
+                && this.Psion.Value == set.Psion.Value
+                && this.Fortitude.Value == set.Fortitude.Value
+                && this.Intimidation.Value == set.Intimidation.Value
+                && this.Persuasion.Value == set.Persuasion.Value;
         }
 
         public override int GetHashCode()
@@ -250,7 +241,7 @@ namespace HSRP
                     int modVal = ((Ability) prop.GetValue(mod)).Value;
 
                     disp.Append(prop.Name + ": " + value);
-                    disp.AppendLine(" " + (modVal - value).ToString("+0;-#"));
+                    disp.AppendLine(" (" + (modVal - value).ToString("+0;-#") + ")");
                 }
             }
 

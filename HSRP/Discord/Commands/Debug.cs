@@ -59,6 +59,12 @@ namespace HSRP.Commands
 
                 await ReplyAsync("All players healed.");
             }
+            else if (type == "msg")
+            {
+                Toolbox.UpdateMessages();
+                Toolbox.UpdateStatusEffects();
+                await ReplyAsync("Messages updated.");
+            }
         }
 
         [Command("strifelist")]

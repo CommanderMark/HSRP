@@ -245,8 +245,8 @@ namespace HSRP
         /// <param name="tar">The entity the user was targeting or targeted by when the effect was applied.</param>
         /// <param name="attackTeam">Boolean stating whether the entity is on the attacking team or not.</param>
         /// <param name="strife">The strife object itself.</param>
-        /// <returns>A tuple containing whether the effect is removed this turn and whether the player's turn is skipped.</returns>
-        public Tuple<bool, bool> Update(Entity ent, Entity tar, bool attackTeam, Strife strife)
+        /// <returns>Whether the player's turn is skipped.</returns>
+        public bool Update(Entity ent, Entity tar, bool attackTeam, Strife strife)
         {
             int dmg = 0;
             if (inflictsDamage)
@@ -269,11 +269,7 @@ namespace HSRP
             --Turns;
             bool endEffect = Turns < 1;
 
-            return new Tuple<bool, bool>
-                (
-                endEffect,
-                skipsTurn
-                );
+            return skipsTurn;
         }
 
         public static bool TryParse(string name, out StatusEffect sa)

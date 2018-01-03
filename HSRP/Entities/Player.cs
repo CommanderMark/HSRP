@@ -135,13 +135,16 @@ namespace HSRP
                                 {
                                     sa = new StatusEffect(strifeEle);
                                 }
-                                sa.Controller = strifeEle.GetAttributeUnsignedLong("controller", 0);
-                                sa.Turns = strifeEle.GetAttributeInt("turns", 0);
-                                XElement abEle = strifeEle.Element("abilities");
-                                AbilitySet set = abEle != null
-                                    ? new AbilitySet(abEle)
-                                    : new AbilitySet();
-                                sa.Modifiers = set;
+                                else
+                                {
+                                    sa.Controller = strifeEle.GetAttributeUnsignedLong("controller", 0);
+                                    sa.Turns = strifeEle.GetAttributeInt("turns", 0);
+                                    XElement abEle = strifeEle.Element("abilities");
+                                    AbilitySet set = abEle != null
+                                        ? new AbilitySet(abEle)
+                                        : new AbilitySet();
+                                    sa.Modifiers = set;
+                                }
 
                                 InflictedAilments.Add(sa);
                             }

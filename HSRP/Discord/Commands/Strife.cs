@@ -33,6 +33,15 @@ namespace HSRP.Commands
             }
 
             await ReplyStrifeAsync(msg);
+
+            // If the strife is no longer active then it was completed this turn. So post logs.
+            if (!strf.Active)
+            {
+                string path = strf.LogLogs();
+
+                await Context.Channel.SendFileAsync(path, "The log of the strife is now being posted.");
+                File.Delete(path);
+            }
         }
 
         [Command("action"), InStrife]
@@ -82,16 +91,6 @@ namespace HSRP.Commands
 
                 // Keep updating the strife until a human is next.
                 await UpdateStrifeUntilHumanAsync(strf);
-
-                // If the strife is no longer active then it was completed this turn. So post logs.
-                // TODO: Doesn't work.
-                if (!strf.Active)
-                {
-                    string path = strf.LogLogs();
-
-                    await Context.Channel.SendFileAsync(path, "The log of the strife is now being posted.");
-                    File.Delete(path);
-                }
 
                 strf.Save();
             }

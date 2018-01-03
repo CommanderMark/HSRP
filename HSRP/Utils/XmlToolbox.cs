@@ -138,27 +138,6 @@ namespace HSRP
             return val;
         }
 
-        private static float GetAttributeFloat(XAttribute attribute, float defaultValue)
-        {
-            if (attribute == null)
-            {
-                return defaultValue;
-            }
-
-            float val = defaultValue;
-
-            try
-            {
-                val = float.Parse(attribute.Value, CultureInfo.InvariantCulture);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("[XML] " + "Error in " + attribute + "! \n" + e);
-            }
-
-            return val;
-        }
-
         public static int GetAttributeInt(this XElement element, string name, int defaultValue)
         {
             if (element == null || element.Attribute(name) == null)

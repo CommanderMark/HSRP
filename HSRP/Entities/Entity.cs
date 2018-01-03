@@ -158,6 +158,12 @@ namespace HSRP
         /// <returns>The log of the event.</returns>
         public void RemoveStatusEffect(string name, Strife strife, bool turnSensitive)
         {
+            StatusEffect sa = InflictedAilments.FirstOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
+            if (!string.IsNullOrWhiteSpace(sa?.EndMsg))
+            {
+                strife.Log.AppendLine(GetEntityMessage(sa.EndMsg, Syntax.ToCodeLine(this.Name), Syntax.ToCodeLine(sa.Name)));
+            }
+
             if (!turnSensitive)
             {
                 InflictedAilments.RemoveAll(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
@@ -166,14 +172,8 @@ namespace HSRP
             {
                 InflictedAilments.RemoveAll(x =>
                     x.Name.ToLowerInvariant() == name.ToLowerInvariant()
-                    && x.Turns < 0
+                    && x.Turns < 1
                     );
-            }
-
-            StatusEffect sa = InflictedAilments.FirstOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
-            if (!string.IsNullOrWhiteSpace(sa?.EndMsg))
-            {
-                strife.Log.AppendLine(sa.EndMsg);
             }
         }
 
@@ -230,7 +230,7 @@ namespace HSRP
         {
             foreach (StatusEffect sa in this.InflictedAilments)
             {
-                if (sa.Controller >= 0)
+                if (sa.Controller > 0)
                 {
                     return sa.Controller;
                 }

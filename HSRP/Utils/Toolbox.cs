@@ -65,6 +65,11 @@ namespace HSRP
             return RandInt((int) (min * 1000), (int) (max * 1000)) / 1000f;
         }
 
+        public static E RandElement<E>(IEnumerable<E> uh)
+        {
+            return uh.ElementAt(RandInt(uh.Count() - 1));
+        }
+
         /// <summary>
         /// Returns true or false randomly.
         /// </summary>
@@ -72,7 +77,7 @@ namespace HSRP
 
         public static bool TrueOrFalse(int denominator) => RandInt(denominator) == 0;
 
-        private static void UpdateMessages()
+        public static void UpdateMessages()
         {
             Messages = new Dictionary<string, string[]>();
 
@@ -108,7 +113,7 @@ namespace HSRP
             }
         }
 
-        private static void UpdateStatusEffects()
+        public static void UpdateStatusEffects()
         {
             StatusEffects = new Dictionary<string, StatusEffect>();
 
@@ -132,10 +137,10 @@ namespace HSRP
             {
                 if (args == null)
                 {
-                    return value[RandInt(value.Length - 1)];
+                    return RandElement(value);
                 }
                 
-                string msg = value[RandInt(value.Length - 1)];
+                string msg = RandElement(value);;
                 for (int i = 0; i < args.Length; i++)
                 {
                     msg = msg.Replace("{" + i + "}", args[i]);

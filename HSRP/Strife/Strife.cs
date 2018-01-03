@@ -367,34 +367,27 @@ namespace HSRP
             if (controller > 0)
             {
                 bool match = false;
+                bool skipTurn = false;
                 foreach (Entity ent in Entities)
                 {
                     if (controller == ent.ID && !ent.Dead && ent.GetMindController() <= 0) 
                     {
                         Log.AppendLine($"{Syntax.ToCodeLine(turner.Name)}, controlled by {Syntax.ToCodeLine(ent.Name)}, is taking their turn!");
+
+                        match = true;
                         
-                        // Update status effects.
-                        bool skipturn = false;
-                        for (int i = 0; i < turner.InflictedAilments.Count; i++)
-                        {
-                            StatusEffect sa = turner.InflictedAilments[i];
-                            Tuple<bool, bool> tup = sa.Update(turner, null, attackTurn, this);
-                            if (tup.Item1)
-                            {
-                                turner.RemoveStatusEffect(sa.Name, this, true);
-                                --i;
-                            }
+                        skipTurn = UpdateStatusEffects(turner);
 
-                            skipturn |= tup.Item2;
-                        }
-
-                        if (skipturn || turner.Dead)
+                        if (skipTurn)
                         {
+                            UpdateTurn();
                             humanNext = false;
                         }
-
-                        CurrentTurner = ent;
-                        match = true;
+                        else
+                        {
+                            CurrentTurner = ent;
+                        }
+                        
                         break;
                     }
                 }
@@ -407,7 +400,7 @@ namespace HSRP
                 AddLog();
                 
                 // AI is taking a turn, do that until a human is found.
-                if (CurrentTurner is NPC)
+                if (CurrentTurner is NPC && !skipTurn)
                 {
                     TakeAITurn();
                     AddLog();
@@ -421,31 +414,21 @@ namespace HSRP
 
                 Log.AppendLine($"{Syntax.ToCodeLine(turner.Name)} is taking their turn!");
 
-                // Update status effects.
-                bool skipturn = false;
-                for (int i = 0; i < turner.InflictedAilments.Count; i++)
+                bool skipTurn = UpdateStatusEffects(turner);
+
+                if (skipTurn)
                 {
-                    StatusEffect sa = turner.InflictedAilments[i];
-                    Tuple<bool, bool> tup = sa.Update(turner, null, attackTurn, this);
-                    if (tup.Item1)
+                    UpdateTurn();
+                    humanNext = false;
+                }
+                else
+                {
+                    // AI is taking a turn, do that until a human is found.
+                    if (turner is NPC)
                     {
-                        turner.RemoveStatusEffect(sa.Name, this, true);
-                        --i;
+                        TakeAITurn();
+                        humanNext = false;
                     }
-
-                    skipturn |= tup.Item2;
-                }
-
-                if (skipturn || turner.Dead)
-                {
-                    humanNext = false;
-                }
-
-                // AI is taking a turn, do that until a human is found.
-                if (turner is NPC)
-                {
-                    TakeAITurn();
-                    humanNext = false;
                 }
 
                 AddLog();
@@ -500,6 +483,36 @@ namespace HSRP
             while (notValidTurner);
 
             AddLog();
+        }
+
+        /// <summary>
+        /// Updates the entity's inflicted status effects.
+        /// </summary>
+        /// <returns>Whether or not the entity's turn is skipped.</returns>
+        private bool UpdateStatusEffects(Entity ent)
+        {
+            bool skipTurn = false;
+            for (int i = 0; i < ent.InflictedAilments.Count; i++)
+            {
+                StatusEffect sa = ent.InflictedAilments[i];
+                // Is the status effect removed this turn?
+                if (sa.Turns < 1)
+                {
+                    ent.RemoveStatusEffect(sa.Name, this, true);
+                    --i;
+                    continue;
+                }
+
+                skipTurn |= sa.Update(ent, null, attackTurn, this);
+            }
+
+            if (ent.Health <= 0 && !ent.Dead)
+            {
+                LeaveStrife(ent);
+                skipTurn = true;
+            }
+
+            return skipTurn;
         }
 
         /// <summary>
@@ -1034,17 +1047,18 @@ namespace HSRP
             }
             else if ((explosion.Target & TargetType.Target) == TargetType.Target)
             {
-                splashZone = tar;
+                splashZone = tar != null
+                    ? tar
+                    : Toolbox.RandElement(Targets);
             }
             else if ((explosion.Target & TargetType.All) == TargetType.All)
             {
-                int index = Toolbox.RandInt(0, Entities.Count() - 1);
-                splashZone = Entities.ElementAt(index);
+                splashZone = Toolbox.RandElement(Entities);
             }
             bool doubleTarget = explosion.Target == (TargetType.Self | TargetType.Target);
 
             Log.AppendLine();
-            if (Toolbox.RandFloat(0f, 1.0f) >= 0.01)
+            if (Toolbox.RandFloat(0f, 1.0f) >= 0.001)
             {
                 if (doubleTarget)
                 {
