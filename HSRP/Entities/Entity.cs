@@ -124,7 +124,7 @@ namespace HSRP
             sa.Modifiers = AbilitySet.ToFixedNumber(sa.Modifiers, this.BaseAbilities);
 
             // Check that it is not an immediate status effect.
-            if (sa.Turns < 0)
+            if (sa.Turns < 1)
             {
                 sa.Update(this, tar, attackTeam, strife);
                 return;
@@ -155,7 +155,6 @@ namespace HSRP
         /// <param name="name">Name of the status effect.</param>
         /// <param name="strife">The strife object itself.</param>
         /// <param name="turnSensitive">When set to true, only removes the status effect if it's turn counter is below 0.</param>
-        /// <returns>The log of the event.</returns>
         public void RemoveStatusEffect(string name, Strife strife, bool turnSensitive)
         {
             StatusEffect sa = InflictedAilments.FirstOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());

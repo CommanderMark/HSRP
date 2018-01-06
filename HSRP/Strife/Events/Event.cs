@@ -334,8 +334,11 @@ namespace HSRP
                 }
             }
 
-            strife.Log.AppendLine();
-            strife.Log.AppendLine(Entity.GetEntityMessage(message, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(tar.Name), Syntax.ToCodeLine(dmgEnt.ToString()), Syntax.ToCodeLine(dmgTar.ToString()), Syntax.ToCodeLine(healEnt.ToString()), Syntax.ToCodeLine(healTar.ToString())));
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                strife.Log.AppendLine();
+                strife.Log.AppendLine(Entity.GetEntityMessage(message, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(tar.Name), Syntax.ToCodeLine(dmgEnt.ToString()), Syntax.ToCodeLine(dmgTar.ToString()), Syntax.ToCodeLine(healEnt.ToString()), Syntax.ToCodeLine(healTar.ToString())));
+            }
 
             foreach (Tuple<TargetType, string> tup in statusEffects)
             {

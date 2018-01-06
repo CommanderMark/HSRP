@@ -140,6 +140,11 @@ namespace HSRP
                 new XAttribute("controller", Controller),
                 new XAttribute("turns", Turns)
                 );
+
+            if (Immunities.Count() > 0)
+            {
+                ailment.Add(new XAttribute("immune", string.Join(",", Immunities)));
+            }
             
             if (!Modifiers.Equals(new AbilitySet()))
             {

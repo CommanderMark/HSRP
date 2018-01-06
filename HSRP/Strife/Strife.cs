@@ -388,7 +388,7 @@ namespace HSRP
                 // Their controller is either dead or being mind-controlled themselves.
                 if (!match)
                 {
-                    turner.RemoveStatusEffect(Constants.MIND_CONTROL_AIL, this, true);
+                    turner.RemoveStatusEffect(Constants.MIND_CONTROL_AIL, this, false);
                 }
 
                 AddLog();
