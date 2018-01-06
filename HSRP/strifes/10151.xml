@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strife id="10151" active="false" currentTurn="26">
+  <status attackTurn="true" turn="0" />
+  <attackers>
+    <npc id="26">
+      <info name="Defenseless Lowblood" type="Normal" pineappleOnPizza="false">She isn't going to hurt you and yet here you are killing her, you monster.</info>
+      <status hp="11" maxhp="100" dead="false" specibus="Feralkind" diceRolls="1" />
+      <abilities>
+        <Strength value="5" />
+        <Constitution value="7" />
+        <Psion value="0" />
+        <Fortitude value="4" />
+        <Intimidation value="3" />
+        <Persuasion value="3" />
+      </abilities>
+      <ailments />
+    </npc>
+  </attackers>
+  <targets>
+    <npc id="26">
+      <info name="Defenseless Lowblood" type="Normal" pineappleOnPizza="false">She isn't going to hurt you and yet here you are killing her, you monster.</info>
+      <status hp="1" maxhp="100" dead="false" specibus="Feralkind" diceRolls="1" />
+      <abilities>
+        <Strength value="5" />
+        <Constitution value="7" />
+        <Psion value="0" />
+        <Fortitude value="4" />
+        <Intimidation value="3" />
+        <Persuasion value="3" />
+      </abilities>
+      <ailments />
+    </npc>
+  </targets>
+  <logs posted="15">
+    <log>Team A:
+0 - Defenseless Lowblood - 11/100
+
+Team T: 
+0 - Defenseless Lowblood - 1/100
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` attacks `Defenseless Lowblood`.
+
+`Defenseless Lowblood` rolls 1!
+`Defenseless Lowblood` rolls 4!
+
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` assaults `Defenseless Lowblood`.
+
+`Defenseless Lowblood` rolls 2!
+`Defenseless Lowblood` rolls 4!
+
+Attack missed.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` attacks `Defenseless Lowblood`.
+
+`Defenseless Lowblood` rolls 3!
+`Defenseless Lowblood` rolls 5!
+
+Attack missed.
+
+`Defenseless Lowblood` is counter attacking.
+`Defenseless Lowblood` rolls 4!
+`Defenseless Lowblood` rolls 2!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` assaults `Defenseless Lowblood`.
+
+`Defenseless Lowblood` rolls 2!
+`Defenseless Lowblood` rolls 5!
+
+Attack missed.
+
+`Defenseless Lowblood` is counter attacking.
+`Defenseless Lowblood` rolls 4!
+`Defenseless Lowblood` rolls 2!
+
+Counter attack blocked.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Defenseless Lowblood` is taking their turn!
+`Defenseless Lowblood` attacks `Defenseless Lowblood`.
+
+`Defenseless Lowblood` rolls 5!
+`Defenseless Lowblood` rolls 4!
+
+`Defenseless Lowblood` took `1` hitpoint(s) of damage.
+`Defenseless Lowblood` is no longer participating in the strife.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>Targets have been defeated.
+
+------------
+</log>
+    <log>The strife is now over. XP will be awarded at the discretion of the GM.
+
+------------
+</log>
+    <log>Team A:
+0 - Defenseless Lowblood - 11/100
+
+Team T: 
+0 - Defenseless Lowblood - 0/100 (DEFEATED)
+
+------------
+</log>
+  </logs>
+</strife>
