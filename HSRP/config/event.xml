@@ -7,16 +7,12 @@
 
     <ailment name="AIDS" type="Target" />
     <cure name="AIDS" type="Self" />
-    
+
     <!-- 
          {0} - strifer who had the event attached to them.
          {1} - strifer who is being targeted
-         {2} - damage amount to entity (use this for "All,Self" and "All" as well.)
-         {3} - damage amount to target (use this for "All,Target" as well.)
-         {4} - heal amount to entity (use this for "All,Self" and "All" as well.)
-         {5} - heal amount to target (use this for "All,Target" as well.)
     -->
-    <message>{0} stole {4} health from {1} to heal themselves for {5} health. Also gave {1} AIDS.</message>
+    <message>{0} stuff {1}.</message>
   </event>
 
   <!-- Template. Applied to all entities automatically. -->

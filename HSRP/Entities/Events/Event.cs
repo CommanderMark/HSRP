@@ -72,6 +72,7 @@ namespace HSRP
             healAmount = 0f;
 
             message = string.Empty;
+
             probability = 1.0f;
         }
 
@@ -227,8 +228,11 @@ namespace HSRP
                 return;
             }
 
-            int dmgEnt = 0, dmgTar = 0;
-            int healEnt = 0, healTar = 0;
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                strife.Log.AppendLine();
+                strife.Log.AppendLine(Entity.GetEntityMessage(message, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(tar.Name)));
+            }
 
             if (damageAmount > 0)
             {
@@ -236,20 +240,20 @@ namespace HSRP
                 {
                     case TargetType.Self:
                     {
-                        dmgEnt = ent.InflictDamageByPercentage(damageAmount);
+                        ent.InflictDamageByPercentage(damageAmount, strife);
                     }
                     break;
 
                     case TargetType.Target:
                     {
-                        dmgTar = tar.InflictDamageByPercentage(damageAmount);
+                        tar.InflictDamageByPercentage(damageAmount, strife);
                     }
                     break;
 
                     case TargetType.Self | TargetType.Target:
                     {
-                        dmgEnt = ent.InflictDamageByPercentage(healAmount);
-                        dmgTar = tar.InflictDamageByPercentage(healAmount);
+                        ent.InflictDamageByPercentage(damageAmount, strife);
+                        tar.InflictDamageByPercentage(damageAmount, strife);
                     }
                     break;
 
@@ -257,7 +261,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
                         {
-                            dmgEnt = strifer.InflictDamageByPercentage(damageAmount);
+                            strifer.InflictDamageByPercentage(damageAmount, strife);
                         }
                     }
                     break;
@@ -266,7 +270,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
                         {
-                            dmgTar = strifer.InflictDamageByPercentage(damageAmount);
+                            strifer.InflictDamageByPercentage(damageAmount, strife);
                         }
                     }
                     break;
@@ -275,7 +279,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in strife.Entities)
                         {
-                            dmgEnt = strifer.InflictDamageByPercentage(damageAmount);
+                            strifer.InflictDamageByPercentage(damageAmount, strife);
                         }
                     }
                     break;
@@ -288,20 +292,20 @@ namespace HSRP
                 {
                     case TargetType.Self:
                     {
-                        healEnt = ent.InflictDamageByPercentage(-healAmount);
+                        ent.HealDamageByPercentage(healAmount, strife);
                     }
                     break;
 
                     case TargetType.Target:
                     {
-                        healTar = tar.InflictDamageByPercentage(-healAmount);
+                        tar.HealDamageByPercentage(healAmount, strife, strife);
                     }
                     break;
 
                     case TargetType.Self | TargetType.Target:
                     {
-                        healEnt = ent.InflictDamageByPercentage(-healAmount);
-                        healTar = tar.InflictDamageByPercentage(-healAmount);
+                        ent.HealDamageByPercentage(healAmount, strife);
+                        tar.HealDamageByPercentage(healAmount, strife);
                     }
                     break;
 
@@ -309,7 +313,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
                         {
-                            healEnt = strifer.InflictDamageByPercentage(-healAmount);
+                            strifer.HealDamageByPercentage(healAmount, strife);
                         }
                     }
                     break;
@@ -318,7 +322,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
                         {
-                            healTar = strifer.InflictDamageByPercentage(-healAmount);
+                            strifer.HealDamageByPercentage(healAmount, strife);
                         }
                     }
                     break;
@@ -327,17 +331,11 @@ namespace HSRP
                     {
                         foreach (Entity strifer in strife.Entities)
                         {
-                            healEnt = strifer.InflictDamageByPercentage(-healAmount);
+                            strifer.HealDamageByPercentage(healAmount, strife);
                         }
                     }
                     break;
                 }
-            }
-
-            if (!string.IsNullOrWhiteSpace(message))
-            {
-                strife.Log.AppendLine();
-                strife.Log.AppendLine(Entity.GetEntityMessage(message, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(tar.Name), Syntax.ToCodeLine(dmgEnt.ToString()), Syntax.ToCodeLine(dmgTar.ToString()), Syntax.ToCodeLine(healEnt.ToString()), Syntax.ToCodeLine(healTar.ToString())));
             }
 
             foreach (Tuple<TargetType, string> tup in statusEffects)

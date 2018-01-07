@@ -26,10 +26,9 @@
     <inflictMsg>{0} was inflicted with "{2}" by {1}!</inflictMsg>
     <!-- 
          {0} - inflicted strifer 
-         {1} - damage
-         {2} - ailment name
+         {1} - ailment name
     -->
-    <statusMsg>{0} received {1} damage from "{2}"! Also skipped their turn.</statusMsg>
+    <statusMsg>{0} is {1}.</statusMsg>
     <!--
          {0} - inflicted strifer 
          {1} - ailment name

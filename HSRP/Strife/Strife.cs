@@ -370,7 +370,7 @@ namespace HSRP
 
                         match = true;
                         
-                        skipTurn = UpdateStatusEffects(turner);
+                        skipTurn = UpdateEntity(turner);
 
                         if (skipTurn)
                         {
@@ -408,7 +408,7 @@ namespace HSRP
 
                 Log.AppendLine($"{Syntax.ToCodeLine(turner.Name)} is taking their turn!");
 
-                bool skipTurn = UpdateStatusEffects(turner);
+                bool skipTurn = UpdateEntity(turner);
 
                 if (skipTurn)
                 {

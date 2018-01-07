@@ -95,6 +95,7 @@ namespace HSRP
         public static string ToStrikethrough(string text) => "~~" + text + "~~";
 
         public static string ToCodeLine(string text) => "`" + text + "`";
+        public static string ToCodeLine(object obj) => ToCodeLine(obj.ToString());
         public static string ToCodeBlock(string text) => "```" + text + "```";
     }
 }

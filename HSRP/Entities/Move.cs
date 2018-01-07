@@ -91,6 +91,12 @@ namespace HSRP
         /// <param name="strife">The strife object itself.</param>
         public void Apply(Entity ent, Entity tar, bool attackTeam, Strife strife)
         {
+            if (!string.IsNullOrWhiteSpace(attackMsg))
+            {
+                strife.Log.AppendLine();
+                strife.Log.AppendLine(Entity.GetEntityMessage(attackMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(tar.Name)));
+            }
+
             foreach (Event evnt in events)
             {
                 evnt.Fire(ent, tar, attackTeam, strife);

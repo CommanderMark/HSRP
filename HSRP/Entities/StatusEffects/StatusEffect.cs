@@ -253,17 +253,17 @@ namespace HSRP
         /// <returns>Whether the player's turn is skipped.</returns>
         public bool Update(Entity ent, Entity tar, bool attackTeam, Strife strife)
         {
-            int dmg = 0;
+
+            if (!string.IsNullOrWhiteSpace(StatusMsg))
+            {
+                strife.Log.AppendLine(Entity.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(this.Name)));
+            }
+
             if (inflictsDamage)
             {
                 // Pick a value to inflict.
                 float per = Toolbox.RandFloat(MinDamagePercentage, MaxDamagePercentage);
-                dmg = ent.InflictDamageByPercentage(per);
-            }
-
-            if (!string.IsNullOrWhiteSpace(StatusMsg))
-            {
-                strife.Log.AppendLine(Entity.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(dmg.ToString()), Syntax.ToCodeLine(this.Name)));
+                ent.InflictDamageByPercentage(per, strife);
             }
 
             if (Turns < 1 && Explodes)
