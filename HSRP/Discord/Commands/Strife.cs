@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace HSRP.Commands
 {
-    // TODO: Ability to read stats of abilities and see current ailments.
+    // TODO: Ability to read stats of abilities and see current ailments. + moves
     [Group("strife")]
     public class StrifeCommands : JModuleBase
     {
@@ -50,20 +50,13 @@ namespace HSRP.Commands
             // Figure out whether this is a pre-defined strife action or a move.
             // TODO: Moves.
             IEnumerable<StrifeAction> fields = Enum.GetValues(typeof(StrifeAction)).Cast<StrifeAction>();
-            bool valid = false;
             foreach (StrifeAction sa in fields)
             {
                 if (sa.ToString().StartsWith(action, StringComparison.OrdinalIgnoreCase))
                 {
                     action = sa.ToString();
-                    valid = true;
                     break;
                 }
-            }
-            if (!valid)
-            {
-                await ReplyAsync("Invalid input.");
-                return;
             }
 
             Strife strf = Context.GetStrife();

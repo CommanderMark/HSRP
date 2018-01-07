@@ -536,12 +536,11 @@ namespace HSRP
         /// <param name="targetingAttackers">Whether the attacker is targeting someone on the attacking team.</param>
         /// <param name="reason">The reason for a turn being rejected if done so.</param>
         /// <returns>Whether or not the action is valid.</returns>
-        // TODO: Add moves check for burning.
         public bool ValidateTurn(string action, int targetNum, bool targetingAttackers, Player plyr, out string reason)
         {
             Entity attacker = CurrentEntity;
             Entity target = GetTarget(targetNum, targetingAttackers);
-            StrifeAction sa = (StrifeAction)Enum.Parse(typeof(StrifeAction), action);
+            bool predefinedMove = Enum.TryParse(action, out StrifeAction sa);
 
             NPC npcAtk = attacker as NPC;
             NPC npcTar = target as NPC;
@@ -575,14 +574,14 @@ namespace HSRP
             }
 
             // Are they trying to mind-control while mind-controlling?
-            if (attacker.GetMindController() > 0 && sa == StrifeAction.MindControl)
+            if (predefinedMove && attacker.GetMindController() > 0 && sa == StrifeAction.MindControl)
             {
                 reason = "Invalid attack. Cannot mind-control while controlling someone else.";
                 return false;
             }
 
             // Are they trying to use a lusus to perform psionic attacks?
-            if (npcAtk != null && npcAtk.Type == NPCType.Lusus
+            if (predefinedMove && npcAtk != null && npcAtk.Type == NPCType.Lusus
                 && (sa == StrifeAction.MindControl || sa == StrifeAction.OpticBlast || sa == StrifeAction.SpeechAttack)
                 )
             {
@@ -591,10 +590,37 @@ namespace HSRP
             }
 
             // Are they trying to intimidate a lusus?
-            if (npcTar != null && npcTar.Type == NPCType.Lusus && sa == StrifeAction.SpeechAttack)
+            if (predefinedMove && npcTar != null && npcTar.Type == NPCType.Lusus && sa == StrifeAction.SpeechAttack)
             {
                 reason = "Invalid attack. Cannot indimidate lusus.";
                 return false;
+            }
+
+            // Does the move exist?
+            if (!predefinedMove)
+            {
+                bool valid = false;
+                foreach (KeyValuePair<string, Move> mov in attacker.Moves)
+                {
+                    if (mov.Key.StartsWith(action, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Is it on a cooldown.
+                        if (mov.Value.Cooldown > 0)
+                        {
+                            reason = "Invalid attack. That move is on a cooldown for another " + mov.Value.Cooldown + " turn(s).";
+                            return false;
+                        }
+
+                        valid = true;
+                        break;
+                    }
+                }
+
+                if (!valid)
+                {
+                    reason = "Invalid attack. Could not find such that action.";
+                    return false;
+                }
             }
 
             reason = "Strife action valid.";
@@ -634,6 +660,20 @@ namespace HSRP
                 case "Guard":
                     Guard(attacker, target);
                     break;
+
+                default:
+                {
+                    // TODO: moves chance roll
+                    foreach (KeyValuePair<string, Move> mov in attacker.Moves)
+                    {
+                        if (mov.Key.StartsWith(action, StringComparison.OrdinalIgnoreCase))
+                        {
+                            mov.Value.Apply(attacker, target, attackTurn, this);
+                            break;
+                        }
+                    }
+                }
+                break;
             }
 
             if (attacker.Health < 1 && !attacker.Dead)
@@ -1064,9 +1104,7 @@ namespace HSRP
             }
             else if ((explosion.Target & TargetType.Target) == TargetType.Target)
             {
-                splashZone = tar != null
-                    ? tar
-                    : Toolbox.RandElement(Targets);
+                splashZone = tar ?? Toolbox.RandElement(Targets);
             }
             else if ((explosion.Target & TargetType.All) == TargetType.All)
             {

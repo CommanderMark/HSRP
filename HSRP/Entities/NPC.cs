@@ -173,7 +173,7 @@ namespace HSRP
             }
             if (moves.Elements().Count() > 0)
             {
-                player.Add(moves);
+                npc.Add(moves);
             }
 
             return npc;

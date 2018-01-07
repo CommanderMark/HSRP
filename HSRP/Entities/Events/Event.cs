@@ -298,7 +298,7 @@ namespace HSRP
 
                     case TargetType.Target:
                     {
-                        tar.HealDamageByPercentage(healAmount, strife, strife);
+                        tar.HealDamageByPercentage(healAmount, strife);
                     }
                     break;
 

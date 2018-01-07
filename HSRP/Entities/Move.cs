@@ -6,6 +6,11 @@ namespace HSRP
     public class Move
     {
         public string Name;
+
+        private bool usesRolls;
+        private AbilityType[] attackerRolls;
+        private AbilityType[] targetRolls;
+
         /// <summary>
         /// Amount of turns to set the cooldown timer to.
         /// </summary>
@@ -22,7 +27,12 @@ namespace HSRP
         public Move()
         {
             Name = string.Empty;
-            cooldownMaxTime = 0;
+
+            usesRolls;
+            attackerRolls;
+            targetRolls;
+
+        cooldownMaxTime = 0;
             Cooldown = 0;
             events = new List<Event>();
 
@@ -101,6 +111,8 @@ namespace HSRP
             {
                 evnt.Fire(ent, tar, attackTeam, strife);
             }
+
+            Cooldown = cooldownMaxTime;
         }
     }
 }
