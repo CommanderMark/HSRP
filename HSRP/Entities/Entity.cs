@@ -16,7 +16,7 @@ namespace HSRP
         public List<Tuple<EventType, Event>> Events { get; set; }
         public string[] Immunities { get; set; }
         public List<StatusEffect> InflictedAilments { get; set; }
-        public List<Move> Moves { get; set; }
+        public Dictionary<string, Move> Moves { get; set; }
 
         public int Health { get; set; }
         public int MaxHealth { get; set; }
@@ -32,7 +32,7 @@ namespace HSRP
             Events = new List<Tuple<EventType, Event>>();
             Immunities = null;
             InflictedAilments = new List<StatusEffect>();
-            Moves = new List<Move>();
+            Moves = new Dictionary<string, Move>();
 
             Name = "";
             Specibus = "";

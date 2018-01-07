@@ -480,11 +480,30 @@ namespace HSRP
         }
 
         /// <summary>
-        /// Updates the entity's inflicted status effects.
+        /// Updates the entity's inflicted status effects and move cooldowns.
         /// </summary>
         /// <returns>Whether or not the entity's turn is skipped.</returns>
-        private bool UpdateStatusEffects(Entity ent)
+        private bool UpdateEntity(Entity ent)
         {
+            // Move cooldowns.
+            foreach (KeyValuePair<string, Move> mov in ent.Moves)
+            {
+                if (mov.Value.Cooldown <= 0)
+                {
+                    continue;
+                }
+
+                --mov.Value.Cooldown;
+                if (mov.Value.Cooldown <= 0)
+                {
+                    if (!string.IsNullOrWhiteSpace(mov.Value.RechargeMsg))
+                    {
+                        Log.AppendLine(Entity.GetEntityMessage(mov.Value.RechargeMsg));
+                    }
+                }
+            }
+
+            // Status effects.
             bool skipTurn = false;
             for (int i = 0; i < ent.InflictedAilments.Count; i++)
             {
@@ -888,10 +907,9 @@ namespace HSRP
             // Mind control wooo.
             if (success)
             {
-                // Or not???
+                // Or sleep.
                 if (Toolbox.RandFloat(0f, 1.0f) < 0.5f)
                 {
-                    // NANI?!?
                     target.ApplyStatusEffect(Constants.SLEEPING_AIL, attacker, !attackTurn, this);
                 }
                 else
@@ -982,29 +1000,29 @@ namespace HSRP
                 {
                     // Roll 1DINT to debuff STR.
                     case 0:
-                        {
-                            int y = attacker.GetTotalAbilities().Intimidation.Value;
-                            debuff = Toolbox.DiceRoll(1, y);
-                            debuff = Math.Min(target.BaseAbilities.Strength.Value / 3, debuff);
-                            stat = Ability.STR;
-                        } break;
+                    {
+                        int y = attacker.GetTotalAbilities().Intimidation.Value;
+                        debuff = Toolbox.DiceRoll(1, y);
+                        debuff = Math.Min(target.BaseAbilities.Strength.Value / 3, debuff);
+                        stat = Ability.STR;
+                    } break;
 
                     // Roll 1DPER to debuff FOR.
                     case 1:
-                        {
-                            int y = attacker.GetTotalAbilities().Persuasion.Value;
-                            debuff = Toolbox.DiceRoll(1, y);
-                            debuff = Math.Min(target.BaseAbilities.Fortitude.Value / 3, debuff);
-                            stat = Ability.FOR;
-                        } break;
+                    {
+                        int y = attacker.GetTotalAbilities().Persuasion.Value;
+                        debuff = Toolbox.DiceRoll(1, y);
+                        debuff = Math.Min(target.BaseAbilities.Fortitude.Value / 3, debuff);
+                        stat = Ability.FOR;
+                    } break;
                     
                     // Roll 1DINT to debuff INT.
                     case 2:
-                        {
-                            int y = attacker.GetTotalAbilities().Intimidation.Value;
-                            debuff = Toolbox.DiceRoll(1, y);
-                            stat = Ability.INT;
-                        } break;
+                    {
+                        int y = attacker.GetTotalAbilities().Intimidation.Value;
+                        debuff = Toolbox.DiceRoll(1, y);
+                        stat = Ability.INT;
+                    } break;
                 }
 
                 ApplyMod(target, Constants.SPE_ATTACK_AIL, stat, -debuff, 10, attacker, !attackTurn);

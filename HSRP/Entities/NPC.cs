@@ -104,6 +104,14 @@ namespace HSRP
                             }
                         }
                         break;
+
+                    case "moves":
+                        foreach (XElement strifeEle in ele.Elements("move"))
+                        {
+                            Move evnt = new Move(strifeEle);
+                            Moves.Add(evnt.Name, evnt);
+                        }
+                        break;
                 }
             }
         }
@@ -156,6 +164,16 @@ namespace HSRP
             if (events.Elements().Count() > 0)
             {
                 npc.Add(events);
+            }
+
+            XElement moves = new XElement("moves");
+            foreach (KeyValuePair<string, Move> mov in Moves)
+            {
+                moves.Add(mov.Value.Save());
+            }
+            if (moves.Elements().Count() > 0)
+            {
+                player.Add(moves);
             }
 
             return npc;

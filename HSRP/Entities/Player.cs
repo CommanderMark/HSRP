@@ -122,6 +122,31 @@ namespace HSRP
                         }
                         break;
 
+                    case "events":
+                        foreach (XElement strifeEle in ele.Elements("event"))
+                        {
+                            Event evnt = new Event(strifeEle);
+                            EventType type = strifeEle.GetAttributeEnum("trigger", EventType.NONE);
+
+                            if (type != EventType.NONE)
+                            {
+                                Events.Add(new Tuple<EventType, Event>(type, evnt));
+                            }
+                            else
+                            {
+                                Console.WriteLine("STRIFE ERROR: Event has invalid type for \"" + this.Name + "\"!");
+                            }
+                        }
+                        break;
+
+                    case "moves":
+                        foreach (XElement strifeEle in ele.Elements("move"))
+                        {
+                            Move evnt = new Move(strifeEle);
+                            Moves.Add(evnt.Name, evnt);
+                        }
+                        break;
+
                     case "strife":
                         StrifeID = XmlToolbox.GetAttributeInt(ele, "id", 0);
 
@@ -147,23 +172,6 @@ namespace HSRP
                                 }
 
                                 InflictedAilments.Add(sa);
-                            }
-                        }
-                        break;
-
-                    case "events":
-                        foreach (XElement strifeEle in ele.Elements("event"))
-                        {
-                            Event evnt = new Event(strifeEle);
-                            EventType type = strifeEle.GetAttributeEnum("trigger", EventType.NONE);
-
-                            if (type != EventType.NONE)
-                            {
-                                Events.Add(new Tuple<EventType, Event>(type, evnt));
-                            }
-                            else
-                            {
-                                Console.WriteLine("STRIFE ERROR: Event has invalid type for \"" + this.Name + "\"!");
                             }
                         }
                         break;
@@ -229,6 +237,16 @@ namespace HSRP
             if (events.Elements().Count() > 0)
             {
                 player.Add(events);
+            }
+
+            XElement moves = new XElement("moves");
+            foreach (KeyValuePair<string, Move> mov in Moves)
+            {
+                moves.Add(mov.Value.Save());
+            }
+            if (moves.Elements().Count() > 0)
+            {
+                player.Add(moves);
             }
 
             if (StrifeID > 0)
