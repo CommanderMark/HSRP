@@ -32,9 +32,12 @@ namespace HSRP
         public string Description { get; set; }
         public NPCType Type { get; set; }
 
+        public List<Move> MoveQueue;
+
         private NPC() : base()
         {
             Description = "";
+            MoveQueue = new List<Move>();
         }
 
         public NPC(XElement element) : this()
@@ -59,6 +62,16 @@ namespace HSRP
                         Specibus = ele.GetAttributeString("specibus", string.Empty);
                         DiceRolls = ele.GetAttributeInt("diceRolls", 1);
                         Immunities = ele.GetAttributeStringArray("immune", new string[0]);
+
+                        string[] arr = ele.GetAttributeStringArray("priorities", new string[0]);
+                        foreach (string uh in arr)
+                        {
+                            Move mov = Moves.Values.FirstOrDefault(x => x.Name == uh);
+                            if (mov != null)
+                            {
+                                MoveQueue.Add(mov);
+                            }
+                        }
                         break;
                     
                     case "abilities":
@@ -141,6 +154,11 @@ namespace HSRP
                 status.Add(new XAttribute("immune", string.Join(",", Immunities)));
             }
 
+            if (MoveQueue.Count() > 0)
+            {
+                status.Add(new XAttribute("priorities", string.Join(",", MoveQueue.Select(x => x.Name))));
+            }
+
             XElement abilities = BaseAbilities.ToXmlElement();
             
             XElement ailments = new XElement("ailments");
@@ -199,6 +217,27 @@ namespace HSRP
             result.AppendLine(showMods
                 ? BaseAbilities.Display(this.GetTotalAbilities())
                 : BaseAbilities.Display());
+            
+            if (showMods)
+            {
+                result.AppendLine();
+                result.Append("Status Effects: ");
+                IEnumerable<StatusEffect> lis = from x in InflictedAilments
+                                        where x.Name != Constants.PHYSICAL_COUNTER_AIL && x.Name != Constants.SPE_ATTACK_AIL
+                                        select x;
+                if (lis.Count() > 0)
+                {
+                    result.Append(lis.ElementAt(0).Name);
+                    foreach (StatusEffect sa in lis)
+                    {
+                        result.Append(", " + sa.Name);
+                    }
+                }
+                else
+                {
+                    result.Append("None");
+                }
+            }
 
             return result.ToString();
         }
@@ -221,6 +260,45 @@ namespace HSRP
 
             npc = null;
             return false;
+        }
+
+        /// <summary>
+        /// Generates a priority list for the NPC to dictate what moves they should use.
+        /// </summary>
+        public void GenerateMoveList()
+        {
+            for (int i = 0; i < Moves.Count(); i++)
+            {
+                Move mov = Moves.ElementAt(i).Value;
+
+                if (mov.Priority <= 0)
+                {
+                    MoveQueue.Add(mov);
+                }
+                // Add the index the same amount of times as the priority number.
+                else
+                {
+                    for (int j = 0; j < mov.Priority; j++)
+                    {
+                        MoveQueue.Add(mov);
+                    }
+                }
+            }
+
+            Shuffle(MoveQueue);
+        }
+
+        private static void Shuffle<T>(List<T> list)  
+        {  
+            int n = list.Count;  
+            while (n > 1)
+            {  
+                n--;  
+                int k = Toolbox.RandInt(n);  
+                T value = list[k];  
+                list[k] = list[n];  
+                list[n] = value;  
+            }  
         }
     }
 }

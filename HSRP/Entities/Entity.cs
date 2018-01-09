@@ -233,6 +233,45 @@ namespace HSRP
             return this.BaseAbilities + this.GetModifiers();
         }
 
+        public int GetAbilityValue(string ability)
+        {
+            switch (ability)
+            {
+                case Ability.STR:
+                {
+                    return this.GetTotalAbilities().Strength.Value;
+                }
+
+                case Ability.CON:
+                {
+                    return this.GetTotalAbilities().Constitution.Value;
+                }
+
+                case Ability.PSI:
+                {
+                    return this.GetTotalAbilities().Psion.Value;
+                }
+
+                case Ability.FOR:
+                {
+                    return this.GetTotalAbilities().Fortitude.Value;
+                }
+
+                case Ability.INT:
+                {
+                    return this.GetTotalAbilities().Intimidation.Value;
+                }
+
+                case Ability.PER:
+                {
+                    return this.GetTotalAbilities().Persuasion.Value;
+                }
+            }
+
+            Console.WriteLine("Error: Ability \"" + ability + "\" not found for " + this.Name + ".");
+            return 0;
+        }
+
         public ulong GetMindController()
         {
             foreach (StatusEffect sa in this.InflictedAilments)

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace HSRP.Commands
 {
-    // TODO: Ability to read stats of abilities and see current ailments. + moves
+    // TODO: Ability to read moves
     [Group("strife")]
     public class StrifeCommands : JModuleBase
     {
@@ -48,7 +48,6 @@ namespace HSRP.Commands
         public async Task Action(string who, int index, string action)
         {
             // Figure out whether this is a pre-defined strife action or a move.
-            // TODO: Moves.
             IEnumerable<StrifeAction> fields = Enum.GetValues(typeof(StrifeAction)).Cast<StrifeAction>();
             foreach (StrifeAction sa in fields)
             {

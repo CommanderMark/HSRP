@@ -393,7 +393,7 @@ namespace HSRP
 
                 AddLog();
                 
-                // AI is taking a turn, do that until a human is found.
+                // AI is taking a turn.
                 if (CurrentTurner is NPC && !skipTurn)
                 {
                     TakeAITurn();
@@ -417,7 +417,7 @@ namespace HSRP
                 }
                 else
                 {
-                    // AI is taking a turn, do that until a human is found.
+                    // AI is taking a turn.
                     if (turner is NPC)
                     {
                         TakeAITurn();
@@ -641,29 +641,28 @@ namespace HSRP
 
             switch (action)
             {
-                case "PhysicalAttack":
+                case Constants.PHYSICAL_ATTACK:
                     PhysicalAttack(attacker, target);
                     break;
 
-                case "MindControl":
+                case Constants.MIND_CONTROL:
                     MindControl(attacker, target);
                     break;
 
-                case "OpticBlast":
+                case Constants.OPTIC_BLAST:
                     OpticBlast(attacker, target);
                     break;
 
-                case "SpeechAttack":
+                case Constants.SPEECH_ATTACK:
                     SpeechAttack(attacker, target);
                     break;
 
-                case "Guard":
+                case Constants.GUARD:
                     Guard(attacker, target);
                     break;
 
                 default:
                 {
-                    // TODO: moves chance roll
                     foreach (KeyValuePair<string, Move> mov in attacker.Moves)
                     {
                         if (mov.Key.StartsWith(action, StringComparison.OrdinalIgnoreCase))
@@ -704,58 +703,119 @@ namespace HSRP
             {
                 throw new NullReferenceException($"Current entity is null. (TURN: {turn}, ATTACKTURN: {attackTurn.ToString()})");
             }
+
+            // Select a target.
             int targetID = 0;
-
             Entity target = null;
-
             while (target == null || target.Dead)
             {
                 targetID = attackTurn
-                    ? Toolbox.RandInt(Targets.Count)
-                    : Toolbox.RandInt(Attackers.Count);
+                    ? Toolbox.RandInt(Targets.Count - 1)
+                    : Toolbox.RandInt(Attackers.Count - 1);
 
                 target = GetTarget(targetID, !attackTurn);
             }
 
-            // TODO: More AI-y stuff.
-            if (ai is NPC npc)
+            NPC npc = ai as NPC;
+            if (npc != null)
             {
-                switch (npc.Type)
+                if (npc.MoveQueue.Count() < 1)
                 {
-                    case NPCType.Lusus:
-                    case NPCType.Normal:
-                        TakeTurn("PhysicalAttack", targetID, !attackTurn);
-                        break;
+                    npc.GenerateMoveList();
+                }
 
-                    case NPCType.Psionic:
-                        int rng = Toolbox.RandInt(4);
-                        // 25% chance to mind-control.
-                        if (rng == 3 && target.GetMindController() != ai.ID)
+                int doT = Toolbox.RandInt(1, 10);
+                if (doT > 4)
+                {
+                    while (true)
+                    {
+                        Move mov = npc.Moves.Values.FirstOrDefault();
+                        // Is the move on cooldown?
+                        if (mov.Cooldown <= 0)
                         {
-                            TakeTurn("MindControl", targetID, !attackTurn);
+                            npc.MoveQueue.Remove(mov);
+                            TakeTurn(mov.Name, targetID, !attackTurn);
                         }
-                        // 25% chance to attack.
-                        else if (rng == 2)
-                        {
+                    }
+                }
+                else
+                {
+                    switch (npc.Type)
+                    {
+                        case NPCType.Lusus:
+                        case NPCType.Normal:
                             TakeTurn("PhysicalAttack", targetID, !attackTurn);
+                            break;
+
+                        case NPCType.Psionic:
+                            int rng = Toolbox.RandInt(4);
+                            // 25% chance to mind-control.
+                            if (rng == 3 && target.GetMindController() != ai.ID)
+                            {
+                                TakeTurn("MindControl", targetID, !attackTurn);
+                            }
+                            // 25% chance to attack.
+                            else if (rng == 2)
+                            {
+                                TakeTurn("PhysicalAttack", targetID, !attackTurn);
+                            }
+                            // 25% chance to optic blast.
+                            else
+                            {
+                                TakeTurn("OpticBlast", targetID, !attackTurn);
+                            }
+                            break;
+                        
+                        case NPCType.Talker:
+                            if (Toolbox.TrueOrFalse(4))
+                            {
+                                TakeTurn("SpeechAttack", targetID, !attackTurn);
+                            }
+                            else
+                            {
+                                TakeTurn("Guard", targetID, !attackTurn);
+                            }
+                            break;
+                    }
+                }
+            }
+            // Someone is mind-controlled.
+            else
+            {
+                IEnumerable<Move> list = npc.Moves.Values.ToList().Where(x => x.Cooldown <= 0);
+                int rng = Toolbox.RandInt(1, 4);
+                switch (rng)
+                {
+                    case 1:
+                    {
+                        TakeTurn(Constants.PHYSICAL_ATTACK, targetID, !attackTurn);
+                    }
+                    break;
+
+                    case 2:
+                    {
+                        TakeTurn(Constants.SPEECH_ATTACK, targetID, !attackTurn);
+                    }
+                    break;
+
+                    case 3:
+                    {
+                        TakeTurn(Constants.OPTIC_BLAST, targetID, !attackTurn);
+                    }
+                    break;
+
+                    case 4:
+                    {
+                        if (list.Count() <= 0)
+                        {
+                            TakeTurn(Constants.GUARD, targetID, !attackTurn);
                         }
-                        // 25% chance to optic blast.
                         else
                         {
-                            TakeTurn("OpticBlast", targetID, !attackTurn);
+                            TakeTurn(Toolbox.RandElement(list).Name, targetID, !attackTurn);
                         }
-                        break;
-                    
-                    case NPCType.Talker:
-                        if (Toolbox.TrueOrFalse(4))
-                        {
-                            TakeTurn("SpeechAttack", targetID, !attackTurn);
-                        }
-                        else
-                        {
-                            TakeTurn("Guard", targetID, !attackTurn);
-                        }
-                        break;
+                    }
+                    break;
                 }
             }
         }

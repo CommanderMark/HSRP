@@ -9,8 +9,8 @@ function tooltip(el, message)
 {
     let scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
     let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-    let x = parseInt(el.getBoundingClientRect().left) + scrollLeft + 10;
-    let y = parseInt(el.getBoundingClientRect().top) + scrollTop + 10;
+    let x = parseInt(el.getBoundingClientRect().left.toString()) + scrollLeft + 10;
+    let y = parseInt(el.getBoundingClientRect().toString()) + scrollTop + 10;
 
     let tooltip;
     if (!document.getElementById("copy_tooltip"))
@@ -20,7 +20,7 @@ function tooltip(el, message)
         tooltip.style.position = "absolute";
         tooltip.style.border = "1px solid black";
         tooltip.style.background = "#dbdb00";
-        tooltip.style.opacity = 1;
+        tooltip.style.opacity = "1";
         tooltip.style.transition = "opacity 0.3s";
         document.body.appendChild(tooltip);
     }
@@ -29,11 +29,11 @@ function tooltip(el, message)
         tooltip = document.getElementById("copy_tooltip")
     }
 
-    tooltip.style.opacity = 1;
+    tooltip.style.opacity = "1";
     tooltip.style.left = x + "px";
     tooltip.style.top = y + "px";
     tooltip.innerHTML = message;
-    setTimeout(function() { tooltip.style.opacity = 0; }, 2000);
+    setTimeout(function() { tooltip.style.opacity = "0"; }, 2000);
 }
 
 function select_all_and_copy(el)

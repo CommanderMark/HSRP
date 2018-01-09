@@ -6,10 +6,11 @@ namespace HSRP
     public class Move
     {
         public string Name;
+        public int Priority;
 
         private bool usesRolls;
-        private AbilityType[] attackerRolls;
-        private AbilityType[] targetRolls;
+        private string[] attackerRolls;
+        private string[] targetRolls;
 
         /// <summary>
         /// Amount of turns to set the cooldown timer to.
@@ -24,15 +25,15 @@ namespace HSRP
         private string attackMsg;
         public string RechargeMsg;
 
-        public Move()
+        private Move()
         {
             Name = string.Empty;
 
-            usesRolls;
-            attackerRolls;
-            targetRolls;
+            usesRolls = false;
+            attackerRolls = new string[0];
+            targetRolls = new string[0];
 
-        cooldownMaxTime = 0;
+            cooldownMaxTime = 0;
             Cooldown = 0;
             events = new List<Event>();
 
@@ -50,6 +51,14 @@ namespace HSRP
             {
                 switch (ele.Name.LocalName)
                 {
+                    case "rolls":
+                    {
+                        usesRolls = true;
+                        attackerRolls = element.GetAttributeStringArray("atk", new string[0]);
+                        targetRolls = element.GetAttributeStringArray("tar", new string[0]);
+                    }
+                    break;
+
                     case "attackMsg":
                     {
                         attackMsg = ele.ElementInnerText();
@@ -78,6 +87,16 @@ namespace HSRP
                 new XAttribute("cooldownMaxTime", cooldownMaxTime),
                 new XAttribute("cooldown", Cooldown)
                 );
+            
+            if (usesRolls)
+            {
+                XElement rolls = new XElement("rolls",
+                    new XAttribute("atk", string.Join(",", attackerRolls)),
+                    new XAttribute("tar", string.Join(",", targetRolls))
+                    );
+                
+                move.Add(rolls);
+            }
 
             XElement attackEle = new XElement("attackMsg", new XText(attackMsg));
             XElement rechargeEle = new XElement("rechargeMsg", new XText(RechargeMsg));
@@ -105,6 +124,33 @@ namespace HSRP
             {
                 strife.Log.AppendLine();
                 strife.Log.AppendLine(Entity.GetEntityMessage(attackMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(tar.Name)));
+            }
+
+            if (usesRolls)
+            {
+                int atkY = 0;
+                foreach (string ab in attackerRolls)
+                {
+                    atkY += ent.GetAbilityValue(ab);
+                }
+
+                int tarY = 0;
+                foreach (string ab in targetRolls)
+                {
+                    tarY += ent.GetAbilityValue(ab);
+                }
+
+                // Dice rolls.
+                int atkRoll = Toolbox.DiceRoll(1, atkY);
+                int tarRoll = Toolbox.DiceRoll(1, tarY);
+                strife.Log.AppendLine($"{Syntax.ToCodeLine(ent.Name)} rolls {Syntax.ToCodeLine(atkRoll)}!");
+                strife.Log.AppendLine($"{Syntax.ToCodeLine(tar.Name)} rolls {Syntax.ToCodeLine(tar)}!");
+
+                if (atkRoll <= tarRoll)
+                {
+                    strife.Log.AppendLine("Attack missed.");
+                    return;
+                }
             }
 
             foreach (Event evnt in events)

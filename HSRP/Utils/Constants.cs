@@ -29,6 +29,13 @@
         public const ulong TEST_STRIFE_CHANNEL = 343972292730028042;
         public const ulong RP_STRIFE_CHANNEL = 351522810008436736;
 
+        // Default actions.
+        public const string PHYSICAL_ATTACK = "PhysicalAttack";
+        public const string MIND_CONTROL = "MindControl";
+        public const string OPTIC_BLAST = "OpticBlast";
+        public const string SPEECH_ATTACK = "SpeechAttack";
+        public const string GUARD = "Guard";
+
         // Ailments.
         public const string MIND_CONTROL_AIL = "MindControl";
         public const string SLEEPING_AIL = "Sleeping";

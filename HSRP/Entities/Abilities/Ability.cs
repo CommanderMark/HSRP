@@ -25,7 +25,6 @@ namespace HSRP
         public XElement Save(string name)
         {
             XElement ability = new XElement(name, new XAttribute("value", Value));
-
             return ability;
         }
     }

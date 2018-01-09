@@ -9,7 +9,6 @@ namespace HSRP
         public string Name;
         public int Quantity;
 
-        // TODO: XML events
         public List<Tuple<EventType, Event>> Events { set; get; }
         public string[] Immunities { get; set; }
 
