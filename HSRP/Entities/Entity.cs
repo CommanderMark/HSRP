@@ -52,18 +52,6 @@ namespace HSRP
             return this.Health <= 0;
         }
 
-        /// <summary>
-        /// Inflicts a specified amount of damage on the entity.
-        /// Amount of damage is based on a percentage multiplied by their max health to calculate damage.
-        /// </summary>
-        public void InflictDamageByPercentage(float percentage, Strife strife)
-        {
-            int damage = (int)Math.Round(this.MaxHealth * percentage, MidpointRounding.AwayFromZero);
-            this.Health -= damage;
-
-            strife.Log.AppendLine($"{Syntax.ToCodeLine(this.Name)} took {Syntax.ToCodeLine(damage)} damage.");
-        }
-
         public void HealDamageByPercentage(float percentage, Strife strife)
         {
             int damage = (int) Math.Round(this.MaxHealth * percentage, MidpointRounding.AwayFromZero);

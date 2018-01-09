@@ -7,7 +7,7 @@
   <targets>
     <npc id="82">
       <info name="BlocK" type="Normal" pineappleOnPizza="false">debug stuff</info>
-      <status hp="800" maxhp="800" dead="false" specibus="Jokerkind" diceRolls="1" />
+      <status hp="760" maxhp="800" dead="false" specibus="Jokerkind" diceRolls="1" />
       <abilities>
         <Strength value="20" />
         <Constitution value="40" />
@@ -17,20 +17,21 @@
         <Persuasion value="0" />
       </abilities>
       <ailments>
-        <ailment name="Sleeping" controller="0" turns="39" />
+        <ailment name="Sleeping" turns="35" />
       </ailments>
       <moves>
-        <move name="Nut" priority="2" cooldownMaxTime="2">
+        <move name="Nut" priority="2" cooldownMaxTime="2" cooldown="0">
           <rolls atk="Strength,Intimidation" tar="Fortitude" />
           <attackMsg>{0} nuts. Highly professionnal debugging move indeed.</attackMsg>
-          <event>
-            <inflictDamage amount="0.05" type="Target" />
+          <event probability="1">
+            <inflictDamage minAmount="0.05" type="Target" />
+            <healDamage amount="0" type="None" />
           </event>
         </move>
       </moves>
     </npc>
   </targets>
-  <logs posted="12">
+  <logs posted="32">
     <log>Team A:
 0 - Sidewind Langston - 108/178
 
@@ -67,6 +68,99 @@ Attack missed.
 ------------
 </log>
     <log>`Sidewind Langston` is `Guarding`!
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`BlocK` is taking their turn!
+`BlocK` is still sleeping!
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` is `Guarding`!
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`BlocK` is taking their turn!
+`BlocK` is still sleeping!
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>
+`Sidewind Langston` nuts. Highly professionnal debugging move indeed.
+`Sidewind Langston` rolls `34`!
+`BlocK` rolls `4`!
+`BlocK` took `40` damage.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`BlocK` is taking their turn!
+`BlocK` is still sleeping!
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` is `Guarding`!
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`BlocK` is taking their turn!
+`BlocK` is still sleeping!
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+Move thingy is recharged.
+
+------------
+</log>
+    <log>
+`Sidewind Langston` nuts. Highly professionnal debugging move indeed.
+`Sidewind Langston` rolls `18`!
+`BlocK` rolls `1`!
+`Sidewind Langston` took `9` damage.
 
 ------------
 </log>

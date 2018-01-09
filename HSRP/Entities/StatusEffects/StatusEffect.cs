@@ -10,9 +10,7 @@ namespace HSRP
     public class StatusEffect
     {
         // Inflict damage stuff.
-        private bool inflictsDamage = false;
-        public float MinDamagePercentage = 0f;
-        public float MaxDamagePercentage = 0f;
+        private InflictDamage damage;
 
         // Skip a turn.
         private bool skipsTurn = false;
@@ -48,7 +46,6 @@ namespace HSRP
         public StatusEffect(XElement element)
         {
             Name = element.GetAttributeString("name", string.Empty);
-            inflictsDamage = element.GetAttributeBool("canDamage", false);
             skipsTurn = element.GetAttributeBool("skipTurns", false);
             Controller = XmlToolbox.GetAttributeUnsignedLong(element, "controller", 0);
             Explodes = element.GetAttributeBool("explodes", false);
@@ -62,8 +59,7 @@ namespace HSRP
                 {
                     case "inflictDamage":
                     {
-                        MinDamagePercentage = ele.GetAttributeFloat("minAmount", 0f);
-                        MaxDamagePercentage = ele.GetAttributeFloat("maxAmount", 0f);
+                        damage = new InflictDamage(ele);
                     }
                     break;
 
@@ -109,9 +105,7 @@ namespace HSRP
         public StatusEffect() { }
         public StatusEffect(StatusEffect sa)
         {
-            this.inflictsDamage = sa.inflictsDamage;
-            this.MinDamagePercentage = sa.MinDamagePercentage;
-            this.MaxDamagePercentage = sa.MaxDamagePercentage;
+            this.damage = new InflictDamage(sa.damage);
 
             this.skipsTurn = sa.skipsTurn;
 
@@ -179,9 +173,22 @@ namespace HSRP
             }
 
             result.AppendLine();
-            if (inflictsDamage)
+            if (damage.HasDamage)
             {
-                result.AppendLine($"Does between {MinDamagePercentage * 100}-{MaxDamagePercentage * 100}% of the user's max health in damage each turn.");
+                if (!damage.FixedAmount)
+                {
+                    string msg = damage.Ranged
+                        ? $"between {damage.MinAmount * 100}-{damage.MaxAmount * 100}"
+                        : (damage.MinAmount * 100).ToString();
+                    result.AppendLine($"Does {msg}% of the user's max health in damage each turn.");
+                }
+                else
+                {
+                    string msg = damage.Ranged
+                        ? $"between {damage.MinAmount}-{damage.MaxAmount}"
+                        : damage.MinAmount.ToString();
+                    result.AppendLine($"Does {msg} damage each turn.");
+                }
             }
             if (skipsTurn)
             {
@@ -263,11 +270,9 @@ namespace HSRP
                 strife.Log.AppendLine(Entity.GetEntityMessage(StatusMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(this.Name)));
             }
 
-            if (inflictsDamage)
+            if (damage.HasDamage)
             {
-                // Pick a value to inflict.
-                float per = Toolbox.RandFloat(MinDamagePercentage, MaxDamagePercentage);
-                ent.InflictDamageByPercentage(per, strife);
+                damage.ApplyDamage(ent, strife);
             }
 
             if (Turns < 1 && Explodes)

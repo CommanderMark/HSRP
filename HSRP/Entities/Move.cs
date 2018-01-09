@@ -9,6 +9,10 @@ namespace HSRP
         public int Priority;
 
         private bool usesRolls;
+        /// <summary>
+        /// Determines whether the difference between the attacker and target rolls affects the damage the events deal.
+        /// </summary>
+        private bool useRollDamage;
         private string[] attackerRolls;
         private string[] targetRolls;
 
@@ -58,6 +62,7 @@ namespace HSRP
                         usesRolls = true;
                         attackerRolls = ele.GetAttributeStringArray("atk", new string[0]);
                         targetRolls = ele.GetAttributeStringArray("tar", new string[0]);
+                        useRollDamage = element.GetAttributeBool("rollDamage", true);
                     }
                     break;
 
@@ -75,6 +80,7 @@ namespace HSRP
 
                     case "event":
                     {
+                        Event evnt = new Event(ele);
                         events.Add(new Event(ele));
                     }
                     break;
@@ -95,7 +101,8 @@ namespace HSRP
             {
                 XElement rolls = new XElement("rolls",
                     new XAttribute("atk", string.Join(",", attackerRolls)),
-                    new XAttribute("tar", string.Join(",", targetRolls))
+                    new XAttribute("tar", string.Join(",", targetRolls)),
+                    new XAttribute("rollDamage", useRollDamage)
                     );
                 
                 move.Add(rolls);
@@ -135,6 +142,7 @@ namespace HSRP
                 strife.Log.AppendLine(Entity.GetEntityMessage(attackMsg, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(tar.Name)));
             }
 
+            int dmg = 0;
             if (usesRolls)
             {
                 int atkY = 0;
@@ -160,11 +168,13 @@ namespace HSRP
                     strife.Log.AppendLine("Attack missed.");
                     return;
                 }
+
+                dmg = atkRoll - tarRoll;
             }
 
             foreach (Event evnt in events)
             {
-                evnt.Fire(ent, tar, attackTeam, strife);
+                evnt.Fire(ent, tar, attackTeam, strife, dmg);
             }
 
             Cooldown = cooldownMaxTime;

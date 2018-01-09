@@ -498,7 +498,7 @@ namespace HSRP
                 {
                     if (!string.IsNullOrWhiteSpace(mov.Value.RechargeMsg))
                     {
-                        Log.AppendLine(Entity.GetEntityMessage(mov.Value.RechargeMsg));
+                        Log.AppendLine(Entity.GetEntityMessage(mov.Value.RechargeMsg, Syntax.ToCodeLine(mov.Value.Name)));
                     }
                 }
             }

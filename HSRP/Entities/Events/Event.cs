@@ -32,14 +32,7 @@ namespace HSRP
         /// </summary>
         private List<Tuple<TargetType, string>> removeEffects;
 
-        /// <summary>
-        /// The entity(ies) that will be targeted by the damageAmount field.
-        /// </summary>
-        private TargetType damageTarget;
-        /// <summary>
-        /// Amount of damage to inflict when the event is triggered.
-        /// </summary>
-        private float damageAmount;
+        private InflictDamage damage;
 
         /// <summary>
         /// The entity(ies) that will be targeted by the healAmount field.
@@ -66,8 +59,7 @@ namespace HSRP
             statusEffects = new List<Tuple<TargetType, string>>();
             removeEffects = new List<Tuple<TargetType, string>>();
 
-            damageTarget = TargetType.None;
-            damageAmount = 0f;
+            damage = new InflictDamage();
             healTarget = TargetType.None;
             healAmount = 0f;
 
@@ -86,12 +78,7 @@ namespace HSRP
                 {
                     case "inflictDamage":
                     {
-                        damageAmount = ele.GetAttributeFloat("amount", 0f);
-                        TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[2]);
-                        foreach(TargetType enumi in enumArr)
-                        {
-                            damageTarget |= enumi;
-                        }
+                        damage = new InflictDamage(ele);
                     }
                     break;
 
@@ -149,10 +136,7 @@ namespace HSRP
                 new XAttribute("probability", probability)
                 );
 
-            XElement inflictDamage = new XElement("inflictDamage",
-                new XAttribute("amount", damageAmount),
-                new XAttribute("type", String.Join(",", damageTarget.GetIndividualFlags()))
-                );
+            XElement inflictDamage = damage.Save();
 
             XElement healDamage = new XElement("healDamage",
                 new XAttribute("amount", healAmount),
@@ -199,9 +183,7 @@ namespace HSRP
                 return false;
             }
 
-            return this.damageTarget == evnt.damageTarget
-                && this.damageAmount == evnt.damageAmount
-                && this.healTarget == evnt.healTarget
+            return this.healTarget == evnt.healTarget
                 && this.healAmount == evnt.healAmount
                 && this.message == evnt.message
                 && this.probability == evnt.probability;
@@ -219,7 +201,7 @@ namespace HSRP
         /// <param name="tar">The entity the user was targeting or targeted by when the event was triggered.</param>
         /// <param name="attackTeam">Boolean stating whether the entity is on the attacking team or not.</param>
         /// <param name="strife">The strife object itself.</param>
-        public void Fire(Entity ent, Entity tar, bool attackTeam, Strife strife)
+        public void Fire(Entity ent, Entity tar, bool attackTeam, Strife strife, int dmg = 0)
         {
             // Probability to fire.
             float magicNumber = Toolbox.RandFloat(0f, 1.0f);
@@ -234,26 +216,26 @@ namespace HSRP
                 strife.Log.AppendLine(Entity.GetEntityMessage(message, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(tar.Name)));
             }
 
-            if (damageAmount > 0)
+            if (damage.HasDamage)
             {
-                switch (damageTarget)
+                switch (damage.Target)
                 {
                     case TargetType.Self:
                     {
-                        ent.InflictDamageByPercentage(damageAmount, strife);
+                        damage.ApplyDamage(ent, strife, dmg);
                     }
                     break;
 
                     case TargetType.Target:
                     {
-                        tar.InflictDamageByPercentage(damageAmount, strife);
+                        damage.ApplyDamage(tar, strife, dmg);
                     }
                     break;
 
                     case TargetType.Self | TargetType.Target:
                     {
-                        ent.InflictDamageByPercentage(damageAmount, strife);
-                        tar.InflictDamageByPercentage(damageAmount, strife);
+                        damage.ApplyDamage(ent, strife, dmg);
+                        damage.ApplyDamage(tar, strife, dmg);
                     }
                     break;
 
@@ -261,7 +243,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
                         {
-                            strifer.InflictDamageByPercentage(damageAmount, strife);
+                            damage.ApplyDamage(strifer, strife, dmg);
                         }
                     }
                     break;
@@ -270,7 +252,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
                         {
-                            strifer.InflictDamageByPercentage(damageAmount, strife);
+                            damage.ApplyDamage(strifer, strife, dmg);
                         }
                     }
                     break;
@@ -279,7 +261,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in strife.Entities)
                         {
-                            strifer.InflictDamageByPercentage(damageAmount, strife);
+                            damage.ApplyDamage(strifer, strife, dmg);
                         }
                     }
                     break;

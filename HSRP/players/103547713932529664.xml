@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sidewind Langston" id="103547713932529664" owner="CommanderMark" blood="Violet" pineappleOnPizza="false" />
-  <status hp="108" maxhp="178" dead="false" specibus="Hatchetkind" />
+  <status hp="99" maxhp="178" dead="false" specibus="Hatchetkind" />
   <levels echeladder="11" pendingSkillPoints="0" xp="2910" nextLevel="3300" />
   <abilities>
     <Strength value="30" />
@@ -31,14 +31,16 @@
       <ailment name="Debugging" type="Target" />
     </event>
   </events>
-  <strife id="8481" />
   <moves>
-    <move name="Nut" priority="2" cooldownMaxTime="2">
+    <move name="Nut" priority="2" cooldownMaxTime="2" cooldown="1">
       <rolls atk="Strength,Intimidation" tar="Fortitude" />
       <attackMsg>{0} nuts. Highly professionnal debugging move indeed.</attackMsg>
-      <event>
-        <inflictDamage amount="0.05" type="Target" />
+      <rechargeMsg>Move thingy is recharged.</rechargeMsg>
+      <event probability="1">
+        <inflictDamage minAmount="0.05" type="Self" />
+        <healDamage amount="0" type="None" />
       </event>
     </move>
   </moves>
+  <strife id="8481" />
 </player>
