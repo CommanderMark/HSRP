@@ -28,6 +28,7 @@ namespace HSRP
         private Move()
         {
             Name = string.Empty;
+            Priority = 0;
 
             usesRolls = false;
             attackerRolls = new string[0];
@@ -44,6 +45,7 @@ namespace HSRP
         public Move(XElement element) : this()
         {
             Name = element.GetAttributeString("name", string.Empty);
+            Priority = element.GetAttributeInt("priority", 0);
             cooldownMaxTime = element.GetAttributeInt("cooldownMaxTime", 0);
             Cooldown = element.GetAttributeInt("cooldown", 0);
 
@@ -54,8 +56,8 @@ namespace HSRP
                     case "rolls":
                     {
                         usesRolls = true;
-                        attackerRolls = element.GetAttributeStringArray("atk", new string[0]);
-                        targetRolls = element.GetAttributeStringArray("tar", new string[0]);
+                        attackerRolls = ele.GetAttributeStringArray("atk", new string[0]);
+                        targetRolls = ele.GetAttributeStringArray("tar", new string[0]);
                     }
                     break;
 
@@ -84,6 +86,7 @@ namespace HSRP
         {
             XElement move = new XElement("move",
                 new XAttribute("name", Name),
+                new XAttribute("priority", Priority),
                 new XAttribute("cooldownMaxTime", cooldownMaxTime),
                 new XAttribute("cooldown", Cooldown)
                 );
@@ -98,10 +101,16 @@ namespace HSRP
                 move.Add(rolls);
             }
 
-            XElement attackEle = new XElement("attackMsg", new XText(attackMsg));
-            XElement rechargeEle = new XElement("rechargeMsg", new XText(RechargeMsg));
-
-            move.Add(attackEle, rechargeEle);
+            if (!string.IsNullOrWhiteSpace(attackMsg))
+            {
+                XElement attackEle = new XElement("attackMsg", new XText(attackMsg));
+                move.Add(attackEle);
+            }
+            if (!string.IsNullOrWhiteSpace(RechargeMsg))
+            {
+                XElement rechargeEle = new XElement("rechargeMsg", new XText(RechargeMsg));
+                move.Add(rechargeEle);
+            }
 
             foreach (Event evnt in events)
             {

@@ -136,10 +136,14 @@ namespace HSRP
         public XElement Save()
         {
             XElement ailment = new XElement("ailment",
-                new XAttribute("name", Name),
-                new XAttribute("controller", Controller),
-                new XAttribute("turns", Turns)
+                new XAttribute("name", Name)
                 );
+            
+            if (Controller != 0)
+            {
+                ailment.Add(new XAttribute("controller", Controller));
+            }
+            ailment.Add(new XAttribute("turns", Turns));
 
             if (Immunities.Count() > 0)
             {

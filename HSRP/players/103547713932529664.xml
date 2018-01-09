@@ -35,9 +35,9 @@
   <moves>
     <move name="Nut" priority="2" cooldownMaxTime="2">
       <rolls atk="Strength,Intimidation" tar="Fortitude" />
+      <attackMsg>{0} nuts. Highly professionnal debugging move indeed.</attackMsg>
       <event>
         <inflictDamage amount="0.05" type="Target" />
-        <attackMsg>{0} nuts. Highly professionnal debugging move indeed.</attackMsg>
       </event>
     </move>
   </moves>
