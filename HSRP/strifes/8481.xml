@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strife id="8481" active="true" currentTurn="103547713932529664">
+  <status attackTurn="true" turn="0" />
+  <attackers>
+    <player id="103547713932529664" />
+  </attackers>
+  <targets>
+    <npc id="82">
+      <info name="BlocK" type="Normal" pineappleOnPizza="false">debug stuff</info>
+      <status hp="800" maxhp="800" dead="false" specibus="Jokerkind" diceRolls="1" />
+      <abilities>
+        <Strength value="20" />
+        <Constitution value="40" />
+        <Psion value="0" />
+        <Fortitude value="0" />
+        <Intimidation value="100" />
+        <Persuasion value="0" />
+      </abilities>
+      <ailments>
+        <ailment name="Sleeping" controller="0" turns="39" />
+      </ailments>
+      <moves>
+        <move name="Nut" priority="2" cooldownMaxTime="2">
+          <rolls atk="Strength,Intimidation" tar="Fortitude" />
+          <event>
+            <inflictDamage amount="0.05" type="Target" />
+            <attackMsg>{0} nuts. Highly professionnal debugging move indeed.</attackMsg>
+          </event>
+        </move>
+      </moves>
+    </npc>
+  </targets>
+  <logs posted="12">
+    <log>Team A:
+0 - Sidewind Langston - 108/178
+
+Team T: 
+0 - BlocK - 800/800
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` rolls `1`!
+`BlocK` rolls `HSRP.NPC`!
+Attack missed.
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`BlocK` is taking their turn!
+`BlocK` is still sleeping!
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+    <log>`Sidewind Langston` is `Guarding`!
+
+------------
+</log>
+    <log>Targets are now taking their turns.
+
+------------
+</log>
+    <log>`BlocK` is taking their turn!
+`BlocK` is still sleeping!
+
+------------
+</log>
+    <log>Attackers are now taking their turns.
+
+------------
+</log>
+    <log>`Sidewind Langston` is taking their turn!
+
+------------
+</log>
+  </logs>
+</strife>

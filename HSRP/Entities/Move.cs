@@ -144,7 +144,7 @@ namespace HSRP
                 int atkRoll = Toolbox.DiceRoll(1, atkY);
                 int tarRoll = Toolbox.DiceRoll(1, tarY);
                 strife.Log.AppendLine($"{Syntax.ToCodeLine(ent.Name)} rolls {Syntax.ToCodeLine(atkRoll)}!");
-                strife.Log.AppendLine($"{Syntax.ToCodeLine(tar.Name)} rolls {Syntax.ToCodeLine(tar)}!");
+                strife.Log.AppendLine($"{Syntax.ToCodeLine(tar.Name)} rolls {Syntax.ToCodeLine(tarRoll)}!");
 
                 if (atkRoll <= tarRoll)
                 {
