@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="1">
-  <info name="Juggalo Messenger" type="Normal" pineappleOnPizza="false">A messenger for the Grand Highblood. Looks rather stocky for one though.</info>
-  <status hp="75" maxhp="75" dead="false" specibus="Bladekind" diceRolls="1" controller="0" />
+  <info name="Corrupted Treetrimmer" type="Normal" pineappleOnPizza="false">His axe was once used for cutting frond nubs, now however, they are only used for cutting your head off.</info>
+  <status hp="100" maxhp="100" dead="false" specibus="Shadowkind" diceRolls="1" />
   <abilities>
-    <strength value="5" />
-    <constitution value="6" />
-    <psion value="0" />
-    <fortitude value="8" />
-    <intimidation value="11" />
-    <persuasion value="3" />
+    <Strength value="5" />
+    <Constitution value="7" />
+    <Psion value="4" />
+    <Fortitude value="7" />
+    <Intimidation value="7" />
+    <Persuasion value="7" />
   </abilities>
+  <ailments />
 </npc>

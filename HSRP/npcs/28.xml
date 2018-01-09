@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="28">
-  <info name="Vengeful Subjugglator" type="Normal" pineappleOnPizza="false">YOU BETTER BELIEVE IN THOSE MOTHERFUCKING MIRACLES, BITCH.</info>
-  <status hp="180" maxhp="180" dead="false" specibus="Clubkind" diceRolls="1" controller="0"/>
+  <info name="Hector Psemos" type="Normal" pineappleOnPizza="false">A very 'happy' troll.</info>
+  <status hp="100" maxhp="100" dead="false" specibus="Bladekind" diceRolls="1" />
   <abilities>
-    <strength value="18"/>
-    <constitution value="15"/>
-    <psion value="0"/>
-    <fortitude value="14"/>
-    <intimidation value="16"/>
-    <persuasion value="8"/>
+    <Strength value="20" />
+    <Constitution value="20" />
+    <Psion value="50" />
+    <Fortitude value="40" />
+    <Intimidation value="0" />
+    <Persuasion value="9" />
   </abilities>
+  <ailments />
 </npc>

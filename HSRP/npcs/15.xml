@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="15">
-  <info name="Goldblood Psionic" type="Normal" pineappleOnPizza="false">It seems even lowbloods want you dead.</info>
-  <status hp="130" maxhp="130" dead="false" specibus="Spearkind" diceRolls="1" controller="0"/>
+  <info name="Subjugglator Apprentice" type="Normal" pineappleOnPizza="false">They are still training.</info>
+  <status hp="120" maxhp="120" dead="false" specibus="Clubkind" diceRolls="1" />
   <abilities>
-    <strength value="4"/>
-    <constitution value="6"/>
-    <psion value="12"/>
-    <fortitude value="7"/>
-    <intimidation value="0"/>
-    <persuasion value="10"/>
+    <Strength value="23" />
+    <Constitution value="30" />
+    <Psion value="0" />
+    <Fortitude value="5" />
+    <Intimidation value="10" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

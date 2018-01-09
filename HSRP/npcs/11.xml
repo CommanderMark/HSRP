@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="11">
-  <info name="Archeradicator" type="Normal" pineappleOnPizza="false">A random Highblood you've found while looking for someone to strife with. He will have to do..</info>
-  <status hp="150" maxhp="150" dead="false" specibus="Bow&amp;Arrowkind" diceRolls="1" controller="0"/>
+  <info name="Midblood fighter" type="Normal" pineappleOnPizza="false">Your opponent.</info>
+  <status hp="110" maxhp="110" dead="false" specibus="Whipkind" diceRolls="1" />
   <abilities>
-    <strength value="8"/>
-    <constitution value="7"/>
-    <psion value="0"/>
-    <fortitude value="7"/>
-    <intimidation value="8"/>
-    <persuasion value="8"/>
+    <Strength value="10" />
+    <Constitution value="4" />
+    <Psion value="0" />
+    <Fortitude value="3" />
+    <Intimidation value="5" />
+    <Persuasion value="5" />
   </abilities>
+  <ailments />
 </npc>

@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="29">
-  <info name="Midblood fighter" type="Normal" pineappleOnPizza="false">Your opponent.</info>
-  <status hp="110" maxhp="110" dead="false" specibus="Whipkind" diceRolls="1" controller="0"/>
+  <info name="Messar Egenas" type="Normal" pineappleOnPizza="false">Not who she used to be.</info>
+  <status hp="100" maxhp="100" dead="false" specibus="Scythekind" diceRolls="1" />
   <abilities>
-    <strength value="10"/>
-    <constitution value="4"/>
-    <psion value="0"/>
-    <fortitude value="3"/>
-    <intimidation value="5"/>
-    <persuasion value="5"/>
+    <Strength value="19" />
+    <Constitution value="35" />
+    <Psion value="70" />
+    <Fortitude value="90" />
+    <Intimidation value="0" />
+    <Persuasion value="9" />
   </abilities>
+  <ailments />
 </npc>

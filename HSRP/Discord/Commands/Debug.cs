@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using Discord.Commands;
 using Discord;
 using System.Collections.Generic;
+using System;
 
 namespace HSRP.Commands
 {
@@ -107,7 +108,7 @@ namespace HSRP.Commands
         public async Task ListNPCs()
         {
             SortedDictionary<ulong, string> ents = new SortedDictionary<ulong, string>();
-            string[] dirs = Directory.GetFiles(Dirs.NPCs);
+            IEnumerable<string> dirs = Directory.GetFiles(Dirs.NPCs).Where(x => x.Contains(".xml"));
 
             foreach (string file in dirs)
             {
@@ -115,6 +116,21 @@ namespace HSRP.Commands
                 
                 if (NPC.TryParse(file, out NPC npc, false))
                 {
+                    int startIndex = file.LastIndexOf('/') + 1;
+                    int length = file.IndexOf(".xml") - startIndex;
+                    ulong.TryParse(file.Substring(startIndex, length), out ulong id);
+
+                    if (id != npc.ID)
+                    {
+                        Console.WriteLine($"NPCS: Changed \"{npc.Name}\" id, {npc.ID}->{id}.");
+                        npc.ID = id;
+
+                        string npcDir = Dirs.NPCs + "/" + id + ".xml";
+                        XDocument doc = new XDocument();
+                        doc.Add(npc.Save());
+                        XmlToolbox.WriteXml(npcDir, doc);
+                    }
+                    
                     ents.Add(npc.ID, npc.Name);
                 }
             }

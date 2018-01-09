@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="14">
-  <info name="Disguised Legislacerator" type="Normal" pineappleOnPizza="false">Sadly, it seems this is just a legislacerator pretending to be the cloaked stalker.</info>
-  <status hp="120" maxhp="120" dead="false" specibus="Staffkind" diceRolls="1" controller="0"/>
+  <info name="Shadow Dropper" type="Normal" pineappleOnPizza="false">It's a TROLL ZOMBIE.</info>
+  <status hp="20" maxhp="20" dead="false" specibus="Infectionkind" diceRolls="1" />
   <abilities>
-    <strength value="12"/>
-    <constitution value="5"/>
-    <psion value="0"/>
-    <fortitude value="5"/>
-    <intimidation value="18"/>
-    <persuasion value="18"/>
+    <Strength value="60" />
+    <Constitution value="0" />
+    <Psion value="0" />
+    <Fortitude value="90" />
+    <Intimidation value="0" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

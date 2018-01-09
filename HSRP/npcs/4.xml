@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="4">
-  <info name="Laughassassin" type="Normal" pineappleOnPizza="false">Same Laughassassin that almost killed you, time for some sweet revenge..</info>
-  <status hp="120" maxhp="120" dead="false" specibus="Bladekind" diceRolls="1" controller="0"/>
+  <info name="Master Illusionist" type="Normal" pineappleOnPizza="false">Must be the one making all of those weird Illusions.</info>
+  <status hp="140" maxhp="140" dead="false" specibus="Whipkind" diceRolls="1" />
   <abilities>
-    <strength value="7"/>
-    <constitution value="5"/>
-    <psion value="0"/>
-    <fortitude value="7"/>
-    <intimidation value="8"/>
-    <persuasion value="6"/>
+    <Strength value="10" />
+    <Constitution value="5" />
+    <Psion value="15" />
+    <Fortitude value="10" />
+    <Intimidation value="20" />
+    <Persuasion value="10" />
   </abilities>
+  <ailments />
 </npc>

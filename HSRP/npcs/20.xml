@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="20">
-  <info name="Master Illusionist" type="Normal" pineappleOnPizza="false">Must be the one making all of those weird Illusions.</info>
-  <status hp="140" maxhp="140" dead="false" specibus="Whipkind" diceRolls="1" controller="0"/>
+  <info name="Ryvern Envian" type="Normal" pineappleOnPizza="false">She's a spear now.</info>
+  <status hp="30" maxhp="30" dead="false" specibus="Spearkind" diceRolls="1" />
   <abilities>
-    <strength value="10"/>
-    <constitution value="5"/>
-    <psion value="15"/>
-    <fortitude value="10"/>
-    <intimidation value="20"/>
-    <persuasion value="10"/>
+    <Strength value="50" />
+    <Constitution value="50" />
+    <Psion value="0" />
+    <Fortitude value="90" />
+    <Intimidation value="0" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

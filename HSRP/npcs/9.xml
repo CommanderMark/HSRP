@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="9">
-  <info name="Ruffiannihilator" type="Normal" pineappleOnPizza="false">A Ruffiannihilator, the strongest of the STRONG Trolls, this guy is probably tough, so watch out..</info>
-  <status hp="150" maxhp="150" dead="false" specibus="Scythekind" diceRolls="2" controller="0"/>
+  <info name="Defenseless Lowblood" type="Normal" pineappleOnPizza="false">She isn't going to hurt you and yet here you are killing her, you monster.</info>
+  <status hp="25" maxhp="100" dead="false" specibus="Feralkind" diceRolls="1" />
   <abilities>
-    <strength value="15"/>
-    <constitution value="8"/>
-    <psion value="0"/>
-    <fortitude value="4"/>
-    <intimidation value="7"/>
-    <persuasion value="10"/>
+    <Strength value="5" />
+    <Constitution value="7" />
+    <Psion value="0" />
+    <Fortitude value="4" />
+    <Intimidation value="3" />
+    <Persuasion value="3" />
   </abilities>
+  <ailments />
 </npc>

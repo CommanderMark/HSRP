@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="27">
-  <info name="Lowblood Lusus" type="Lusus" pineappleOnPizza="false">It's a cow.</info>
-  <status hp="100" maxhp="100" dead="false" specibus="Feralkind" diceRolls="1" controller="26" />
+  <info name="The Purifier" type="Normal" pineappleOnPizza="false">The Settlement's best agent/cultist so far.</info>
+  <status hp="380" maxhp="380" dead="false" specibus="Pyrokind" diceRolls="1" />
   <abilities>
-    <strength value="10"/>
-    <constitution value="7"/>
-    <psion value="0"/>
-    <fortitude value="10"/>
-    <intimidation value="0"/>
-    <persuasion value="0"/>
+    <Strength value="90" />
+    <Constitution value="70" />
+    <Psion value="0" />
+    <Fortitude value="90" />
+    <Intimidation value="60" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="23">
-  <info name="tricksterPhantasm's Phantom" type="Normal" pineappleOnPizza="false">It's a shadow, most likely controlled by someone else. It can still hurt you even though it's just an illusion.</info>
-  <status hp="180" maxhp="180" dead="false" specibus="Shadowkind" diceRolls="1" controller="0"/>
+  <info name="Snake Lusus" type="Lusus" pineappleOnPizza="false">It's a snake lusus.</info>
+  <status hp="120" maxhp="120" dead="false" specibus="Feralkind" diceRolls="1" />
   <abilities>
-    <strength value="27"/>
-    <constitution value="9"/>
-    <psion value="5"/>
-    <fortitude value="9"/>
-    <intimidation value="15"/>
-    <persuasion value="10"/>
+    <Strength value="45" />
+    <Constitution value="30" />
+    <Psion value="0" />
+    <Fortitude value="50" />
+    <Intimidation value="0" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

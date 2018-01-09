@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="26">
-  <info name="Defenseless Lowblood" type="Normal" pineappleOnPizza="false">She isn't going to hurt you and yet here you are killing her, you monster.</info>
-  <status hp="25" maxhp="100" dead="false" specibus="Feralkind" diceRolls="1" controller="0"/>
+  <info name="Vindicta Indignar" type="Normal" pineappleOnPizza="false">Sic seems to know her.</info>
+  <status hp="210" maxhp="210" dead="false" specibus="Halberdkind" diceRolls="1" />
   <abilities>
-    <strength value="5"/>
-    <constitution value="7"/>
-    <psion value="0"/>
-    <fortitude value="4"/>
-    <intimidation value="3"/>
-    <persuasion value="3"/>
+    <Strength value="34" />
+    <Constitution value="46" />
+    <Psion value="0" />
+    <Fortitude value="40" />
+    <Intimidation value="50" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="13">
-  <info name="Threshecutioner" type="Normal" pineappleOnPizza="false">A Threshecutioner, those guys are known for being tricky ones. You should better pay attention on what you're doing.</info>
-  <status hp="120" maxhp="120" dead="false" specibus="Sicklekind" diceRolls="1" controller="0"/>
+  <info name="Imperial Drone" type="Normal" pineappleOnPizza="false">It's an Imperial Drone.</info>
+  <status hp="200" maxhp="200" dead="false" specibus="Fistkind" diceRolls="1" />
   <abilities>
-    <strength value="7"/>
-    <constitution value="13"/>
-    <psion value="0"/>
-    <fortitude value="15"/>
-    <intimidation value="8"/>
-    <persuasion value="10"/>
+    <Strength value="40" />
+    <Constitution value="40" />
+    <Psion value="0" />
+    <Fortitude value="90" />
+    <Intimidation value="45" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

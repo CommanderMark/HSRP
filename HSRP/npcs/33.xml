@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="33">
-  <info name="Olive Trickster" type="Psionic" pineappleOnPizza="false">Their grin alone would be enough to unsettle someone lesser than you.</info>
-  <status hp="140" maxhp="140" dead="false" specibus="Daggerkind" diceRolls="1" controller="0"/>
+  <info name="The Purifier Phase 2" type="Normal" pineappleOnPizza="false">Not giving up that easily.</info>
+  <status hp="400" maxhp="400" dead="false" specibus="Pyrokind" diceRolls="1" />
   <abilities>
-    <strength value="5"/>
-    <constitution value="14"/>
-    <psion value="15"/>
-    <fortitude value="7"/>
-    <intimidation value="10"/>
-    <persuasion value="15"/>
+    <Strength value="700" />
+    <Constitution value="900" />
+    <Psion value="0" />
+    <Fortitude value="100" />
+    <Intimidation value="50" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

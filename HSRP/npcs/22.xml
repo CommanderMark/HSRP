@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="22">
-  <info name="elegantProtector" type="Normal" pineappleOnPizza="false">An Indigoblood that is strong even for an Archeradicator.</info>
-  <status hp="250" maxhp="250" dead="false" specibus="Bow&amp;Arrowkind" diceRolls="1" controller="0"/>
+  <info name="Frigidor" type="Lusus" pineappleOnPizza="false">Feugax's Barkbeast lusus.</info>
+  <status hp="150" maxhp="150" dead="false" specibus="Feralkind" diceRolls="1" />
   <abilities>
-    <strength value="45"/>
-    <constitution value="9"/>
-    <psion value="0"/>
-    <fortitude value="9"/>
-    <intimidation value="10"/>
-    <persuasion value="20"/>
+    <Strength value="45" />
+    <Constitution value="33" />
+    <Psion value="0" />
+    <Fortitude value="50" />
+    <Intimidation value="0" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

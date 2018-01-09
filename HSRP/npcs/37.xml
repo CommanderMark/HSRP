@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="37">
-  <info name="Wolf" type="Lusus" pineappleOnPizza="false">It's a TROLL WOLF.</info>
-  <status hp="130" maxhp="130" dead="false" specibus="Feralkind" diceRolls="1" controller="0"/>
+  <info name="Bronze-Blood Fighter" type="Psionic" pineappleOnPizza="false">Well this is surely interesting...</info>
+  <status hp="140" maxhp="140" dead="false" specibus="Psionickind" diceRolls="1" />
   <abilities>
-    <strength value="23"/>
-    <constitution value="20"/>
-    <psion value="0"/>
-    <fortitude value="15"/>
-    <intimidation value="0"/>
-    <persuasion value="0"/>
+    <Strength value="20" />
+    <Constitution value="20" />
+    <Psion value="50" />
+    <Fortitude value="20" />
+    <Intimidation value="0" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

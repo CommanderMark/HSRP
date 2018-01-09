@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="24">
-  <info name="Rag Doll" type="Normal" pineappleOnPizza="false">It's a rag doll, nothing new there. Except this one can move and try to kill you, nice.</info>
-  <status hp="50" maxhp="50" dead="false" specibus="Shadowkind" diceRolls="1" controller="0"/>
+  <info name="Lowblooded Fighter" type="Psionic" pineappleOnPizza="false">She's shy, but she can fight very well.</info>
+  <status hp="90" maxhp="90" dead="false" specibus="Scythekind" diceRolls="1" />
   <abilities>
-    <strength value="7"/>
-    <constitution value="5"/>
-    <psion value="0"/>
-    <fortitude value="9"/>
-    <intimidation value="15"/>
-    <persuasion value="0"/>
+    <Strength value="15" />
+    <Constitution value="30" />
+    <Psion value="70" />
+    <Fortitude value="50" />
+    <Intimidation value="0" />
+    <Persuasion value="5" />
   </abilities>
+  <ailments />
 </npc>

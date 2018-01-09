@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="10">
-  <info name="Corrupted Treetrimmer" type="Normal" pineappleOnPizza="false">His axe was once used for cutting frond nubs, now however, they are only used for cutting your head off.</info>
-  <status hp="100" maxhp="100" dead="false" specibus="Shadowkind" diceRolls="1" controller="0"/>
+  <info name="Vengeful Subjugglator" type="Normal" pineappleOnPizza="false">YOU BETTER BELIEVE IN THOSE MOTHERFUCKING MIRACLES, BITCH.</info>
+  <status hp="180" maxhp="180" dead="false" specibus="Clubkind" diceRolls="1" />
   <abilities>
-    <strength value="5"/>
-    <constitution value="7"/>
-    <psion value="4"/>
-    <fortitude value="7"/>
-    <intimidation value="7"/>
-    <persuasion value="7"/>
+    <Strength value="18" />
+    <Constitution value="15" />
+    <Psion value="0" />
+    <Fortitude value="14" />
+    <Intimidation value="16" />
+    <Persuasion value="8" />
   </abilities>
+  <ailments />
 </npc>

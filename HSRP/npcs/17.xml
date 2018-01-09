@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="17">
-  <info name="Arkhator" type="Lusus" pineappleOnPizza="false">A large bear lusus.</info>
-  <status hp="150" maxhp="150" dead="false" specibus="Feralkind" diceRolls="1" controller="15"/>
+  <info name="vengefulSurvivor" type="Psionic" pineappleOnPizza="false">Your cooler friend.</info>
+  <status hp="120" maxhp="120" dead="false" specibus="Sicklekind" diceRolls="1" />
   <abilities>
-    <strength value="20"/>
-    <constitution value="8"/>
-    <psion value="0"/>
-    <fortitude value="8"/>
-    <intimidation value="0"/>
-    <persuasion value="0"/>
+    <Strength value="23" />
+    <Constitution value="30" />
+    <Psion value="40" />
+    <Fortitude value="80" />
+    <Intimidation value="0" />
+    <Persuasion value="20" />
   </abilities>
+  <ailments />
 </npc>

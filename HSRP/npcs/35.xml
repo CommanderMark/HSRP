@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="35">
-  <info name="Mirthful Customer" type="Normal" pineappleOnPizza="false">This guy doesn't really care, he's just protecting his precious Faygo.</info>
-  <status hp="170" maxhp="170" dead="false" specibus="Clubkindx2" diceRolls="1" controller="0"/>
+  <info name="GIANT TROLL SPIDER" type="Lusus" pineappleOnPizza="false">Spidermom's ancestor.</info>
+  <status hp="400" maxhp="400" dead="false" specibus="feralkind" diceRolls="1" />
   <abilities>
-    <strength value="29"/>
-    <constitution value="19"/>
-    <psion value="0"/>
-    <fortitude value="15"/>
-    <intimidation value="14"/>
-    <persuasion value="0"/>
+    <Strength value="80" />
+    <Constitution value="50" />
+    <Psion value="0" />
+    <Fortitude value="400" />
+    <Intimidation value="0" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

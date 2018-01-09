@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="18">
-  <info name="Octoblood Illusionist" type="Normal" pineappleOnPizza="false">A masked Octoblood.</info>
-  <status hp="110" maxhp="110" dead="false" specibus="Whipkind" diceRolls="1" controller="0"/>
+  <info name="Bear Lusus" type="Lusus" pineappleOnPizza="false">Aggressive Wildlife.</info>
+  <status hp="180" maxhp="180" dead="false" specibus="Sicklekind" diceRolls="1" />
   <abilities>
-    <strength value="5"/>
-    <constitution value="5"/>
-    <psion value="9"/>
-    <fortitude value="6"/>
-    <intimidation value="20"/>
-    <persuasion value="5"/>
+    <Strength value="43" />
+    <Constitution value="30" />
+    <Psion value="0" />
+    <Fortitude value="80" />
+    <Intimidation value="0" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

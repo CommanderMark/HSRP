@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="31">
-  <info name="Vengeful Laughassassin" type="Normal" pineappleOnPizza="false">It's a Juggalo? It's a ninja? It's both m8.</info>
-  <status hp="170" maxhp="170" dead="false" specibus="Daggerkind" diceRolls="1" controller="0"/>
+  <info name="Hector's Lusus" type="Lusus" pineappleOnPizza="false">TROLL WOLF, but they don't want to kill you this time.</info>
+  <status hp="150" maxhp="150" dead="false" specibus="feralkind" diceRolls="1" />
   <abilities>
-    <strength value="17"/>
-    <constitution value="15"/>
-    <psion value="0"/>
-    <fortitude value="20"/>
-    <intimidation value="10"/>
-    <persuasion value="12"/>
+    <Strength value="60" />
+    <Constitution value="60" />
+    <Psion value="0" />
+    <Fortitude value="0" />
+    <Intimidation value="0" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

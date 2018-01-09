@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="2">
-  <info name="Dendar" type="Lusus" pineappleOnPizza="false">Dendar, your lusus.</info>
-  <status hp="150" maxhp="150" dead="false" specibus="lususkind" diceRolls="1" controller="164204195069689857" />
+  <info name="Goldblood Psionic" type="Normal" pineappleOnPizza="false">It seems even lowbloods want you dead.</info>
+  <status hp="130" maxhp="130" dead="false" specibus="Spearkind" diceRolls="1" />
   <abilities>
-    <strength value="15" />
-    <constitution value="17" />
-    <psion value="0" />
-    <fortitude value="0" />
-    <intimidation value="8" />
-    <persuasion value="0" />
+    <Strength value="4" />
+    <Constitution value="6" />
+    <Psion value="12" />
+    <Fortitude value="7" />
+    <Intimidation value="0" />
+    <Persuasion value="10" />
   </abilities>
+  <ailments />
 </npc>

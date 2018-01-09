@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="36">
-  <info name="Alpha Wolf" type="Lusus" pineappleOnPizza="false">It's the leader of the pack.</info>
-  <status hp="150" maxhp="150" dead="false" specibus="Feralkind" diceRolls="1" controller="0"/>
+  <info name="Centaur" type="Lusus" pineappleOnPizza="false">A centaur lusus you found.</info>
+  <status hp="250" maxhp="250" dead="false" specibus="feralkind" diceRolls="1" />
   <abilities>
-    <strength value="25"/>
-    <constitution value="25"/>
-    <psion value="0"/>
-    <fortitude value="15"/>
-    <intimidation value="0"/>
-    <persuasion value="0"/>
+    <Strength value="65" />
+    <Constitution value="40" />
+    <Psion value="0" />
+    <Fortitude value="400" />
+    <Intimidation value="40" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>

@@ -1,12 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="30">
-  <info name="Kornla" type="Lusus" pineappleOnPizza="false">Neyrah's Lusus.</info>
-  <status hp="180" maxhp="180" dead="false" specibus="Feralkind" diceRolls="1" controller="287684257693040640"/>
+  <info name="Capricer" type="Lusus" pineappleOnPizza="false">Vindicta's Cholerbear lusus.</info>
+  <status hp="180" maxhp="180" dead="false" specibus="feralkind" diceRolls="1" />
   <abilities>
-    <strength value="30"/>
-    <constitution value="10"/>
-    <psion value="0"/>
-    <fortitude value="8"/>
-    <intimidation value="5"/>
-    <persuasion value="5"/>
+    <Strength value="70" />
+    <Constitution value="50" />
+    <Psion value="0" />
+    <Fortitude value="0" />
+    <Intimidation value="0" />
+    <Persuasion value="0" />
   </abilities>
+  <ailments />
 </npc>
