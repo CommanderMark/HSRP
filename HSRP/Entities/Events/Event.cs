@@ -216,7 +216,7 @@ namespace HSRP
                 strife.Log.AppendLine(Entity.GetEntityMessage(message, Syntax.ToCodeLine(ent.Name), Syntax.ToCodeLine(tar.Name)));
             }
 
-            if (damage.HasDamage)
+            if (damage.HasDamage || dmg != 0)
             {
                 switch (damage.Target)
                 {

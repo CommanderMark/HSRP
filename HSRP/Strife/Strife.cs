@@ -735,6 +735,7 @@ namespace HSRP
                         {
                             npc.MoveQueue.Remove(mov);
                             TakeTurn(mov.Name, targetID, !attackTurn);
+                            break;
                         }
                     }
                 }

@@ -10,7 +10,7 @@ namespace HSRP
     public class StatusEffect
     {
         // Inflict damage stuff.
-        private InflictDamage damage;
+        private InflictDamage damage = new InflictDamage();
 
         // Skip a turn.
         private bool skipsTurn = false;
@@ -40,7 +40,6 @@ namespace HSRP
         /// </summary>
         public bool Stacks = false;
 
-        //TODO:1`00% next to.
         public const int EXPLOSION_FALLOFF_FACTOR = 2;
 
         public StatusEffect(XElement element)

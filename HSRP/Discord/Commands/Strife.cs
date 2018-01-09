@@ -4,10 +4,10 @@ using System.IO;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 
 namespace HSRP.Commands
 {
-    // TODO: Ability to read moves
     [Group("strife")]
     public class StrifeCommands : JModuleBase
     {
@@ -255,6 +255,59 @@ namespace HSRP.Commands
             else
             {
                 await ReplyAsync(Syntax.ToCodeBlock(ent.Display(true)));
+            }
+        }
+
+        [Command("identify"), Alias("identity"), InStrife, Priority(1)]
+        public async Task Identify(string who, int index, string mAIM) => await Identify(Context.GetStrife(), who, index, mAIM);
+
+        [Command("identify"), Alias("identity"), RequireGM, Priority(0)]
+        public async Task Identify(Strife strf, string who, int index, string mAIM)
+        {
+            bool attackAtks = false;
+            if ("attackers".StartsWith(who, StringComparison.OrdinalIgnoreCase)
+                || who.Equals("atk", StringComparison.OrdinalIgnoreCase))
+            {
+                attackAtks = true;
+            }
+            else if ("targets".StartsWith(who, StringComparison.OrdinalIgnoreCase))
+            {
+                attackAtks = false;
+            }
+            else
+            {
+                await ReplyAsync("Invalid input.");
+                return;
+            }
+
+            Entity ent = strf.GetTarget(index, attackAtks);
+            if (ent == null)
+            {
+                await ReplyAsync("Invalid strifer.");
+            }
+            else
+            {
+                if ("moves".StartsWith(mAIM, StringComparison.OrdinalIgnoreCase))
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine("Moves for " + ent.Name + ":");
+
+                    bool any = false;
+                    foreach (Move mov in ent.Moves.Values)
+                    {
+                        sb.AppendLine(Syntax.ToCodeLine(mov.Name));
+                        any = true;
+                    }
+
+                    if (!any)
+                    {
+                        await ReplyAsync("This entity has none.");
+                    }
+                    else
+                    {
+                        await ReplyAsync(sb.ToString());
+                    }
+                }
             }
         }
 
