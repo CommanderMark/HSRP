@@ -154,7 +154,7 @@ namespace HSRP
                 int tarY = 0;
                 foreach (string ab in targetRolls)
                 {
-                    tarY += ent.GetAbilityValue(ab);
+                    tarY += tar.GetAbilityValue(ab);
                 }
 
                 // Dice rolls.

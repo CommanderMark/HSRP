@@ -25,7 +25,7 @@ namespace HSRP
         /// <summary>
         /// Contains the type of target the status effect should affect and the name of the status effects invoked when this event is triggered.
         /// </summary>
-        private List<Tuple<TargetType, string>> statusEffects;
+        private List<Tuple<TargetType, StatusEffect>> statusEffects;
 
         /// <summary>
         /// Contains the type of target the status effect should affect and the name of the status effects cured (if the target has it) when this event is triggered.
@@ -56,7 +56,7 @@ namespace HSRP
 
         private Event()
         {
-            statusEffects = new List<Tuple<TargetType, string>>();
+            statusEffects = new List<Tuple<TargetType, StatusEffect>>();
             removeEffects = new List<Tuple<TargetType, string>>();
 
             damage = new InflictDamage();
@@ -95,7 +95,18 @@ namespace HSRP
 
                     case "ailment":
                     {
-                        string name = ele.GetAttributeString("name", string.Empty);
+                        string ailName = ele.GetAttributeString("name", string.Empty);
+                        StatusEffect sa = new StatusEffect();
+
+                        if (ele.HasElements)
+                        {
+                            sa = new StatusEffect(ele);
+                        }
+                        else
+                        {
+                            StatusEffect.TryParse(ailName, out sa);
+                        }
+
                         TargetType type = TargetType.None;
                         TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[2]);
                         foreach(TargetType enumi in enumArr)
@@ -103,7 +114,7 @@ namespace HSRP
                             type |= enumi;
                         }
 
-                        statusEffects.Add(new Tuple<TargetType, string>(type, name));
+                        statusEffects.Add(new Tuple<TargetType, StatusEffect>(type, sa));
                     }
                     break;
 
@@ -145,10 +156,10 @@ namespace HSRP
 
             eventEle.Add(inflictDamage, healDamage);
 
-            foreach (Tuple<TargetType, string> tup in statusEffects)
+            foreach (Tuple<TargetType, StatusEffect> tup in statusEffects)
             {
                 eventEle.Add(new XElement("ailment",
-                                          new XAttribute("name", tup.Item2),
+                                          new XAttribute("name", tup.Item2.SaveAllData()),
                                           new XAttribute("type", String.Join(",", tup.Item1.GetIndividualFlags()))
                                          )
                             );
@@ -320,7 +331,7 @@ namespace HSRP
                 }
             }
 
-            foreach (Tuple<TargetType, string> tup in statusEffects)
+            foreach (Tuple<TargetType, StatusEffect> tup in statusEffects)
             {
                 switch (tup.Item1)
                 {

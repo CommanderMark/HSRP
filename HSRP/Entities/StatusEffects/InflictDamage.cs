@@ -5,6 +5,7 @@ namespace HSRP
 {
     public class InflictDamage
     {
+        public static double MarginOfError = 0.001;
         /// <summary>
         /// Amount of damage to inflict when the event is triggered.
         /// </summary>
@@ -26,7 +27,7 @@ namespace HSRP
         {
             get
             {
-                return Math.Abs(MinAmount - MaxAmount) >= 0.001;
+                return Math.Abs(MinAmount - MaxAmount) >= MarginOfError;
             }
         }
 

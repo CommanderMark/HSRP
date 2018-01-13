@@ -77,6 +77,7 @@ namespace HSRP
                     case "abilities":
                         BaseAbilities = new AbilitySet(ele);
                         break;
+                        
                     case "ailments":
                         foreach (XElement strifeEle in ele.Elements("ailment"))
                         {

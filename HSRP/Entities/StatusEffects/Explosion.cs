@@ -31,6 +31,17 @@ namespace HSRP
             FixedNumber = element.GetAttributeBool("fixedNumber", false);
         }
 
+        public XElement Save()
+        {
+            XElement explosion = new XElement("explosion",
+                new XAttribute("type", Target.GetIndividualFlags()),
+                new XAttribute("damage", Damage),
+                new XAttribute("fixedNumber", FixedNumber)
+                );
+
+            return explosion;
+        }
+
         public Explosion(Explosion ex)
         {
             Target = ex.Target;

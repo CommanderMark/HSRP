@@ -151,6 +151,45 @@ namespace HSRP
             return ailment;
         }
 
+        public XElement SaveAllData()
+        {
+            XElement ailment = this.Save();
+            
+            if (damage.MinAmount >= InflictDamage.MarginOfError
+                || damage.MaxAmount >= InflictDamage.MarginOfError)
+            {
+                ailment.Add(damage.Save());
+            }
+            
+            if (Explodes)
+            {
+                ailment.Add(new XAttribute("explodes", true));
+                ailment.Add(Explosion.Save());
+            }
+
+            if (!string.IsNullOrWhiteSpace(InflictMsg))
+            {
+                ailment.Add(new XElement("inflictMsg", new XText(InflictMsg)));
+            }
+
+            if (!string.IsNullOrWhiteSpace(StatusMsg))
+            {
+                ailment.Add(new XElement("statusMsg", new XText(StatusMsg)));
+            }
+
+            if (!string.IsNullOrWhiteSpace(EndMsg))
+            {
+                ailment.Add(new XElement("endMsg", new XText(EndMsg)));
+            }
+
+            if (!string.IsNullOrWhiteSpace(description))
+            {
+                ailment.Add(new XElement("description", new XText(description)));
+            }
+
+            return ailment;
+        }
+
         public string Display()
         {
             StringBuilder result = new StringBuilder();

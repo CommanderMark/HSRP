@@ -37,7 +37,6 @@ namespace HSRP
             Client = new DiscordSocketClient(new DiscordSocketConfig
             {
                 LogLevel = LogSeverity.Info
-                
             });
 
             // Add the log handler.
