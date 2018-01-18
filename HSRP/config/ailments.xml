@@ -67,7 +67,7 @@
 
   <ailment name="Guarding" turns="1" immune="Bleeding,Poisoned,Stunned">
     <abilities>
-      <constitution per="0.5" />
+      <constitution per="1" />
     </abilities>
 
     <inflictMsg>{0} is {2}!</inflictMsg>

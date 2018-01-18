@@ -358,24 +358,25 @@ namespace HSRP
 
             foreach (Tuple<TargetType, StatusEffect> tup in statusEffects)
             {
+                StatusEffect sa = new StatusEffect(tup.Item2);
                 switch (tup.Item1)
                 {
                     case TargetType.Self:
                     {
-                        ent.ApplyStatusEffect(tup.Item2, tar, attackTeam, strife);
+                        ent.ApplyStatusEffect(sa, tar, attackTeam, strife);
                     }
                     break;
 
                     case TargetType.Target:
                     {
-                        tar.ApplyStatusEffect(tup.Item2, ent, !attackTeam, strife);
+                        tar.ApplyStatusEffect(sa, ent, !attackTeam, strife);
                     }
                     break;
 
                     case TargetType.Self | TargetType.Target:
                     {
-                        ent.ApplyStatusEffect(tup.Item2, tar, attackTeam, strife);
-                        tar.ApplyStatusEffect(tup.Item2, ent, !attackTeam, strife);
+                        ent.ApplyStatusEffect(sa, tar, attackTeam, strife);
+                        tar.ApplyStatusEffect(sa, ent, !attackTeam, strife);
                     }
                     break;
 
@@ -383,7 +384,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
                         {
-                            strifer.ApplyStatusEffect(tup.Item2, tar, attackTeam, strife);
+                            strifer.ApplyStatusEffect(sa, tar, attackTeam, strife);
                         }
                     }
                     break;
@@ -392,7 +393,7 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
                         {
-                            strifer.ApplyStatusEffect(tup.Item2, ent, !attackTeam, strife);
+                            strifer.ApplyStatusEffect(sa, ent, !attackTeam, strife);
                         }
                     }
                     break;
@@ -401,11 +402,11 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
                         {
-                            strifer.ApplyStatusEffect(tup.Item2, tar, attackTeam, strife);
+                            strifer.ApplyStatusEffect(sa, tar, attackTeam, strife);
                         }
                         foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
                         {
-                            strifer.ApplyStatusEffect(tup.Item2, ent, !attackTeam, strife);
+                            strifer.ApplyStatusEffect(sa, ent, !attackTeam, strife);
                         }
                     }
                     break;

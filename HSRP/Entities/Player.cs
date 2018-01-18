@@ -294,11 +294,15 @@ namespace HSRP
             {
                 result.AppendLine();
                 result.Append("Status Effects: ");
-                if (InflictedAilments.Count() > 0)
+                IEnumerable<StatusEffect> lis = from x in InflictedAilments
+                                        where x.Name != Constants.PHYSICAL_COUNTER_AIL && x.Name != Constants.SPE_ATTACK_AIL
+                                        select x;
+                if (lis.Count() > 0)
                 {
-                    result.Append(InflictedAilments[0].Name);
-                    foreach (StatusEffect sa in InflictedAilments)
+                    result.Append(lis.ElementAt(0).Name);
+                    for (int i = 1; i < lis.Count(); i++)
                     {
+                        StatusEffect sa = lis.ElementAt(i);
                         result.Append(", " + sa.Name);
                     }
                 }

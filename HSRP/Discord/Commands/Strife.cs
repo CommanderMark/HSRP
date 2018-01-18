@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using System.Globalization;
 
 namespace HSRP.Commands
 {
@@ -45,7 +46,7 @@ namespace HSRP.Commands
         }
 
         [Command("action"), InStrife]
-        public async Task Action(string who, int index, string action)
+        public async Task Action(string who, int index, [Remainder]string action)
         {
             // Figure out whether this is a pre-defined strife action or a move.
             IEnumerable<StrifeAction> fields = Enum.GetValues(typeof(StrifeAction)).Cast<StrifeAction>();
@@ -365,6 +366,19 @@ namespace HSRP.Commands
             strf.Save();
             await ReplyAsync("Strife " + strf.ID + " has been created."
                 + "\n" + strf.Display());
+        }
+
+        [Command("ailment")]
+        public async Task AilmentView([Remainder] string name)
+        {
+            foreach (KeyValuePair<string, StatusEffect> sa in Toolbox.StatusEffects)
+            {
+                if (sa.Value.Name.StartsWith(name, true, CultureInfo.InvariantCulture))
+                {
+                    await ReplyAsync(sa.Value.Display());
+                    return;
+                }
+            }
         }
     }
 }

@@ -607,7 +607,10 @@ namespace HSRP
                         // Is it on a cooldown.
                         if (mov.Value.Cooldown > 0)
                         {
-                            reason = "Invalid attack. That move is on a cooldown for another " + mov.Value.Cooldown + " turn(s).";
+                            string cool = mov.Value.Cooldown == 1
+                                ? "turn"
+                                : mov.Value.Cooldown + " turns";
+                            reason = "Invalid attack. " + Syntax.ToCodeLine(mov.Value.Name) + " is on a cooldown for another " + cool + ".";
                             return false;
                         }
 
@@ -725,7 +728,7 @@ namespace HSRP
                 }
 
                 int doT = Toolbox.RandInt(1, 10);
-                if (doT > 4)
+                if (doT > 4 && npc.MoveQueue.Any())
                 {
                     while (true)
                     {

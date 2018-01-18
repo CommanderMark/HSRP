@@ -229,8 +229,9 @@ namespace HSRP
                 if (lis.Count() > 0)
                 {
                     result.Append(lis.ElementAt(0).Name);
-                    foreach (StatusEffect sa in lis)
+                    for (int i = 1; i < lis.Count(); i++)
                     {
+                        StatusEffect sa = lis.ElementAt(i);
                         result.Append(", " + sa.Name);
                     }
                 }

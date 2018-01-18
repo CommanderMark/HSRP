@@ -137,12 +137,6 @@ namespace HSRP
             {
                 strife.Log.AppendLine(GetEntityMessage(sa.InflictMsg, Syntax.ToCodeLine(this.Name), Syntax.ToCodeLine(tar.Name), Syntax.ToCodeLine(sa.Name)));
             }
-
-            // If the status effect makes you immune to anything then cure them immediately.
-            foreach (string cure in sa.Immunities)
-            {
-                this.RemoveStatusEffect(cure, strife, false);
-            }
         }
 
         /// <summary>

@@ -45,7 +45,7 @@ namespace HSRP.Commands
         }
 
         [Command("ailments"), Alias("ailment", "status effects")]
-        public async Task AilmentHelp(string ailName)
+        public async Task AilmentHelp([Remainder] string ailName)
         {
             foreach (KeyValuePair<string, StatusEffect> sa in Toolbox.StatusEffects)
             {
