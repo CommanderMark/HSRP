@@ -22,6 +22,38 @@ namespace HSRP
             }
         }
 
+        public static Event HighbloodBoner
+        {
+            get
+            {
+                Event evnt = new Event();
+                evnt.probability = 0.3f;
+                if (!StatusEffect.TryParse(Constants.HIGHBLOOD_AIL, out StatusEffect sa))
+                {
+                    throw new NullReferenceException("Unable to parse Highblood move!");
+                }
+
+                evnt.statusEffects.Add(new Tuple<TargetType, StatusEffect>(TargetType.Self, sa));
+                return evnt;
+            }
+        }
+
+        public static Event LowbloowIngenuity
+        {
+            get
+            {
+                Event evnt = new Event();
+                evnt.probability = 0.1f;
+                if (!StatusEffect.TryParse(Constants.LOWBLOOD_AIL, out StatusEffect sa))
+                {
+                    throw new NullReferenceException("Unable to parse Lowblood move!");
+                }
+
+                evnt.statusEffects.Add(new Tuple<TargetType, StatusEffect>(TargetType.Self, sa));
+                return evnt;
+            }
+        }
+
         /// <summary>
         /// Contains the type of target the status effect should affect and the name of the status effects invoked when this event is triggered.
         /// </summary>

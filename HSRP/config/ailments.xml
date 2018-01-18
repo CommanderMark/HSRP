@@ -36,6 +36,15 @@
     <endMsg>{0} is no longer "{1}"!</endMsg>
   </ailment>
 
+  <ailment name="Poisoned" turns="7">
+    <inflictDamage minAmount="0.05" />
+    <description>Decreases a strifer's constitution by 15% but increases their strength by 15%.</description>
+
+    <inflictMsg>{0} is {2}!</inflictMsg>
+    <statusMsg>{0} is still {1}!</statusMsg>
+    <endMsg>{0} is no longer {1}!</endMsg>
+  </ailment>
+
   <ailment name="MindControl" turns="5" controller="1">
     <inflictMsg>{0} is being mind-controlled by {1}!</inflictMsg>
     <endMsg>{0} is no longer mind-controlled!</endMsg>
@@ -43,7 +52,7 @@
 
   <ailment name="Sleeping" turns="10" skipTurns="true">
     <inflictMsg>{0} fell asleep!</inflictMsg>
-    <statusMsg>{0} is still sleeping!</statusMsg>
+    <statusMsg>{0} is still {1}!</statusMsg>
     <endMsg>{0} woke up!</endMsg>
   </ailment>
 
@@ -63,5 +72,22 @@
     </abilities>
 
     <inflictMsg>{0} is {2}!</inflictMsg>
+  </ailment>
+
+  <ailment name="Highblood_Boner" turns="3">
+    <description>A 25% STRENGTH buff a highblood receives when they defeat an opponent.</description>
+    <abilities>
+      <strength per="0.25" />
+    </abilities>
+    <inflictMsg>{0} appears more focused on the strife! Their STRENGTH has increased!</inflictMsg>
+  </ailment>
+
+  <ailment name="Lowblood_Ingenuity" turns="3">
+    <description>A 25% PSION buff a lowblood receives when they get attacked.</description>
+    <abilities>
+      <constitution per="-0.1" />
+      <psion per="0.25" />
+    </abilities>
+    <inflictMsg>{0} appears more focused on the strife! Their PSION has increased!</inflictMsg>
   </ailment>
 </root>

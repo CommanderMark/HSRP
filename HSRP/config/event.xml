@@ -15,8 +15,14 @@
     <message>{0} stuff {1}.</message>
   </event>
 
-  <!-- Template. Applied to all entities automatically. -->
+  <!-- Templates. Applied to all entities automatically. -->
   <event trigger="OnAttacked" probability="0.25">
     <cure name="Sleeping" type="Self" />
+  </event>
+  <event trigger="OnKill" probability="0.3">
+    <ailment name="Highblood_Boner" type="Self" />
+  </event>
+  <event trigger="OnAttacked" probability="0.1">
+    <ailment name="Lowblood_Ingenuity" type="Self" />
   </event>
 </events>

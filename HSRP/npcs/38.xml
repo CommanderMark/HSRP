@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<npc id="38">
+  <info name="Flex Seal" type="Normie" pineappleOnPizza="false">Can INSTANTLY Bond. Fix. Seal and Repair!</info>
+  <status hp="140" maxhp="140" dead="false" specibus="Liquidkind" diceRolls="1" />
+  <abilities>
+    <Strength value="10" />
+    <Constitution value="2" />
+    <Psion value="0" />
+    <Fortitude value="0" />
+    <Intimidation value="0" />
+    <Persuasion value="0" />
+  </abilities>
+  <moves>
+    <!--
+    cooldownMaxTime refers to how long a cooldown is for the form once it's used.
+    cooldown is how long the current cooldown is (can just leave it at 0 unless you want to make it "charge" from the get go.
+    -->
+    <move name="Nut" priority="2" cooldownMaxTime="2" cooldown="0">
+      <!--
+      The person using this will roll a number between 1 and their combined STR and INT stats, while the target rolls with their FOR.
+      The damage dealt will be based on the different of the number in these 2 rolls.
+      -->
+      <rolls atk="Strength,Intimidation" tar="Fortitude"/>
+      <!-- Appears when you use the move.
+      {0} - entity's name
+      {1} - target's name
+      -->
+      <attackMsg>{0} sawed this boat in half!</attackMsg>
+      <!-- Appears when the cooldown on the move is finished.
+      {0} - entity's name
+      {1} - move's name
+      -->
+      <rechargeMsg>{0} is about to show you the power of flex seal!</rechargeMsg>
+      <!--
+      probability is the chance of the event actually triggering.
+      decimal format ~ 0.25 = 25%
+      -->
+      <event probability="1">
+        <!--
+        This will be confusing.
+        minAmount refers to the minimum damage the attack can do.
+        maxAmount is self-explanatory. This is optional if you want it to do a fixed amount of damage each time.
+        also, you know the rolls element defined above? that's optional, if you add it then the amounts put into inflictDamage are ignored
+
+        fixed refers to whether the damage amount is relative to the entity's max health or not
+        if fixed is true, then writing "50" in minAmount will do 50 damage.
+        if fixed is false, then writing "0.5" in minAmount will do 50% of the entity's max health in damage.
+        if you don't add the fixed attribute at all then it's set to false by default.
+
+        type refers to who is getting the damage.
+        has several things it can be set to:
+          Target - will damage the entity being targeted
+          Self - will damage the entity using the move
+          Target,Self - both the target and self
+          All,Self - everyone on the entity's team
+          All,Target - everyone on the target's team
+          All - everyone
+        -->
+        <inflictDamage minAmount="0.05" type="Target" fixed="false" />
+        <!--
+        same as inflictDamage but with less features
+        amount is always relative to the entity's max health
+        min and maxAmount don't exist
+        if you really want those added for healing then let me know.
+        -->
+        <healDamage amount="0" type="None"/>
+      </event>
+    </move>
+  </moves>
+</npc>

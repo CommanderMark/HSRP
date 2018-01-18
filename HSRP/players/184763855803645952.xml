@@ -29,5 +29,17 @@
     <item value="Toxin Syringe" quantity="1" />
     <item value="TROLL SHINOBI outfit" quantity="1" />
   </inventory>
+  <moves>
+    <move name="Killing Flair" cooldownMaxTime="2" cooldown="0">
+      <rolls atk="Strength" tar="Constitution" rollDamage="false" />
+      <event probability="1">
+        <inflictDamage minAmount="0.05" maxAmount="0.17" type="Target" />
+        <message>{0} is stabbing {1}!</message>
+      </event>
+      <event probability="0.35">
+        <ailment name="Poison" type="Target" />
+      </event>
+    </move>
+  </moves>
   <strife id="6168" />
 </player>

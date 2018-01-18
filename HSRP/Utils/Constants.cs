@@ -43,6 +43,8 @@
         public const string SPE_ATTACK_AIL = "SpeAttack";
         public const string ENRAGED_AIL = "Enraged";
         public const string GUARDING_AIL = "Guarding";
+        public const string HIGHBLOOD_AIL = "Highblood_Boner";
+        public const string LOWBLOOD_AIL = "Lowblood_Ingenuity";
     }
 
     public static class Dirs

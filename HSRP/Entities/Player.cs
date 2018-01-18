@@ -177,6 +177,16 @@ namespace HSRP
                         break;
                 }
             }
+
+            // Add blood color specific stuff.
+            if (BloodColor.CompareTo(BloodType.Cerulean) >= 0)
+            {
+                Events.Add(new Tuple<EventType, Event>(EventType.OnKill, Event.HighbloodBoner));
+            }
+            else if (BloodColor.CompareTo(BloodType.Yellow) <= 0)
+            {
+                Events.Add(new Tuple<EventType, Event>(EventType.OnAttacked, Event.LowbloowIngenuity));
+            }
         }
 
         public void Save()
@@ -228,7 +238,11 @@ namespace HSRP
             XElement events = new XElement("events");
             foreach (Tuple<EventType, Event> evnt in Events)
             {
-                if (evnt.Item2.Equals(Event.WakeUpAfterHit)) { continue; }
+                if (
+                    evnt.Item2.Equals(Event.WakeUpAfterHit)
+                    || evnt.Item2.Equals(Event.HighbloodBoner)
+                    || evnt.Item2.Equals(Event.LowbloowIngenuity)
+                    ) { continue; }
                 XElement ailEle = evnt.Item2.Save();
                 ailEle.Add(new XAttribute("trigger", evnt.Item1.ToString()));
 
