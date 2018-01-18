@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 
@@ -128,16 +129,7 @@ namespace HSRP
                     case "ailment":
                     {
                         string ailName = ele.GetAttributeString("name", string.Empty);
-                        StatusEffect sa = new StatusEffect();
-
-                        if (ele.HasElements)
-                        {
-                            sa = new StatusEffect(ele);
-                        }
-                        else
-                        {
-                            StatusEffect.TryParse(ailName, out sa);
-                        }
+                        StatusEffect sa = new StatusEffect(ele);
 
                         TargetType type = TargetType.None;
                         TargetType[] enumArr = ele.GetAttributeEnumArray("type", new TargetType[2]);
@@ -190,11 +182,12 @@ namespace HSRP
 
             foreach (Tuple<TargetType, StatusEffect> tup in statusEffects)
             {
-                eventEle.Add(new XElement("ailment",
-                                          new XAttribute("name", tup.Item2.SaveAllData()),
-                                          new XAttribute("type", String.Join(",", tup.Item1.GetIndividualFlags()))
-                                         )
-                            );
+                XElement ailment = Toolbox.StatusEffects.Any(x => x.Value.Name == tup.Item2.Name)
+                    ? tup.Item2.Save()
+                    : tup.Item2.SaveAllData();
+                ailment.Add(new XAttribute("type", String.Join(",", tup.Item1.GetIndividualFlags())));
+
+                eventEle.Add(ailment);
             }
 
             foreach (Tuple<TargetType, string> tup in removeEffects)

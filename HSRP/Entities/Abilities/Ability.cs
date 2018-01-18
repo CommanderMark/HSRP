@@ -16,6 +16,13 @@ namespace HSRP
         public float Percentage;
         
         public Ability() { }
+
+        public Ability(Ability copy)
+        {
+            Value = copy.Value;
+            Percentage = copy.Percentage;
+        }
+
         public Ability(XElement element)
         {
             Value = element.GetAttributeInt("value", 0);

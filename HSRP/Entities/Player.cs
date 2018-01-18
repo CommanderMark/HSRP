@@ -154,23 +154,7 @@ namespace HSRP
                         {
                             foreach (XElement strifeEle in ele.Elements("ailment"))
                             {
-                                string ailName = strifeEle.GetAttributeString("name", string.Empty);
-
-                                if (!StatusEffect.TryParse(ailName, out StatusEffect sa))
-                                {
-                                    sa = new StatusEffect(strifeEle);
-                                }
-                                else
-                                {
-                                    sa.Controller = strifeEle.GetAttributeUnsignedLong("controller", 0);
-                                    sa.Turns = strifeEle.GetAttributeInt("turns", 0);
-                                    XElement abEle = strifeEle.Element("abilities");
-                                    AbilitySet set = abEle != null
-                                        ? new AbilitySet(abEle)
-                                        : new AbilitySet();
-                                    sa.Modifiers = set;
-                                }
-
+                                StatusEffect sa = new StatusEffect(strifeEle);
                                 InflictedAilments.Add(sa);
                             }
                         }

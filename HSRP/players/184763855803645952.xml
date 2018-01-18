@@ -30,14 +30,17 @@
     <item value="TROLL SHINOBI outfit" quantity="1" />
   </inventory>
   <moves>
-    <move name="Killing Flair" cooldownMaxTime="2" cooldown="0">
+    <move name="Killing Flair" priority="0" cooldownMaxTime="2" cooldown="0">
       <rolls atk="Strength" tar="Constitution" rollDamage="false" />
       <event probability="1">
-        <inflictDamage minAmount="0.05" maxAmount="0.17" type="Target" />
+        <inflictDamage minAmount="0.05" maxAmount="0.17" type="Target" fixed="false" />
+        <healDamage amount="0" type="None" />
         <message>{0} is stabbing {1}!</message>
       </event>
       <event probability="0.35">
-        <ailment name="Poison" type="Target" />
+        <inflictDamage minAmount="0" type="None" fixed="false" />
+        <healDamage amount="0" type="None" />
+        <ailment name="Poisoned" turns="7" type="Target" />
       </event>
     </move>
   </moves>

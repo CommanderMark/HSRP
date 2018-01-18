@@ -45,11 +45,18 @@ namespace HSRP
         public StatusEffect(XElement element)
         {
             Name = element.GetAttributeString("name", string.Empty);
-            skipsTurn = element.GetAttributeBool("skipTurns", false);
-            Controller = XmlToolbox.GetAttributeUnsignedLong(element, "controller", 0);
-            Explodes = element.GetAttributeBool("explodes", false);
-            Turns = element.GetAttributeInt("turns", 0);
-            Stacks = element.GetAttributeBool("stacks", false);
+            
+            // If the element has no sub-elements then try to parse them from the master list.
+            if (!element.HasElements)
+            {
+                StatusEffect.TryParse(Name, this);
+            }
+
+            skipsTurn = element.GetAttributeBool("skipTurns", this.skipsTurn);
+            Controller = XmlToolbox.GetAttributeUnsignedLong(element, "controller", this.Controller);
+            Explodes = element.GetAttributeBool("explodes", this.Explodes);
+            Turns = element.GetAttributeInt("turns", this.Turns);
+            Stacks = element.GetAttributeBool("stacks", this.Stacks);
             Immunities = XmlToolbox.GetAttributeStringArray(element, "immune", new string[0]);
 
             foreach (XElement ele in element.Elements())
@@ -104,26 +111,31 @@ namespace HSRP
         public StatusEffect() { }
         public StatusEffect(StatusEffect sa)
         {
-            this.damage = new InflictDamage(sa.damage);
+            this.Copy(sa);
+        }
 
-            this.skipsTurn = sa.skipsTurn;
+        private void Copy(StatusEffect copy)
+        {
+            this.damage = new InflictDamage(copy.damage);
 
-            this.Controller = sa.Controller;
+            this.skipsTurn = copy.skipsTurn;
 
-            this.Explodes = sa.Explodes;
-            this.Explosion = new Explosion(sa.Explosion);
+            this.Controller = copy.Controller;
 
-            this.Modifiers = sa.Modifiers;
+            this.Explodes = copy.Explodes;
+            this.Explosion = new Explosion(copy.Explosion);
 
-            this.Immunities = sa.Immunities;
+            this.Modifiers = new AbilitySet(copy.Modifiers);
 
-            this.Name = sa.Name;
-            this.Turns = sa.Turns;
-            this.InflictMsg = sa.InflictMsg;
-            this.StatusMsg = sa.StatusMsg;
-            this.EndMsg = sa.EndMsg;
-            this.description = sa.description;
-            this.Stacks = sa.Stacks;
+            this.Immunities = copy.Immunities;
+
+            this.Name = copy.Name;
+            this.Turns = copy.Turns;
+            this.InflictMsg = copy.InflictMsg;
+            this.StatusMsg = copy.StatusMsg;
+            this.EndMsg = copy.EndMsg;
+            this.description = copy.description;
+            this.Stacks = copy.Stacks;
         }
 
         public XElement Save()
@@ -333,6 +345,17 @@ namespace HSRP
             }
             
             sa = null;
+            return false;
+        }
+
+        public static bool TryParse(string name, StatusEffect sa)
+        {
+            if (Toolbox.StatusEffects.TryGetValue(sa.Name, out StatusEffect ail))
+            {
+                sa.Copy(ail);
+                return true;
+            }
+            
             return false;
         }
     }

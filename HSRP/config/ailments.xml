@@ -1,6 +1,6 @@
 ﻿<root>
   <!-- Turns are amount of turns that come after it. -->
-  <ailment name="Debugging" canDamage="true" skipTurns="true" turns="3" immune="Debugging2,Debugging3">
+  <ailment name="Debugging" turns="3" immune="Debugging2,Debugging3">
     <!-- Does between 5% and 15% of the entity's max health in damage. -->
     <inflictDamage minAmount="0.05" maxAmount="0.15" />
 
@@ -38,7 +38,6 @@
 
   <ailment name="Poisoned" turns="7">
     <inflictDamage minAmount="0.05" />
-    <description>Decreases a strifer's constitution by 15% but increases their strength by 15%.</description>
 
     <inflictMsg>{0} is {2}!</inflictMsg>
     <statusMsg>{0} is still {1}!</statusMsg>

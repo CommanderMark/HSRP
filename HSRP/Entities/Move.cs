@@ -62,7 +62,7 @@ namespace HSRP
                         usesRolls = true;
                         attackerRolls = ele.GetAttributeStringArray("atk", new string[0]);
                         targetRolls = ele.GetAttributeStringArray("tar", new string[0]);
-                        useRollDamage = element.GetAttributeBool("rollDamage", true);
+                        useRollDamage = ele.GetAttributeBool("rollDamage", true);
                     }
                     break;
 

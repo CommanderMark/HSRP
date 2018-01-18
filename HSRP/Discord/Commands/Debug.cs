@@ -16,7 +16,7 @@ namespace HSRP.Commands
         [Command("filter")]
         public async Task FilterXml(string type)
         {
-            if (type == "users" || type == "players")
+            if (type == "users" || type == "players" || type == "player")
             {
                 string err = "";
                 string[] dirs = Directory.GetFiles(Dirs.Players);

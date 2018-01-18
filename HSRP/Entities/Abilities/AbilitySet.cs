@@ -75,62 +75,24 @@ namespace HSRP
             + "for people to perceive you as non-threatening, regardless of your actual motive.")]
         public Ability Persuasion { get; set; }
 
-        public static AbilitySet operator +(AbilitySet set1, AbilitySet set2)
-        {
-            AbilitySet newSet = new AbilitySet();
-            newSet.Strength.Value = set1.Strength.Value + set2.Strength.Value;
-            newSet.Constitution.Value = set1.Constitution.Value + set2.Constitution.Value;
-            newSet.Psion.Value = set1.Psion.Value + set2.Psion.Value;
-            newSet.Fortitude.Value = set1.Fortitude.Value + set2.Fortitude.Value;
-            newSet.Intimidation.Value = set1.Intimidation.Value + set2.Intimidation.Value;
-            newSet.Persuasion.Value = set1.Persuasion.Value + set2.Persuasion.Value;
-
-            return newSet;
-        }
-
-        public override bool Equals(Object obj)
-        {
-            // If parameter cannot be cast to Point return false.
-            AbilitySet set = obj as AbilitySet;
-            if (set == null)
-            {
-                return false;
-            }
-
-            return this.Strength.Value == set.Strength.Value
-                && this.Constitution.Value == set.Constitution.Value
-                && this.Psion.Value == set.Psion.Value
-                && this.Fortitude.Value == set.Fortitude.Value
-                && this.Intimidation.Value == set.Intimidation.Value
-                && this.Persuasion.Value == set.Persuasion.Value;
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
-        public static AbilitySet ToFixedNumber(AbilitySet mod, AbilitySet set)
-        {
-            AbilitySet newSet = new AbilitySet();
-            newSet.Strength.Value = mod.Strength.Value + (int) (mod.Strength.Percentage * set.Strength.Value);
-            newSet.Constitution.Value = mod.Constitution.Value + (int) (mod.Constitution.Percentage * set.Constitution.Value);
-            newSet.Psion.Value = mod.Psion.Value + (int) (mod.Psion.Percentage * set.Psion.Value);
-            newSet.Fortitude.Value = mod.Fortitude.Value + (int) (mod.Fortitude.Percentage * set.Fortitude.Value);
-            newSet.Intimidation.Value = mod.Intimidation.Value + (int) (mod.Intimidation.Percentage * set.Intimidation.Value);
-            newSet.Persuasion.Value = mod.Persuasion.Value + (int) (mod.Persuasion.Percentage * set.Persuasion.Value);
-
-            return newSet;
-        }
-
-        public AbilitySet() 
-        {
+        public AbilitySet()
+        { 
             Strength = new Ability();
             Constitution = new Ability();
             Psion = new Ability();
             Fortitude = new Ability();
             Intimidation = new Ability();
             Persuasion = new Ability();
+        }
+
+        public AbilitySet(AbilitySet copy)
+        {
+            Strength = new Ability(copy.Strength);
+            Constitution = new Ability(copy.Constitution);
+            Psion = new Ability(copy.Psion);
+            Fortitude = new Ability(copy.Fortitude);
+            Intimidation = new Ability(copy.Intimidation);
+            Persuasion = new Ability(copy.Persuasion);
         }
 
         public AbilitySet(XElement element) : this()
@@ -219,6 +181,54 @@ namespace HSRP
             }
 
             return element;
+        }
+
+        public static AbilitySet operator +(AbilitySet set1, AbilitySet set2)
+        {
+            AbilitySet newSet = new AbilitySet();
+            newSet.Strength.Value = set1.Strength.Value + set2.Strength.Value;
+            newSet.Constitution.Value = set1.Constitution.Value + set2.Constitution.Value;
+            newSet.Psion.Value = set1.Psion.Value + set2.Psion.Value;
+            newSet.Fortitude.Value = set1.Fortitude.Value + set2.Fortitude.Value;
+            newSet.Intimidation.Value = set1.Intimidation.Value + set2.Intimidation.Value;
+            newSet.Persuasion.Value = set1.Persuasion.Value + set2.Persuasion.Value;
+
+            return newSet;
+        }
+
+        public override bool Equals(Object obj)
+        {
+            // If parameter cannot be cast to Point return false.
+            AbilitySet set = obj as AbilitySet;
+            if (set == null)
+            {
+                return false;
+            }
+
+            return this.Strength.Value == set.Strength.Value
+                && this.Constitution.Value == set.Constitution.Value
+                && this.Psion.Value == set.Psion.Value
+                && this.Fortitude.Value == set.Fortitude.Value
+                && this.Intimidation.Value == set.Intimidation.Value
+                && this.Persuasion.Value == set.Persuasion.Value;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public static AbilitySet ToFixedNumber(AbilitySet mod, AbilitySet set)
+        {
+            AbilitySet newSet = new AbilitySet();
+            newSet.Strength.Value = mod.Strength.Value + (int) (mod.Strength.Percentage * set.Strength.Value);
+            newSet.Constitution.Value = mod.Constitution.Value + (int) (mod.Constitution.Percentage * set.Constitution.Value);
+            newSet.Psion.Value = mod.Psion.Value + (int) (mod.Psion.Percentage * set.Psion.Value);
+            newSet.Fortitude.Value = mod.Fortitude.Value + (int) (mod.Fortitude.Percentage * set.Fortitude.Value);
+            newSet.Intimidation.Value = mod.Intimidation.Value + (int) (mod.Intimidation.Percentage * set.Intimidation.Value);
+            newSet.Persuasion.Value = mod.Persuasion.Value + (int) (mod.Persuasion.Percentage * set.Persuasion.Value);
+
+            return newSet;
         }
 
         public string Display(AbilitySet mod = null)
