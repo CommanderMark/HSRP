@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="12">
-  <info name="Feugax Leviis " type="Psionic" pineappleOnPizza="false">Your Midblooded friend.</info>
+  <info name="Feugax Leviis" type="Psionic" pineappleOnPizza="false">Your Midblooded friend.</info>
   <status hp="120" maxhp="120" dead="false" specibus="Dicekind" diceRolls="1" />
   <abilities>
     <Strength value="15" />
@@ -11,24 +11,23 @@
     <Persuasion value="10" />
   </abilities>
   <moves>
-    <move name="Overdrive" cooldownMaxTime="20" cooldown="0">
-      <rolls atk="Psion" tar="Fortitude" rollDamage="false" />  
+    <move name="Overdrive" priority="1" cooldownMaxTime="20" cooldown="0">
+      <rolls atk="Psion" tar="Fortitude" rollDamage="false" />
       <event probability="1">
-        <inflictDamage minAmount="0.25" maxAmount="0.35" type="All,Target" />    
-        <message>{0} is using all of their psionic power in a single attack.</message>
+        <inflictDamage minAmount="0.25" maxAmount="0.35" type="Target,All" fixed="false" />
         <ailment name="Fatigue" turns="9" type="Self">
-          <description>{0} is fatigued.</description>
           <abilities>
             <Constitution value="-15" />
-            <Psion value="-15"/>
-            <Fortitude value=“-10” />
+            <Psion value="-15" />
+            <Fortitude value="-10" />
           </abilities>
+          <description>{0} is fatigued.</description>
         </ailment>
+        <message>{0} is using all of their psionic power in a single attack.</message>
       </event>
       <event probability="1">
-        <inflictDamage minAmount="0.10" maxAmount="0.15" type="Self" /> 
-      </event> 
+        <inflictDamage minAmount="0.1" maxAmount="0.15" type="Self" fixed="false" />
+      </event>
     </move>
   </moves>
-  <ailments />
 </npc>

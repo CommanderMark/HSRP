@@ -11,18 +11,17 @@
     <Persuasion value="10" />
   </abilities>
   <moves>
-    <move name="Protective Lowblood" cooldownMaxTime="8" cooldown="0">
+    <move name="Protective Lowblood" priority="1" cooldownMaxTime="8" cooldown="0">
       <event probability="1">
-        <message>{0} is protecting her allies!</message>
-        <ailment name="Shielded" turns="4" type="All,Self">
-          <description>A protective boost Scitar has granted.</description>
+        <ailment name="Shielded" turns="4" type="Self,All">
           <abilities>
             <Constitution value="10" />
             <Fortitude value="10" />
           </abilities>
+          <description>A protective boost Scitar has granted.</description>
         </ailment>
+        <message>{0} is protecting her allies!</message>
       </event>
     </move>
   </moves>
-  <ailments />
 </npc>

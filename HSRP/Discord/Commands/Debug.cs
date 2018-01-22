@@ -60,6 +60,25 @@ namespace HSRP.Commands
 
                 await ReplyAsync("All players healed.");
             }
+            else if (type == "npc" || type == "npcs")
+            {
+                string[] dirs = Directory.GetFiles(Dirs.NPCs);
+                foreach (string file in dirs)
+                {
+                    if (file.Contains("DS_Store")) { continue; }
+                    
+                    XDocument doc = XmlToolbox.TryLoadXml(file);
+                    Console.WriteLine(file);
+                    NPC npc = new NPC(doc.Root);
+
+                    XElement ele = npc.Save();
+                    doc = new XDocument();
+                    doc.Add(ele);
+                    XmlToolbox.WriteXml(file, doc);
+                }
+
+                await ReplyAsync("Done.");
+            }
             else if (type == "msg")
             {
                 Toolbox.UpdateMessages();

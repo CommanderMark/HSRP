@@ -171,14 +171,21 @@ namespace HSRP
                 new XAttribute("probability", probability)
                 );
 
-            XElement inflictDamage = damage.Save();
+            if (damage.MinAmount != 0 && damage.MaxAmount != 0)
+            {
+                XElement inflictDamage = damage.Save();
+                eventEle.Add(inflictDamage);
+            }
 
-            XElement healDamage = new XElement("healDamage",
-                new XAttribute("amount", healAmount),
-                new XAttribute("type", String.Join(",", healTarget.GetIndividualFlags()))
+            if (healAmount != 0)
+            {
+                XElement healDamage = new XElement("healDamage",
+                    new XAttribute("amount", healAmount),
+                    new XAttribute("type", String.Join(",", healTarget.GetIndividualFlags()))
                 );
 
-            eventEle.Add(inflictDamage, healDamage);
+                eventEle.Add(healDamage);
+            }
 
             foreach (Tuple<TargetType, StatusEffect> tup in statusEffects)
             {
