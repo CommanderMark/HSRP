@@ -6,43 +6,63 @@ using System.Xml.Linq;
 namespace HSRP
 {
     // TODO: Add thing for preventing moves.
-    // TODO: Burning, Bleeding, Stunned
+    // TODO: Burning, Bleeding
     public class StatusEffect
     {
         // Inflict damage stuff.
-        private InflictDamage damage = new InflictDamage();
+        private InflictDamage damage;
 
         // Skip a turn.
-        private bool skipsTurn = false;
+        private bool skipsTurn;
 
         // Mind control.
-        public ulong Controller = 0;
+        public ulong Controller;
 
         // Explosion
-        public bool Explodes = false;
-        public Explosion Explosion = new Explosion();
+        public bool Explodes;
+        public Explosion Explosion;
 
         // Stat buffs/debuffs.
-        public AbilitySet Modifiers = new AbilitySet();
+        public AbilitySet Modifiers;
 
-        public string[] Immunities = new string[0];
+        public string[] Immunities;
 
         // Misc. general status effect stuff.
-        public string Name = string.Empty;
-        public int Turns = 0;
-        public string InflictMsg = string.Empty;
-        public string StatusMsg = string.Empty;
-        public string EndMsg = string.Empty;
-        private string description = string.Empty;
+        public string Name;
+        public int Turns;
+        public string InflictMsg;
+        public string StatusMsg;
+        public string EndMsg;
+        private string description;
 
         /// <summary>
         /// Whether not the status effect can be applied multiple times.
         /// </summary>
-        public bool Stacks = false;
+        public bool Stacks;
 
         public const int EXPLOSION_FALLOFF_FACTOR = 2;
 
-        public StatusEffect(XElement element)
+        public StatusEffect()
+        {
+            damage = new InflictDamage();
+            skipsTurn = false;
+            Controller = 0;
+            Explodes = false;
+            Explosion = new Explosion();
+            Modifiers = new AbilitySet();
+            Immunities = new string[0];
+
+            Name = string.Empty;
+            Turns = 0;
+            InflictMsg = string.Empty;
+            StatusMsg = string.Empty;
+            EndMsg = string.Empty;
+            description = string.Empty;
+
+            Stacks = false;
+        }
+
+        public StatusEffect(XElement element) : this()
         {
             Name = element.GetAttributeString("name", string.Empty);
             
@@ -108,7 +128,6 @@ namespace HSRP
             }
         }
 
-        public StatusEffect() { }
         public StatusEffect(StatusEffect sa)
         {
             this.Copy(sa);

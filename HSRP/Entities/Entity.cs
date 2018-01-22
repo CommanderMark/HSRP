@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace HSRP
 {
@@ -41,6 +42,54 @@ namespace HSRP
         }
 
         public abstract string Display(bool showMods);
+
+        public string DisplayAilmentsAndMoves()
+        {
+            StringBuilder msg = new StringBuilder();
+            string separator = "--";
+
+            // Moves.
+            msg.AppendLine(Syntax.ToCodeLine("Status Effects:"));
+            IEnumerable<StatusEffect> displayList = from x in InflictedAilments
+                                    where x.Name != Constants.PHYSICAL_COUNTER_AIL && x.Name != Constants.SPE_ATTACK_AIL
+                                    select x;
+            if (displayList.Any())
+            {
+                foreach (StatusEffect sa in displayList)
+                {
+                    msg.AppendLine(sa.Display());
+
+                    msg.AppendLine();
+                    msg.AppendLine(separator);
+                    msg.AppendLine();
+                }
+            }
+            else
+            {
+                msg.Append("None");
+            }
+
+            // Events.
+            msg.AppendLine(Syntax.ToCodeLine("Moves:"));
+            if (Moves.Values.Any())
+            {
+                foreach (Move attack in Moves.Values)
+                {
+                    msg.Append(Syntax.ToBold(attack.Name) + ": ");
+                    msg.AppendLine(attack.Description);
+                    
+                    msg.AppendLine();
+                    msg.AppendLine(separator);
+                    msg.AppendLine();
+                }
+            }
+            else
+            {
+                msg.Append("None");
+            }
+
+            return msg.ToString();
+        }
 
         // <summary>
         /// Inflicts a specified amount of damage on the entity. Input negative values for healing.
@@ -144,7 +193,9 @@ namespace HSRP
         /// </summary>
         /// <param name="name">Name of the status effect.</param>
         /// <param name="strife">The strife object itself.</param>
-        /// <param name="turnSensitive">When set to true, only removes the status effect if it's turn counter is below 0.</param>
+        /// <param name="turnSensitive">When set to true, only removes the status effect if it's turn counter is below 0.
+        /// I.E. if a status effect can be applied multiple times at once to an entity then this would be set to true
+        /// so as to make sure this command only removes the iteration of it who's turn count is below 1.</param>
         public void RemoveStatusEffect(string name, Strife strife, bool turnSensitive)
         {
             StatusEffect sa = InflictedAilments.FirstOrDefault(x => x.Name.ToLowerInvariant() == name.ToLowerInvariant());
@@ -172,6 +223,8 @@ namespace HSRP
         /// <param name="tar">The entity the user was targeting or targeted by when the event was triggered.</param>
         /// <param name="attackTeam">Boolean stating whether the entity is on the attacking team or not.</param>
         /// <param name="strife">The strife object itself.</param>
+        // One thing that could potentially be done in the future is to give status effects these types of triggers
+        // and run them here.
         public void TriggerEvent(EventType type, Entity tar, bool attackTeam, Strife strife)
         {
             foreach (Tuple<EventType, Event> tup in Events)

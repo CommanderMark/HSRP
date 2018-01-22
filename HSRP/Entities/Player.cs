@@ -289,28 +289,6 @@ namespace HSRP
             result.AppendLine(showMods
                 ? BaseAbilities.Display(this.GetTotalAbilities())
                 : BaseAbilities.Display());
-            
-            if (showMods)
-            {
-                result.AppendLine();
-                result.Append("Status Effects: ");
-                IEnumerable<StatusEffect> lis = from x in InflictedAilments
-                                        where x.Name != Constants.PHYSICAL_COUNTER_AIL && x.Name != Constants.SPE_ATTACK_AIL
-                                        select x;
-                if (lis.Count() > 0)
-                {
-                    result.Append(lis.ElementAt(0).Name);
-                    for (int i = 1; i < lis.Count(); i++)
-                    {
-                        StatusEffect sa = lis.ElementAt(i);
-                        result.Append(", " + sa.Name);
-                    }
-                }
-                else
-                {
-                    result.Append("None");
-                }
-            }
 
             return result.ToString();
         }

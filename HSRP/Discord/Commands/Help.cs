@@ -55,6 +55,9 @@ namespace HSRP.Commands
                     return;
                 }
             }
+
+            await ReplyAsync("Ailment not found. If you were trying to find an ailment that is attached to a "
+                + "specific move then it will not show up using this command.");
         }
 
         [Command("skills")]

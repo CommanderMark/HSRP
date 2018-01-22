@@ -48,7 +48,8 @@ namespace HSRP
                 DefaultRunMode = RunMode.Sync,
                 LogLevel = LogSeverity.Error
             });
-            // FUCK YES
+
+            // If a command throws an exception then log it in the console.
             commands.Log += async (message) => await Console.Out.WriteLineAsync($"[{message.Severity}] {message.Source} -> {message.Message}\n\n" + message.Exception);
 
             Registers = new Dictionary<ulong, int>();
@@ -61,8 +62,6 @@ namespace HSRP
             Client.Connected += OnConnect;
             Client.Ready += OnReady;
             Client.JoinedGuild += OnJoinGuild;
-            // Client.UserJoined += OnUserJoin;
-            // Client.UserLeft += OnUserLeave;
 
             // Discover all of the commands in this assembly and load them.
             commands.AddTypeReader<Player>(new Commands.PlayerTypeReader());
@@ -97,6 +96,7 @@ namespace HSRP
 
         public async Task OnJoinGuild(SocketGuild guild)
         {
+            // If it's not the RP's guild then leave the server.
             if (guild.Id != Constants.RP_GUILD)
             {
                 await guild.DefaultChannel.SendMessageAsync("This bot only works on its original server."
@@ -105,25 +105,12 @@ namespace HSRP
             }
         }
 
-        public async Task OnUserJoin(SocketGuildUser user)
-        {
-            SocketTextChannel chnl = user.Guild.GetTextChannel(Constants.GEN_CHANNEL);
-            await chnl.SendMessageAsync(user.Username + " has joined the server.");
-        }
-
-        public async Task OnUserLeave(SocketGuildUser user)
-        {
-            SocketTextChannel chnl = user.Guild.GetTextChannel(Constants.GEN_CHANNEL);
-            await chnl.SendMessageAsync(user.Username + " has left the server.");
-        }
-
         public async Task OnMessageReceive(SocketMessage messageParam)
         {
             // Don't process the command if it was a System Message.
             SocketUserMessage message = messageParam as SocketUserMessage;
             if (message == null) { return; }
 
-            // Create command context.
             CommandContext context = new CommandContext(Client, message);
 
             // Create a number to track where the prefix ends and the command begins.

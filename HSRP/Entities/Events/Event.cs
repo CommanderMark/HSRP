@@ -259,19 +259,23 @@ namespace HSRP
                     case TargetType.Self:
                     {
                         damage.ApplyDamage(ent, strife, dmg);
+                        ent.TriggerEvent(EventType.OnHit, tar, attackTeam, strife);
                     }
                     break;
 
                     case TargetType.Target:
                     {
                         damage.ApplyDamage(tar, strife, dmg);
+                        tar.TriggerEvent(EventType.OnHit, ent, !attackTeam, strife);
                     }
                     break;
 
                     case TargetType.Self | TargetType.Target:
                     {
                         damage.ApplyDamage(ent, strife, dmg);
+                        ent.TriggerEvent(EventType.OnHit, tar, attackTeam, strife);
                         damage.ApplyDamage(tar, strife, dmg);
+                        tar.TriggerEvent(EventType.OnHit, ent, !attackTeam, strife);
                     }
                     break;
 
@@ -280,6 +284,7 @@ namespace HSRP
                         foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
                         {
                             damage.ApplyDamage(strifer, strife, dmg);
+                            strifer.TriggerEvent(EventType.OnHit, ent, attackTeam, strife);
                         }
                     }
                     break;
@@ -289,15 +294,23 @@ namespace HSRP
                         foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
                         {
                             damage.ApplyDamage(strifer, strife, dmg);
+                            strifer.TriggerEvent(EventType.OnHit, ent, !attackTeam, strife);
                         }
                     }
                     break;
 
                     case TargetType.All:
                     {
-                        foreach (Entity strifer in strife.Entities)
+                        foreach (Entity strifer in strife.Attackers)
                         {
                             damage.ApplyDamage(strifer, strife, dmg);
+                            strifer.TriggerEvent(EventType.OnHit, ent, attackTeam, strife);
+                        }
+
+                        foreach (Entity strifer in strife.Targets)
+                        {
+                            damage.ApplyDamage(strifer, strife, dmg);
+                            strifer.TriggerEvent(EventType.OnHit, ent, !attackTeam, strife);
                         }
                     }
                     break;

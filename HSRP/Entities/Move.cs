@@ -26,6 +26,7 @@ namespace HSRP
         public int Cooldown;
         private List<Event> events;
 
+        public string Description;
         private string attackMsg;
         public string RechargeMsg;
 
@@ -42,6 +43,7 @@ namespace HSRP
             Cooldown = 0;
             events = new List<Event>();
 
+            Description = string.Empty;
             attackMsg = string.Empty;
             RechargeMsg = string.Empty;
         }
@@ -57,6 +59,12 @@ namespace HSRP
             {
                 switch (ele.Name.LocalName)
                 {
+                    case "description":
+                    {
+                        Description = ele.ElementInnerText();
+                    }
+                    break;
+
                     case "rolls":
                     {
                         usesRolls = true;
@@ -96,6 +104,12 @@ namespace HSRP
                 new XAttribute("cooldownMaxTime", cooldownMaxTime),
                 new XAttribute("cooldown", Cooldown)
                 );
+            
+            if (!string.IsNullOrWhiteSpace(Description))
+            {
+                XElement description = new XElement("description", new XText(Description));
+                move.Add(description);
+            }
             
             if (usesRolls)
             {

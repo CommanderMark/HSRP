@@ -31,16 +31,29 @@
   </inventory>
   <moves>
     <move name="Killing Flair" priority="0" cooldownMaxTime="2" cooldown="0">
+      <description>Lets Sicarius show someone their stabs. Has a chance to posion.</description>
       <rolls atk="Strength" tar="Constitution" rollDamage="false" />
       <event probability="1">
         <inflictDamage minAmount="0.05" maxAmount="0.17" type="Target" fixed="false" />
         <healDamage amount="0" type="None" />
-        <message>{0} is stabbing {1}!</message>
       </event>
       <event probability="0.35">
         <inflictDamage minAmount="0" type="None" fixed="false" />
         <healDamage amount="0" type="None" />
         <ailment name="Poisoned" turns="7" type="Target" />
+      </event>
+      <attackMsg>{0} goes for a stab on {1}!</attackMsg>
+    </move>
+    <move name="So-jutsu" cooldownMaxTime="10" cooldown="0">
+      <event probability="1">
+        <ailment name="Running" turns="5" skipTurns="true" type="Self">
+          <description>Makes them highly resistant to damage, but unable to attack for the duration of the effect.</description>
+          <statusMsg>{0} is still running around.</statusMsg>
+          <abilities>
+            <constitution value="9999">
+          </abilities>
+        </ailment>
+        <message>[S] {0}: Gotta Go Fast</message>
       </event>
     </move>
   </moves>
