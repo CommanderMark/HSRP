@@ -10,23 +10,25 @@
     <Intimidation value="0" />
     <Persuasion value="10" />
   </abilities>
-  <move name="Overdrive" cooldownMaxTime="20" cooldown="0">
-    <rolls atk="Psion" tar="Fortitude" rollDamage="false" />  
-    <event probability="1">
-      <inflictDamage minAmount="0.25" maxAmount="0.35" type="All,Target" />    
-      <message>{0} is using all of their psionic power in a single attack.</message>
-      <ailment name="Fatigue" turns="9" type="Self">
-        <description>{0} is fatigued.</description>
-        <abilities>
-          <Constitution value=“-15” />
-          <Psion value="-15"/>
-          <Fortitude value=“-10” />
-        </abilities>
-      </ailment>
-    </event>
-    <event probability="1">
-      <inflictDamage minAmount="0.10" maxAmount="0.15" type="Self" /> 
-    </event> 
-  </move>
+  <moves>
+    <move name="Overdrive" cooldownMaxTime="20" cooldown="0">
+      <rolls atk="Psion" tar="Fortitude" rollDamage="false" />  
+      <event probability="1">
+        <inflictDamage minAmount="0.25" maxAmount="0.35" type="All,Target" />    
+        <message>{0} is using all of their psionic power in a single attack.</message>
+        <ailment name="Fatigue" turns="9" type="Self">
+          <description>{0} is fatigued.</description>
+          <abilities>
+            <Constitution value="-15" />
+            <Psion value="-15"/>
+            <Fortitude value=“-10” />
+          </abilities>
+        </ailment>
+      </event>
+      <event probability="1">
+        <inflictDamage minAmount="0.10" maxAmount="0.15" type="Self" /> 
+      </event> 
+    </move>
+  </moves>
   <ailments />
 </npc>
