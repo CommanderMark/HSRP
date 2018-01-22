@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="19">
-  <info name="Midblood Fighter" type="Normal" pineappleOnPizza="false">A good fighter.</info>
+  <info name="Iratar" type="Normal" pineappleOnPizza="false">A good fighter.</info>
   <status hp="140" maxhp="140" dead="false" specibus="Fistkind" diceRolls="1" />
   <abilities>
     <Strength value="43" />

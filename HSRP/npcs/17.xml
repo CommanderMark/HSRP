@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="17">
-  <info name="vengefulSurvivor" type="Psionic" pineappleOnPizza="false">Your cooler friend.</info>
+  <info name="Faelas Lustra" type="Psionic" pineappleOnPizza="false">Your cooler friend.</info>
   <status hp="120" maxhp="120" dead="false" specibus="Sicklekind" diceRolls="1" />
   <abilities>
     <Strength value="23" />

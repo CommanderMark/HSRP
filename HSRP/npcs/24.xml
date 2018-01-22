@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="24">
-  <info name="Lowblooded Fighter" type="Psionic" pineappleOnPizza="false">She's shy, but she can fight very well.</info>
+  <info name="Messar Egenas" type="Psionic" pineappleOnPizza="false">She's shy, but she can fight very well.</info>
   <status hp="90" maxhp="90" dead="false" specibus="Scythekind" diceRolls="1" />
   <abilities>
     <Strength value="15" />

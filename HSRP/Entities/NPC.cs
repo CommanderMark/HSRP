@@ -162,14 +162,19 @@ namespace HSRP
 
             XElement abilities = BaseAbilities.ToXmlElement();
             
-            XElement ailments = new XElement("ailments");
-            foreach (StatusEffect sa in InflictedAilments)
-            {
-                XElement ailEle = sa.Save();
-                ailments.Add(ailEle);
-            }
+            npc.Add(info, status, abilities);
 
-            npc.Add(info, status, abilities, ailments);
+            if (InflictedAilments.Any())
+            {
+                XElement ailments = new XElement("ailments");
+                foreach (StatusEffect sa in InflictedAilments)
+                {
+                    XElement ailEle = sa.Save();
+                    ailments.Add(ailEle);
+                }
+
+                npc.Add(ailments);
+            }
 
             XElement events = new XElement("events");
             foreach (Tuple<EventType, Event> evnt in Events)
