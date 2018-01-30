@@ -319,5 +319,37 @@ namespace HSRP
 
             return 0;
         }
+
+        /// <summary>
+        /// Returns a boolean indicating whether the entity has a status effect that makes them immune to damage.
+        /// </summary>
+        public bool ImmuneToDamage()
+        {
+            foreach (StatusEffect sa in this.InflictedAilments)
+            {
+                if (sa.DamageImmune)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns a boolean indicating whether the entity has a status effect that prevents move-usage.
+        /// </summary>
+        public bool BlockedTurns()
+        {
+            foreach (StatusEffect sa in this.InflictedAilments)
+            {
+                if (sa.BlocksMoves)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

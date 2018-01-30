@@ -265,6 +265,11 @@ namespace HSRP
                 {
                     case TargetType.Self:
                     {
+                        if (ent.ImmuneToDamage())
+                        {
+                            strife.Log.AppendLine($"{Syntax.ToCodeLine(ent.Name)} is immune to damage.\n");
+                            break;
+                        }
                         damage.ApplyDamage(ent, strife, dmg);
                         ent.TriggerEvent(EventType.OnHit, tar, attackTeam, strife);
                     }
@@ -272,6 +277,11 @@ namespace HSRP
 
                     case TargetType.Target:
                     {
+                        if (tar.ImmuneToDamage())
+                        {
+                            strife.Log.AppendLine($"{Syntax.ToCodeLine(tar.Name)} is immune to damage.\n");
+                            break;
+                        }
                         damage.ApplyDamage(tar, strife, dmg);
                         tar.TriggerEvent(EventType.OnHit, ent, !attackTeam, strife);
                     }
@@ -279,10 +289,27 @@ namespace HSRP
 
                     case TargetType.Self | TargetType.Target:
                     {
-                        damage.ApplyDamage(ent, strife, dmg);
-                        ent.TriggerEvent(EventType.OnHit, tar, attackTeam, strife);
-                        damage.ApplyDamage(tar, strife, dmg);
-                        tar.TriggerEvent(EventType.OnHit, ent, !attackTeam, strife);
+                        if (ent.ImmuneToDamage())
+                        {
+                            strife.Log.AppendLine($"{Syntax.ToCodeLine(ent.Name)} is immune to damage.\n");
+                            break;
+                        }
+                        else
+                        {
+                            damage.ApplyDamage(ent, strife, dmg);
+                            ent.TriggerEvent(EventType.OnHit, tar, attackTeam, strife);
+                        }
+
+                        if (tar.ImmuneToDamage())
+                        {
+                            strife.Log.AppendLine($"{Syntax.ToCodeLine(tar.Name)} is immune to damage.\n");
+                            break;
+                        }
+                        else
+                        {  
+                            damage.ApplyDamage(tar, strife, dmg);
+                            tar.TriggerEvent(EventType.OnHit, ent, !attackTeam, strife);
+                        }
                     }
                     break;
 
@@ -290,6 +317,11 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Attackers : strife.Targets)
                         {
+                            if (strifer.ImmuneToDamage())
+                            {
+                                strife.Log.AppendLine($"{Syntax.ToCodeLine(strifer.Name)} is immune to damage.\n");
+                                continue;
+                            }
                             damage.ApplyDamage(strifer, strife, dmg);
                             strifer.TriggerEvent(EventType.OnHit, ent, attackTeam, strife);
                         }
@@ -300,6 +332,11 @@ namespace HSRP
                     {
                         foreach (Entity strifer in attackTeam ? strife.Targets : strife.Attackers)
                         {
+                            if (strifer.ImmuneToDamage())
+                            {
+                                strife.Log.AppendLine($"{Syntax.ToCodeLine(strifer.Name)} is immune to damage.\n");
+                                continue;
+                            }
                             damage.ApplyDamage(strifer, strife, dmg);
                             strifer.TriggerEvent(EventType.OnHit, ent, !attackTeam, strife);
                         }
@@ -310,12 +347,22 @@ namespace HSRP
                     {
                         foreach (Entity strifer in strife.Attackers)
                         {
+                            if (strifer.ImmuneToDamage())
+                            {
+                                strife.Log.AppendLine($"{Syntax.ToCodeLine(strifer.Name)} is immune to damage.\n");
+                                continue;
+                            }
                             damage.ApplyDamage(strifer, strife, dmg);
                             strifer.TriggerEvent(EventType.OnHit, ent, attackTeam, strife);
                         }
 
                         foreach (Entity strifer in strife.Targets)
                         {
+                            if (strifer.ImmuneToDamage())
+                            {
+                                strife.Log.AppendLine($"{Syntax.ToCodeLine(strifer.Name)} is immune to damage.\n");
+                                continue;
+                            }
                             damage.ApplyDamage(strifer, strife, dmg);
                             strifer.TriggerEvent(EventType.OnHit, ent, !attackTeam, strife);
                         }

@@ -6,6 +6,7 @@ using System.Xml.Linq;
 namespace HSRP
 {
     // TODO: Add thing for preventing moves.
+    // TODO: Add check for preventing moves to NPCs as well.
     // TODO: Burning, Bleeding
     public class StatusEffect
     {
@@ -17,6 +18,16 @@ namespace HSRP
 
         // Mind control.
         public ulong Controller;
+
+        /// <summary>
+        /// Makes the inflicted immune to damage.
+        /// </summary>
+        public bool DamageImmune;
+
+        /// <summary>
+        /// Prevents the inflicted from using moves.
+        /// </summary>
+        public bool BlocksMoves;
 
         // Explosion
         public bool Explodes;
@@ -47,6 +58,8 @@ namespace HSRP
             damage = new InflictDamage();
             skipsTurn = false;
             Controller = 0;
+            DamageImmune = false;
+            BlocksMoves = false;
             Explodes = false;
             Explosion = new Explosion();
             Modifiers = new AbilitySet();
@@ -72,7 +85,11 @@ namespace HSRP
                 StatusEffect.TryParse(Name, this);
             }
 
+            // Pull any different attributes from the element itself.
             skipsTurn = element.GetAttributeBool("skipTurns", this.skipsTurn);
+            Controller = XmlToolbox.GetAttributeUnsignedLong(element, "controller", this.Controller);
+            DamageImmune = XmlToolbox.GetAttributeBool(element, "damageImmune", this.DamageImmune);
+            BlocksMoves = XmlToolbox.GetAttributeBool(element, "blocksMoves", this.BlocksMoves);
             Controller = XmlToolbox.GetAttributeUnsignedLong(element, "controller", this.Controller);
             Explodes = element.GetAttributeBool("explodes", this.Explodes);
             Turns = element.GetAttributeInt("turns", this.Turns);
@@ -167,6 +184,14 @@ namespace HSRP
             {
                 ailment.Add(new XAttribute("controller", Controller));
             }
+            if (DamageImmune)
+            {
+                ailment.Add(new XAttribute("damageImmune", DamageImmune));
+            }
+            if (BlocksMoves)
+            {
+                ailment.Add(new XAttribute("blocksMoves", BlocksMoves));
+            }
             ailment.Add(new XAttribute("turns", Turns));
 
             if (Immunities.Count() > 0)
@@ -221,6 +246,7 @@ namespace HSRP
             return ailment;
         }
 
+        // TODO:
         public string Display()
         {
             StringBuilder result = new StringBuilder();

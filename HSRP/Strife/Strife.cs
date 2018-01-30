@@ -897,6 +897,13 @@ namespace HSRP
             Log.AppendLine(Toolbox.GetMessage("phyStart", Syntax.ToCodeLine(attacker.Name), Syntax.ToCodeLine(target.Name)));
             Log.AppendLine();
 
+            // If target is immune to damage then ignore.
+            if (target.ImmuneToDamage())
+            {
+                Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} is immune to damage.\n");
+                return;
+            }
+
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
             int atkY = attacker.GetTotalAbilities().Strength.Value;
@@ -908,8 +915,8 @@ namespace HSRP
             // Dice rolls.
             int atk = Toolbox.DiceRoll(atkX, atkY);
             int tar = Toolbox.DiceRoll(tarX, tarY);
-            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
-            Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {Syntax.ToCodeLine(atk)}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {Syntax.ToCodeLine(tar)}!");
 
             // If attacker rolled higher inflict damage.
             if (atk > tar)
@@ -959,8 +966,8 @@ namespace HSRP
 
                     atk = Toolbox.DiceRoll(atkX, atkY);
                     tar = Toolbox.DiceRoll(tarX, tarY);
-                    Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
-                    Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
+                    Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {Syntax.ToCodeLine(atk)}!");
+                    Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {Syntax.ToCodeLine(tar)}!");
 
                     // Counter failed.
                     if (atk >= tar)
@@ -1003,8 +1010,8 @@ namespace HSRP
                 if (tar[i] >= atk[i]) { success = false; }
             }
 
-            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
-            Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar[0]}, {tar[1]}, {tar[2]}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {Syntax.ToCodeLine(atk[0])}, {Syntax.ToCodeLine(atk[1])}, {Syntax.ToCodeLine(atk[2])}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {Syntax.ToCodeLine(tar[0])}, {Syntax.ToCodeLine(tar[1])}, {Syntax.ToCodeLine(tar[2])}!");
 
             int atkTotal = atk[0] + atk[1] + atk[2];
             int tarTotal = tar[0] + tar[1] + tar[2];
@@ -1030,6 +1037,14 @@ namespace HSRP
         private void OpticBlast(Entity attacker, Entity target)
         {
             Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} is preparing an Optic Blast.\n");
+            Log.AppendLine();
+
+            // If target is immune to damage then ignore.
+            if (target.ImmuneToDamage())
+            {
+                Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} is immune to damage.\n");
+                return;
+            }
 
             // Attacker XDY roll.
             int atkX = attacker.DiceRolls;
@@ -1049,8 +1064,8 @@ namespace HSRP
                 tar[i] = Toolbox.DiceRoll(tarX, tarY);
             }
 
-            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk[0]}, {atk[1]}, {atk[2]}!");
-            Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar[0]}, {tar[1]}, {tar[2]}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {Syntax.ToCodeLine(atk[0])}, {Syntax.ToCodeLine(atk[1])}, {Syntax.ToCodeLine(atk[2])}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {Syntax.ToCodeLine(tar[0])}, {Syntax.ToCodeLine(tar[1])}, {Syntax.ToCodeLine(tar[2])}!");
 
             int atkTotal = atk[0] + atk[1] + atk[2];
             int tarTotal = tar[0] + tar[1] + tar[2];
@@ -1091,8 +1106,8 @@ namespace HSRP
             // Dice rolls.
             int atk = Toolbox.DiceRoll(atkX, atkY);
             int tar = Toolbox.DiceRoll(tarX, tarY);
-            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {atk}!");
-            Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {tar}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(attacker.Name)} rolls {Syntax.ToCodeLine(atk)}!");
+            Log.AppendLine($"{Syntax.ToCodeLine(target.Name)} rolls {Syntax.ToCodeLine(tar)}!");
             
             // Attack rolls higher, random chance begins.
             if (atk > tar)
