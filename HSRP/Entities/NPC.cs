@@ -8,7 +8,6 @@ using System.Xml.Linq;
 
 namespace HSRP
 {
-    // TODO: add chance to use moves
     public class NPC : Entity
     {
         public string Title;

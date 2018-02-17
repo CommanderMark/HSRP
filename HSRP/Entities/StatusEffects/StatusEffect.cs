@@ -5,8 +5,6 @@ using System.Xml.Linq;
 
 namespace HSRP
 {
-    // TODO: Add thing for preventing moves.
-    // TODO: Add check for preventing moves to NPCs as well.
     // TODO: Burning, Bleeding
     public class StatusEffect
     {
@@ -246,7 +244,6 @@ namespace HSRP
             return ailment;
         }
 
-        // TODO:
         public string Display()
         {
             StringBuilder result = new StringBuilder();

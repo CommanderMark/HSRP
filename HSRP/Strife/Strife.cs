@@ -719,7 +719,6 @@ namespace HSRP
         /// Let's an AI take their turn. Also handles whether they die this turn or not.
         /// Note that no string is returned here as that should be handled by the UpdateStrife() function.
         /// </summary>
-        //TODO: Rewrire this function to take into account mind-controlled NPCs.
         private void TakeAITurn()
         {
             Entity turner = CurrentEntity;
