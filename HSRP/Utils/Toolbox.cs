@@ -60,11 +60,21 @@ namespace HSRP
         }
         public static int RandInt(int max) => RandInt(0, max);
 
-        public static float RandFloat(float min, float max)
+        /// <summary>
+        /// Returns a random floating point number.
+        /// </summary>
+        /// <param name="magnitude">Since this uses RandInt, it needs to be converted to a float in post.
+        /// This number specifies how much the value inputed should be multiplied by,
+        /// then divided by after the random number is gotten.</param>
+        /// <returns></returns>
+        public static float RandFloat(float min, float max, int magnitude = 1000)
         {
-            return RandInt((int) (min * 1000), (int) (max * 1000)) / 1000f;
+            return RandInt((int) (min * magnitude), (int) (max * magnitude)) / (float)magnitude;
         }
 
+        /// <summary>
+        /// Selects a random element from a list.
+        /// </summary>
         public static E RandElement<E>(IEnumerable<E> uh)
         {
             return uh.ElementAt(RandInt(uh.Count() - 1));

@@ -43,7 +43,7 @@ namespace HSRP
                     : value.Name;
             }
         }
-        private string equippedWeapon { get; set; }
+        private string equippedWeapon;
         public int StrifeID { get; set; }
 
         /// <summary>

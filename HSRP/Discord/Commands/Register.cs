@@ -36,6 +36,7 @@ namespace HSRP.Commands
                 // If a phase is succesful, then the number
                 // is incremented by the time we get here.
                 // Otherwise, the number remains the same.
+
                 // Registering/Name.
                 case 1:
                     if (result)
