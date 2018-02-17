@@ -29,5 +29,31 @@
         <inflictDamage minAmount="0.1" maxAmount="0.15" type="Self" fixed="false" />
       </event>
     </move>
+    <move name="Crush" cooldownMaxTime="5" cooldown="0">
+      <rolls atk="Psion" tar="Fortitude" rollDamage="false" />
+      <event probability="1">
+        <inflictDamage minAmount="0.08" maxAmount="0.18" type="Target" />
+        <message>{0} is crushing {1} with his telekinesis.</message>
+      </event>
+    </move>
+    <move name="Lift" cooldownMaxTime="10" cooldown="0">
+      <event probability="1">
+        <ailment name="Flying" turns="5" skipTurns="true" blocksMoves="true" type="Target">
+          <statusMsg>{0} is flying.</statusMsg>
+        </ailment>
+        <message>{0} is making {1} fly with their telekinesis.</message>
+      </event>
+    </move>
+    <move name="Strategist" cooldownMaxTime="12" cooldown="0">
+      <event probability="1">
+        <message>{0} is planning an attack.</message>
+        <ailment name="Concentrated" turns="5" type="Self">
+          <description>This character is focused on the battle.</description>
+          <abilities>
+            <Fortitude value="15" />
+          </abilities>
+        </ailment>
+      </event>
+    </move>
   </moves>
 </npc>

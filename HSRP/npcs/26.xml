@@ -10,4 +10,18 @@
     <Intimidation value="50" />
     <Persuasion value="0" />
   </abilities>
+  <moves>
+    <move name="Makibishi" cooldownMaxTime="20" cooldown="0">
+      <event probability="1">
+        <message>{0} is throwing makibishi on the ground.</message>
+        <ailment name="Restrained" turns="10" type="All,Target">
+          <description>This character stepped on a makibishi, reducing their combat capabilities temporarily.</description>
+          <abilities>
+            <Strength value="-5" />
+            <Constitution value="-12" />
+          </abilities>
+        </ailment>
+      </event>
+    </move>
+  </moves>
 </npc>

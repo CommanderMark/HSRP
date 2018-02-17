@@ -699,10 +699,11 @@ namespace HSRP
         /// Let's an AI take their turn. Also handles whether they die this turn or not.
         /// Note that no string is returned here as that should be handled by the UpdateStrife() function.
         /// </summary>
+        //TODO: Rewrire this function to take into account mind-controlled NPCs.
         private void TakeAITurn()
         {
-            Entity ai = CurrentEntity;
-            if (ai == null)
+            Entity attacker = CurrentEntity;
+            if (attacker == null)
             {
                 throw new NullReferenceException($"Current entity is null. (TURN: {turn}, ATTACKTURN: {attackTurn.ToString()})");
             }
@@ -719,20 +720,23 @@ namespace HSRP
                 target = GetTarget(targetID, !attackTurn);
             }
 
-            NPC npc = ai as NPC;
+            NPC npc = attacker as NPC;
             if (npc != null)
             {
-                if (npc.MoveQueue.Count() < 1)
+                // Use a move if the chance is high enough.
+                float doT = Toolbox.RandFloat(0.0f, 1.0f);
+                if (npc.Moves.Any(x => x.Value.Cooldown <= 0) && !npc.BlockedTurns() && doT <= npc.ChanceToMove)
                 {
-                    npc.GenerateMoveList();
-                }
+                    if (npc.MoveQueue.Count() < 1)
+                    {
+                        npc.GenerateMoveList();
+                    }
 
-                int doT = Toolbox.RandInt(1, 10);
-                if (doT > 4 && npc.MoveQueue.Any())
-                {
-                    while (true)
+                    while (npc.Moves.Any())
                     {
                         Move mov = npc.Moves.Values.FirstOrDefault();
+                        npc.MoveQueue.Remove(mov); // Remove the move even if it's on cooldown.
+
                         // Is the move on cooldown?
                         if (mov.Cooldown <= 0)
                         {
@@ -742,19 +746,24 @@ namespace HSRP
                         }
                     }
                 }
+                // Use a pre-defined move otherwise.
                 else
                 {
                     switch (npc.Type)
                     {
                         case NPCType.Lusus:
                         case NPCType.Normal:
+                        {
                             TakeTurn("PhysicalAttack", targetID, !attackTurn);
-                            break;
+                        }
+                        break;
 
                         case NPCType.Psionic:
+                        {
                             int rng = Toolbox.RandInt(4);
                             // 25% chance to mind-control.
-                            if (rng == 3 && target.GetMindController() != ai.ID)
+                            // Make sure the target isn't already being mind-controlled.
+                            if (rng == 3 && target.GetMindController() == 0)
                             {
                                 TakeTurn("MindControl", targetID, !attackTurn);
                             }
@@ -768,9 +777,11 @@ namespace HSRP
                             {
                                 TakeTurn("OpticBlast", targetID, !attackTurn);
                             }
-                            break;
+                        }
+                        break;
                         
                         case NPCType.Talker:
+                        {
                             if (Toolbox.TrueOrFalse(4))
                             {
                                 TakeTurn("SpeechAttack", targetID, !attackTurn);
@@ -779,14 +790,25 @@ namespace HSRP
                             {
                                 TakeTurn("Guard", targetID, !attackTurn);
                             }
-                            break;
+                        }
+                        break;
                     }
                 }
             }
-            // Someone is mind-controlled.
+            // Someone is being mind-controlled.
             else
             {
-                IEnumerable<Move> list = npc.Moves.Values.ToList().Where(x => x.Cooldown <= 0);
+                // Find a new target.
+                while (target == null || target.Dead)
+                {
+                    targetID = attackTurn
+                        ? Toolbox.RandInt(Attackers.Count - 1)
+                        : Toolbox.RandInt(Targets.Count - 1);
+
+                    target = GetTarget(targetID, !attackTurn);
+                }
+
+                IEnumerable<Move> list = attacker.Moves.Values.ToList().Where(x => x.Cooldown <= 0);
                 int rng = Toolbox.RandInt(1, 4);
                 switch (rng)
                 {

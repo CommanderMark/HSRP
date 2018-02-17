@@ -8,6 +8,7 @@ using System.Xml.Linq;
 
 namespace HSRP
 {
+    // TODO: add chance to use moves
     public class NPC : Entity
     {
         public string Title;
@@ -33,10 +34,11 @@ namespace HSRP
         public NPCType Type { get; set; }
 
         public List<Move> MoveQueue;
+        public float ChanceToMove;
 
         private NPC() : base()
         {
-            Description = "";
+            Description = string.Empty;
             MoveQueue = new List<Move>();
         }
 
@@ -51,6 +53,7 @@ namespace HSRP
                     case "info":
                         Name = ele.GetAttributeString("name", string.Empty);
                         Type = ele.GetAttributeEnum("type", NPCType.Normal);
+                        ChanceToMove = ele.GetAttributeFloat("moveChance", 0.5f);
                         LikesPineappleOnPizza = ele.GetAttributeBool("pineappleOnPizza", false);
                         Description = ele.ElementInnerText();
                         break;
@@ -139,6 +142,7 @@ namespace HSRP
             XElement info = new XElement("info",
                 new XAttribute("name", Title),
                 new XAttribute("type", Type),
+                new XAttribute("moveChance", ChanceToMove),
                 new XAttribute("pineappleOnPizza", LikesPineappleOnPizza),
                 new XText(Description)
                 );

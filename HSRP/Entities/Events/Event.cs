@@ -39,6 +39,7 @@ namespace HSRP
             }
         }
 
+        // TODO: MidbloodCharisma
         public static Event LowbloowIngenuity
         {
             get

@@ -46,12 +46,9 @@
     </move>
     <move name="So-jutsu" cooldownMaxTime="10" cooldown="0">
       <event probability="1">
-        <ailment name="Running" turns="5" skipTurns="true" type="Self">
-          <description>Makes them highly resistant to damage, but unable to attack for the duration of the effect.</description>
+        <ailment name="Running" turns="5" skipTurns="true" blocksMoves="true" type="Self">
+          <description>Makes them resistant to damage, but unable to attack for the duration of the effect.</description>
           <statusMsg>{0} is still running around.</statusMsg>
-          <abilities>
-            <constitution value="9999">
-          </abilities>
         </ailment>
         <message>[S] {0}: Gotta Go Fast</message>
       </event>
