@@ -10,4 +10,17 @@
     <Intimidation value="50" />
     <Persuasion value="0" />
   </abilities>
+  <moves>
+    <move name="Cold analysis" cooldownMaxTime="10" cooldown="0">
+      <event probability="1">
+        <message>{0} is studying the situation .</message>
+        <ailment name="Concentrated" turns="8" type="Self">
+          <description>This character is focused on the battle.</description>
+          <abilities>
+            <Fortitude value="15" />
+          </abilities>
+        </ailment>
+      </event>
+    </move>
+  </moves>
 </npc>

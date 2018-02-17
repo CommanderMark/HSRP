@@ -82,7 +82,7 @@ namespace HSRP
             // If the element has no sub-elements then try to parse them from the master list.
             if (!element.HasElements)
             {
-                StatusEffect.TryParse(Name, this);
+                TryParse(Name, this);
             }
 
             // Pull any different attributes from the element itself.
