@@ -168,9 +168,13 @@ namespace HSRP
 
         public XElement Save()
         {
-            XElement eventEle = new XElement("event",
-                new XAttribute("probability", probability)
-                );
+            XElement eventEle = new XElement("event");
+
+            if (probability != 1f)
+            {
+                eventEle.Add(
+                new XAttribute("probability", probability));
+            }
 
             if (damage.MinAmount != 0 && damage.MaxAmount != 0)
             {

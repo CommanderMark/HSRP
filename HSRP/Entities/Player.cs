@@ -25,25 +25,6 @@ namespace HSRP
         public string OwnerUsername;
 
         public BloodType BloodColor { get; set; }
-
-        // TODO: xml and implement its events
-        public Item EquippedWeapon
-        {
-            get
-            {
-                return string.IsNullOrWhiteSpace(equippedWeapon)
-                    ? null
-                    : Inventory.FirstOrDefault(x => x.Name == equippedWeapon);
-            }
-
-            set
-            {
-                equippedWeapon = value == null
-                    ? string.Empty
-                    : value.Name;
-            }
-        }
-        private string equippedWeapon;
         public int StrifeID { get; set; }
 
         /// <summary>
@@ -115,7 +96,6 @@ namespace HSRP
                         break;
 
                     case "inventory":
-                        equippedWeapon = ele.GetAttributeString("equippedWeapon", string.Empty);
                         foreach (XElement item in ele.Elements())
                         {
                             Inventory.Add(new Item(item));
@@ -206,18 +186,20 @@ namespace HSRP
 
             XElement abilities = BaseAbilities.ToXmlElement();
 
-            XElement inventory = new XElement("inventory",
-                new XAttribute("equippedWeapon", equippedWeapon)
-                );
+            player.Add(info, status, levels, abilities);
 
-            for (int i = 0; i < Inventory.Count; i++)
+            if (Inventory.Any())
             {
-                bool equipped = EquippedWeapon == Inventory[i];
-                XElement ele = Inventory[i].Save(equipped);
-                inventory.Add(ele);
-            }
+                XElement inventory = new XElement("inventory");
 
-            player.Add(info, status, levels, abilities, inventory);
+                for (int i = 0; i < Inventory.Count; i++)
+                {
+                    XElement ele = Inventory[i].Save();
+                    inventory.Add(ele);
+                }
+
+                player.Add(inventory);
+            }
 
             XElement events = new XElement("events");
             foreach (Tuple<EventType, Event> evnt in Events)
@@ -301,11 +283,7 @@ namespace HSRP
                 result += Inventory[i].Quantity > 1
                     ? $"{i} - {Inventory.ElementAt(i).Name} ({Inventory.ElementAt(i).Quantity})"
                     : $"{i} - {Inventory.ElementAt(i).Name}";
-
-                if (Inventory[i].Name == equippedWeapon)
-                {
-                    result += " (Equipped)";
-                }
+                    
                 result += "\n";
             }
 

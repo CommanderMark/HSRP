@@ -28,7 +28,7 @@ namespace HSRP
             Immunities = XmlToolbox.GetAttributeStringArray(ele, "immune", new string[0]);
         }
 
-        public XElement Save(bool equipped)
+        public XElement Save()
         {
             XElement item = new XElement("item",
                 new XAttribute("value", Name),

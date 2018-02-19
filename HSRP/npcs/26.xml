@@ -10,6 +10,19 @@
     <Intimidation value="50" />
     <Persuasion value="0" />
   </abilities>
+  <events>
+    <event trigger="OnStrifeStart" probability="1">
+      <message>{0} is using her disguise as distraction.</message>
+      <ailment name="Distracted" turns=“9” type="All,Target">
+        <description>Vindicta is disguised as one of the enemy's allies.</description>
+        <abilities>
+          <Strength value= "-7"/>
+          <Constitution value= "-2"/>
+          <Fortitude value=“-10” />
+        </abilities>
+      </ailment>
+    </event>
+  </events>
   <moves>
     <move name="Makibishi" cooldownMaxTime="20" cooldown="0">
       <event probability="1">

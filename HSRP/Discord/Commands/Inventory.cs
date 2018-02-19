@@ -85,83 +85,83 @@ namespace HSRP.Commands
             await Remove(plyr, index);
         }
 
-        [RequireGM]
-        [Command("equip"), Priority(1)]
-        public async Task Equip(Player plyr, int index)
-        {
-            Item item = plyr.Inventory.ElementAtOrDefault(index);
-            if (item == null)
-            {
-                await ReplyAsync("Invalid item index.");
-                return;
-            }
+        // [RequireGM]
+        // [Command("equip"), Priority(1)]
+        // public async Task Equip(Player plyr, int index)
+        // {
+        //     Item item = plyr.Inventory.ElementAtOrDefault(index);
+        //     if (item == null)
+        //     {
+        //         await ReplyAsync("Invalid item index.");
+        //         return;
+        //     }
 
-            if (item.Name == plyr.EquippedWeapon.Name)
-            {
-                await ReplyAsync("This item is already equipped.");
-                return;
-            }
+        //     if (item.Name == plyr.EquippedWeapon.Name)
+        //     {
+        //         await ReplyAsync("This item is already equipped.");
+        //         return;
+        //     }
 
-            plyr.EquippedWeapon = item;
+        //     plyr.EquippedWeapon = item;
 
-            plyr.Save();
-            string log = Syntax.ToCodeLine(item.Name) + " was equipped to " + Syntax.ToCodeLine(plyr.Name) + ".";
-            await ReplyAsync(log);
-        }
+        //     plyr.Save();
+        //     string log = Syntax.ToCodeLine(item.Name) + " was equipped to " + Syntax.ToCodeLine(plyr.Name) + ".";
+        //     await ReplyAsync(log);
+        // }
 
-        [RequireGM]
-        [Command("equip"), Priority(0)]
-        public async Task Equip(Player plyr, [Remainder] string name)
-        {
-            Item item = plyr.Inventory.FirstOrDefault(x => x.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
-            if (item == null)
-            {
-                await ReplyAsync("Invalid item name.");
-                return;
-            }
+        // [RequireGM]
+        // [Command("equip"), Priority(0)]
+        // public async Task Equip(Player plyr, [Remainder] string name)
+        // {
+        //     Item item = plyr.Inventory.FirstOrDefault(x => x.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
+        //     if (item == null)
+        //     {
+        //         await ReplyAsync("Invalid item name.");
+        //         return;
+        //     }
 
-            int index = plyr.Inventory.IndexOf(item);
-            await Equip(plyr, index);
-        }
+        //     int index = plyr.Inventory.IndexOf(item);
+        //     await Equip(plyr, index);
+        // }
 
-        [RequireGM]
-        [Command("unequip"), Priority(1)]
-        public async Task UnEquip(Player plyr, int index)
-        {
-            Item item = plyr.Inventory.ElementAtOrDefault(index);
-            if (item == null)
-            {
-                await ReplyAsync("Invalid item index.");
-                return;
-            }
+        // [RequireGM]
+        // [Command("unequip"), Priority(1)]
+        // public async Task UnEquip(Player plyr, int index)
+        // {
+        //     Item item = plyr.Inventory.ElementAtOrDefault(index);
+        //     if (item == null)
+        //     {
+        //         await ReplyAsync("Invalid item index.");
+        //         return;
+        //     }
 
-            if (item.Name != plyr.EquippedWeapon?.Name)
-            {
-                await ReplyAsync("This item is not equipped.");
-                return;
-            }
+        //     if (item.Name != plyr.EquippedWeapon?.Name)
+        //     {
+        //         await ReplyAsync("This item is not equipped.");
+        //         return;
+        //     }
 
-            plyr.EquippedWeapon = null;
+        //     plyr.EquippedWeapon = null;
 
-            plyr.Save();
-            string log = Syntax.ToCodeLine(item.Name) + " was un-equipped from " + Syntax.ToCodeLine(plyr.Name) + ".";
-            await ReplyAsync(log);
-        }
+        //     plyr.Save();
+        //     string log = Syntax.ToCodeLine(item.Name) + " was un-equipped from " + Syntax.ToCodeLine(plyr.Name) + ".";
+        //     await ReplyAsync(log);
+        // }
 
-        [RequireGM]
-        [Command("unequip"), Priority(0)]
-        public async Task UnEquip(Player plyr, [Remainder] string name)
-        {
-            Item item = plyr.Inventory.FirstOrDefault(x => x.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
-            if (item == null)
-            {
-                await ReplyAsync("Invalid item name.");
-                return;
-            }
+        // [RequireGM]
+        // [Command("unequip"), Priority(0)]
+        // public async Task UnEquip(Player plyr, [Remainder] string name)
+        // {
+        //     Item item = plyr.Inventory.FirstOrDefault(x => x.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase));
+        //     if (item == null)
+        //     {
+        //         await ReplyAsync("Invalid item name.");
+        //         return;
+        //     }
 
-            int index = plyr.Inventory.IndexOf(item);
-            await UnEquip(plyr, index);
-        }
+        //     int index = plyr.Inventory.IndexOf(item);
+        //     await UnEquip(plyr, index);
+        // }
 
         [RequireGM]
         [Group("quantity"), Alias("amount")]
