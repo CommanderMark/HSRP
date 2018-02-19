@@ -590,6 +590,13 @@ namespace HSRP
                 return false;
             }
 
+            // Are they trying to use a move while it is blocked?
+            if (attacker.BlockedMoves())
+            {
+                reason = "A status effect is blocking you from using character-specific moves.";
+                return false;
+            }
+
             // Are they trying to mind-control while mind-controlling?
             if (predefinedMove && attacker.GetMindController() > 0 && sa == StrifeAction.MindControl)
             {
@@ -753,7 +760,7 @@ namespace HSRP
 
                 // Use a move if the chance is high enough.
                 float doT = Toolbox.RandFloat(0.0f, 1.0f);
-                if (npc.Moves.Any(x => x.Value.Cooldown <= 0) && !npc.BlockedTurns() && doT <= npc.ChanceToMove)
+                if (npc.Moves.Any(x => x.Value.Cooldown <= 0) && !npc.BlockedMoves() && doT <= npc.ChanceToMove)
                 {
                     if (npc.MoveQueue.Count() < 1)
                     {

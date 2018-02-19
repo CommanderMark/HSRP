@@ -190,6 +190,10 @@ namespace HSRP
             {
                 ailment.Add(new XAttribute("blocksMoves", BlocksMoves));
             }
+            if (skipsTurn)
+            {
+                ailment.Add(new XAttribute("skipTurns", skipsTurn));
+            }
             ailment.Add(new XAttribute("turns", Turns));
 
             if (Immunities.Count() > 0)
@@ -208,7 +212,7 @@ namespace HSRP
         public XElement SaveAllData()
         {
             XElement ailment = this.Save();
-            
+
             if (damage.MinAmount >= InflictDamage.MarginOfError
                 || damage.MaxAmount >= InflictDamage.MarginOfError)
             {
@@ -283,14 +287,22 @@ namespace HSRP
                     result.AppendLine($"Does {msg} damage each turn.");
                 }
             }
+
+            if (BlocksMoves)
+            {
+                result.AppendLine("Prevents the user from using character-specific moves.");
+            }
+
             if (skipsTurn)
             {
                 result.AppendLine("Skips the user's turn.");
             }
+
             if (Controller != 0)
             {
                 result.AppendLine("Whoever inflicts the status effect will have control over the strifer's mind.");
             }
+
             if (Explodes)
             {
                 result.Append("Causes an explosion. ");

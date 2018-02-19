@@ -235,7 +235,7 @@ namespace HSRP
 
                 foreach (StatusEffect sa in InflictedAilments)
                 {
-                    XElement ailEle = sa.Save();
+                    XElement ailEle = sa.SaveAllData();
                     strife.Add(ailEle);
                 }
 

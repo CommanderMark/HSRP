@@ -337,7 +337,7 @@ namespace HSRP
         /// <summary>
         /// Returns a boolean indicating whether the entity has a status effect that prevents move-usage.
         /// </summary>
-        public bool BlockedTurns()
+        public bool BlockedMoves()
         {
             foreach (StatusEffect sa in this.InflictedAilments)
             {
