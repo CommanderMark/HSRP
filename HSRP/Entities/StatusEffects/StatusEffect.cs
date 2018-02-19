@@ -248,12 +248,13 @@ namespace HSRP
         {
             StringBuilder result = new StringBuilder();
 
-            result.AppendLine(Syntax.ToBold(Name) + ":");
+            result.Append(Syntax.ToBold(Name) + ":");
             if (!string.IsNullOrWhiteSpace(description))
             {
-                result.AppendLine(Syntax.ToBold("Description") + ": " + description);
+                result.Append(Syntax.ToBold("Description") + ": " + description);
             }
-
+            
+            result.AppendLine();
             result.AppendLine();
             if (Turns > 0)
             {

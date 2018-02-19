@@ -59,7 +59,6 @@ namespace HSRP
                 {
                     msg.AppendLine(sa.Display());
 
-                    msg.AppendLine();
                     msg.AppendLine(separator);
                     msg.AppendLine();
                 }
@@ -78,7 +77,6 @@ namespace HSRP
                     msg.Append(Syntax.ToBold(attack.Name) + ": ");
                     msg.AppendLine(attack.Description);
                     
-                    msg.AppendLine();
                     msg.AppendLine(separator);
                     msg.AppendLine();
                 }

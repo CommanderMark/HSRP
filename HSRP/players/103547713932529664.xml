@@ -24,13 +24,4 @@
     <item value="Pail" quantity="1" />
     <item value="Expensive Cider" quantity="300" />
   </inventory>
-  <strife id="29169">
-    <ailment name="Distracted" turns="8">
-      <abilities>
-        <Strength value="-7" />
-        <Constitution value="-2" />
-        <Fortitude value="-10" />
-      </abilities>
-    </ailment>
-  </strife>
 </player>
