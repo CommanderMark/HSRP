@@ -23,7 +23,7 @@ var proto = XMLWriter.prototype = {
     encoding:'UTF-8',// what is the encoding
     version:'1.0', //what xml version to use
     formatting: 'indented', //how to format the output (indented/none)  ?
-    indentChar:'\t', //char to use for indent
+    indentChar:' ', //char to use for indent
     indentation: 2, //how many indentChar to add per level
     newLine: '\n', //character to separate nodes when formatting
     /* */

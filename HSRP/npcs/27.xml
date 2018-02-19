@@ -1,44 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="27">
-  <info name="The Purifier" type="Normal" pineappleOnPizza="false">The Settlement's best agent/cultist so far.</info>
-  <status hp="380" maxhp="380" dead="false" specibus="Pyrokind" diceRolls="1" />
+  <info name="Hector Psemos" type="Normal" moveChance="0.5" pineappleOnPizza="false">A very 'happy' troll.</info>
+  <status hp="100" maxhp="100" dead="false" specibus="Bladekind" diceRolls="1" />
   <abilities>
-    <Strength value="90" />
-    <Constitution value="70" />
-    <Psion value="0" />
-    <Fortitude value="90" />
-    <Intimidation value="60" />
-    <Persuasion value="0" />
+    <Strength value="20" />
+    <Constitution value="20" />
+    <Psion value="50" />
+    <Fortitude value="40" />
+    <Intimidation value="0" />
+    <Persuasion value="9" />
   </abilities>
-  <moves>
-    <move name="Highblood Resistance" cooldownMaxTime="15" cooldown="0">
-      <event>
-        <message>{0} is resisting their injuries.</message>
-        <ailment name="Resistant" turns="9" immune="Burning,Poisoned,Stunned" type="Self">
-          <description>Grants resistance to most ailments and attacks.</description>
-          <abilities>
-            <Constitution value="8" />
-            <Fortitude value="2" />
-          </abilities>
-        </ailment>
-      </event>
-    </move>
-    <move name="Roast" cooldownMaxTime="5" cooldown="0">
-      <rolls atk="Strength" tar="Constitution" rollDamage="false" />
-        <event probability="1">
-          <inflictDamage minAmount="0.05" maxAmount="0.10" type="Target" />
-          <message>Roast.</message>
-      </event>
-      <event probability="0.35">
-        <ailment name="Burning" type="Target" />
-      </event>
-    </move>
-    <move name="Ruffiannihilate" cooldownMaxTime="23" cooldown="0">
-      <rolls atk="Strength" tar="Constitution" rollDamage="false" />
-      <event probability="1">
-        <inflictDamage minAmount="0.20" maxAmount="0.25" type="Target" />
-        <message>{0} is attacking {1}!</message>
-      </event>
-    </move>
-  </moves>
 </npc>

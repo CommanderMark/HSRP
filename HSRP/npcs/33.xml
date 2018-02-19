@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="33">
-  <info name="The Purifier Phase 2" type="Normal" pineappleOnPizza="false">Not giving up that easily.</info>
-  <status hp="400" maxhp="400" dead="false" specibus="Pyrokind" diceRolls="1" />
+  <info name="Venatar" type="Lusus" moveChance="0.5" pineappleOnPizza="false">Strange humanoid wolf, also Iratar's lusus.</info>
+  <status hp="200" maxhp="200" dead="false" specibus="feralkind" diceRolls="1" />
   <abilities>
-    <Strength value="700" />
-    <Constitution value="900" />
+    <Strength value="30" />
+    <Constitution value="30" />
     <Psion value="0" />
-    <Fortitude value="100" />
-    <Intimidation value="50" />
+    <Fortitude value="0" />
+    <Intimidation value="0" />
     <Persuasion value="0" />
   </abilities>
 </npc>

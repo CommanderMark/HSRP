@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strife id="29169" active="false">
+  <status attackTurn="true" turn="0" />
+  <attackers>
+    <player id="103547713932529664" />
+    <player id="184763855803645952" />
+  </attackers>
+  <targets>
+    <npc id="25">
+      <info name="Vindicta Indignar" type="Normal" moveChance="0.5" pineappleOnPizza="false">Sic seems to know her.</info>
+      <status hp="810" maxhp="210" dead="false" specibus="Halberdkind" diceRolls="1" />
+      <abilities>
+        <Strength value="34" />
+        <Constitution value="46" />
+        <Psion value="0" />
+        <Fortitude value="40" />
+        <Intimidation value="50" />
+        <Persuasion value="0" />
+      </abilities>
+      <events>
+        <event trigger="OnStrifeStart">
+          <ailment name="Distracted" turns="9" type="Target,All">
+            <abilities>
+              <Strength value="-7" />
+              <Constitution value="-2" />
+              <Fortitude value="-10" />
+            </abilities>
+            <description>Vindicta is disguised as one of the enemy's allies.</description>
+          </ailment>
+          <message>{0} is using her disguise as a distraction.</message>
+        </event>
+      </events>
+      <moves>
+        <move name="Makibishi" priority="0" cooldownMaxTime="20" cooldown="0">
+          <event>
+            <ailment name="Restrained" turns="10" type="Target,All">
+              <abilities>
+                <Strength value="-5" />
+                <Constitution value="-12" />
+              </abilities>
+              <description>This character stepped on a makibishi, reducing their combat capabilities temporarily.</description>
+            </ailment>
+            <message>{0} is throwing makibishi on the ground.</message>
+          </event>
+        </move>
+        <move name="Cold Analysis" priority="0" cooldownMaxTime="10" cooldown="0">
+          <event>
+            <ailment name="Concentrated" turns="8" type="Self">
+              <abilities>
+                <Fortitude value="15" />
+              </abilities>
+              <description>This character is focused on the battle.</description>
+            </ailment>
+            <message>{0} is studying the situation .</message>
+          </event>
+        </move>
+      </moves>
+    </npc>
+    <npc id="26">
+      <info name="The Purifier" type="Normal" moveChance="0.5" pineappleOnPizza="false">The Settlement's best agent/cultist so far.</info>
+      <status hp="810" maxhp="380" dead="false" specibus="Pyrokind" diceRolls="1" />
+      <abilities>
+        <Strength value="90" />
+        <Constitution value="70" />
+        <Psion value="0" />
+        <Fortitude value="90" />
+        <Intimidation value="60" />
+        <Persuasion value="0" />
+      </abilities>
+      <moves>
+        <move name="Highblood Resistance" priority="0" cooldownMaxTime="15" cooldown="0">
+          <event>
+            <ailment name="Resistant" turns="9" immune="Burning,Poisoned,Stunned" type="Self">
+              <abilities>
+                <Constitution value="8" />
+                <Fortitude value="2" />
+              </abilities>
+              <description>Grants resistance to most ailments and attacks.</description>
+            </ailment>
+            <message>{0} is resisting their injuries.</message>
+          </event>
+        </move>
+        <move name="Roast" priority="0" cooldownMaxTime="5" cooldown="0">
+          <rolls atk="Strength" tar="Constitution" rollDamage="false" />
+          <event>
+            <inflictDamage minAmount="0.05" maxAmount="0.1" type="Target" fixed="false" />
+            <message>Roast.</message>
+          </event>
+          <event probability="0.35">
+            <ailment name="Burning" turns="4" type="Target" />
+          </event>
+        </move>
+        <move name="Ruffiannihilate" priority="0" cooldownMaxTime="23" cooldown="0">
+          <rolls atk="Strength" tar="Constitution" rollDamage="false" />
+          <event>
+            <inflictDamage minAmount="0.2" maxAmount="0.25" type="Target" fixed="false" />
+            <message>{0} is attacking {1}!</message>
+          </event>
+        </move>
+      </moves>
+    </npc>
+    <npc id="12">
+      <info name="Feugax Leviis" type="Psionic" moveChance="0.5" pineappleOnPizza="false">Your Midblooded friend.</info>
+      <status hp="810" maxhp="120" dead="false" specibus="Dicekind" diceRolls="1" />
+      <abilities>
+        <Strength value="15" />
+        <Constitution value="23" />
+        <Psion value="40" />
+        <Fortitude value="19" />
+        <Intimidation value="0" />
+        <Persuasion value="10" />
+      </abilities>
+      <moves>
+        <move name="Overdrive" priority="1" cooldownMaxTime="20" cooldown="0">
+          <rolls atk="Psion" tar="Fortitude" rollDamage="false" />
+          <event>
+            <inflictDamage minAmount="0.25" maxAmount="0.35" type="Target,All" fixed="false" />
+            <ailment name="Fatigue" turns="9" type="Self">
+              <abilities>
+                <Constitution value="-15" />
+                <Psion value="-15" />
+                <Fortitude value="-10" />
+              </abilities>
+              <description>{0} is fatigued.</description>
+            </ailment>
+            <message>{0} is using all of their psionic power in a single attack.</message>
+          </event>
+          <event>
+            <inflictDamage minAmount="0.1" maxAmount="0.15" type="Self" fixed="false" />
+          </event>
+        </move>
+        <move name="Crush" priority="0" cooldownMaxTime="5" cooldown="0">
+          <rolls atk="Psion" tar="Fortitude" rollDamage="false" />
+          <event>
+            <inflictDamage minAmount="0.08" maxAmount="0.18" type="Target" fixed="false" />
+            <message>{0} is crushing {1} with his telekinesis.</message>
+          </event>
+        </move>
+        <move name="Lift" priority="0" cooldownMaxTime="10" cooldown="0">
+          <event>
+            <ailment name="Flying" blocksMoves="true" turns="5" type="Target">
+              <statusMsg>{0} is flying.</statusMsg>
+            </ailment>
+            <message>{0} is making {1} fly with their telekinesis.</message>
+          </event>
+        </move>
+        <move name="Strategist" priority="0" cooldownMaxTime="12" cooldown="0">
+          <event>
+            <ailment name="Concentrated" turns="5" type="Self">
+              <abilities>
+                <Fortitude value="15" />
+              </abilities>
+              <description>This character is focused on the battle.</description>
+            </ailment>
+            <message>{0} is planning an attack.</message>
+          </event>
+        </move>
+      </moves>
+    </npc>
+    <npc id="16">
+      <info name="Scitar" type="Psionic" moveChance="0.5" pineappleOnPizza="false">Your new lowblooded friend.</info>
+      <status hp="810" maxhp="90" dead="false" specibus="Psionickind" diceRolls="1" />
+      <abilities>
+        <Strength value="10" />
+        <Constitution value="20" />
+        <Psion value="70" />
+        <Fortitude value="40" />
+        <Intimidation value="0" />
+        <Persuasion value="10" />
+      </abilities>
+      <moves>
+        <move name="Protective Lowblood" priority="1" cooldownMaxTime="8" cooldown="0">
+          <event>
+            <ailment name="Shielded" turns="4" type="Self,All">
+              <abilities>
+                <Constitution value="10" />
+                <Fortitude value="10" />
+              </abilities>
+              <description>A protective boost Scitar has granted.</description>
+            </ailment>
+            <message>{0} is protecting her allies!</message>
+          </event>
+        </move>
+      </moves>
+    </npc>
+  </targets>
+</strife>

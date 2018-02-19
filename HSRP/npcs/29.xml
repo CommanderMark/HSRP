@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="29">
-  <info name="Messar Egenas" type="Normal" pineappleOnPizza="false">Not who she used to be.</info>
-  <status hp="100" maxhp="100" dead="false" specibus="Scythekind" diceRolls="1" />
+  <info name="Capricer" type="Lusus" moveChance="0.5" pineappleOnPizza="false">Vindicta's Cholerbear lusus.</info>
+  <status hp="180" maxhp="180" dead="false" specibus="feralkind" diceRolls="1" />
   <abilities>
-    <Strength value="19" />
-    <Constitution value="35" />
-    <Psion value="70" />
-    <Fortitude value="90" />
+    <Strength value="70" />
+    <Constitution value="50" />
+    <Psion value="0" />
+    <Fortitude value="0" />
     <Intimidation value="0" />
-    <Persuasion value="9" />
+    <Persuasion value="0" />
   </abilities>
 </npc>

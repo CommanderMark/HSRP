@@ -1,13 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="25">
-  <info name="TROLL SHARK" type="Lusus" pineappleOnPizza="false">Looks hungry.</info>
-  <status hp="120" maxhp="120" dead="false" specibus="Feralkind" diceRolls="1" />
+  <info name="Vindicta Indignar" type="Normal" moveChance="0.5" pineappleOnPizza="false">Sic seems to know her.</info>
+  <status hp="210" maxhp="210" dead="false" specibus="Halberdkind" diceRolls="1" />
   <abilities>
-    <Strength value="20" />
-    <Constitution value="40" />
+    <Strength value="34" />
+    <Constitution value="46" />
     <Psion value="0" />
-    <Fortitude value="10" />
+    <Fortitude value="40" />
     <Intimidation value="50" />
     <Persuasion value="0" />
   </abilities>
+  <events>
+    <event trigger="OnStrifeStart">
+      <ailment name="Distracted" turns="9" type="Target,All">
+        <abilities>
+          <Strength value="-7" />
+          <Constitution value="-2" />
+          <Fortitude value="-10" />
+        </abilities>
+        <description>Vindicta is disguised as one of the enemy's allies.</description>
+      </ailment>
+      <message>{0} is using her disguise as a distraction.</message>
+    </event>
+  </events>
+  <moves>
+    <move name="Makibishi" priority="0" cooldownMaxTime="20" cooldown="0">
+      <event>
+        <ailment name="Restrained" turns="10" type="Target,All">
+          <abilities>
+            <Strength value="-5" />
+            <Constitution value="-12" />
+          </abilities>
+          <description>This character stepped on a makibishi, reducing their combat capabilities temporarily.</description>
+        </ailment>
+        <message>{0} is throwing makibishi on the ground.</message>
+      </event>
+    </move>
+    <move name="Cold Analysis" priority="0" cooldownMaxTime="10" cooldown="0">
+      <event>
+        <ailment name="Concentrated" turns="8" type="Self">
+          <abilities>
+            <Fortitude value="15" />
+          </abilities>
+          <description>This character is focused on the battle.</description>
+        </ailment>
+        <message>{0} is studying the situation .</message>
+      </event>
+    </move>
+  </moves>
 </npc>

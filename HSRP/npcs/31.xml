@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="31">
-  <info name="Hector's Lusus" type="Lusus" pineappleOnPizza="false">TROLL WOLF, but they don't want to kill you this time.</info>
-  <status hp="150" maxhp="150" dead="false" specibus="feralkind" diceRolls="1" />
+  <info name="Cholerbear" type="Lusus" moveChance="0.5" pineappleOnPizza="false">Creepy bear with 3 legs and an exoskeleton.</info>
+  <status hp="250" maxhp="250" dead="false" specibus="feralkind" diceRolls="1" />
   <abilities>
-    <Strength value="60" />
-    <Constitution value="60" />
+    <Strength value="80" />
+    <Constitution value="80" />
     <Psion value="0" />
     <Fortitude value="0" />
     <Intimidation value="0" />

@@ -11,7 +11,7 @@
     <Intimidation value="36" />
     <Persuasion value="10" />
   </abilities>
-  <inventory equippedWeapon="">
+  <inventory>
     <item value="Map" quantity="1" />
     <item value="SOCKS" quantity="1" />
     <item value="MOODY BLUE CAPE" quantity="1" />
@@ -24,4 +24,13 @@
     <item value="Pail" quantity="1" />
     <item value="Expensive Cider" quantity="300" />
   </inventory>
+  <strife id="29169">
+    <ailment name="Distracted" turns="8">
+      <abilities>
+        <Strength value="-7" />
+        <Constitution value="-2" />
+        <Fortitude value="-10" />
+      </abilities>
+    </ailment>
+  </strife>
 </player>

@@ -1,13 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="35">
-  <info name="GIANT TROLL SPIDER" type="Lusus" pineappleOnPizza="false">Spidermom's ancestor.</info>
-  <status hp="400" maxhp="400" dead="false" specibus="feralkind" diceRolls="1" />
+  <info name="Flex Seal" type="Normal" moveChance="0.5" pineappleOnPizza="false">Can INSTANTLY Bond. Fix. Seal and Repair!</info>
+  <status hp="140" maxhp="140" dead="false" specibus="Liquidkind" diceRolls="1" />
   <abilities>
-    <Strength value="80" />
-    <Constitution value="50" />
+    <Strength value="10" />
+    <Constitution value="2" />
     <Psion value="0" />
-    <Fortitude value="400" />
+    <Fortitude value="0" />
     <Intimidation value="0" />
     <Persuasion value="0" />
   </abilities>
+  <moves>
+    <move name="Nut" priority="2" cooldownMaxTime="2" cooldown="0">
+      <rolls atk="Strength,Intimidation" tar="Fortitude" rollDamage="true" />
+      <attackMsg>{0} sawed this boat in half!</attackMsg>
+      <rechargeMsg>{0} is about to show you the power of flex seal!</rechargeMsg>
+      <event>
+        <inflictDamage minAmount="0.05" type="Target" fixed="false" />
+      </event>
+    </move>
+  </moves>
 </npc>

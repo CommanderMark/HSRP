@@ -11,7 +11,7 @@
     <Intimidation value="20" />
     <Persuasion value="10" />
   </abilities>
-  <inventory equippedWeapon="">
+  <inventory>
     <item value="CINQUEDEA DAGGER" quantity="1" />
     <item value="Un-Stolen Computer" quantity="1" />
     <item value="Cash" quantity="34106" />
@@ -33,25 +33,31 @@
     <move name="Killing Flair" priority="0" cooldownMaxTime="2" cooldown="0">
       <description>Lets Sicarius show someone their stabs. Has a chance to posion.</description>
       <rolls atk="Strength" tar="Constitution" rollDamage="false" />
-      <event probability="1">
+      <attackMsg>{0} goes for a stab on {1}!</attackMsg>
+      <event>
         <inflictDamage minAmount="0.05" maxAmount="0.17" type="Target" fixed="false" />
-        <healDamage amount="0" type="None" />
       </event>
       <event probability="0.35">
-        <inflictDamage minAmount="0" type="None" fixed="false" />
-        <healDamage amount="0" type="None" />
         <ailment name="Poisoned" turns="7" type="Target" />
       </event>
-      <attackMsg>{0} goes for a stab on {1}!</attackMsg>
     </move>
-    <move name="So-jutsu" cooldownMaxTime="10" cooldown="0">
-      <event probability="1">
-        <ailment name="Running" damageImmune="true" turns="5" skipTurns="true" type="Self">
-          <description>Makes them resistant to damage, but unable to attack for the duration of the effect.</description>
+    <move name="So-jutsu" priority="0" cooldownMaxTime="10" cooldown="0">
+      <event>
+        <ailment name="Running" damageImmune="true" turns="5" type="Self">
           <statusMsg>{0} is still running around.</statusMsg>
+          <description>Makes them resistant to damage, but unable to attack for the duration of the effect.</description>
         </ailment>
         <message>[S] {0}: Gotta Go Fast</message>
       </event>
     </move>
   </moves>
+  <strife id="29169">
+    <ailment name="Distracted" turns="8">
+      <abilities>
+        <Strength value="-7" />
+        <Constitution value="-2" />
+        <Fortitude value="-10" />
+      </abilities>
+    </ailment>
+  </strife>
 </player>
