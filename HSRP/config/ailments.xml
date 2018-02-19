@@ -36,6 +36,14 @@
     <endMsg>{0} is no longer "{1}"!</endMsg>
   </ailment>
 
+  <ailment name="Burning" blocksMoves="true" turns="4">
+    <inflictDamage minAmount="0.10" maxAmount="0.12" />
+
+    <inflictMsg>{0} is {2}!</inflictMsg>
+    <statusMsg>{0} is still {1}!</statusMsg>
+    <endMsg>{0} is no longer {1}!</endMsg>
+  </ailment>
+
   <ailment name="Poisoned" turns="7">
     <inflictDamage minAmount="0.05" />
 
@@ -53,6 +61,12 @@
     <inflictMsg>{0} fell asleep!</inflictMsg>
     <statusMsg>{0} is still {1}!</statusMsg>
     <endMsg>{0} woke up!</endMsg>
+  </ailment>
+  
+  <ailment name="Stunned" turns="3" skipTurns="true">
+    <inflictMsg>{0} is {2}!</inflictMsg>
+    <statusMsg>{0} is still {1}!</statusMsg>
+    <endMsg>{0} is no longer {1}!</endMsg>
   </ailment>
 
   <ailment name="Enraged" turns="15" stacks="true">

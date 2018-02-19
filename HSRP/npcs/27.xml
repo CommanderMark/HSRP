@@ -10,4 +10,35 @@
     <Intimidation value="60" />
     <Persuasion value="0" />
   </abilities>
+  <moves>
+    <move name="Highblood Resistance" cooldownMaxTime="15" cooldown="0">
+      <event>
+        <message>{0} is resisting their injuries.</message>
+        <ailment name="Resistant" turns="9" immune="Burning,Poisoned,Stunned" type="Self">
+          <description>Grants resistance to most ailments and attacks.</description>
+          <abilities>
+            <Constitution value="8" />
+            <Fortitude value="2" />
+          </abilities>
+        </ailment>
+      </event>
+    </move>
+    <move name="Roast" cooldownMaxTime="5" cooldown="0">
+      <rolls atk="Strength" tar="Constitution" rollDamage="false" />
+        <event probability="1">
+          <inflictDamage minAmount="0.05" maxAmount="0.10" type="Target" />
+          <message>Roast.</message>
+      </event>
+      <event probability="0.35">
+        <ailment name="Burning" type="Target" />
+      </event>
+    </move>
+    <move name="Ruffiannihilate" cooldownMaxTime="23" cooldown="0">
+      <rolls atk="Strength" tar="Constitution" rollDamage="false" />
+      <event probability="1">
+        <inflictDamage minAmount="0.20" maxAmount="0.25" type="Target" />
+        <message>{0} is attacking {1}!</message>
+      </event>
+    </move>
+  </moves>
 </npc>

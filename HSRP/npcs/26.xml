@@ -13,12 +13,12 @@
   <events>
     <event trigger="OnStrifeStart" probability="1">
       <message>{0} is using her disguise as distraction.</message>
-      <ailment name="Distracted" turns=“9” type="All,Target">
+      <ailment name="Distracted" turns="9" type="All,Target">
         <description>Vindicta is disguised as one of the enemy's allies.</description>
         <abilities>
-          <Strength value= "-7"/>
-          <Constitution value= "-2"/>
-          <Fortitude value=“-10” />
+          <Strength value="-7"/>
+          <Constitution value="-2"/>
+          <Fortitude value="-10" />
         </abilities>
       </ailment>
     </event>
