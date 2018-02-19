@@ -8,6 +8,11 @@
         NONE,
 
         /// <summary>
+        /// Event triggers when the calling entity enters a strife.
+        /// </summary>
+        OnStrifeStart,
+
+        /// <summary>
         /// Event triggers when the calling entity strikes a hit on another entity.
         /// </summary>
         OnHit,

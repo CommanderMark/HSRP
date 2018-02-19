@@ -198,6 +198,11 @@ namespace HSRP
 
         public override bool Equals(Object obj)
         {
+            if (this == obj)
+            {
+                return true;
+            }
+
             // If parameter cannot be cast to Point return false.
             AbilitySet set = obj as AbilitySet;
             if (set == null)

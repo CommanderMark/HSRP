@@ -220,6 +220,11 @@ namespace HSRP
 
         public override bool Equals(Object obj)
         {
+            if (this == obj)
+            {
+                return true;
+            }
+            
             // If parameter cannot be cast to Point return false.
             Event evnt = obj as Event;
             if (evnt == null)

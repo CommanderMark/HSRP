@@ -299,8 +299,25 @@ namespace HSRP
             // Add list of users to log but skip it when posting the logs as that's posted separately.
             Logs.Clear();
             Log.Append(Display());
+
+
             AddLog();
             postedLogs = 1;
+
+            // Safety net incase the strife is initialized with an empty team.
+            if (Attackers.Any() && Targets.Any())
+            {
+                // Check for any events that should trigger when the strife starts.
+                foreach (Entity ent in Attackers)
+                {
+                    // Will find a random target if the event needs it.
+                    ent.TriggerEvent(EventType.OnStrifeStart, FindAvailableTarget(false, out int ID), true, this);
+                }
+                foreach (Entity ent in Targets)
+                {
+                    ent.TriggerEvent(EventType.OnStrifeStart, FindAvailableTarget(true, out int ID), false, this);
+                }
+            }
 
             // Notify any player involved.
             foreach (Entity ent in Entities)
@@ -698,6 +715,8 @@ namespace HSRP
         /// <summary>
         /// Finds an entity that can be targeted (isn't dead essentially).
         /// </summary>
+        /// <param name="attackTeam">Whether the target should be from the attacking team.</param>
+        /// <param name="ID">The index of the list the entity is from.</param>
         private Entity FindAvailableTarget(bool attackTeam, out int ID)
         {
             ID = -1;
