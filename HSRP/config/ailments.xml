@@ -36,7 +36,7 @@
     <endMsg>{0} is no longer "{1}"!</endMsg>
   </ailment>
 
-  <ailment name="Burning" blocksMoves="true" turns="4">
+  <ailment name="Burning" blocksMoves="true" turns="3">
     <inflictDamage minAmount="0.10" maxAmount="0.12" />
 
     <inflictMsg>{0} is {2}!</inflictMsg>
