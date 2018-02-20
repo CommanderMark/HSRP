@@ -841,19 +841,19 @@ namespace HSRP
                 {
                     case 1:
                     {
-                        TakeTurn(Constants.PHYSICAL_ATTACK, targetID, !attackTurn);
+                        TakeTurn(Constants.PHYSICAL_ATTACK, targetID, attackTurn);
                     }
                     break;
 
                     case 2:
                     {
-                        TakeTurn(Constants.SPEECH_ATTACK, targetID, !attackTurn);
+                        TakeTurn(Constants.SPEECH_ATTACK, targetID, attackTurn);
                     }
                     break;
 
                     case 3:
                     {
-                        TakeTurn(Constants.OPTIC_BLAST, targetID, !attackTurn);
+                        TakeTurn(Constants.OPTIC_BLAST, targetID, attackTurn);
                     }
                     break;
 
@@ -861,11 +861,11 @@ namespace HSRP
                     {
                         if (list.Count() <= 0)
                         {
-                            TakeTurn(Constants.GUARD, targetID, !attackTurn);
+                            TakeTurn(Constants.GUARD, targetID, attackTurn);
                         }
                         else
                         {
-                            TakeTurn(Toolbox.RandElement(list).Name, targetID, !attackTurn);
+                            TakeTurn(Toolbox.RandElement(list).Name, targetID, attackTurn);
                         }
                     }
                     break;

@@ -54,7 +54,6 @@
 
   <ailment name="MindControl" turns="5" controller="1">
     <inflictMsg>{0} is being mind-controlled by {1}!</inflictMsg>
-    <endMsg>{0} is no longer mind-controlled!</endMsg>
   </ailment>
 
   <ailment name="Sleeping" turns="10" skipTurns="true">

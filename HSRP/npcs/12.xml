@@ -13,6 +13,7 @@
   <moves>
     <move name="Overdrive" priority="1" cooldownMaxTime="20" cooldown="0">
       <rolls atk="Psion" tar="Fortitude" rollDamage="false" />
+      <attackMsg>{0} is using all of their psionic power in a single attack.</attackMsg>
       <event probability="1">
         <inflictDamage minAmount="0.25" maxAmount="0.35" type="Target,All" fixed="false" />
         <ailment name="Fatigue" turns="9" type="Self">
@@ -23,7 +24,6 @@
           </abilities>
           <inflictMsg>{0} is fatigued.</inflictMsg>
         </ailment>
-        <message>{0} is using all of their psionic power in a single attack.</message>
       </event>
       <event probability="1">
         <inflictDamage minAmount="0.1" maxAmount="0.15" type="Self" fixed="false" />

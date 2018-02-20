@@ -156,6 +156,8 @@ namespace HSRP
 
             this.Controller = copy.Controller;
 
+            this.BlocksMoves = copy.BlocksMoves;
+
             this.Explodes = copy.Explodes;
             this.Explosion = new Explosion(copy.Explosion);
 

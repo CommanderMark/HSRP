@@ -100,10 +100,14 @@ namespace HSRP
         {
             XElement move = new XElement("move",
                 new XAttribute("name", Name),
-                new XAttribute("priority", Priority),
                 new XAttribute("cooldownMaxTime", cooldownMaxTime),
                 new XAttribute("cooldown", Cooldown)
                 );
+            
+            if (Priority != 0)
+            {
+                move.Add(new XAttribute("priority", Priority));
+            }
             
             if (!string.IsNullOrWhiteSpace(Description))
             {
@@ -176,6 +180,7 @@ namespace HSRP
                 int tarRoll = Toolbox.DiceRoll(1, tarY);
                 strife.Log.AppendLine($"{Syntax.ToCodeLine(ent.Name)} rolls {Syntax.ToCodeLine(atkRoll)}!");
                 strife.Log.AppendLine($"{Syntax.ToCodeLine(tar.Name)} rolls {Syntax.ToCodeLine(tarRoll)}!");
+                strife.Log.AppendLine();
 
                 if (atkRoll <= tarRoll)
                 {
@@ -183,7 +188,10 @@ namespace HSRP
                     return;
                 }
 
-                dmg = atkRoll - tarRoll;
+                if (useRollDamage)
+                {
+                    dmg = atkRoll - tarRoll;
+                }
             }
 
             foreach (Event evnt in events)
