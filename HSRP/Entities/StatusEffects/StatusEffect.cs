@@ -255,7 +255,7 @@ namespace HSRP
             result.Append(Syntax.ToBold(Name) + ":");
             if (!string.IsNullOrWhiteSpace(description))
             {
-                result.Append(Syntax.ToBold("Description") + ": " + description);
+                result.Append(" " + description);
             }
             
             result.AppendLine();

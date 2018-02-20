@@ -767,15 +767,14 @@ namespace HSRP
                         npc.GenerateMoveList();
                     }
 
-                    while (npc.Moves.Any())
+                    while (npc.MoveQueue.Any())
                     {
-                        Move mov = npc.Moves.Values.FirstOrDefault();
+                        Move mov = npc.MoveQueue.FirstOrDefault();
                         npc.MoveQueue.Remove(mov); // Remove the move even if it's on cooldown.
 
                         // Is the move on cooldown?
                         if (mov.Cooldown <= 0)
                         {
-                            npc.MoveQueue.Remove(mov);
                             TakeTurn(mov.Name, targetID, !attackTurn);
                             break;
                         }
