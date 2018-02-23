@@ -11,5 +11,43 @@
     <Intimidation value="0" />
     <Persuasion value="34" />
   </abilities>
-  <inventory equippedWeapon="" />
+  <moves>
+    <move name="Voice of the Empire" cooldownMaxTime="15" cooldown="0">
+    <rolls atk="Persuasion" tar="Fortitude" rollDamage="true" />
+      <event probability="1">
+        <inflictDamage minAmount="0.05" maxAmount="0.17" type="Target" /> 
+          <message>The Heiress is showing'em who's boss.</message>
+          <ailment name="Subjugated" turns="7" type="Target">
+            <description>OBEY.</description>
+            <abilities>
+              <Fortitude value="-25" />
+            </abilities>
+        </ailment>
+      </event>
+    </move>
+    <move name="Demands of the Heiress" cooldownMaxTime="7" cooldown="0">
+      <event probability="1">
+        <message>She won't stop complaining, will she?</message>
+        <ailment name="Distracted" turns="5" type="All,Target" />
+      </event>
+    </move>
+    <move name="Hair Shield" cooldownMaxTime="5" cooldown="0">
+      <event probability="1">
+        <message>{0} THAT'S SOME LARGE HAIR M8.</message>
+        <ailment name="Shielded" turns="5" type="Self">
+          <description>Wtf is up with that hair?</description>
+          <abilities>
+            <Constitution value="15" />
+          </abilities>
+        </ailment>
+      </event>
+    </move>
+    <move name="Trident Stab" cooldownMaxTime="3" cooldown="0">
+      <rolls atk="Strength" tar="Constitution" rollDamage="false" />
+      <event probability="1">
+        <inflictDamage minAmount="0.08" maxAmount="0.15" type="Target" />
+        <message>{0} is stabbing {1} with her 2x3dent!</message>
+      </event>
+    </move>
+  </moves>
 </player>
