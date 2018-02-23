@@ -11,7 +11,7 @@
     <Intimidation value="1" />
     <Persuasion value="10" />
   </abilities>
-  <inventory equippedWeapon="">
+  <inventory>
     <item value="Cash" quantity="700" />
   </inventory>
 </player>

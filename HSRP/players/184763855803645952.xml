@@ -30,21 +30,21 @@
     <item value="TROLL SHINOBI outfit" quantity="1" />
   </inventory>
   <moves>
-    <move name="Killing Flair" priority="0" cooldownMaxTime="2" cooldown="0">
+    <move name="Killing Flair" cooldownMaxTime="2" cooldown="0">
       <description>Lets Sicarius show someone their stabs. Has a chance to posion.</description>
       <rolls atk="Strength" tar="Constitution" rollDamage="false" />
       <attackMsg>{0} goes for a stab on {1}!</attackMsg>
       <event>
-        <inflictDamage minAmount="0.05" maxAmount="0.17" type="Target" fixed="false" />
+        <inflictDamage minAmount="0.05" maxAmount="0.17" type="Target" />
       </event>
       <event probability="0.35">
         <ailment name="Poisoned" turns="7" type="Target" />
       </event>
     </move>
-    <move name="So-jutsu" priority="0" cooldownMaxTime="10" cooldown="0">
+    <move name="So-jutsu" cooldownMaxTime="10" cooldown="0">
       <description>Lets Sicarius dash around the battle field. Makes him immune to damage but also prevents him from being able to attack.</description>
       <event>
-        <ailment name="Running" damageImmune="true" turns="5" skipTurns="true" type="Self">
+        <ailment name="Running" damageImmune="true" skipTurns="true" turns="5" type="Self">
           <statusMsg>{0} is still running around.</statusMsg>
           <description>Makes them resistant to damage, but unable to attack for the duration of the effect.</description>
         </ailment>

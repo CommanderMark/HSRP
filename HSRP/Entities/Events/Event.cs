@@ -176,7 +176,7 @@ namespace HSRP
                 new XAttribute("probability", probability));
             }
 
-            if (damage.MinAmount != 0 && damage.MaxAmount != 0)
+            if (damage.MinAmount != 0 || damage.MaxAmount != 0 || damage.Target != TargetType.None)
             {
                 XElement inflictDamage = damage.Save();
                 eventEle.Add(inflictDamage);

@@ -11,7 +11,7 @@
     <Intimidation value="0" />
     <Persuasion value="15" />
   </abilities>
-  <inventory equippedWeapon="">
+  <inventory>
     <item value="Jade Potion" quantity="1" />
   </inventory>
 </player>

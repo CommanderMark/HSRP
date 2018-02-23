@@ -86,18 +86,24 @@ namespace HSRP
 
         public XElement Save()
         {
-            XElement inflictDamage = new XElement("inflictDamage",
-                new XAttribute("minAmount", MinAmount)
-                );
+            XElement inflictDamage = new XElement("inflictDamage");
+            
+            if (MinAmount != 0)
+            {
+                inflictDamage.Add(new XAttribute("minAmount", MinAmount));
+            }
             
             if (Ranged)
             {
                 inflictDamage.Add(new XAttribute("maxAmount", MaxAmount));
             }
 
-            inflictDamage.Add(new XAttribute("type", string.Join(",", Target.GetIndividualFlags())),
-                new XAttribute("fixed", FixedAmount)
-                );
+            inflictDamage.Add(new XAttribute("type", string.Join(",", Target.GetIndividualFlags())));
+            
+            if (FixedAmount)
+            {
+                inflictDamage.Add(new XAttribute("fixed", FixedAmount));
+            }
             
             return inflictDamage;
         }
