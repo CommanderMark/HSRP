@@ -57,16 +57,17 @@ namespace HSRP
             {
                 foreach (StatusEffect sa in displayList)
                 {
-                    msg.AppendLine(sa.Display());
-
-                    msg.AppendLine(separator);
-                    msg.AppendLine();
+                    msg.Append(sa.Display());
                 }
             }
             else
             {
-                msg.Append("None");
+                msg.AppendLine("None");
             }
+
+            msg.AppendLine();
+            msg.AppendLine(separator);
+            msg.AppendLine();
 
             // Events.
             msg.AppendLine(Syntax.ToCodeLine("Moves:"));

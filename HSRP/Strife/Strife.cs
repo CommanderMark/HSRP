@@ -634,7 +634,7 @@ namespace HSRP
                             string cool = mov.Value.Cooldown == 1
                                 ? "turn"
                                 : mov.Value.Cooldown + " turns";
-                            reason = "Invalid attack. " + Syntax.ToCodeLine(mov.Value.Name) + " is on a cooldown for another " + cool + ".";
+                            reason = "Invalid attack. " + Syntax.ToCodeLine(mov.Value.Name) + " is on a cooldown for another " + Syntax.ToCodeLine(cool) + ".";
                             return false;
                         }
 
@@ -933,6 +933,12 @@ namespace HSRP
                 if (ent is Player plyr)
                 {
                     plyr.StrifeID = 0;
+                }
+
+                // Remove all cooldowns.
+                foreach (Move mov in ent.Moves.Values)
+                {
+                    mov.Cooldown = 0;
                 }
             }
         }

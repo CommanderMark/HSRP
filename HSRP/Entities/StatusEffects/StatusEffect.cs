@@ -271,9 +271,9 @@ namespace HSRP
                 result.AppendLine($"This status effect is applied immediately instead of over multiple turns.");
             }
 
-            result.AppendLine();
             if (damage.HasDamage)
             {
+                result.AppendLine();
                 if (!damage.FixedAmount)
                 {
                     string msg = damage.Ranged
@@ -355,7 +355,7 @@ namespace HSRP
                 {
                     result.Append(", " + Immunities[i]);
                 }
-                result.AppendLine(".");
+                result.Append(".");
             }
 
             return result.ToString();
