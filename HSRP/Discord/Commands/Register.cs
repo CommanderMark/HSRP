@@ -96,7 +96,7 @@ namespace HSRP.Commands
                     break;
 
                 // Done.
-                case 6:
+                case 5:
                     if (result)
                     {
                         msg = "Alright, you are now registered!";

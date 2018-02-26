@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<player>
+  <info name="Kordra Fyrenn" id="356967565869973506" owner="Harelora" blood="Indigo" pineappleOnPizza="false" />
+  <status hp="100" maxhp="100" dead="false" specibus="batkind" />
+  <levels echeladder="0" pendingSkillPoints="24" xp="0" nextLevel="0" />
+  <abilities>
+    <Strength value="0" />
+    <Constitution value="0" />
+    <Psion value="0" />
+    <Fortitude value="0" />
+    <Intimidation value="0" />
+    <Persuasion value="0" />
+  </abilities>
+</player>

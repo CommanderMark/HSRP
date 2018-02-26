@@ -31,7 +31,7 @@ namespace HSRP
             BaseAbilities = new AbilitySet();
 
             Events = new List<Tuple<EventType, Event>>();
-            Immunities = null;
+            Immunities = new string[0];
             InflictedAilments = new List<StatusEffect>();
             Moves = new Dictionary<string, Move>();
 

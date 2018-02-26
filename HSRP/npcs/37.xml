@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="37">
+ <info name="Barkfiend-Troll Hybrid" type="Lusus" moveChance="0.0" pineappleOnPizza="false">A mutant.</info>
+  <status hp="150" maxhp="150" dead="false" specibus="Feralkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="39" />
+    <constitution value="25" />
+    <psion value="0" />
+    <fortitude value="15" />
+    <intimidation value="50" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

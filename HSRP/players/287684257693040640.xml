@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sayana Cantet" id="287684257693040640" owner="Ikoma" blood="Fuchsia" pineappleOnPizza="false" />
-  <status hp="259" maxhp="259" dead="false" specibus="2x3dent" />
+  <status hp="255" maxhp="259" dead="false" specibus="2x3dent" />
   <levels echeladder="13" pendingSkillPoints="0" xp="5001" nextLevel="7600" />
   <abilities>
     <Strength value="25" />
