@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
@@ -67,13 +68,30 @@ namespace HSRP.Commands
         }
 
         [Command("skills")]
-        public async Task HelpSkills(PropertyInfo prop)
+        public async Task HelpSkills(string name)
         {
-            AbilityAttribute attrib = (AbilityAttribute)prop.GetCustomAttribute(typeof(AbilityAttribute), false)
-                ?? new AbilityAttribute(AbilityType.None, false, "Errored");
-            string ab = Syntax.ToCodeLine($"{prop.Name} ({attrib.ToString()})") + "\n";
-            ab = ab.AddLine(attrib.Desc);
-            await DiscordToolbox.DMUser(Context.User, ab);
+            PropertyInfo[] props = typeof(AbilitySet).GetProperties();
+            foreach (PropertyInfo prop in props)
+            {
+                if (!prop.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                object[] attrs = prop.GetCustomAttributes(true);
+                foreach (object attr in attrs)
+                {
+                    AbilityAttribute abAttr = attr as AbilityAttribute;
+                    if (abAttr != null)
+                    {
+                        string ab = Syntax.ToCodeLine($"{prop.Name} ({abAttr.ToString()})") + "\n"
+                            + abAttr.Desc;
+                        
+                        await DiscordToolbox.DMUser(Context.User, ab);
+                        return;
+                    }
+                }
+            }
         }
 
         public static string Skills()

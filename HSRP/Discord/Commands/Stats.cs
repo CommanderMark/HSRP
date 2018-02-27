@@ -35,43 +35,49 @@ namespace HSRP.Commands
         public async Task Skills() => await ReplyAsync(HelpCommands.Skills());
 
         [Command("skills spend"), RequireRegistration]
-        public async Task SpendSkill(PropertyInfo ability, int amount)
+        public async Task SpendSkill(string ability, int amount)
         {
+            if (amount < 1)
+            {
+                await ReplyAsync("Invalid amount.");
+                return;
+            }
+
             Player plyr = new Player(Context.User);
+            
             if (plyr.PendingSkillPointAllocations < 1)
             {
                 await ReplyAsync("You have no pending skill point allocations.");
                 return;
             }
-            else if (plyr.PendingSkillPointAllocations < amount)
+            if (plyr.PendingSkillPointAllocations < amount)
             {
                 await ReplyAsync("You are attempting to allocate more skill points than you actually have."
                     + $"\nYou have {plyr.PendingSkillPointAllocations}, you were trying to spend {amount}.");
                 return;
             }
-            
-            if (ability.CanRead && ability.CanWrite)
+
+            Ability ab = plyr.BaseAbilities.GetAbilityByName(ability);
+            if (ab == null)
             {
-                int value = (int)ability.GetValue(plyr.BaseAbilities);
-                ability.SetValue(plyr.BaseAbilities, value + amount);
+                await ReplyAsync("No such ability found.");
+                return;
+            }
 
-                plyr.PendingSkillPointAllocations -= amount;
+            int value = ab.Value;
+            ab.Value += amount;
+            plyr.PendingSkillPointAllocations -= amount;
 
-                string msg = $"You have added {amount} skill point(s) into {ability.Name}."
+            string msg = $"You have added {amount} skill point(s) into {ab.name}."
                     + $" ({value} -> {value + amount})";
-                if (plyr.PendingSkillPointAllocations >= 1)
-                {
-                    msg += "\n\nYou have " + plyr.PendingSkillPointAllocations
-                        + " skill point(s) left to allocate.";
-                }
-
-                plyr.Save();
-                await ReplyAsync(msg);
-            }
-            else
+            if (plyr.PendingSkillPointAllocations >= 1)
             {
-                await ReplyAsync("Something went wrong, go tell Mark.");
+                msg += "\n\nYou have " + plyr.PendingSkillPointAllocations
+                    + " skill point(s) left to allocate.";
             }
+
+            plyr.Save();
+            await ReplyAsync(msg);
         }
 
         [Command("xp award"), Alias("xp give", "xp"), RequireGM]

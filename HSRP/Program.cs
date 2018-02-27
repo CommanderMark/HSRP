@@ -67,7 +67,6 @@ namespace HSRP
             commands.AddTypeReader<Player>(new Commands.PlayerTypeReader());
             commands.AddTypeReader<Entity>(new Commands.EntityTypeReader());
             commands.AddTypeReader<Strife>(new Commands.StrifeTypeReader());
-            commands.AddTypeReader<PropertyInfo>(new Commands.AbilityTypeReader());
             await commands.AddModulesAsync(Assembly.GetEntryAssembly());
 
             // Block this task until the program is exited.

@@ -1321,7 +1321,9 @@ namespace HSRP
             {
                 if (prop.Name.Contains(stat, StringComparison.OrdinalIgnoreCase))
                 {
-                    Ability uh = new Ability();
+                    // For the time being this will assume the property's name
+                    // is the same as the property it's representing.
+                    Ability uh = new Ability(prop.Name);
                     uh.Value = value;
                     
                     prop.SetValue(set, uh);

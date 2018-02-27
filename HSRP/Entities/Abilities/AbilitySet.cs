@@ -77,12 +77,12 @@ namespace HSRP
 
         public AbilitySet()
         { 
-            Strength = new Ability();
-            Constitution = new Ability();
-            Psion = new Ability();
-            Fortitude = new Ability();
-            Intimidation = new Ability();
-            Persuasion = new Ability();
+            Strength = new Ability(Ability.STR);
+            Constitution = new Ability(Ability.STR);
+            Psion = new Ability(Ability.PSI);
+            Fortitude = new Ability(Ability.FOR);
+            Intimidation = new Ability(Ability.INT);
+            Persuasion = new Ability(Ability.PER);
         }
 
         public AbilitySet(AbilitySet copy)
@@ -250,7 +250,7 @@ namespace HSRP
             }
             else
             {
-                foreach (PropertyInfo prop in GetType().GetProperties())
+                foreach (PropertyInfo prop in this.GetType().GetProperties())
                 {
                     int value = ((Ability) prop.GetValue(this)).Value;
                     int modVal = ((Ability) prop.GetValue(mod)).Value;
@@ -261,6 +261,20 @@ namespace HSRP
             }
 
             return disp.ToString();
+        }
+
+        public Ability GetAbilityByName(string name)
+        {
+            foreach (PropertyInfo prop in this.GetType().GetProperties())
+            {
+                if (prop.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    return (Ability) prop.GetValue(this);
+                }
+            }
+
+            Console.WriteLine("[ERROR] Ability \"" + name + "\" not found!");
+            return null;
         }
     }
 }
