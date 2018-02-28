@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<npc id="36">
+ <info name="#3D-6969" type="Normal" pineappleOnPizza="false">An experiment.</info>
+  <status hp="100" maxhp="100" dead="false" specibus="Feralkind" diceRolls="1" controller="0" />
+  <abilities>
+    <strength value="14" />
+    <constitution value="32" />
+    <psion value="0" />
+    <fortitude value="10" />
+    <intimidation value="20" />
+    <persuasion value="0" />
+  </abilities>
+</npc>

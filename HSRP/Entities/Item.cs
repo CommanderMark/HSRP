@@ -18,7 +18,7 @@ namespace HSRP
             Quantity = 1;
 
             Events = new List<Tuple<EventType, Event>>();
-            Immunities = null;
+            Immunities = new string[0];
         }
 
         public Item(XElement ele) : this()

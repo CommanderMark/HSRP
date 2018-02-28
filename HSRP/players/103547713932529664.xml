@@ -23,5 +23,8 @@
     <item value="Assassin Hatchet" quantity="1" />
     <item value="Pail" quantity="1" />
     <item value="Expensive Cider" quantity="300" />
+    <item value="T.A.S.E.R. Prototype." quantity="1" />
+    <item value="T.A.S.E.R. Documents" quantity="1" />
+    <item value="Syringe" quantity="1" />
   </inventory>
 </player>

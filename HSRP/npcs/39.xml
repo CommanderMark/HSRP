@@ -1,0 +1,12 @@
+<npc id="39">
+  <info name="Silent Phonation" type="Normal" moveChance="0.5" pineappleOnPizza="false">He has a mouth and he can't scream. The tragic irony.</info>
+  <status hp="110" maxhp="110" dead="false" specibus="Feralkind" diceRolls="1" />
+  <abilities>
+    <Strength value="15" />
+    <Constitution value="20" />
+    <Psion value="0" />
+    <Fortitude value="0" />
+    <Intimidation value="0" />
+    <Persuasion value="0" />
+  </abilities>
+</npc>

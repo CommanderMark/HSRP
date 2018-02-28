@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <npc id="25">
-  <info name="Vindicta Indignar" type="Normal" moveChance="0.5" pineappleOnPizza="false">Sic seems to know her.</info>
+  <info name="Vindicta Indignar" type="Normal" moveChance="0.5" pineappleOnPizza="false">Sic's (former?) kismesis.</info>
   <status hp="210" maxhp="210" dead="false" specibus="Halberdkind" diceRolls="1" />
   <abilities>
     <Strength value="34" />

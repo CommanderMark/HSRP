@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <player>
   <info name="Sicarius Anathera" id="184763855803645952" owner="Akumado" blood="Cerulean" pineappleOnPizza="true" />
-  <status hp="227" maxhp="232" dead="false" specibus="Bladekindx2" />
-  <levels echeladder="12" pendingSkillPoints="0" xp="4364" nextLevel="5000" />
+  <status hp="157" maxhp="232" dead="false" specibus="Bladekindx2" />
+  <levels echeladder="12" pendingSkillPoints="0" xp="4379" nextLevel="5000" />
   <abilities>
     <Strength value="36" />
     <Constitution value="22" />
@@ -26,8 +26,8 @@
     <item value="Anime Shades" quantity="1" />
     <item value="Cool Jacket" quantity="1" />
     <item value="DEADLY CORVOS" quantity="1" />
-    <item value="Toxin Syringe" quantity="1" />
     <item value="TROLL SHINOBI outfit" quantity="1" />
+    <item value="Explosive Apples" quantity="1" />
   </inventory>
   <moves>
     <move name="Killing Flair" cooldownMaxTime="2" cooldown="0">
@@ -49,6 +49,13 @@
           <description>Makes them resistant to damage, but unable to attack for the duration of the effect.</description>
         </ailment>
         <message>[S] {0}: Gotta Go Fast</message>
+      </event>
+    </move>
+    <move name="Kunai Throw" cooldownMaxTime="3" cooldown="0">
+      <rolls atk="Strength" tar="Constitution" rollDamage="false" />
+      <event>
+        <inflictDamage minAmount="0.07" maxAmount="0.15" type="Target,All" />
+        <message>{0} is throwing some knives.</message>
       </event>
     </move>
   </moves>
