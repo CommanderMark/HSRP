@@ -13,5 +13,27 @@
   </abilities>
   <inventory>
     <item value="Jade Potion" quantity="1" />
+    <item value="Khalar's Journal" quantity="1" />
+    <item value="Khalar's Crystal Dagger" quantity="1" />
   </inventory>
+  <moves>
+    <move name="Violent Edge" cooldownMaxTime="8" cooldown="0">
+      <rolls atk="Strength" tar="Constitution" rollDamage="false" />
+      <event probability="1">
+        <inflictDamage minAmount="0.08" maxAmount="0.19" type="Target" />
+        <message>{0} is using her chainsaw!</message>
+      </event>
+      <event probability="0.35">
+        <ailment name="Bleeding" turns=“4” type="Target">
+        <description>{0} is bleeding.</description>
+      </event>
+    </move>
+    <move name="Revenge Syndrome" cooldownMaxTime="20" cooldown="25">
+      <rolls atk="Strength" tar="Constitution" rollDamage="false" />
+      <event probability="1">
+        <inflictDamage minAmount="0.15" maxAmount="0.30" type="All,Target" />
+        <message>{0} is going to bring justice upon her enemies!</message>
+      </event>
+    </move>
+  </moves>
 </player>
