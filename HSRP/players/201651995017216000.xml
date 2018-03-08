@@ -2,7 +2,7 @@
 <player>
   <info name="Katras Serpes" id="201651995017216000" owner="Moonfang" blood="Teal" pineappleOnPizza="false" />
   <status hp="155" maxhp="155" dead="false" specibus="chainsawkind" />
-  <levels echeladder="7" pendingSkillPoints="0" xp="618" nextLevel="620" />
+  <levels echeladder="7" pendingSkillPoints="0" xp="620" nextLevel="620" />
   <abilities>
     <Strength value="17" />
     <Constitution value="20" />
@@ -19,19 +19,18 @@
   <moves>
     <move name="Violent Edge" cooldownMaxTime="8" cooldown="0">
       <rolls atk="Strength" tar="Constitution" rollDamage="false" />
-      <event probability="1">
+      <event>
         <inflictDamage minAmount="0.08" maxAmount="0.19" type="Target" />
         <message>{0} is using her chainsaw!</message>
       </event>
       <event probability="0.35">
-        <ailment name="Bleeding" turns=“4” type="Target">
-        <description>{0} is bleeding.</description>
+        <ailment name="Bleeding" turns="4" type="Target" />
       </event>
     </move>
-    <move name="Revenge Syndrome" cooldownMaxTime="20" cooldown="25">
+    <move name="Revenge Syndrome" cooldownMaxTime="20" cooldown="0">
       <rolls atk="Strength" tar="Constitution" rollDamage="false" />
-      <event probability="1">
-        <inflictDamage minAmount="0.15" maxAmount="0.30" type="All,Target" />
+      <event>
+        <inflictDamage minAmount="0.15" maxAmount="0.3" type="Target,All" />
         <message>{0} is going to bring justice upon her enemies!</message>
       </event>
     </move>

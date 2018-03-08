@@ -633,8 +633,8 @@ namespace HSRP
                         {
                             string cool = mov.Value.Cooldown == 1
                                 ? "turn"
-                                : mov.Value.Cooldown + " turns";
-                            reason = "Invalid attack. " + Syntax.ToCodeLine(mov.Value.Name) + " is on a cooldown for another " + Syntax.ToCodeLine(cool) + ".";
+                                : Syntax.ToCodeLine(mov.Value.Cooldown) + " turns";
+                            reason = "Invalid attack. " + Syntax.ToCodeLine(mov.Value.Name) + " is on a cooldown for another " + cool + ".";
                             return false;
                         }
 
