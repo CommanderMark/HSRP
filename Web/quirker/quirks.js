@@ -1,25 +1,3 @@
-// Grand Highblood.
-function omvQuirk()
-{
-    let str = getInputText();
-
-    str = str.replace(/\b(\w)/g, function(match) { return match.toUpperCase(); });
-    str = str.replace(/(\w)\b/g, function(match) { return match.toUpperCase(); });
-
-    output(str);
-}
-
-// Guild Master.
-function guildMasterQuirk()
-{
-    let str = getInputText().toUpperCase();
-
-    str = str.replace(/\b(\w)/g, function(match) { return match.toLowerCase(); });
-    str = str.replace(/(\w)\b/g, function(match) { return match.toLowerCase(); });
-
-    output(str);
-}
-
 // Sicarius Anathera
 function sicariusQuirk()
 {
@@ -69,45 +47,21 @@ function sicariusQuirk()
     output(str);
 }
 
-// HECTOR??? HE WAS THE RAT??
-function hectorQuirk()
-{
-    let quirk = getInputText().split("");
-    for (let i = 0; i < quirk.length; i++)
-    {
-        if (quirk[i] === "i")
-        {
-            quirk[i] = "iii";
-        }
-        else if (quirk[i] === "I")
-        {
-            quirk[i] = "III";
-        }
-        else if (quirk[i] === "!")
-        {
-            quirk[i] = "!!!";
-        }
-    }
-
-    output(arrayToString(quirk));
-}
-
-function vanderQuirk()
-{
-    let str = getInputText();
-
-    str = str.replace(/b/g, "♋");
-    str = str.replace(/B/g, "♋");
-    str = str.replace(/p/g, "♋");
-    str = str.replace(/P/g, "♋");
-
-    output(":Cancer: " + str);
-}
-
 // Sidewind Langston
 function sideQuirk()
 {
     output(getInputText());
+}
+
+// Sidewind's Alt Quirk
+function sideAltQuirk()
+{
+    let str = getInputText();
+
+    str = str.replace(/p/g, "q");
+    str = str.replace(/P/g, "Q");
+
+    output(str);
 }
 
 // Iratar
@@ -150,4 +104,76 @@ function purifierQuirk()
     str = str.replace(/T/g, "+");
 
     output("♠️ " + str + " -_-");
+}
+
+// Guild Master.
+function guildMasterQuirk()
+{
+    let str = getInputText().toUpperCase();
+
+    str = str.replace(/\b(\w)/g, function(match) { return match.toLowerCase(); });
+    str = str.replace(/(\w)\b/g, function(match) { return match.toLowerCase(); });
+
+    output(str);
+}
+
+// HECTOR??? HE WAS THE RAT??
+function hectorQuirk()
+{
+    let quirk = getInputText().split("");
+    for (let i = 0; i < quirk.length; i++)
+    {
+        if (quirk[i] === "i")
+        {
+            quirk[i] = "iii";
+        }
+        else if (quirk[i] === "I")
+        {
+            quirk[i] = "III";
+        }
+        else if (quirk[i] === "!")
+        {
+            quirk[i] = "!!!";
+        }
+    }
+
+    output(arrayToString(quirk));
+}
+
+function vanderQuirk()
+{
+    let str = getInputText();
+
+    str = str.replace(/b/g, "♋");
+    str = str.replace(/B/g, "♋");
+    str = str.replace(/p/g, "♋");
+    str = str.replace(/P/g, "♋");
+
+    output(":Cancer: " + str);
+}
+
+function keahimQuirk()
+{
+    output(":Aquarius: " + getInputText());
+}
+
+function melQuirk()
+{
+    let str = getInputText();
+
+    str = str.replace(/y/g, "λ");
+    str = str.replace(/Y/g, "Λ");
+
+    output(str + " :Aquarius:");
+}
+
+// Juggalo
+function juggaloQuirk()
+{
+    let str = getInputText();
+
+    str = str.replace(/\b(\w)/g, function(match) { return match.toUpperCase(); });
+    str = str.replace(/(\w)\b/g, function(match) { return match.toUpperCase(); });
+
+    output(str);
 }

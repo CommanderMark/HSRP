@@ -24,11 +24,10 @@ namespace HSRP
         /// </summary>
         public Dictionary<ulong, int> Registers { get; private set; }
 
-        // Convert our sync-main to an async main method.
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             Instance = new Program();
-            Instance.Run(args).GetAwaiter().GetResult();
+            await Instance.Run(args);
         }
 
         public async Task Run(string[] args)
