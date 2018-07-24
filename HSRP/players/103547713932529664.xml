@@ -2,7 +2,7 @@
 <player>
   <info name="Sidewind Langston" id="103547713932529664" owner="CommanderMark" blood="Violet" pineappleOnPizza="false" />
   <status hp="178" maxhp="178" dead="false" specibus="Hatchetkind" />
-  <levels echeladder="11" pendingSkillPoints="0" xp="2910" nextLevel="3300" />
+  <levels echeladder="11" pendingSkillPoints="0" xp="3110" nextLevel="3300" />
   <abilities>
     <Strength value="30" />
     <Constitution value="22" />
@@ -16,7 +16,6 @@
     <item value="SOCKS" quantity="1" />
     <item value="MOODY BLUE CAPE" quantity="1" />
     <item value="MOODY BLUE RUSTY HATCHET" quantity="1" />
-    <item value="Stolen Dagger" quantity="1" />
     <item value="Cash" quantity="62520" />
     <item value="Phones" quantity="2" />
     <item value="Ultimate Hatchet from Hell" quantity="1" />
