@@ -13,7 +13,7 @@ namespace HSRP.Commands
     {
         public override async Task<PreconditionResult> CheckPermissions(ICommandContext context, CommandInfo command, IServiceProvider services)
         {
-            IGuildUser user = await Program.Instance.RpGuild.GetUserAsync(context.User.Id);
+            IGuildUser user = await Program.Instance.RPGuild.GetUserAsync(context.User.Id);
             foreach (ulong role in user.RoleIds)
             {
                 if (role == Constants.GM_ROLE)
@@ -21,7 +21,7 @@ namespace HSRP.Commands
                     return PreconditionResult.FromSuccess();
                 }
             }
-            
+
             return PreconditionResult.FromError(context.User + "isn't registered.");
         }
     }

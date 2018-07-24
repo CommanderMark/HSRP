@@ -17,7 +17,7 @@ namespace HSRP
         public DiscordSocketClient Client;
         private CommandService commands;
 
-        public IGuild RpGuild { get; private set; }
+        public IGuild RPGuild { get; private set; }
 
         /// <summary>
         /// Key value pair of users who are in the process of registering.
@@ -83,7 +83,7 @@ namespace HSRP
             {
                 try
                 {
-                    Instance.RpGuild = Client.GetGuild(Constants.RP_GUILD) as IGuild;
+                    Instance.RPGuild = Client.GetGuild(Constants.RP_GUILD) as IGuild;
                 }
                 catch (Exception e)
                 {

@@ -16,7 +16,7 @@ namespace HSRP
         {
             get
             {
-                return Program.Instance.RpGuild.GetUserAsync(ID);
+                return Program.Instance.RPGuild.GetUserAsync(ID);
             }
         }
         /// <summary>
@@ -63,7 +63,7 @@ namespace HSRP
 
             XDocument doc = XmlToolbox.TryLoadXml(path);
             if (doc == null || doc.Root == null) { Errored = true; return; }
-            
+
             foreach (XElement ele in doc.Root.Elements())
             {
                 switch (ele.Name.LocalName)
@@ -157,7 +157,7 @@ namespace HSRP
         {
             XDocument doc = new XDocument();
             XElement player = new XElement("player");
-            
+
             XElement info = new XElement("info",
                 new XAttribute("name", Name),
                 new XAttribute("id", ID),
@@ -283,7 +283,7 @@ namespace HSRP
                 result += Inventory[i].Quantity > 1
                     ? $"{i} - {Inventory.ElementAt(i).Name} ({Inventory.ElementAt(i).Quantity})"
                     : $"{i} - {Inventory.ElementAt(i).Name}";
-                    
+
                 result += "\n";
             }
 
@@ -301,7 +301,7 @@ namespace HSRP
                     Program.Instance.Registers.Add(ID, 1);
                     return true;
                 }
-                
+
                 int phase = Program.Instance.Registers[ID];
                 switch (phase)
                 {
@@ -313,7 +313,7 @@ namespace HSRP
                         }
                         Name = input;
                         break;
-                    
+
                     // Blood color.
                     case 2:
                         if (Enum.TryParse(input, true, out BloodType result)
@@ -420,7 +420,7 @@ namespace HSRP
             }
             else
             {
-                IReadOnlyCollection<IGuildUser> guildUsers = await Program.Instance.RpGuild.GetUsersAsync();
+                IReadOnlyCollection<IGuildUser> guildUsers = await Program.Instance.RPGuild.GetUsersAsync();
 
                 // By Username + Discriminator
                 int index = input.LastIndexOf('#');
@@ -497,7 +497,7 @@ namespace HSRP
                 {
                     return Tuple.Create(true, new Player(id));
                 }
-                
+
                 return Tuple.Create<bool, Player>(false, null);
             }
         }
