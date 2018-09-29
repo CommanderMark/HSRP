@@ -403,20 +403,20 @@ namespace HSRP
                 && !Program.Instance.Registers.ContainsKey(plyer);
         }
 
-        public static async Task<Tuple<bool, Player>> TryParse(string input)
+        public static async Task<(bool, Player)> TryParse(string input)
         {
             ulong id;
 
             // By Mention
             if (MentionUtils.TryParseUser(input, out id))
             {
-                goto Finish;
+                return (true, new Player(id));
             }
 
             // By Id
             else if (ulong.TryParse(input, NumberStyles.None, CultureInfo.InvariantCulture, out id))
             {
-                goto Finish;
+                return (true, new Player(id));
             }
             else
             {
@@ -434,8 +434,7 @@ namespace HSRP
                             string.Equals(username, x.Username, StringComparison.OrdinalIgnoreCase));
                         if (user != null)
                         {
-                            id = user.Id;
-                            goto Finish;
+                            return (true, new Player(user.Id));
                         }
                     }
                 }
@@ -449,8 +448,7 @@ namespace HSRP
                     IGuildUser user = matchedUsers.FirstOrDefault();
                     if (user != null)
                     {
-                        id = user.Id;
-                        goto Finish;
+                        return (true, new Player(user.Id));
                     }
                 }
                 // Multiple people with that username exist on the server.
@@ -460,8 +458,7 @@ namespace HSRP
                     {
                         if (Registered(resident.Id))
                         {
-                            id = resident.Id;
-                            goto Finish;
+                            return (true, new Player(resident.Id));
                         }
                     }
                 }
@@ -473,8 +470,7 @@ namespace HSRP
                     IGuildUser user = matchedUsers.FirstOrDefault();
                     if (user != null)
                     {
-                        id = user.Id;
-                        goto Finish;
+                        return (true, new Player(user.Id));
                     }
                 }
                 // Multiple people with that username exist on the server.
@@ -484,22 +480,13 @@ namespace HSRP
                     {
                         if (Registered(resident.Id))
                         {
-                            id = resident.Id;
-                            goto Finish;
+                            return (true, new Player(resident.Id));
                         }
                     }
                 }
             }
 
-        Finish:
-            {
-                if (id != 0 && Player.Registered(id))
-                {
-                    return Tuple.Create(true, new Player(id));
-                }
-
-                return Tuple.Create<bool, Player>(false, null);
-            }
+            return (false, null);
         }
     }
 }

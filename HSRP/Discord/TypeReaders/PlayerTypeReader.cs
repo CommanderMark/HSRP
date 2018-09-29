@@ -11,12 +11,12 @@ namespace HSRP.Commands
     {
         public override async Task<TypeReaderResult> Read(ICommandContext context, string input, IServiceProvider services)
         {
-            Tuple<bool, Player> tuple = await Player.TryParse(input);
+            (bool, Player) tuple = await Player.TryParse(input);
             if (tuple.Item1)
             {
                 return await Task.FromResult(TypeReaderResult.FromSuccess(tuple.Item2));
             }
-            
+
             return TypeReaderResult.FromError(CommandError.ParseFailed, "No such player was found.");
         }
     }

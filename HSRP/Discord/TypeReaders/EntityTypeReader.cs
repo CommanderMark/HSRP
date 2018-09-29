@@ -12,7 +12,7 @@ namespace HSRP.Commands
         public override async Task<TypeReaderResult> Read(ICommandContext context, string input, IServiceProvider services)
         {
             // Player?
-            Tuple<bool, Player> tuple = await Player.TryParse(input);
+            (bool, Player) tuple = await Player.TryParse(input);
             if (tuple.Item1)
             {
                 return await Task.FromResult(TypeReaderResult.FromSuccess(tuple.Item2));
@@ -23,7 +23,7 @@ namespace HSRP.Commands
             {
                 return await Task.FromResult(TypeReaderResult.FromSuccess(npc));
             }
-            
+
             await context.Channel.SendMessageAsync("Entity " + input + " not found.");
             return TypeReaderResult.FromError(CommandError.ParseFailed, "No such entity was found.");
         }
